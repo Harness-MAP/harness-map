@@ -8,7 +8,7 @@ produces an unbiased random walk: 0/10 wins, and those steps account for **~100%
 This is a TASK-GAP with a known, already-validated fix (an exact push planner).
 
 ## 1. What this harness does (mechanism)
-`harness.py:GroundedAgent.act` walks `STAGES = (prompt, orient, stairs, fight, cross, hold, kit, fetch,
+`orchestrator.py:GroundedAgent.act` walks `STAGES = (prompt, orient, stairs, fight, cross, hold, kit, fetch,
 route, probe, model)`, and the first stage that answers wins.
 - `tools/frame.py` parses message, prose, cursor and map.
 - `tools/chart.py` holds per-level map memory and does BFS `route` (stairs first, then the nearest

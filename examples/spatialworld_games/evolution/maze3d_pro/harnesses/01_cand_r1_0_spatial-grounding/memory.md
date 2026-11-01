@@ -1,5 +1,5 @@
 <!-- memory.md — the per-step working-memory TEMPLATE. tools/grounding.py fills the {{TOKENS}}
-     below from FRAME DIFFERENCES ONLY and harness.py appends the result to the live system
+     below from FRAME DIFFERENCES ONLY and orchestrator.py appends the result to the live system
      message (conversation_history[0]) before every VLM turn. Everything here is self-derived:
      the view digest, the outcome of the agent's own last action, and the exact-colour pixel
      census of the frame the agent is already looking at. No layout file, no true pose, no

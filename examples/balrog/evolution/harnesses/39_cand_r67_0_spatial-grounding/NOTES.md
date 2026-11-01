@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| harness.py | `PipelineHarness.act`: context → ledger.observe → stage `pre` (outer→inner) → ONE model call → `snap` → stage `post` (inner→outer); trail → `response.reasoning` | code |
+| orchestrator.py | `PipelineHarness.act`: context → ledger.observe → stage `pre` (outer→inner) → ONE model call → `snap` → stage `post` (inner→outer); trail → `response.reasoning` | code |
 | tools/context.py | NEW. `StepContext`: cursor (row = y−1), `map:` grid, Dlvl, message, "<noun> adjacent <dirs>" prose, notes, trail | code |
 | tools/ledger.py | NEW. per-level visits, COMBAT-AWARE failed (square, dir) edges, prose-blocked/deadly cells, `hash_is_bars` level flag, `probed(cell)` | code |
 | tools/route.py | NEW. BFS over drawn passable glyphs (no walls/blank/boulder/`}`/failed edges/door diagonals): drawn `>` first, else best unprobed frontier, key `(dist−2·gain, dist, y, x)` | code |
@@ -55,5 +55,5 @@ Predicted: MazeWalk 9x9/15x15 and Corridor-R3 up (DFS exploration plus stairs se
 Boxoban and Quest-Easy are unchanged (no mechanism). Melee tasks: the swing is kept.
 
 ## files:
-harness.py (rewritten), tools/context.py (new), tools/ledger.py (new), tools/route.py (new), tools/stages.py (new),
+orchestrator.py (rewritten), tools/context.py (new), tools/ledger.py (new), tools/route.py (new), tools/stages.py (new),
 tools/action_io.py, tools/prompting.py, AGENT.md, memory.md, NOTES.md

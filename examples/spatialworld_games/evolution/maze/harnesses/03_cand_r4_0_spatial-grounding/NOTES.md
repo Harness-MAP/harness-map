@@ -18,7 +18,7 @@ and 76.0% re-pushed an edge the same episode had already seen fail. Both are rec
 any privileged state, because the frame answers the wall question exactly.
 
 ## files:
-`tools/vlm.py`, `harness.py`, `tools/action.py`, `tools/frame.py`, `tools/__init__.py`,
+`tools/vlm.py`, `orchestrator.py`, `tools/action.py`, `tools/frame.py`, `tools/__init__.py`,
 `AGENT.md`, `rules.md`, `memory.md`, `skills/navigation.md`, `NOTES.md`, `traces_notes/`.
 
 ## verification:

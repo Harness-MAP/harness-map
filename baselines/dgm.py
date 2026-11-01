@@ -313,7 +313,7 @@ def _directive(parent: C.Cand, entry: str, thresh: float) -> str:
 
 def _logger(path: Path):
     """A real logging.Logger, because upstream's `is_compiled_self_improve` calls `logger.info`."""
-    lg = logging.getLogger(f"dgm_arm.{path.parent.name}")
+    lg = logging.getLogger(f"dgm.{path.parent.name}")
     if not lg.handlers:
         path.parent.mkdir(parents=True, exist_ok=True)
         h = logging.FileHandler(path)

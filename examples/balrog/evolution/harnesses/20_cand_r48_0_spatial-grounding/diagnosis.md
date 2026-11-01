@@ -17,7 +17,7 @@ This is the same per-task vector as r041, r046 and r051: the lineage has a stabl
 **Binding constraint:** the field goes flat on every Boxoban and Quest frame, and the flat case falls through to a model consult that only ever emits compass directions (0 `pickup`/`kick`/`apply`/`zap`/push-plans in 1000 steps). The missing 25 points are 10 Boxoban, 10 Quest, 4 CB-Dark (dice) and 1 R3. Of these, 21 need a **code mechanism for a regime the field cannot represent**: TASK-GAP plus HARNESS-BUG, not the navigation.
 
 ## 1. What this harness does (mechanism)
-`harness.py:GradientAgent.act` parses the frame (`tools/field.py:parse_tty_frame`). It then runs `STAGES = (prompt, orient, stairs, swing, descend, consult)`; the first stage that answers wins.
+`orchestrator.py:GradientAgent.act` parses the frame (`tools/field.py:parse_tty_frame`). It then runs `STAGES = (prompt, orient, stairs, swing, descend, consult)`; the first stage that answers wins.
 - `st_prompt` answers every modal frame with `more`, or `esc` if `more` is not legal.
 - `st_orient` does four things:
   - folds the frame into `tools/chart.py:Chart`;
@@ -96,7 +96,7 @@ Cost: Boxoban + QE consults are about 96% of all tokens. `consult` has produced 
 - **Cross the lava.** Walk to the square adjacent to the nearest cardinal lava run and `apply`/`zap`. Answer the item prompt with the verb whose keystroke equals the item letter, and the direction prompt with the bearing to the lava. On `solidif`, clear the lava from `Chart.terrain` so `field()` reseeds on the now-reachable `>`.
 - Restrict pickups to `(` and `/`, so letters are not burned on potions.
 
-**2. `harness.py`: QM mouth hold.** *(Survival 0.775 → up to 0.90; required for #1 to score on QM.)*
+**2. `orchestrator.py`: QM mouth hold.** *(Survival 0.775 → up to 0.90; required for #1 to score on QM.)*
 - Gate it on the Quest verb set so CB-Dark stays byte-identical.
 - When ≥2 creature letters are drawn and the hero stands on a cell with ≤2 passable neighbours (the corridor mouth at step 12), do not advance: swing if something is adjacent, else `search` (a free wait in the Quest vocabulary).
 - Never let `consult` answer while creatures are drawn. The QM deaths start exactly at the step-13 consult.
@@ -111,7 +111,7 @@ Cost: Boxoban + QE consults are about 96% of all tokens. `consult` has produced 
 - If any `>` is in `terrain` but not in `region`, give each frontier seed a potential of `manhattan(seed, >)·k` (k≈1) instead of 0.
 - Gate it on no `}` drawn, so Quest is untouched. Tie-break in level coordinates.
 
-**5. `harness.py:st_consult` — the cost/hygiene fix.** *(Primary neutral; cost −90% if #1/#3 are not shipped.)*
+**5. `orchestrator.py:st_consult` — the cost/hygiene fix.** *(Primary neutral; cost −90% if #1/#3 are not shipped.)*
 - Filter the menu with `self.chart.edge(pos, d) is not None`, which removes the 225 bar bumps.
 - When the flat regime is Boxoban/Quest (armed on the verb list), skip the VLM: take `menu[0]`, or `search` on Quest. The consult has produced 0 wins in 20 episodes on every lineage.
 

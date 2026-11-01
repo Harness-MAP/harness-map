@@ -6,7 +6,7 @@ By task: MazeWalk-9x9 5/5, MazeWalk-15x15 5/5, Corridor-R3 1/5, and 0/5 on the o
 The second constraint is a missing owner. No stage ever elects a swing, and the model parrots the route note, so the agent walks away from adjacent rats until it dies (CB-Dark 0/5). The third is that Boxoban and Quest have no mechanism at all. The chain already has donors for both.
 
 ## 1. What this harness does (mechanism)
-`harness.py:PipelineHarness.act` does the following each step:
+`orchestrator.py:PipelineHarness.act` does the following each step:
 1. `context.build` parses the cursor (row = y−1), the `map:` grid, the message and the `adjacent` prose into a `StepContext`.
 2. `Ledger.observe` records visits, failed (square, dir) edges when there is no displacement and no combat message, and cells whose prose noun is wall/stone/bars or lava/water.
 3. The stages' `pre` hooks run: Modal (`--More--`), Hazard (adds a "Blocked or deadly" note), and Route (BFS: a drawn `>`, else the frontier minimising `(dist−2·gain, …)`; adds a "Route: move X" note).

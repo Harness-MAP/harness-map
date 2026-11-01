@@ -312,6 +312,6 @@ class LegalStage:
 def default_stack():
     # outer -> inner. pre() runs in this order (first non-None answer wins), post() in reverse.
     # BumpStage.post must see every emitted move, so short-circuit answers are routed through
-    # the post hooks too (harness.py).
+    # the post hooks too (orchestrator.py).
     return [LegalStage(), ModalStage(), DoorStage(), BumpStage(), HazardStage(), FoeStage(),
             NavStage(), OrbitStage()]

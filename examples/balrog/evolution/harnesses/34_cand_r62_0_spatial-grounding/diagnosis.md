@@ -20,7 +20,7 @@
 Fixing only the `KeyError` restores 10 episodes that can currently score only 0. Fixing the seeding means those episodes never need the model at all.
 
 ## 1. What this harness does (mechanism)
-`harness.py:GroundedHarness.act` → `ledger.observe` (cursor, `map:`, Dlvl, adjacent prose) → `ledger.rows` (8 neighbours, each labelled `deadly|blocked|unknown|creature|open|''`) → `chart.fold` (per-level terrain; deadly prose → `}`; prose-`open` blank → virtual cell) → `decide_in_code`. `decide_in_code` checks, in order:
+`orchestrator.py:GroundedHarness.act` → `ledger.observe` (cursor, `map:`, Dlvl, adjacent prose) → `ledger.rows` (8 neighbours, each labelled `deadly|blocked|unknown|creature|open|''`) → `chart.fold` (per-level terrain; deadly prose → `}`; prose-`open` blank → virtual cell) → `decide_in_code`. `decide_in_code` checks, in order:
 1. `modal` → `more`, and books `ledger.last` as failed;
 2. `down` on a charted `>`;
 3. `swing` at any drawn letter on a neighbour whose kind is `creature` or `''`;
@@ -100,7 +100,7 @@ Corridor-R3 scored 0.4–0.8 on r055–r061. The same route-to-frontier mechanis
    - This keeps the r062 fix: no 310 stone bumps from treating dark area as *open*. The dark doorway gaps in R3/02 and R3/04 still get a finite potential.
    - Verify on MazeWalk-15 that the bump count stays low. MazeWalk is lit, so undrawn cells there are stone, and the surcharge plus the ledger should bound it.
 
-5. **`harness.py:decide_in_code` swing rule — respect `f`, and do not count prompt frames.**
+5. **`orchestrator.py:decide_in_code` swing rule — respect `f`, and do not count prompt frames.**
    - Change the swing condition to `... and not f`. Once the `[yn]` refusal books `(pos,dir)`, the peaceful goblin is no longer swung at, and the field takes over.
    - In `ledger.observe`, skip the visit/failed update when `cursor.y == 0` (modal frame), so that `(35,0)`-type garbage is not charted.
    - *Predicted:* QE/04's 95-step loop disappears. This alone wins nothing on QE (the lava gap remains), but it stops the loop and the tokens.
@@ -111,7 +111,7 @@ Corridor-R3 scored 0.4–0.8 on r055–r061. The same route-to-frontier mechanis
    - Wire it into `decide_in_code` ahead of `field`.
    - *Predicted:* +8 to +10 episodes. This is the single biggest point source left, and it transfers because it reads only the observation.
 
-7. **CB-Dark fight-square hold (`harness.py:decide_in_code`, before `field`).**
+7. **CB-Dark fight-square hold (`orchestrator.py:decide_in_code`, before `field`).**
    - When a hostile is named in the prose (not adjacent) and the hero stands on a square with ≤2 open neighbours (a corridor `#`), emit `search` instead of advancing along the field.
    - When the hero is adjacent to a foe on an open room square with ≥3 open neighbours, step back one hop to the last corridor cell instead of swinging.
    - Memory says CB-Dark is noisy: price it on ≥200 episodes before trusting it. r058/r061's hold gave 1–2/5 against 0/5 here.

@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| harness.py | `GroundedAgent`: builds a per-step context `c`, then runs `STAGES = (prompt, orient, stairs, fight, route, probe, model)`. The first stage that answers wins, and its rung goes to `reasoning`. Loads tools/ through `importlib` under a per-candidate module name. `build_agent` is the entry, unchanged. | code |
+| orchestrator.py | `GroundedAgent`: builds a per-step context `c`, then runs `STAGES = (prompt, orient, stairs, fight, route, probe, model)`. The first stage that answers wins, and its rung goes to `reasoning`. Loads tools/ through `importlib` under a per-candidate module name. `build_agent` is the entry, unchanged. | code |
 | tools/frame.py | Parser (`parse_glyph_map`, `clause_index`), `glyph`, `decide_action`, and the STEP/ORDER/CARDINALS/LETHAL/WALL/CREATURE/DOOR_NOUNS tables. A prompt counts as open when `cursor.y==0`. | code |
 | tools/chart.py | `Chart`: drawn glyphs, doors, bump-closed edges, visits. Its wall table depends on the regime. Also holds `route` (to `>`, else the nearest frontier) and `probe` (a step into undrawn space in a dark room). | code |
 | AGENT.md / rules.md / memory.md / skills/ | empty | prose |
@@ -12,7 +12,7 @@
 Code, the structure and wiring (search-space steer toward r041/r046). The parent's monolithic `act()` becomes an ordered stage table over two tool modules. Each owner is a separable stage that either abstains or answers. The stage slots also host the diagnosis's glyph and verb fixes, which had no single place to live in the monolith.
 
 ## change:
-`harness.py` is split into `tools/frame.py` and `tools/chart.py` and rewired as `STAGES`. The stages run as follows:
+`orchestrator.py` is split into `tools/frame.py` and `tools/chart.py` and rewired as `STAGES`. The stages run as follows:
 - **`prompt`** answers any open prompt with `more`, the only legal verb that closes both `[yn]` and the item-letter prompts. It stops after 3 in a row. A `[yn]` raised by a move also closes that `(square, bearing)` edge, so the walk does not re-raise it. This replaces the dead `y`/`esc` branches.
 - **`orient`** folds the frame into the Chart and books bumps. `The door opens.` marks a door instead of booking a bump.
 - **Doors in the Chart.** Doors are:
@@ -42,4 +42,4 @@ Stub checks:
 - An illegal model reply maps to a safe bearing.
 
 ## files:
-harness.py (rewired), tools/__init__.py, tools/frame.py, tools/chart.py (new), NOTES.md
+orchestrator.py (rewired), tools/__init__.py, tools/frame.py, tools/chart.py (new), NOTES.md

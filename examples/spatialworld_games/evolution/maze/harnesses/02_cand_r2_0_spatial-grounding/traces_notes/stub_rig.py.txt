@@ -43,7 +43,7 @@ class StubEval:
 def load():
     for m in [k for k in list(sys.modules) if k == "tools" or k.startswith("tools.")]:
         sys.modules.pop(m, None)
-    spec = importlib.util.spec_from_file_location("cand_harness", os.path.join(OUT, "harness.py"))
+    spec = importlib.util.spec_from_file_location("cand_harness", os.path.join(OUT, "orchestrator.py"))
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
     return mod
 

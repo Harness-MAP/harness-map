@@ -84,7 +84,7 @@ instead of 8 — a qualitative move on exactly that block, with the public entry
 
 | file | role |
 |---|---|
-| `harness.py` | unchanged entry: `build_agent(evaluator)` + the sorted-Markdown prompt composer. |
+| `orchestrator.py` | unchanged entry: `build_agent(evaluator)` + the sorted-Markdown prompt composer. |
 | `AGENT.md` | unchanged role framing and the six face letters. |
 | `rules.md` | unchanged move taxonomy. |
 | `skills/survey_then_solve.md` | NEW static prior: the screen facts, what a camera turn is for, how to read the solution word, the three things that never help. Replaces the refuted `macro_commitment.md`. |
@@ -109,5 +109,5 @@ on every step. The anti-cheat guard recorded nothing in any of the 114 rig episo
 - `tools/vlm.py` — the turn rebuilt around observe/think/inform/commit, with the journal.
 - `memory.md` — the brief template; the parent's dead `word`/`stood`/`screen` fields are gone.
 - `skills/survey_then_solve.md` — new; replaces `skills/macro_commitment.md` (deleted, refuted).
-- `harness.py` — docstrings retargeted; the factory and the composer are unchanged.
+- `orchestrator.py` — docstrings retargeted; the factory and the composer are unchanged.
 - `traces_notes/MECHANISM.md` — the implementation record, outside the agent's prompt.

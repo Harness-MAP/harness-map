@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| harness.py | `GradientAgent`; `STAGES = (prompt, orient, stairs, swing, cross, hold, kit, fetch, descend, consult)`, first stage to answer wins, rung -> `reasoning` | code |
+| orchestrator.py | `GradientAgent`; `STAGES = (prompt, orient, stairs, swing, cross, hold, kit, fetch, descend, consult)`, first stage to answer wins, rung -> `reasoning` | code |
 | tools/field.py | frame decoder (sections, adjacent clauses, **now also raw `lang` prose**), glyph lookup | code |
 | tools/chart.py | map memory + reachability-seeded potential field (unchanged) | code |
 | tools/quest.py | **NEW** `Quest`: pile detection, a single safe kick, horn-first pickup plus a letter filler, firing across the lava, typed prompt answers, mouth hold, charted `toward` walk | code |
@@ -36,4 +36,4 @@ I validated it on the real env: `make_env` with the stock config, the evaluator'
 - **Non-Quest tasks:** Corridor-R3 ran through the parent's unchanged code path.
 
 ## files:
-tools/quest.py (new), harness.py (4 stages, prompt routing, Quest consult bypass), tools/field.py (`lang` field), NOTES.md
+tools/quest.py (new), orchestrator.py (4 stages, prompt routing, Quest consult bypass), tools/field.py (`lang` field), NOTES.md

@@ -21,7 +21,7 @@ cell I walked through" onto the openings that are genuinely unexplored.
 
 The steer asked to move toward the `cand_r002_1_action-planning` / `cand_r003_0_spatial-grounding`
 region and named the productive difference as the **token-level** half of φ, so this iteration lands
-in that region's component graph — the same six modules those two ship (`harness.py` +
+in that region's component graph — the same six modules those two ship (`orchestrator.py` +
 `tools/{__init__,action,frame,plan,sight,vlm}.py`), nothing added, split or rewired — and differs
 inside the components, which is where the steer pointed: the ruler the decode needs lives as class
 attributes of the class that uses it, the decision helpers are module-scope functions over a
@@ -200,7 +200,7 @@ the load-bearing evidence; the live runs are the confirmation that it transfers.
 
 | file | role |
 |------|------|
-| harness.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `tools.plan.Pilot` per episode, threading it into `tools.vlm.decide`; `compose_system_prompt()` recomposes the prior from the .md files. `evaluator.game` does **not** exist yet at this point — `run_evaluation` builds it after the call — so nothing may touch engine state here, and nothing does. |
+| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `tools.plan.Pilot` per episode, threading it into `tools.vlm.decide`; `compose_system_prompt()` recomposes the prior from the .md files. `evaluator.game` does **not** exist yet at this point — `run_evaluation` builds it after the call — so nothing may touch engine state here, and nothing does. |
 | **tools/sight.py** | **NEW.** `Sight`: one frame read whole — the ruler as class attributes, the corridor's distance from the centre-column run height, its kind from a colour vote over that run, the FLANK LADDER with its occlusion gate, the frame digest, and the lines that state all of it in words. |
 | **tools/plan.py** | **NEW.** `MazeChart` (per-epoch occupancy with PLAIN vs PASSABLE-ONLY provenance, frontier test, BFS), `Pilot` (reckoning, filing, the climb/epoch bookkeeping with the digest retirement test, the governor, the per-turn block), and the decision helpers as module-scope functions over a pilot: `route_step`, `choose_target`, `clamp_translation`, `inert_reason`, `escape_step`. |
 | tools/action.py | the key table, the engine `Action` metadata envelope (`retarget` strips `granularity`/`repeat`/`json_data` before rebuilding a turn — a stale `repeat: 3` fires THREE 90-degree turns) and the bearing algebra (0..3 = N,E,S,W, so `turn_right` is `+1 mod 4`). |
@@ -213,7 +213,7 @@ the load-bearing evidence; the live runs are the confirmation that it transfers.
 ## evolvable levers
 
 - **prose**: AGENT.md / rules.md / skills/*.md / memory.md — what the agent is told.
-- **code**: harness.py / tools/*.py — the mechanism (decode, chart, route, govern, inject).
+- **code**: orchestrator.py / tools/*.py — the mechanism (decode, chart, route, govern, inject).
 - **tuning** (class attributes on `plan.Pilot`; set them **after** `build_agent`):
 
 | lever | shipped | measured |
@@ -264,5 +264,5 @@ on all five episodes.
 
 Edited this iteration: `tools/sight.py` (new), `tools/plan.py` (new), `tools/action.py` (bearing
 algebra + the Action envelope), `tools/vlm.py` (the measure→state→ask→govern loop), `tools/__init__.py`,
-`harness.py` (one pilot per episode), `AGENT.md`, `rules.md`, `skills/navigation.md`, `memory.md`,
+`orchestrator.py` (one pilot per episode), `AGENT.md`, `rules.md`, `skills/navigation.md`, `memory.md`,
 `NOTES.md`. Untouched: `tools/frame.py`, `system_prompt.txt`, `system_prompt.md`.

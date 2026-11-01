@@ -176,7 +176,7 @@ MAX_XCHECK_REFUSALS_PER_SUBTASK = 1
 # Lowered 3 -> 1 (baseline-leaning): the baseline has NO motion floor before
 # honoring a commit; a floor of 1 still blocks the carry-over Match=1 on the first
 # frame of a new subtask, but no longer vetoes short approaches. Combined with the
-# motion counter now counting strafes (harness.py), short/strafe completions can
+# motion counter now counting strafes (orchestrator.py), short/strafe completions can
 # commit instead of overshooting.
 K_MIN_FORWARD_BEFORE_PLANNER_COMMIT = 1
 
@@ -710,7 +710,7 @@ class CompletionChecker:
     # fired on that leg, so a single leg can raise at most one geometric commit.
     _road_arrival_fired: Dict[int, bool] = field(default_factory=dict)
     # Which channel raised the most recent commit ("road_surface" | "reach_vlm").
-    # Written here, read by harness.py only to LABEL the note it appends -- it is a
+    # Written here, read by orchestrator.py only to LABEL the note it appends -- it is a
     # trace-visibility field and nothing in the decision path branches on it.
     last_commit_channel: str = ""
 
@@ -1147,7 +1147,7 @@ class CompletionChecker:
         # the detector also fires in-window -- so deferring to the detector keeps the
         # planner's correct claims and drops its far-field ones. Returning False here
         # costs the planner nothing but the commit: its remaining actions still run,
-        # and the bounded in-place HOLD in harness.py covers the bare-`-1` case.
+        # and the bounded in-place HOLD in orchestrator.py covers the bare-`-1` case.
         road = self.road_surface_arrival(obs, instruction, cur_idx)
         if road is not None:
             return road

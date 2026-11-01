@@ -45,16 +45,16 @@ two-engine-steps-per-executed-action cost were re-verified directly against
 
 ## 1. What this harness does (mechanism)
 
-`harness.py` is a **pass-through**. Nothing in it decides anything.
+`orchestrator.py` is a **pass-through**. Nothing in it decides anything.
 
-- `compose_system_prompt()` (harness.py:21) concatenates `AGENT.md` + `skills/*.md` + `rules.md` and
+- `compose_system_prompt()` (orchestrator.py:21) concatenates `AGENT.md` + `skills/*.md` + `rules.md` and
   installs the result on `evaluator.current_prompt`, which `eval_runner.py:293` captures as
   `initial_prompt`. **Verified: the composition equals `system_prompt.txt` token-for-token** (1377 vs
   1382 chars — leading/trailing whitespace only), so this candidate *is* the prompt-only baseline
   wearing a module layout. It supplies role + grid facts, "study the three views / you can remove
   misplaced blocks", and the 7-action control map + colour legend. **No coordinates, no clamp model,
   no toggle-parity model, no plan.**
-- `build_agent(evaluator)` (harness.py:34) puts `HERE` on `sys.path`, purges `sys.modules["tools*"]`
+- `build_agent(evaluator)` (orchestrator.py:34) puts `HERE` on `sys.path`, purges `sys.modules["tools*"]`
   so a sibling candidate's `tools/` can never be inherited (**keep this line** — it is the only load-
   bearing code in the file), and returns `agent(frame_data) -> await tools.vlm.decide(...)`.
 - `tools/vlm.py:decide()` is **two lines**: `return await evaluator.baseline_step(frame_data)`. That

@@ -151,7 +151,7 @@ Both rigs say patience 24 recovers L20 and the live sample says it does not, twi
 thing to watch in the next diagnosis, and the cheapest read on it is the prose, not the gate.
 
 **Contract + anti-cheat.** `pre_eval_gate` replica run by hand: **PASS** (no privileged mention in
-any agent-facing prior, no privileged attribute or subscript access in `harness.py` or any
+any agent-facing prior, no privileged attribute or subscript access in `orchestrator.py` or any
 `tools/*.py`). No module touches `evaluator.game` at all. End-to-end check with a fake evaluator:
 `build_agent(evaluator)` signature unchanged, the prompt composes from all three priors (6337
 chars), a saturated-stair frame trims a `large` proposal to `small`, the next frame sets the latch
@@ -161,7 +161,7 @@ appended to and never spliced, and `baseline_step` is called once per decision.
 ## module map
 | file | role |
 |------|------|
-| harness.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `ActionPlanner` per episode; `compose_system_prompt()` recomposes the prompt from the .md priors. |
+| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `ActionPlanner` per episode; `compose_system_prompt()` recomposes the prompt from the .md priors. |
 | tools/sight.py | **NEW.** The exact-colour census: the two zero-channel masks, the central-band readout, the measured area→cells ladder, `stepped_onto_stair` (the exact on-stair transition) and `StairSense` (the latch, its budget, the believed floor, and the plain-English line the agent is shown). |
 | tools/plan.py | The governor. Whole-frame `fingerprint`/`screen_changed` + the view-keyed refusal ledger + the right-hand escape sweep (unchanged and load-bearing), now plus the grounded-climb branch, the floor-age/staleness price, the inert-climb counter, the granularity trim, and the working-memory block. |
 | tools/vlm.py | The perceive → inject → ask → govern step. Appends the block to a stashed `conversation_history[0]`, delegates every call to `evaluator.baseline_step`. **Unchanged this iter.** |
@@ -174,7 +174,7 @@ appended to and never spliced, and `baseline_step` is called once per decision.
 
 ## evolvable levers (axes)
 - prose: AGENT.md / rules.md / skills/*.md / memory.md — what the agent is told.
-- code: harness.py / tools/*.py — the mechanism (compose, fingerprint, census, govern, inject).
+- code: orchestrator.py / tools/*.py — the mechanism (compose, fingerprint, census, govern, inject).
 - knobs inside the new mechanism, both swept above and both shallow: `FLOOR_PATIENCE`,
   `STALE_FLOOR` (tools/sight.py). `ADJACENT`, `CLIMB_BUDGET` and the ladder cuts are MEASUREMENTS
   of the render, not knobs — the adjacent/2-cell gap is a factor of 4, so 0.30 has no gradient.
@@ -206,4 +206,4 @@ and they live in the session scratchpad, not in this directory.
 
 ## files
 tools/sight.py (new), tools/plan.py, AGENT.md, rules.md, skills/navigation.md, memory.md,
-harness.py (docstring), NOTES.md
+orchestrator.py (docstring), NOTES.md

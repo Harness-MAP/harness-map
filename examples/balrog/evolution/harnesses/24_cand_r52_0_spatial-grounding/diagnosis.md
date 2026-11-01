@@ -14,7 +14,7 @@
 **Binding constraint:** Boxoban is now the only big hole left: 10 episodes (0.25 primary) and **100% of the token bill** (~600k tok/ep × 10 ≈ 6.07M of 6.08M). The field is flat on a premapped, stairless level, so every step falls through to a VLM that random-walks the four cardinals. Classification: TASK-GAP (no push planner) plus VLM-CEILING (the consult cannot plan pushes). It is fixable in code.
 
 ## 1. What this harness does (mechanism)
-`harness.py:GradientAgent.act` parses the frame with `tools/field.py:parse_tty_frame`. It then runs `STAGES = (prompt, orient, stairs, swing, cross, hold, kit, fetch, descend, consult)`, and the first stage that answers wins.
+`orchestrator.py:GradientAgent.act` parses the frame with `tools/field.py:parse_tty_frame`. It then runs `STAGES = (prompt, orient, stairs, swing, cross, hold, kit, fetch, descend, consult)`, and the first stage that answers wins.
 
 - **Chart and field.** `st_orient` folds the frame into `tools/chart.py:Chart` and computes `Chart.field(pos)`:
   - a BFS potential seeded on a *reachable* `>`;
@@ -111,7 +111,7 @@ The Boxoban fix is worth 10× any other remaining lever, and it also removes ess
 - Keep `kind = "frontier"`.
 - Gate it off on Quest levels (`}` drawn), where the `>` is behind lava and the Quest stages own the approach.
 
-**3. `harness.py:st_consult`: filter the menu by the chart.** Use `menu = [d for d in menu if self.chart.edge(pos, d) is not None] or menu` on **every** task, not only Quest. This is a fallback-quality fix for whatever Boxoban states the solver cannot solve: 24% of Boxoban steps are bar bumps. It is cheap, but it will not win Boxoban by itself.
+**3. `orchestrator.py:st_consult`: filter the menu by the chart.** Use `menu = [d for d in menu if self.chart.edge(pos, d) is not None] or menu` on **every** task, not only Quest. This is a fallback-quality fix for whatever Boxoban states the solver cannot solve: 24% of Boxoban steps are bar bumps. It is cheap, but it will not win Boxoban by itself.
 
 **4. (Low, 1 ep) QE untypeable-letter trap.**
 - When no filler object is drawn and the next free letter is untypeable, try a `drop`/re-pickup cycle to walk the letter pointer forward, if `drop` is legal.

@@ -47,7 +47,7 @@ diagnosed and **never run**. Fifteen diagnoses, zero evaluations.
 
 ```
 config.py::_apply_harness
-  └─ harness.py:build_agent(evaluator)
+  └─ orchestrator.py:build_agent(evaluator)
        ├─ sys.path.insert(0, HERE); evict inherited tools.*
        ├─ evaluator.current_prompt = compose_system_prompt()
        │        AGENT.md + skills/*.md (sorted) + rules.md      → reproduces system_prompt.txt in order

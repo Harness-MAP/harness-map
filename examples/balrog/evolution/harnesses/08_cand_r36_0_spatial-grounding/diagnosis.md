@@ -24,7 +24,7 @@ Quest-Medium also has no corridor-mouth hold. **Two cheap HARNESS-BUGs** remain 
    2-cycle** that eats 83 steps.
 
 ## 1. What this harness does (mechanism)
-`harness.py:GroundedAgent.act` runs a rung ladder. The first rung that fires decides the step, and
+`orchestrator.py:GroundedAgent.act` runs a rung ladder. The first rung that fires decides the step, and
 its name is written to `reasoning`:
 1. `tools/reflex.modal`: if a prompt is open, answer `northwest` for a `[yn]` attack prompt,
    otherwise `more`.
@@ -166,7 +166,7 @@ Other counts:
    - The prior sibling chain measured this lever at **R3 4/5 → 5/5, +2/−0 over 125 levels, with
      zero arms firing off R3**.
    - It is inert on MazeWalk: there the `>` is reachable as soon as it is drawn.
-2. **Veto a cancelled verb** (`harness.py:act` + `tools/reflex.modal`).
+2. **Veto a cancelled verb** (`orchestrator.py:act` + `tools/reflex.modal`).
    - When `modal` answers an item prompt (`What do you want to <verb>?`) with `more`, record
      `(pos, verb)` in `chart.blocked_verbs`. The verb is the previous action.
    - On the next `ask_model`, add that verb to `banned`, which `arbitrate` already honours. Also
@@ -203,7 +203,7 @@ Other counts:
 - Keep the MazeWalk, R3 door-identity and arbiter code paths byte-identical. They are 10/10, 4/5
   and 0 coercions respectively.
 - The five-module layout is a good base: add `sokoban.py` and `quest.py` as siblings and keep
-  `harness.py` as the orchestrator.
+  `orchestrator.py` as the orchestrator.
 
 ## 6. Exhausted — do NOT repeat
 - Prose priors: the prose files are empty, and the lever has proven to be code every time.

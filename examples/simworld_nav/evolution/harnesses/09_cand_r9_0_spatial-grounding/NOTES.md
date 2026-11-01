@@ -30,7 +30,7 @@ only thing that moved is the shape of the decision**.
 
 | module | role | this iter |
 |---|---|---|
-| `harness.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ★ 4 sites: gate instantiated; xcheck re-pointed; proactive re-pointed + FINISH un-blocked; the 71-line face-scan block deleted; gate ledger appended to `notes` |
+| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ★ 4 sites: gate instantiated; xcheck re-pointed; proactive re-pointed + FINISH un-blocked; the 71-line face-scan block deleted; gate ledger appended to `notes` |
 | `modules/arrival_gate.py` | **the `-1` license** — text-free identity ∧ hint-free place | ★ **NEW MODULE** |
 | `modules/completion_checker.py` | `verify()` (planner-`-1` rule) + `_binary_reach_vlm_call` as the gate's fallback | **untouched** (its two decision methods are now unreferenced, left in place for A/B) |
 | `modules/viewpoint_controller.py` | TURN approach + FINISH commit pose | **untouched** (`request_face_scan` / `face_code` / `restore_code` / `allow_forward_commit` now unreferenced) |
@@ -48,7 +48,7 @@ only thing that moved is the shape of the decision**.
 | **legacy degradation edge** (`checker._binary_reach_vlm_call` on a `None`) | code | `arrival_gate._legacy_verdict` | **NEW** — a dead second channel degrades to the parent, never to silence |
 | junction wording operating point | prose-in-code | `_JUNCTION_SYS` | **measured this iter**: 5/14 NEAR vs 1/14 FAR (A/B of 3 wordings, §why) |
 | frontage wording operating point | prose-in-code | `_FRONTAGE_SYS` | **measured 0/7 NEAR, 0/12 FAR** — an honest weak spot, see §risk |
-| face-before-look path | code | `harness.py` + `viewpoint_controller` | **DELETED — CLOSED, measured 0/128 on ROAD and 9/9 fatal on FINISH** |
+| face-before-look path | code | `orchestrator.py` + `viewpoint_controller` | **DELETED — CLOSED, measured 0/128 on ROAD and 9/9 fatal on FINISH** |
 | `allow_forward_commit` FINISH block | code | `viewpoint_controller` | **unwired** — it was a workaround for a criterion with no stopping power; the conjunction is the replacement |
 | TURN approach (`APPROACH_CAP_FORWARDS = 3`) | code | `viewpoint_controller.gate_burst` | **keep verbatim** — TURNING 5/45 → 9/45, the chain's one genuine gain |
 | ORIENTATION cardinal burst | code | `active_perception` (a) | **do not touch** — 50/50 |
@@ -56,7 +56,7 @@ only thing that moved is the shape of the decision**.
 | `side_building_fraction` as a junction cue | code | `viewpoint_controller` | **CLOSED** — 11.9 % in-window vs 16.1 % far, released the burst early 0/10 times |
 | **k = 2 confirmations on a `-1`** | code | `completion_checker` + `harness` | **still open** — gradient §5-(4); deliberately deferred so the conjunction is measured alone |
 | **"window entered and left" latch** | code | `spatial_memory` | **still open** — gradient §5-(5); the only named route to a non-zero FINISH |
-| stuck detector scoped to history, not the burst | code | `harness.py:~293` | **still open** — gradient §5-(7), `forward_count` is unreachable at `>3` with 1-action plans |
+| stuck detector scoped to history, not the burst | code | `orchestrator.py:~293` | **still open** — gradient §5-(7), `forward_count` is unreachable at `>3` with 1-action plans |
 | TURN approach conditional on ROAD arrival evidence | code | `viewpoint_controller` | **still open** — gradient §5-(6); needs this iter's evidence channel to exist first |
 
 ## change
@@ -222,7 +222,7 @@ code. `read_audit` surface is unchanged from the parent.
   (`_identity_call`, `_place_call`, `_place_verdict`, `_legacy_verdict`,
   `proactive_commit`, `allow_planner_commit`, `summary`)
 - `modules/__init__.py` — export `ArrivalGate`; docstring 8 → 9 nodes
-- `harness.py` — import + instantiate the gate (`checker=completion`); the
+- `orchestrator.py` — import + instantiate the gate (`checker=completion`); the
   xcheck site re-pointed to `allow_planner_commit`; the proactive site
   re-pointed to `proactive_commit` and the `allow_forward_commit` FINISH block
   removed; the 71-line iter-5/6 face-scan block deleted; `arrival.summary()`

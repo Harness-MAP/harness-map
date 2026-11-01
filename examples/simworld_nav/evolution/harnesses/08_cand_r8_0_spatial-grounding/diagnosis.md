@@ -21,15 +21,15 @@ it compares a **forward-facing** frame against a reference photo captured **faci
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:run_episode` runs one *decision* per loop iteration, but a decision can emit a multi-step
+`orchestrator.py:run_episode` runs one *decision* per loop iteration, but a decision can emit a multi-step
 *burst*, so decisions and env steps are different clocks (**3014 env steps / 918 decisions = 3.28**).
 
 | order | site | role in this run |
 |---|---|---|
-| 1 | `active.should_emit` (`harness.py:301`) | **short-circuits perceive+plan entirely** when it returns a list (`:310`). Owns (a) the ORIENTATION cardinal burst `[rot…, -1]`, (a″) the relative-turn burst `[rot, -1]` (`active_perception.py:434-440`), (a′) the red-signal idle, (b) anti-spin, (b′) wall-recovery, (d) cap-2 forward momentum (`:256`). |
+| 1 | `active.should_emit` (`orchestrator.py:301`) | **short-circuits perceive+plan entirely** when it returns a list (`:310`). Owns (a) the ORIENTATION cardinal burst `[rot…, -1]`, (a″) the relative-turn burst `[rot, -1]` (`active_perception.py:434-440`), (a′) the red-signal idle, (b) anti-spin, (b′) wall-recovery, (d) cap-2 forward momentum (`:256`). |
 | 2 | `perceiver.perceive` | 1 VLM call, 4 images (RGB, hint, seg mask, JET depth) → free-text `Description`. |
 | 3 | `planner.plan` | 1 text-only VLM call → `{Summary, Match, Actions}`. |
-| 4 | `completion.verify` (`harness.py:391`) | honours a planner `-1` iff `planner_match == 1 and forward_streak >= 1`. |
+| 4 | `completion.verify` (`orchestrator.py:391`) | honours a planner `-1` iff `planner_match == 1 and forward_streak >= 1`. |
 | 5 | `cross_check_planner_commit` (`:413`) | 2nd binary REACH VLM call; vetoes a planner `-1`. Fired 18× (note `XCHECK_BLOCK`). |
 | 6 | `proactive_commit_check` (`:430`) | **the commit path that actually decides this run.** At `forward_streak ≥ 4`, every 5 forwards, ≤12/leg: one binary REACH call `(live RGB, hint) → {Match}`; `Match==1` ⇒ inject `[-1]`. Fired 17× (`REACH_COMMIT`). |
 | 7 | `request_side_scan` → `scan_reach` (`:459-470`) | the *only* component that can acquire an off-axis viewpoint. Fired **2× in 50 episodes** (`SIDE_SCAN_MISS` ×2, `SIDE_SCAN_COMMIT` ×0). |
@@ -139,7 +139,7 @@ this leg: its precision here is **0/7**. Meanwhile the two episodes that actuall
 | **left the world polygon** | **14** | verified with the actual `build_road_polygon` union: outside on **exactly the final step** in 14/14. **This is the "walk past forever" tail, not an independent road-keeping failure** — median closest approach to the live waypoint 179 cm, median 47 steps (~23 500 cm) walked after it |
 | **`subtask_max_steps` deadline** | **9** (all on ROAD) | `substeps_count >= int(L1/100)`; the harness cannot see this clock |
 | **20 identical positions** | **4** | wedged against a facade for 20 steps |
-| harness self-break (`STUCK`) | 3 | `harness.py` forward-stall detector |
+| harness self-break (`STUCK`) | 3 | `orchestrator.py` forward-stall detector |
 
 ---
 
@@ -191,13 +191,13 @@ identically `0`, so **both** `active_perception`'s wall-recovery rule (b′) (`:
 momentum collision veto (`:579-585`) can never fire. Evidence they were needed: 4 episodes died to
 the env's 20-identical-position check and 3 more to `STUCK`. Note `info["agent_collision"]` is a
 **forbidden** field, so the honest repair is to delete the accessor and key those rules on the
-odometry delta alone. Also unused: `SpatialMemory.summary()` is never called from `harness.py`.
+odometry delta alone. Also unused: `SpatialMemory.summary()` is never called from `orchestrator.py`.
 
 ---
 
 ## 5. Concrete changes to try (the gradient — ranked by leverage)
 
-### A — Commit from the *faced* pose: make the off-axis look unconditional, and make it the FINISH commit route. `modules/completion_checker.py:768-800` (`request_side_scan`) + `harness.py:455-478`
+### A — Commit from the *faced* pose: make the off-axis look unconditional, and make it the FINISH commit route. `modules/completion_checker.py:768-800` (`request_side_scan`) + `orchestrator.py:455-478`
 
 Replace the `_side_band_near` depth trigger with the **arrival-look cadence itself** (fire whenever
 `proactive_commit_check` would have been eligible: `forward_streak ≥ 4`, spacing 4, cap ~4/leg), and
@@ -242,7 +242,7 @@ lateral segmentation band on the turn side opens (facade gives way to the cross 
   byte-identical to this anchor.** That is the highest-confidence, lowest-variance move available.
 * Express the floor/cap as **action counts**, never cm (lint WARNs literals ≥ 2000).
 
-### D — Read the text the harness already has: an arrival vote from the perceiver/planner prose. `harness.py:352-370` (`planner_response` is built and discarded) + a new predicate in `completion_checker.py`
+### D — Read the text the harness already has: an arrival vote from the perceiver/planner prose. `orchestrator.py:352-370` (`planner_response` is built and discarded) + a new predicate in `completion_checker.py`
 
 The planner's own `Summary`/`reason` says *"very close to the … building … on the left"* at 4.5 % of
 decisions and 78 % of decisions contain the *"not directly in front / continue forward"* clause.
@@ -322,7 +322,7 @@ Either re-derive it that way or delete the veto — do not leave a fitted no-op 
 
 ## 7. Provenance
 
-* Candidate: `$OUT_DIR` = `simworld_gym/simworld_config/harnesses/nav` (`harness.py` 613 lines +
+* Candidate: `$OUT_DIR` = `simworld_gym/simworld_config/harnesses/nav` (`orchestrator.py` 613 lines +
   7 modules, 2705 lines total). Score: `arm_hard5010_adaptive_k4c1/anchor_nav_r000/score.json`.
 * Traces: `arm_hard5010_adaptive_k4c1/anchor_nav/traces/` — 50 episodes, 3014 env steps,
   2184 VLM calls (918 perceive · 918 plan · 348 REACH-family), 8 truncated.

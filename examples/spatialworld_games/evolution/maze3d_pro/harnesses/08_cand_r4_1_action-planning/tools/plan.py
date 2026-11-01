@@ -256,7 +256,7 @@ Reply with ONLY the JSON object in the format specified above."""
 
 
 class ActionPlanner:
-    """Episode-local perception + map + route planning. One instance per episode (harness.py)."""
+    """Episode-local perception + map + route planning. One instance per episode (orchestrator.py)."""
 
     # ── swept levers (class attributes so a rig can set them AFTER build_agent, which purges
     #    sys.modules["tools*"] and would throw away an instance override set before the call) ──

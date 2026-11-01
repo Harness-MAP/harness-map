@@ -197,7 +197,7 @@ MAX_XCHECK_FIRES_PER_SUBTASK = 2
 # Lowered 3 -> 1 (baseline-leaning): the baseline has NO motion floor before
 # honoring a commit; a floor of 1 still blocks the carry-over Match=1 on the first
 # frame of a new subtask, but no longer vetoes short approaches. Combined with the
-# motion counter now counting strafes (harness.py), short/strafe completions can
+# motion counter now counting strafes (orchestrator.py), short/strafe completions can
 # commit instead of overshooting.
 K_MIN_FORWARD_BEFORE_PLANNER_COMMIT = 1
 

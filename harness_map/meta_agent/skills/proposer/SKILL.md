@@ -1,6 +1,6 @@
 ---
 name: harness-map-proposer
-description: Run ONE proposer iteration of harness-map evolution on any benchmark. Take the parent harness copied into $OUT_DIR, make ONE coherent axis-distinct structural improvement to its rich multi-file harness (harness.py + AGENT.md/rules.md/skills/*.md/tools/*.py/memory.md), keep the run_episode contract intact, and write $OUT_DIR/NOTES.md to finish. The outer loop (harness_map.main.run) handles eval, scoring, and diagnosis.
+description: Run ONE proposer iteration of harness-map evolution on any benchmark. Take the parent harness copied into $OUT_DIR, make ONE coherent axis-distinct structural improvement to its rich multi-file harness (orchestrator.py + AGENT.md/rules.md/skills/*.md/tools/*.py/memory.md), keep the run_episode contract intact, and write $OUT_DIR/NOTES.md to finish. The outer loop (harness_map.main.run) handles eval, scoring, and diagnosis.
 ---
 
 # harness-map proposer (general)
@@ -33,23 +33,23 @@ skeleton. Read the candidate to see the current content; keep the structure.
 
 ```
 <harness>/
-├── harness.py     # ENTRYPOINT + orchestrator. Defines the control flow: compose the system
-│                  #   prompt from the .md priors, run the perceive→decide→act loop, use the
-│                  #   tools, maintain memory, return the result. THE EVALUATOR IMPORTS AND RUNS THIS.
-├── AGENT.md       # prose prior: role / task framing + verified perception facts
-├── rules.md       # prose prior: the output contract (response format), legal action set,
-│                  #   and the anti-cheat rule ("decide from the observation only")
-├── memory.md      # a fenced scratchpad TEMPLATE; harness.py fills it per step and injects it
-│                  #   into each turn (self-derived state — NEVER oracle)
-├── skills/        # composable prose priors, one concern per file (e.g. locate.md, plan.md,
-│   └── *.md       #   recover.md); harness.py composes/【optionally routes】them into the prompt
-├── tools/         # executable CODE helpers the harness CALLS (not model-facing function tools):
-│   └── *.py       #   the model call+parse+fallback, an action/geometry algebra, frame capture, …
-└── NOTES.md       # module map + evolvable-lever table + the change you made. Read by the
-                   #   diagnostician/proposer; NOT shown to the frozen agent. YOU write this to finish.
+├── orchestrator.py  # ENTRYPOINT. Defines the control flow: compose the system
+│                    #   prompt from the .md priors, run the perceive→decide→act loop, use the
+│                    #   tools, maintain memory, return the result. THE EVALUATOR IMPORTS AND RUNS THIS.
+├── AGENT.md         # prose prior: role / task framing + verified perception facts
+├── rules.md         # prose prior: the output contract (response format), legal action set,
+│                    #   and the anti-cheat rule ("decide from the observation only")
+├── memory.md        # a fenced scratchpad TEMPLATE; orchestrator.py fills it per step and injects it
+│                    #   into each turn (self-derived state — NEVER oracle)
+├── skills/          # composable prose priors, one concern per file (e.g. locate.md, plan.md,
+│   └── *.md         #   recover.md); orchestrator.py composes/【optionally routes】them into the prompt
+├── tools/           # executable CODE helpers the harness CALLS (not model-facing function tools):
+│   └── *.py         #   the model call+parse+fallback, an action/geometry algebra, frame capture, …
+└── NOTES.md         # module map + evolvable-lever table + the change you made. Read by the
+                     #   diagnostician/proposer; NOT shown to the frozen agent. YOU write this to finish.
 ```
 
-**Entrypoint contract (uniform).** `harness.py` MUST expose:
+**Entrypoint contract (uniform).** `orchestrator.py` MUST expose:
 
 ```python
 def run_episode(env, task_spec, vlm_clients, trace_dir=None) -> EpisodeResult
@@ -66,9 +66,9 @@ scores from the env's true post-rollout state. **A broken import or a changed si
 
 **Two evolvable axes** (this is what makes attribution work):
 - **prose levers** — `AGENT.md`, `rules.md`, `memory.md`, `skills/*.md`: change *what the agent is told*.
-- **code levers** — `harness.py`, `tools/*.py`: change *the mechanism* (control flow, parsing,
+- **code levers** — `orchestrator.py`, `tools/*.py`: change *the mechanism* (control flow, parsing,
   tool logic, memory maintenance, skill routing).
-- **NOT a lever** — do NOT edit `system_prompt.txt`: `harness.py:compose_system_prompt` rebuilds the
+- **NOT a lever** — do NOT edit `system_prompt.txt`: `orchestrator.py:compose_system_prompt` rebuilds the
   agent's prompt from `AGENT.md` + `skills/*.md` + `rules.md` and never reads `system_prompt.txt`, so
   editing it changes nothing (it is a redundant reference kept only for the gate/prompt-only-fallback).
   To change the prompt, edit the `.md` priors. Likewise `NOTES.md` is your write-only change log, not a lever.

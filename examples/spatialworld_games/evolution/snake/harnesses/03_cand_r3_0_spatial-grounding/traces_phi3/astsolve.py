@@ -1,6 +1,6 @@
 """astsolve.py — price an ast/num profile against cell 3's centroid slice, offline.
 
-FIXED comps (harness.py + tools/action.py + tools/frame.py, untouched): per-comp cf = [1,3,4,0,3,0]
+FIXED comps (orchestrator.py + tools/action.py + tools/frame.py, untouched): per-comp cf = [1,3,4,0,3,0]
 with types If 3, For 1, comprehension 4, BoolOp 2, IfExp 1 and literals [0, 0].
 A candidate adds 8 components in tools/vlm.py; this scores a chosen (per-comp cf, type totals,
 literal) profile without writing a line of code.

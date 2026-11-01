@@ -10,7 +10,7 @@ Measured: BALROG naive on the official 8, Qwen3-VL-30B-A3B-Instruct, n=40 -> **2
 
 | file | role | kind |
 |---|---|---|
-| `harness.py` | entrypoint `build_agent()`, the per-step `act()` loop | orchestrator |
+| `orchestrator.py` | entrypoint `build_agent()`, the per-step `act()` loop | orchestrator |
 | `tools/prompting.py` | message assembly + `compose_priors()` over the prose levers | code lever |
 | `tools/action_io.py` | model reply -> action string | code lever |
 | `AGENT.md` | task framing | prose lever — **EMPTY** |

@@ -6,7 +6,7 @@ surfaces either side of the one pristine model call: the REQUEST
 (`build_conversation_history` swapped in the step function's own module globals for the duration of
 that call) and the KEY (`Action.key` projected onto the moves a reckoned lattice says are
 pressable). The component graph keeps its shape — five top-level components in `tools/vlm.py`, each
-reached only from `decide`, no new module and no new import, with `harness.py`, `tools/action.py`
+reached only from `decide`, no new module and no new import, with `orchestrator.py`, `tools/action.py`
 and `tools/frame.py` untouched — so what moved is control flow and constants INSIDE components.
 
 ## change:

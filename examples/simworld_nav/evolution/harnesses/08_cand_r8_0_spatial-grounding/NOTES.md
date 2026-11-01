@@ -22,7 +22,7 @@ commit path is byte-identical to the anchor.
 
 | module | role | this iter |
 |---|---|---|
-| `harness.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ **one** wiring point (pose consulted before AP) + one per-leg trace note |
+| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ **one** wiring point (pose consulted before AP) + one per-leg trace note |
 | `modules/pose_script.py` | **POSE program per leg**; lateral-band trace + turn-down detector; the TURN-leg approach | ★ **NEW MODULE** |
 | `modules/active_perception.py` | cardinal burst, relative-turn burst, red idle, anti-spin, momentum | **untouched** — its `[rotate, -1]` burst is *delayed*, never captured |
 | `modules/completion_checker.py` | the appearance verdict behind every `-1` | **untouched** |
@@ -42,7 +42,7 @@ commit path is byte-identical to the anchor.
 | ROAD / FINISH pose programs | code | `pose_script.step` (returns `None`) | **deliberately empty** — one leg per candidate |
 | forward-facing arrival recognizer (criterion / evidence / schedule / caps) | code | `completion_checker` | **CLOSED this iter** — 6 prior candidates, none beat the anchor |
 | ORIENTATION cardinal burst | code | `active_perception` (a) | **do not touch** — 50/50; `step` returns `None` for it by construction |
-| red-signal idle during the approach | code | `harness.py` wiring | **open** — AP is not consulted for the ≤3 approach decisions (see §risk) |
+| red-signal idle during the approach | code | `orchestrator.py` wiring | **open** — AP is not consulted for the ≤3 approach decisions (see §risk) |
 | overshoot / "I have passed it" state | code | `spatial_memory` | **still open** |
 
 ## change
@@ -186,7 +186,7 @@ through the evaluator's own `spec_from_file_location(f"{pkg}.harness", …)` pat
   `PoseScript.step` (the TURN-leg approach program, `release_reason` /
   `approach_forwards` for traces)
 - `modules/__init__.py` — export `PoseScript`; docstring 7 → 8
-- `harness.py` — import + instantiate `PoseScript`; the single wiring point
+- `orchestrator.py` — import + instantiate `PoseScript`; the single wiring point
   (`pose.step` consulted before `active.should_emit`, its result short-
   circuiting the AP consultation); one per-leg `TURN_APPROACH_{CUE,CAP}_{n}`
   note; module-list docstring 7 → 8

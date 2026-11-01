@@ -1,4 +1,4 @@
-"""Naive H_0 module package — exports the modules wired by harness.py.
+"""Naive H_0 module package — exports the modules wired by orchestrator.py.
 
 iter 6 added an 8th node, `ViewpointController` (POSE arbitration). iter 9
 adds a 9th, `ArrivalGate`, which takes the `-1` LICENSE away from

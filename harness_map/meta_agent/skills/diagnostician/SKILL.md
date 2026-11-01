@@ -1,6 +1,6 @@
 ---
 name: harness-map-diagnostician
-description: Causal post-eval diagnosis of ONE evaluated harness-map candidate on any benchmark. Reads the candidate's own rich harness (harness.py + AGENT.md/rules.md/skills/*.md/tools/*.py/memory.md), its episode traces (full VLM reasoning + the frames the agent saw + actions + env logs), a numeric diagnostics summary, and prior chain diagnosis. Writes $OUT_DIR/diagnosis.md — a causal failure chain + a classified binding constraint (HARNESS-BUG | VLM-CEILING | TASK-GAP) + concrete, file/function-level fixes. This markdown is the UNSTRUCTURED GRADIENT the next proposer refines against. You DO read the candidate source and recommend concrete code changes.
+description: Causal post-eval diagnosis of ONE evaluated harness-map candidate on any benchmark. Reads the candidate's own rich harness (orchestrator.py + AGENT.md/rules.md/skills/*.md/tools/*.py/memory.md), its episode traces (full VLM reasoning + the frames the agent saw + actions + env logs), a numeric diagnostics summary, and prior chain diagnosis. Writes $OUT_DIR/diagnosis.md — a causal failure chain + a classified binding constraint (HARNESS-BUG | VLM-CEILING | TASK-GAP) + concrete, file/function-level fixes. This markdown is the UNSTRUCTURED GRADIENT the next proposer refines against. You DO read the candidate source and recommend concrete code changes.
 ---
 
 # harness-map diagnostician (general)
@@ -19,7 +19,7 @@ You are invoked with these env vars:
 - `SETTING` / `SUBSET` — the task and eval subset · `ITER_N` / `PARENT_TAG` · `REPO_ROOT`.
 
 ## What to read — broadly, the RAW artifacts (not just the scalar)
-1. **The candidate's own harness** — `harness.py` (the control flow), `tools/*.py` (the mechanism),
+1. **The candidate's own harness** — `orchestrator.py` (the control flow), `tools/*.py` (the mechanism),
    `AGENT.md`/`rules.md`/`skills/*.md`/`memory.md` (what the agent was told). You must understand
    the mechanism before you can attribute a failure to it.
 2. **The traces** in `$TRACE_DIR` — read several episodes end to end: the VLM's reasoning, the frame
@@ -60,7 +60,7 @@ Evidence-backed, causal, code-level. Cite specific episodes/steps/frames. Struct
                   commit/steer); a better planning/goal-directed lever is needed.
 
 ## 5. Concrete changes to try (the gradient — ranked by leverage)
-   For each: the exact file/function (e.g. tools/perception.py, harness.py:decide), the change, and
+   For each: the exact file/function (e.g. tools/perception.py, orchestrator.py:decide), the change, and
    the PREDICTED effect on which metric + the causal reason it should work. Favor structural levers.
 
 ## 6. Exhausted — do NOT repeat
@@ -69,7 +69,7 @@ Evidence-backed, causal, code-level. Cite specific episodes/steps/frames. Struct
 
 ## Rules
 - **Causal, not correlational.** "Score is low" is not a diagnosis; "the agent reaches the goal cell
-  in 7/10 eps but `harness.py:decide` never emits the commit action because the parser drops the
+  in 7/10 eps but `orchestrator.py:decide` never emits the commit action because the parser drops the
   `stop` token (ep 3 step 12, frame shows target centered)" is.
 - **Judge by stable signals, not the scalar** — the metric is noisy (temp=1.0). A pattern seen across
   episodes/frames beats a single number.

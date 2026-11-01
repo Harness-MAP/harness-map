@@ -35,7 +35,7 @@ Two numbers carry this diagnosis:
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:build_agent` installs `tools/vlm.py:decide`, a six-statement turn. Verified live, not
+`orchestrator.py:build_agent` installs `tools/vlm.py:decide`, a six-statement turn. Verified live, not
 assumed — I re-ran the shipped decision table against the recorded pick stream of all 20 episodes and
 reproduced the committed move **1901/1901 with zero mismatches**, so every claim below is exact.
 

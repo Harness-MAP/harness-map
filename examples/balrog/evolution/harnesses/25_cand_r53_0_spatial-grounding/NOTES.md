@@ -3,7 +3,7 @@
 ## module map
 | file | role |
 |---|---|
-| harness.py | `Ledger`: per-level visits, failed (square, dir) moves, prev square, prose-adjacent deadly (lava/water) and blocked (wall/bars) sets. `Ledger.menu` ranks the open legal compass moves. `MenuHarness`: one model call per step, plus the orbit override |
+| orchestrator.py | `Ledger`: per-level visits, failed (square, dir) moves, prev square, prose-adjacent deadly (lava/water) and blocked (wall/bars) sets. `Ledger.menu` ranks the open legal compass moves. `MenuHarness`: one model call per step, plus the orbit override |
 | tools/prompting.py | naive transcript + priors + `render_menu`: a numbered best-first MOVE MENU |
 | tools/action_io.py | `legal_actions`, and whole-word legal projection with a veto and a fallback (from r029) |
 | AGENT.md / memory.md | short priors: `>` is the goal, keep swinging, take menu option 1, what the menu tags mean |
@@ -30,4 +30,4 @@ named adjacent in the prose beforehand. Menu order is the known lever for a mode
 sees. The override breaks the 2-cycle deterministically without taking every decision away from the model.
 
 ## files:
-harness.py, tools/prompting.py, tools/action_io.py (copied from r029), AGENT.md, memory.md, NOTES.md
+orchestrator.py, tools/prompting.py, tools/action_io.py (copied from r029), AGENT.md, memory.md, NOTES.md

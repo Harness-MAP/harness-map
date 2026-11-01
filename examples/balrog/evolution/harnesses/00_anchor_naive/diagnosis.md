@@ -11,7 +11,7 @@ The observation already carries everything needed: an exact `map:` block, `curso
 prose adjacency list.
 
 ## 1. What this harness does (mechanism)
-- `harness.py:NaiveHarness.act` → `prompt_builder.update_observation(obs)` →
+- `orchestrator.py:NaiveHarness.act` → `prompt_builder.update_observation(obs)` →
   `tools/prompting.py:build_messages` appends `compose_priors()` (EMPTY: AGENT.md, rules.md, memory.md
   and skills/ are all empty) plus `NAIVE_INSTRUCTION` → one VLM call → `tools/action_io.py:extract_action`,
   which is only `re.sub(r"[^a-zA-Z\s:]", "", text)`.
@@ -73,7 +73,7 @@ VLM-ceiling only for Boxoban planning. Even there, the level is fully drawn and 
 can compute the plan.
 
 ## 5. Concrete changes to try (ranked by leverage)
-1. **Chart + frontier explorer in `tools/` (new `chart.py`), called from `harness.py:act`.** Parse
+1. **Chart + frontier explorer in `tools/` (new `chart.py`), called from `orchestrator.py:act`.** Parse
    the `map:` block (row index = cursor.y − 1, col = x) into a persistent grid. Record visited cells,
    and record squares where a move produced no position change. Each step, BFS to the nearest
    unvisited, passable frontier cell, or straight to `>` if it is drawn. Offer that step as a

@@ -159,7 +159,7 @@ def proposer_corpus(adapter, anchor_dir, out_dir, k: int, *, max_rounds: int = 6
     def distinct():
         seen, keep = {content_hash(anchor_dir)}, []
         for d in sorted(out_dir.glob("cand_r*")):
-            if (d / "harness.py").exists():
+            if (d / "orchestrator.py").exists():
                 s = content_hash(d)
                 if s not in seen:
                     seen.add(s)
@@ -311,7 +311,7 @@ def main(argv=None) -> None:
 
     if a.corpus:
         corpus = [adapter.anchor().source_dir] + sorted(
-            d for d in a.corpus.iterdir() if (d / "harness.py").exists())
+            d for d in a.corpus.iterdir() if (d / "orchestrator.py").exists())
     else:
         corpus = proposer_corpus(adapter, adapter.anchor().source_dir, root / "corpus",
                                  k=max(5, k0 + 3))

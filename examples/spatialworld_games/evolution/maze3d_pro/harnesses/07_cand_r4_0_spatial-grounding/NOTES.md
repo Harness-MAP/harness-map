@@ -180,7 +180,7 @@ only in the offline rig in the scratchpad; nothing of it ships.
 
 | file | role |
 |------|------|
-| harness.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn, opens ONE `SightedPlanner` per episode and threads it plus the memory template into `tools.vlm.decide`; `compose_system_prompt()` recomposes the prior from the .md files; `memory_template()` loads `memory.md` and validates its placeholders against the planner's fields, falling back to `plan.DEFAULT_TEMPLATE` on any mismatch. Exposes the planner on the returned fn so an offline rig can read its counters. |
+| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn, opens ONE `SightedPlanner` per episode and threads it plus the memory template into `tools.vlm.decide`; `compose_system_prompt()` recomposes the prior from the .md files; `memory_template()` loads `memory.md` and validates its placeholders against the planner's fields, falling back to `plan.DEFAULT_TEMPLATE` on any mismatch. Exposes the planner on the returned fn so an offline rig can read its counters. |
 | **tools/plan.py** | **NEW — the mechanism.** `read_sight` (the projection inverted + the colour key + the frame digest), `Sight` (`reach` / `stride_cap`), `Lattice` (per-floor grid, `absorb` / `frontier` / BFS `route`), `SightedPlanner` (`observe` → outcome resolution + dead reckoning, `forced` / `routed` / `plan`, `climb_choice`, `unseen_bearing`, `floor_spent`, `govern`, `record`, `render_memory`). |
 | tools/vlm.py | the perceive → inject → ask → govern step. Still calls `evaluator.baseline_step` every step. Owns `_inject_memory`, which appends to a **stashed pristine** `conversation_history[0]` and never splices it — truncate-then-append deletes the JSON RESPONSE FORMAT contract from every later turn. |
 | tools/action.py | the action/key algebra, now ACTIVE: `name_for` (the inverse table — the engine dispatches on `action.key`), `read_proposal`, and `retarget`, which strips `granularity`, `repeat` AND `json_data` before rebuilding an Action (a stale `repeat: 3` on a replaced translation fires a turn three times, and `_get_action_granularity` re-reads a stale `json_data`). |
@@ -195,7 +195,7 @@ only in the offline rig in the scratchpad; nothing of it ships.
 ## evolvable levers (axes)
 
 - **prose**: AGENT.md / rules.md / skills/*.md / memory.md — what the agent is told.
-- **code**: harness.py / tools/*.py — compose, normalise, decode, reckon, map, route, govern.
+- **code**: orchestrator.py / tools/*.py — compose, normalise, decode, reckon, map, route, govern.
 - **sub-levers inside tools/plan.py**: the goal priority in `_goal_cells`; the three branches of
   `forced()`; the veto set in `govern`; the stride policy (clip vs extend); the `climb_choice`
   ranking; the route metric (plain BFS — turn-aware routing is listed as refuted in the lineage
@@ -243,6 +243,6 @@ only in the offline rig in the scratchpad; nothing of it ships.
 
 `tools/plan.py` (new, the mechanism), `tools/vlm.py` (observe/inject/govern + `_inject_memory`),
 `tools/action.py` (`name_for`, `read_proposal`, `retarget`), `tools/frame.py` (`pixels`),
-`harness.py` (per-episode planner + `memory_template`), `AGENT.md`, `rules.md`,
+`orchestrator.py` (per-episode planner + `memory_template`), `AGENT.md`, `rules.md`,
 `skills/navigation.md`, `memory.md`, `NOTES.md`. Unchanged: `tools/__init__.py`,
 `system_prompt.txt`, `system_prompt.md`.

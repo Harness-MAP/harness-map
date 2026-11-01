@@ -21,7 +21,7 @@
 One cheap HARNESS-BUG sits on top: the route has no "drawn-but-unreachable `>`" phase (R3/03). The QM survival regression is also self-inflicted: after the route runs out of targets, the model walks the hero into the rat room.
 
 ## 1. What this harness does (mechanism)
-`harness.py:GroundedAgent.act` parses the frame (`parse_glyph_map`: map row = cursor.y−1) and walks `STAGES = (prompt, orient, stairs, fight, route, model)`:
+`orchestrator.py:GroundedAgent.act` parses the frame (`parse_glyph_map`: map row = cursor.y−1) and walks `STAGES = (prompt, orient, stairs, fight, route, model)`:
 - **`st_prompt`**
   - Answers `Really attack? [yn]` with `northwest` (the `y` key).
   - Answers every other prompt, **including every `What do you want to …`**, with `more` (cancel).

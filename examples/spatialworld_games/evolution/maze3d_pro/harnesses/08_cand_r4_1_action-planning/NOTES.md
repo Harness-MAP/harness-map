@@ -9,7 +9,7 @@ changed, and `build_agent` / `compose_system_prompt` / `tools.vlm.decide` keep t
 **code / action-planning — `tools/plan.py` (new): an EXACT scene decoder feeding a dead-reckoned
 occupancy map that the harness routes on.** The steer named the productive difference in the target
 region as its *token-level implementation*, so the component graph is deliberately the region's own
-(`harness.py` + `tools/{__init__,action,frame,plan,vlm}.py` + the four prose priors — the same five
+(`orchestrator.py` + `tools/{__init__,action,frame,plan,vlm}.py` + the four prose priors — the same five
 modules both exemplars ship, nothing added or split), and everything new is token-level content
 *inside* those components: `tools/plan.py` inverts the renderer's fog/rect geometry with
 module-level look-up tables built by comprehension over the engine's own `fog(d)` and `rects[d]`
@@ -169,7 +169,7 @@ are L6 and L17), and L02/L04/L11 end **on floor 2** — the floor transitions th
 ## module map
 | file | role |
 |------|------|
-| harness.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `tools.plan.ActionPlanner` per episode, threading it into `tools.vlm.decide`; `compose_system_prompt()` recomposes the prior from the .md files. Note `evaluator.game` does **not** exist yet at this point — `run_evaluation` builds it after the call — so nothing may touch engine state here, and nothing does. |
+| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `tools.plan.ActionPlanner` per episode, threading it into `tools.vlm.decide`; `compose_system_prompt()` recomposes the prior from the .md files. Note `evaluator.game` does **not** exist yet at this point — `run_evaluation` builds it after the call — so nothing may touch engine state here, and nothing does. |
 | **tools/plan.py** | **NEW — the mechanism.** The renderer-derived constants and depth LUTs, `read_scene` (ray + both lateral cells + the frame digest), the dead-reckoned pose, the per-floor occupancy map with `clear` provenance, BFS routing (exit → frontier → stair), the epoch/stair-link bookkeeping with the climb-retirement test, the governor, and `render_memory`. |
 | tools/action.py | the engine `Action` contract **and** the bearing algebra. `name_for(key)` (the engine dispatches on the key, not on `metadata["function_called"]`), `turn_toward` / `turns_to` / `bearing_to` / `STEP` (integer headings 0..3 = N,E,S,W, matching the adapter's own turn tables so `turn_right` is `+1 mod 4`), and `retarget`, which strips `granularity`, `repeat` **and** `json_data` before rebuilding a turn — the input source reads all three, and a stale `repeat: 3` on a re-aimed turn fires 270 degrees. |
 | tools/vlm.py | the perceive → measure → inject → ask → govern step. Still calls `evaluator.baseline_step` every step (parsing, fallback and the legal set untouched); owns `_inject_memory`, which appends to a stashed pristine `conversation_history[0]`. |
@@ -182,7 +182,7 @@ are L6 and L17), and L02/L04/L11 end **on floor 2** — the floor transitions th
 
 ## evolvable levers (axes)
 - **prose**: AGENT.md / rules.md / skills/*.md / memory.md — what the agent is told.
-- **code**: harness.py / tools/*.py — the mechanism (decode, map, route, govern, inject).
+- **code**: orchestrator.py / tools/*.py — the mechanism (decode, map, route, govern, inject).
 - **tuning, all priced here** (class attributes on `ActionPlanner`; set them **after** `build_agent`):
 
 | lever | shipped | measured alternatives |
@@ -243,7 +243,7 @@ receives; they are the same thing a sighted agent would see, not episode ground 
   `turns_to`, `bearing_to`, `steps_granularity`, `climb_dz`) and `retarget`.
 - `tools/vlm.py` — `decide()` now observes → injects → delegates to `baseline_step` → governs; added
   `_inject_memory` (stash-and-append on `conversation_history[0]`).
-- `harness.py` — `build_agent` opens the per-episode planner and threads it into `vlm.decide`; added
+- `orchestrator.py` — `build_agent` opens the per-episode planner and threads it into `vlm.decide`; added
   `_positive_int`.
 - `AGENT.md`, `rules.md`, `skills/navigation.md`, `memory.md` — rewritten around the measured facts.
 - unchanged: `tools/frame.py`, `tools/__init__.py`, `system_prompt.txt`, `system_prompt.md`.

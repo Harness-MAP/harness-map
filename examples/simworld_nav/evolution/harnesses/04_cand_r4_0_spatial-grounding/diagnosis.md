@@ -28,16 +28,16 @@ env's per-leg substep deadline.
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:run_episode`, one outer iteration per **decision** (not per env step). Seven modules:
+`orchestrator.py:run_episode`, one outer iteration per **decision** (not per env step). Seven modules:
 
 | # | call site | role in the outcome |
 |---|---|---|
-| 1 | `active.should_emit` (`harness.py:305`) | **Short-circuits perceive+plan entirely** when it returns a list. Owns (a) the ORIENTATION cardinal burst `[rot…, -1]` — 50/50 pass, 0 VLM calls; (a″) the relative-turn burst, now with **E1**'s 2-forward approach; (a′) red-signal idle; (b) anti-spin; (b′) wall-stuck recovery; (d) cap-2 forward momentum. |
+| 1 | `active.should_emit` (`orchestrator.py:305`) | **Short-circuits perceive+plan entirely** when it returns a list. Owns (a) the ORIENTATION cardinal burst `[rot…, -1]` — 50/50 pass, 0 VLM calls; (a″) the relative-turn burst, now with **E1**'s 2-forward approach; (a′) red-signal idle; (b) anti-spin; (b′) wall-stuck recovery; (d) cap-2 forward momentum. |
 | 2–3 | `perceiver.perceive` → `planner.plan` | 2 VLM calls/decision → `{Summary, Match, Actions}`. |
-| 4 | `completion.verify` (`harness.py:406`) | honours a planner `-1` only if `planner_match == 1 and forward_streak >= 1`. |
-| 5 | `cross_check_planner_commit` (`harness.py:420`) | 3rd VLM call gating a planner `-1`. **E3** changed its cap semantics. |
-| 6 | `proactive_commit_check` (`harness.py:449`) | at `forward_streak ≥ 4`, every 5 forwards, ≤12/leg: independent binary arrival call; `Match==1` ⇒ inject the commit burst. **This is where 8/8 of this run's commits came from.** |
-| 7 | `request_side_scan` / `scan_reach` (`harness.py:477`) | physical yaw toward the named side, re-ask, yaw back on miss. Fired 4× (all `SIDE_SCAN_MISS`). |
+| 4 | `completion.verify` (`orchestrator.py:406`) | honours a planner `-1` only if `planner_match == 1 and forward_streak >= 1`. |
+| 5 | `cross_check_planner_commit` (`orchestrator.py:420`) | 3rd VLM call gating a planner `-1`. **E3** changed its cap semantics. |
+| 6 | `proactive_commit_check` (`orchestrator.py:449`) | at `forward_streak ≥ 4`, every 5 forwards, ≤12/leg: independent binary arrival call; `Match==1` ⇒ inject the commit burst. **This is where 8/8 of this run's commits came from.** |
+| 7 | `request_side_scan` / `scan_reach` (`orchestrator.py:477`) | physical yaw toward the named side, re-ask, yaw back on miss. Fired 4× (all `SIDE_SCAN_MISS`). |
 
 Stages 5 and 6 both call **the same** `_binary_reach_vlm_call` (`completion_checker.py:646`).
 **E4 rewrote that one system prompt, so it hit every commit path in the harness simultaneously.**
@@ -150,7 +150,7 @@ Cost this run: **281 blocked forwards (9 % of all 3118 forwards; anchor 4 %) in 
 ≥2 steps long, 9 of them 19 steps long — 259 substeps wasted**, and `static_collision_mean` 1.78 →
 **5.12** with `static_collision_rate` 0.14 → 0.30.
 
-**(b) The STUCK detector cannot fire.** `harness.py:280` computes
+**(b) The STUCK detector cannot fire.** `orchestrator.py:280` computes
 `forward_count = sum(1 for a in chosen_actions if a == 0)` where `chosen_actions` is the **previous
 decision's burst**, not the leg's history — on the `EMPTY_FALLBACK` path it is `[0]`, so
 `forward_count == 1` and `forward_count > 3` is never true. `SpatialMemory` already exposes the
@@ -296,7 +296,7 @@ code is what let this survive three iters.
 - **Measured operating point:** 22 blocked-forward runs this arm, **20 of length ≥ 2**, only 2
   singletons. A 2-stall trigger catches 20/22 (91 %) and never fires on a transient. It reclaims
   **259 wasted substeps** and should drop `static_collision_mean` 5.12 → ~2.
-- **Compose with:** fixing `harness.py:280` to
+- **Compose with:** fixing `orchestrator.py:280` to
   `forward_count = memory.forward_count_since_boundary()` (the accessor already exists,
   `spatial_memory.py:101`, and is unused) so STUCK becomes a real backstop rather than dead code.
 
@@ -315,7 +315,7 @@ left/right" — 181/181 of them (`"Continue straight and stop at the intersectio
 `_INTERSECTION_RE` as load-bearing, not belt-and-braces. A FINISH-prefix leak onto a ROAD commit
 would corrupt the heading the E1 turn burst rotates from.
 
-### F — (after A–D) Over-walk backstop for the TASK-GAP. `modules/completion_checker.py` + `harness.py`
+### F — (after A–D) Over-walk backstop for the TASK-GAP. `modules/completion_checker.py` + `orchestrator.py`
 
 The recognizer's residual miss rate still walks 38/40 window entries straight out. An honest,
 observation-only backstop: track `forward_streak` since the leg began and, once it exceeds the
@@ -357,8 +357,8 @@ set — land A–D first and re-measure, since A alone changes the miss distribu
 
 ## 7. Provenance
 
-- Candidate: `$OUT_DIR` = `…/prop_r001_df84f4/cand_r001_0_spatial-grounding` — `harness.py` +
-  7 modules; `git diff` vs anchor = 3 files (`harness.py`, `modules/active_perception.py`,
+- Candidate: `$OUT_DIR` = `…/prop_r001_df84f4/cand_r001_0_spatial-grounding` — `orchestrator.py` +
+  7 modules; `git diff` vs anchor = 3 files (`orchestrator.py`, `modules/active_perception.py`,
   `modules/completion_checker.py`).
 - Eval: `cand_r1_0_spatial-grounding_r001/score.json`, subset `search_hard_50`, 50/50 episodes
   complete, `read_audit.json` verdict **PASS** (0 forbidden / 0 undeclared reads, 25 089 reads).

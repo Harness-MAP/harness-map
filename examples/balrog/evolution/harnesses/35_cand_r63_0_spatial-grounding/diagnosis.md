@@ -13,13 +13,13 @@
 Inside what the field does cover, a **HARNESS-BUG** cost one R3 win: `The door opens.` is booked as a failed edge (R3 run_01). **Classification: TASK-GAP** (Quest verbs, Boxoban pushes) **+ HARNESS-BUG** (door-open booking, a field with no fallback when `>` is unreachable).
 
 ## 1. What this harness does (mechanism)
-`harness.py:MenuHarness.act` runs, in order:
+`orchestrator.py:MenuHarness.act` runs, in order:
 1. **Reflexes:**
    - `Really attack? [yn]` → `y` (only if `y` is legal, which it is not on Quest; see §2E);
    - `--More--` → `more`;
    - standing on a charted `>` → `down`.
 2. **`Ledger.observe`** parses the cursor (row = y−1), `Dlvl`, the `map:` rows and the adjacent-noun prose. `deadly` = lava/water; `blocked` = wall/bars/dark area.
-   - **It books `(square, dir)` into `failed` whenever the cursor did not move, the target glyph was not a letter, and there was no combat text** (`harness.py:61-65`).
+   - **It books `(square, dir)` into `failed` whenever the cursor did not move, the target glyph was not a letter, and there was no combat text** (`orchestrator.py:61-65`).
 3. **`Ledger.chart` + `tools/field.py:flood`** folds the map into `terrain`, then runs a reverse BFS. The sources are:
    - **every drawn `>`**;
    - **only if no `>` is drawn**, every unvisited passable cell that touches an undrawn cell.
@@ -106,7 +106,7 @@ None of this is VLM-ceiling: the model is only ever consulted where the code has
    - Verbs must call `self.ledger.commit(pos, verb, " ")`. `commit` already sets `last=None` for non-compass actions, so they will not be booked as bumps.
    - `Quest` expects r058's chart and frame API (`ChartView`, `fr["adjacent"]`, `fr["message"]`). Write a thin adapter over `Ledger.terrain/visits/doors`, and apply `The lava cools and solidifies.` to `Ledger.terrain` (set `}`→`.`) so the field then routes to the `>`.
    - Predicted: Quest 0/10 → 8–10/10 (+0.20–0.25 primary; replicated in r052 and r058), plus about 2.7M tokens of the 3.04M bill removed.
-2. **`harness.py:Ledger.observe` — classify the no-move message before booking `failed`.**
+2. **`orchestrator.py:Ledger.observe` — classify the no-move message before booking `failed`.**
    - `door opens` → `self.doors.add(target)`; do not book.
    - `door resists` / `This door is locked` → keep the target a door; do not book permanently. Better, kick it (memory: kick opener on R3).
    - `can't move diagonally … doorway` → book only that diagonal.

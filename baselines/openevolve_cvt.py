@@ -14,7 +14,7 @@ import numpy as np
 from . import common as C
 from .upstream import load_openevolve, pins
 # Reused from the vanilla arm: everything that is not the descriptor, so a fix lands on both.
-from .openevolve_arm import EVALUATE_PY, SYSTEM_MESSAGE, _EvalServer, _metrics
+from .openevolve import EVALUATE_PY, SYSTEM_MESSAGE, _EvalServer, _metrics
 
 
 FEATURE_DIM = "cvt_cell"          # the single archive axis; deliberately NOT an evaluator metric
@@ -212,7 +212,7 @@ def run(adapter, *, out_dir, ledger: C.Ledger, k0: int = 8, cvt_dir=None, corpus
         if known is not None and known.fit is not None:
             return _metrics(known)                       # upstream re-scores clones; don't re-pay
 
-        # budget stop as in openevolve_arm: refuse to pay past the cap
+        # budget stop as in openevolve: refuse to pay past the cap
         if ledger.max_cand_evals and ledger.cand_evals >= ledger.max_cand_evals:
             return {"combined_score": 0.0, "budget_exhausted": True}
 

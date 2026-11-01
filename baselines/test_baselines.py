@@ -15,8 +15,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from baselines import common as C                                                # noqa: E402
-from baselines import dgm_arm, gepa_arm, meta_harness_arm, upstream              # noqa: E402
-from baselines import openevolve_arm, shinka_arm                                 # noqa: E402
+from baselines import dgm, gepa, meta_harness, upstream              # noqa: E402
+from baselines import openevolve, shinka_arm                             # noqa: E402
 from harness_map.main import EpisodeResult, Fitness, Genome                # noqa: E402
 
 
@@ -84,13 +84,13 @@ class MockAdapter:
         """ONE text file, so the harness is a single GEPA component a reflection LM can rewrite."""
         d = self.root / name
         d.mkdir(parents=True, exist_ok=True)
-        (d / "harness.py").write_text("BITS = %r\n" % (bits,))
+        (d / "orchestrator.py").write_text("BITS = %r\n" % (bits,))
         return d
 
     @staticmethod
     def _read(d: Path):
         import ast, re
-        m = re.search(r"BITS\s*=\s*(\[[^\]]*\])", (d / "harness.py").read_text())
+        m = re.search(r"BITS\s*=\s*(\[[^\]]*\])", (d / "orchestrator.py").read_text())
         bits = ast.literal_eval(m.group(1)) if m else [0] * N_BITS
         bits = [int(bool(b)) for b in bits][:N_BITS]
         return bits + [0] * (N_BITS - len(bits))
@@ -189,8 +189,8 @@ def test_dgm_layout_contract():
                       scores={"a": 1.0, "b": 0.4, "c": 0.0})
         kid = C.Cand(idx=1, genome=g, fit=Fitness(primary=0.9, valid=True),
                      scores={"a": 1.0, "b": 0.9, "c": 0.8}, parent=0)
-        dgm_arm._write_node(out, "initial", None, init, 1.0)
-        dgm_arm._write_node(out, "kid1", "initial", kid, 1.0)
+        dgm._write_node(out, "initial", None, init, 1.0)
+        dgm._write_node(out, "kid1", "initial", kid, 1.0)
 
         md = json.loads((out / "initial" / "metadata.json").read_text())
         check(md["overall_performance"]["total_resolved_ids"] == ["a"]
@@ -215,8 +215,8 @@ def test_dgm_layout_contract():
                                      method="score_child_prop", polyglot=False)
         check(all(e[0] in ("initial", "kid1") for e in ents) and ents,
               f"upstream choose_selfimproves returns (parent, entry) pairs from our layout ({ents})")
-        unres = {"initial": set(dgm_arm._unresolved(init, 1.0)),
-                 "kid1": set(dgm_arm._unresolved(kid, 1.0))}
+        unres = {"initial": set(dgm._unresolved(init, 1.0)),
+                 "kid1": set(dgm._unresolved(kid, 1.0))}
         check(all(e[1].startswith("solve_") or e[1] in unres[e[0]] for e in ents),
               f"each entry is one of THAT parent's unresolved instances, or a systematic mode "
               f"({ents})")
@@ -224,7 +224,7 @@ def test_dgm_layout_contract():
         # the upstream crash our arm has to survive: a parent with NO unresolved instances
         solved = C.Cand(idx=2, genome=g, fit=Fitness(primary=1.0, valid=True),
                         scores={"a": 1.0, "b": 1.0}, parent=0)
-        dgm_arm._write_node(out, "solved", "initial", solved, 1.0)
+        dgm._write_node(out, "solved", "initial", solved, 1.0)
         raised = False
         try:
             for s in range(40):
@@ -234,7 +234,7 @@ def test_dgm_layout_contract():
         except IndexError:
             raised = True
         check(raised, "upstream's empty-unresolved case does crash (DGM_outer.py:143)")
-        got = dgm_arm._choose(D, str(out), ["solved"], 1, "score_child_prop", None,
+        got = dgm._choose(D, str(out), ["solved"], 1, "score_child_prop", None,
                               {"solved": solved}, 1.0, quiet)
         check(got == [], "our arm survives it and returns no attempt for that parent")
     finally:
@@ -280,12 +280,12 @@ def run_arm(name, root, budget=8):
     led = C.Ledger(max_cand_evals=budget)
     out = root / f"out_{name}"
     if name == "meta-harness":
-        s = meta_harness_arm.run(ad, out_dir=out, ledger=led, iterations=20, k=1, log=quiet)
+        s = meta_harness.run(ad, out_dir=out, ledger=led, iterations=20, k=1, log=quiet)
     elif name == "gepa":
-        s = gepa_arm.run(ad, out_dir=out, ledger=led, minibatch_size=3, log=quiet,
+        s = gepa.run(ad, out_dir=out, ledger=led, minibatch_size=3, log=quiet,
                          proposer="reflection-lm", reflection_lm=_fake_reflection_lm)
     else:
-        s = dgm_arm.run(ad, out_dir=out, ledger=led, generations=20, selfimprove_size=1, k=1,
+        s = dgm.run(ad, out_dir=out, ledger=led, generations=20, selfimprove_size=1, k=1,
                         small_n=3, resolve_thresh=1.0, log=quiet)
     return ad, led, s, out
 
@@ -355,14 +355,14 @@ def test_bundle_roundtrip():
     root = Path(tempfile.mkdtemp())
     try:
         src = root / "h"; (src / "modules").mkdir(parents=True)
-        (src / "harness.py").write_text("import modules.a\nX = 1\n")
+        (src / "orchestrator.py").write_text("import modules.a\nX = 1\n")
         (src / "modules" / "__init__.py").write_text("")
         (src / "modules" / "a.py").write_text("def go():\n    return 42\n")
         (src / "notes.md").write_text("not bundled, but must survive\n")
 
         b = C.bundle_harness(src)
         files = C._FILE_RE.findall(b)
-        check(set(files) == {"harness.py", "modules/__init__.py", "modules/a.py"},
+        check(set(files) == {"orchestrator.py", "modules/__init__.py", "modules/a.py"},
               f"every .py file becomes its own region ({files})")
         check(b.count("# EVOLVE-BLOCK-START") == len(files)
               and b.count("# EVOLVE-BLOCK-END") == len(files),
@@ -382,7 +382,7 @@ def test_bundle_roundtrip():
 
         # a mangled bundle must fail loudly, not silently run the anchor
         out3 = C.unbundle_harness("total garbage, no markers", src, root / "out3")
-        check((out3 / "harness.py").read_text() == "total garbage, no markers",
+        check((out3 / "orchestrator.py").read_text() == "total garbage, no markers",
               "a bundle with no markers is written as-is so it fails validation, not silently "
               "reverting to the anchor")
 
@@ -411,7 +411,7 @@ def test_openevolve_glue():
         anchor_dir = Path(ad.anchor().source_dir)
         task = root / "task"; task.mkdir(parents=True)
         eval_py = task / "evaluate.py"
-        eval_py.write_text(openevolve_arm.EVALUATE_PY.format(timeout=60))
+        eval_py.write_text(openevolve.EVALUATE_PY.format(timeout=60))
 
         from harness_map.main import Genome
         def handle(program_path):
@@ -420,9 +420,9 @@ def test_openevolve_glue():
             g = Genome(source_dir=d, label="cand")
             fit, _ = C.evaluate_on(ad, g, rid=0, ledger=led)
             c = C.Cand(idx=0, genome=g, fit=fit, scores=C.per_instance(fit))
-            return openevolve_arm._metrics(c)
+            return openevolve._metrics(c)
 
-        server = openevolve_arm._EvalServer(task / "rpc", handle, log=quiet)
+        server = openevolve._EvalServer(task / "rpc", handle, log=quiet)
         server.start()
         try:
             # import it exactly as upstream's worker does

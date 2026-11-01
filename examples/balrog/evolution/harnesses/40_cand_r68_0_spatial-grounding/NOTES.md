@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| harness.py | `LearnerAgent` hub; `STAGES = (prompt, orient, sokoban, stairs, swing, cross, hold, kit, fetch, route, learner)`. The first stage that answers wins, and its rung goes to `reasoning`. `load_tool()` imports `tools/<name>.py` under a path-unique key. `ChartView` exposes the chart to the tools. `route()` now elects frontiers with a stairs attractor. | code |
+| orchestrator.py | `LearnerAgent` hub; `STAGES = (prompt, orient, sokoban, stairs, swing, cross, hold, kit, fetch, route, learner)`. The first stage that answers wins, and its rung goes to `reasoning`. `load_tool()` imports `tools/<name>.py` under a path-unique key. `ChartView` exposes the chart to the tools. `route()` now elects frontiers with a stairs attractor. | code |
 | tools/quest.py | Quest-pair owner: kick-split, pickup, apply/zap across lava, mouth hold. Armed on {pickup, kick, zap} ⊆ legal. | code |
 | tools/sokoban.py | Boxoban owner: exact push-level A*, a plan cache, expect-and-replan. Armed on a 4-cardinal vocab plus a drawn boulder and fountain. | code |
 | AGENT.md | one-sentence tie-break prose | prose |
@@ -26,6 +26,6 @@ Code, structure/wiring (steered toward r064/r058). The parent's monolithic `act(
 - Expected: the r064 profile (35/40) plus R3 5/5, so about 0.900.
 
 ## files:
-- harness.py (replaced with the stage-table wiring; `route()` attractor)
+- orchestrator.py (replaced with the stage-table wiring; `route()` attractor)
 - tools/__init__.py, tools/quest.py, tools/sokoban.py (new)
 - NOTES.md

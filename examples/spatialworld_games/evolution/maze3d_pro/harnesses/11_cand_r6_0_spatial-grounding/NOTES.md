@@ -20,7 +20,7 @@ decided only "turn left or turn right, once".
 ## module map
 | file | role |
 |------|------|
-| harness.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `plan.Pilot` for the episode; `compose_system_prompt()` recomposes the prompt from the .md priors. Unchanged this iteration. |
+| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `plan.Pilot` for the episode; `compose_system_prompt()` recomposes the prompt from the .md priors. Unchanged this iteration. |
 | tools/sight.py | ONE FRAME READ AS GEOMETRY: the corridor's length and kind down column 400, and the FLANK LADDER — the two neighbours of every corridor cell the ray proves open. Censused exact over 5624 poses / 24 938 band readings. Unchanged this iteration bar one `break`-free rewrite of the ladder prefix. |
 | tools/plan.py | the chart those readings fill, the route over it, the ROTATION PLANNER, and the governor. `MazeChart` keeps PLAIN (a ray went through) strictly apart from PASSABLE-ONLY (a flank showed it empty, so it could still be the exit); that distinction is what the floor-exhaustion proof rests on. |
 | tools/action.py | the key table, the engine `Action` metadata envelope, the bearing algebra and NEW the rotation algebra. |
@@ -183,7 +183,7 @@ never `sorted(CLIMB_ACTIONS)`.
 
 ## evolvable levers (axes)
 - prose: AGENT.md / rules.md / skills/*.md / memory.md — what the agent is told.
-- code: harness.py / tools/*.py — the mechanism.
+- code: orchestrator.py / tools/*.py — the mechanism.
 - knobs, all CLASS attributes of `plan.Pilot` (a rig must set them AFTER `build_agent`):
   `PIVOT_MAX` (saturated at 2), `SWEEP`, `CEILING_LEARNS` (refuted, off), `OBEY_MODE`,
   `FLOOR_GATE`/`STALE_LIMIT`, `STRIDE_MAX`, `MAX_CLIMBS`, `TWIN_MATCHES`/`TWIN_WINDOW`,
@@ -214,7 +214,7 @@ engine, the adapter or pygame. The harness reads exactly `baseline_step`,
 `capture_game_screenshot`, `current_prompt`, `conversation_history` and `max_steps` off the
 evaluator. `evaluator.baseline_step` is called on EVERY step, so the frozen model chooses every
 decision and the VLM-call counter can never void the run. The ground-truth level data used in the
-censuses above lives only in the offline rig, which `harness.py` never imports.
+censuses above lives only in the offline rig, which `orchestrator.py` never imports.
 
 ## files
 tools/action.py, tools/plan.py, tools/sight.py, AGENT.md, rules.md, skills/navigation.md, NOTES.md

@@ -2,7 +2,7 @@
 
 Companion to `NOTES.md`. Everything here was measured by a scratch rig that synthesises frames from the
 documented geometry (three congruent panel outlines in `rgb(70,70,75)`, shadow fill `rgb(80,80,80)` on
-`rgb(20,20,20)`, the highlight footprint at the affine centroid) and drives the REAL `harness.py` through
+`rgb(20,20,20)`, the highlight footprint at the affine centroid) and drives the REAL `orchestrator.py` through
 a stub evaluator that owns the engine state and the scripted model reply. Three banks of 20 levels:
 **structured** (unions of small slabs — the shape family a level actually is), **hull-closed** (random
 targets whose admitted hull equals the target, the common real case), and **hull-over** (random targets
@@ -12,7 +12,7 @@ reads it.
 ## what was measured, and on what
 Everything below was measured offline against a rig that synthesises frames from the documented
 geometry (three congruent panel outlines in `rgb(70,70,75)`, shadow fill `rgb(80,80,80)` on
-`rgb(20,20,20)`, the highlight footprint at the affine centroid) and drives the REAL `harness.py`
+`rgb(20,20,20)`, the highlight footprint at the affine centroid) and drives the REAL `orchestrator.py`
 through a stub evaluator that owns the engine state. Three banks of 20 levels: **structured** (unions of
 small slabs, the shape family a level actually is), **hull-closed** (random targets whose hull equals the
 target, the common real case), **hull-over** (random targets the hull strictly over-approximates).

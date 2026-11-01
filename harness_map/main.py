@@ -200,7 +200,7 @@ def _evaluate_all(adapter, cands, it, *, check_contract=False):
     """Static gate, `evaluate_batch` (or `evaluate`), judge, diagnosis; one result per candidate."""
     reasons = [_pre_eval_gate(adapter, g) for g in cands]
     from pathlib import Path as _P
-    if any((_P(getattr(g, "source_dir", ".")) / "harness.py").exists() for g in cands):
+    if any((_P(getattr(g, "source_dir", ".")) / "orchestrator.py").exists() for g in cands):
         _rej = [f"{getattr(g, 'label', '?')}: {r}" for g, r in zip(cands, reasons) if r]
         print(f"[gate] pre-eval GATE: {sum(1 for r in reasons if r is None)}/{len(cands)} pass"
               + (" | REJECT " + "; ".join(_rej) if _rej else ""))
@@ -242,9 +242,9 @@ def _default_pre_eval_gate(adapter, genome):
     import ast
     from pathlib import Path as _Path
     src_dir = _Path(getattr(genome, "source_dir", "."))
-    entry = src_dir / "harness.py"
+    entry = src_dir / "orchestrator.py"
     if not entry.exists():
-        return None                                  # no harness.py: nothing to gate
+        return None                                  # no orchestrator.py: nothing to gate
     py_files = [entry] + sorted(src_dir.glob("tools/*.py"))
     trees = {}
     for f in py_files:

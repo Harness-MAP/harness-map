@@ -1,7 +1,7 @@
 # cand_r044_0_spatial-grounding
 
 ## module map
-- `harness.py`: hub `GroundedAgent`, in the same shape as r026. Each step runs a modal reflex, then stairs, the hazard veto, a swing, the chart route, and finally the model fallback. It loads `tools/terrain.py` under a module name unique to its path.
+- `orchestrator.py`: hub `GroundedAgent`, in the same shape as r026. Each step runs a modal reflex, then stairs, the hazard veto, a swing, the chart route, and finally the model fallback. It loads `tools/terrain.py` under a module name unique to its path.
 - `tools/terrain.py` (NEW): square-level terrain semantics. It turns adjacent prose nouns into per-cell facts (`door`, `doorway`, `solid`, `liquid`), gives a `passable(glyph, fact, bars_level)` verdict, and an `edge_ok` rule: no diagonal into or out of a real door, or any square ever drawn `+`.
 
 ## axis:
@@ -26,4 +26,4 @@ The r026 diagnosis names the binding constraint: the glyph→terrain table is wr
 Every one of these drops the harness into the model fallback, which is net harmful. Expected: R3 2/5 → 4/5, fewer Boxoban bumps, and freed QE prompt steps. MazeWalk is unchanged, since it has no doors or bars and stays route-owned.
 
 ## files:
-harness.py (edited), tools/terrain.py (new), NOTES.md
+orchestrator.py (edited), tools/terrain.py (new), NOTES.md

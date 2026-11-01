@@ -23,4 +23,4 @@ The r033 diagnosis traces all 8 losses caused by the harness (MW15 ×3, R3 ×5) 
 r027's structure, a field that decides and a model that breaks ties, and the r001/r036 chart-plus-BFS both scored MW15 5/5 and R3 about 4/5. A field that re-descends every step with a visit-weighted cost has no fixed-point 2-cycle. Skipping the model on steps the code decides should also cut the roughly 330k tokens per episode.
 
 ## files
-harness.py, tools/grid.py
+orchestrator.py, tools/grid.py

@@ -14,7 +14,7 @@ of these, except the 5 melee deaths (4 CB-Dark, 4 Quest-Medium, with overlap in 
 **TASK-GAP** on Boxoban and Quest.
 
 ## 1. What this harness does (mechanism)
-`harness.py:GradientAgent.act` runs these steps in order:
+`orchestrator.py:GradientAgent.act` runs these steps in order:
 1. `tools/field.py:parse_tty_frame` folds the frame into `chart` (terrain, visits, blocked (pos,dir)).
 2. It runs `flood_field`, a reverse Dijkstra with a visit penalty. The seeds are every drawn `>`, or, only when
    no `>` is drawn, the unvisited open cells that border undrawn space.
@@ -116,7 +116,7 @@ lever. Neither is a VLM ceiling: the model is not the deciding component on any 
 - This removes almost every consult on R3 and part of the Quest consults. That cuts cost by roughly 3–4×, and
   cost is a scored key.
 
-**3. `harness.py:act`: fix the `[yn]` prompt and the modal-cursor pollution.**
+**3. `orchestrator.py:act`: fix the `[yn]` prompt and the modal-cursor pollution.**
 - Detect modal as `cursor y==0` or the current message checks.
 - In that state, do **not** fold `pos` into `chart` (no visits, and don't consume `pending`).
 - `y` and `esc` are not legal, so answer "Really attack …? [yn]" with `more`, which escapes the prompt.
@@ -124,7 +124,7 @@ lever. Neither is a VLM ceiling: the model is not the deciding component on any 
   re-attacking.
 - This removes the QE/04 93-frame freeze.
 
-**4. `harness.py:act`: filter the consult menu by terrain.**
+**4. `orchestrator.py:act`: filter the consult menu by terrain.**
 - `open_dirs` must drop any neighbour whose drawn glyph is in `SOLID` (unless it is a known door), and any
   undrawn neighbour already bumped.
 - Offer diagonals only when the level has them.

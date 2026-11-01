@@ -29,22 +29,22 @@ generator there because the FINISH reference view is 90° off the travel axis.
 | 1 | arrival call sees mask + JET depth + perceiver description (2 → 4 images) | `completion_checker.py:750-806` | **NO EFFECT, +11.6 % cost — close this axis** (§2.2) |
 | 2 | criterion reverted to the anchor's wording byte-for-byte | `completion_checker.py:718-735` | **correct, and it is what recovered leg 1** (§2.1) |
 | 3 | arbitration: cap decides nothing, veto bounded by refusals, falls through to motion floor | `completion_checker.py:1015-1017, 1034-1039` | **half right** — killed the veto loop, but the fallback is a *delayed rubber-stamp*: 5 fires → 1 pass, **4 fatal commits** (§2.4) |
-| 4 | vetoed `-1` answered with `HOLD_PROBE=(Rotate_L, Rotate_R)` | `harness.py:109, 598-604` | **does what it says** (0 cm displacement vs 1 500 cm) but **cannot refresh the evidence** (§2.4) |
-| 5 | REACH path raises a bare `[-1]`; single pose composer | `harness.py:486` | **correct, and completely unexercised** — all 6 FINISH commits were 15–45 km false positives (§2.5) |
+| 4 | vetoed `-1` answered with `HOLD_PROBE=(Rotate_L, Rotate_R)` | `orchestrator.py:109, 598-604` | **does what it says** (0 cm displacement vs 1 500 cm) but **cannot refresh the evidence** (§2.4) |
+| 5 | REACH path raises a bare `[-1]`; single pose composer | `orchestrator.py:486` | **correct, and completely unexercised** — all 6 FINISH commits were 15–45 km false positives (§2.5) |
 | — | turn-approach latch (kept from parent, untouched) | `active_perception.py:504-532` | **confirmed at n=6 — the best thing in this lineage** (§2.3) |
 
 ---
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:run_episode`, one iteration per *decision* (not per env step). Seven modules, unchanged graph:
+`orchestrator.py:run_episode`, one iteration per *decision* (not per env step). Seven modules, unchanged graph:
 
 | # | call site | authority over `-1` |
 |---|---|---|
-| 1 | `active.should_emit` (`harness.py:~310`) | short-circuits perceive+plan: ORIENTATION cardinal burst, the **turn-approach latch**, red idle, anti-spin, cap-2 momentum cadence (≈3 forwards per VLM pair) |
+| 1 | `active.should_emit` (`orchestrator.py:~310`) | short-circuits perceive+plan: ORIENTATION cardinal burst, the **turn-approach latch**, red idle, anti-spin, cap-2 momentum cadence (≈3 forwards per VLM pair) |
 | 2 | `perceiver.perceive` | 1 call, 4 images (RGB, hint, mask, JET depth), temp 0.2 |
 | 3 | `planner.plan` | 1 text-only call → `{Summary, Match, Actions}`, temp 0.2 |
-| 4 | `completion.verify` (`harness.py:420`) | honours a planner `-1` iff `planner_match == 1 ∧ forward_streak` floor |
+| 4 | `completion.verify` (`orchestrator.py:420`) | honours a planner `-1` iff `planner_match == 1 ∧ forward_streak` floor |
 | 5 | `cross_check_planner_commit` (`:444`) | REACH call on the planner's claim; 1 refusal/leg, cap 2, then **motion floor decides** |
 | 6 | `proactive_commit_check` (`:472`) | REACH call on a schedule: `forward_streak ≥ 4`, then every `K_REACH_INTERVAL = 5` forwards, cap `MAX_REACH_FIRES_PER_SUBTASK = 12` |
 | 7 | `request_side_scan` / `scan_reach` (`:508`) | depth-gated yaw-to-named-side + re-ask |
@@ -290,7 +290,7 @@ Two coupled edits:
   per-fire recall **0.017**; recall is now **0.143** and passes = coverage × recall. The closure was
   correct for its regime and is void in this one.
 
-### B — **On FINISH legs, stop asking forward and ask sideways.** `modules/completion_checker.py:830-913` + `harness.py:472-535`
+### B — **On FINISH legs, stop asking forward and ask sideways.** `modules/completion_checker.py:830-913` + `orchestrator.py:472-535`
 1. In `proactive_commit_check`, **suppress the forward REACH when `_is_finish_instruction(instruction)`**
    (the predicate is already there and is 199/199 correct).
 2. Replace `request_side_scan`'s trigger: drop `_side_band_near` (1 fire / 50 eps — a per-frame-normalised
@@ -307,7 +307,7 @@ Two coupled edits:
 - Also raise/remove `MAX_REACH_FIRES_PER_SUBTASK = 12` on FINISH legs, or make the spacing widen-then-tighten
   with `forward_streak` — §2.5 shows 4/5 FINISH legs spent the allowance 15–35 km short. Derived from
   forward counts only.
-- Bug to fix while in there: `harness.py:518` calls `scan_reach` **without** `description=`, unlike the
+- Bug to fix while in there: `orchestrator.py:518` calls `scan_reach` **without** `description=`, unlike the
   other two call sites (moot if the 2-image revert in A lands first).
 
 ### C — **Delete the delayed rubber-stamp; re-arm on displacement, not on a hold.** `modules/completion_checker.py:1015-1017`
@@ -330,7 +330,7 @@ Two coupled edits:
 - Also move `_named_side_has_structure` (`:997`) **below** the refusal counter or delete it: it is a free,
   uncounted veto that vetoed 0/16 accepts this run — inert today, the parent's failure shape tomorrow.
 
-### D — **Un-wedge instead of dying.** `harness.py:292-304` + `modules/affordance_estimator.py:38`
+### D — **Un-wedge instead of dying.** `orchestrator.py:292-304` + `modules/affordance_estimator.py:38`
 - **Why:** 12/50 episodes (24 %) end wedged — 7 on the harness's `break`, **5 on the env's
   20-identical-positions rule** (env fact 1b-4), stalled-forward rate 5.9 %. `forward_count =
   sum(1 for a in chosen_actions if a == 0)` counts only the **current burst** (≤3), so the detector
@@ -404,7 +404,7 @@ dead: `spatial_memory.py:66` (`coll = 0` hard-coded).
 
 ## 7. Provenance
 
-- Candidate: `…/prop_r002_fe2b86/cand_r002_0_spatial-grounding` (`harness.py` 700 L + 7 modules).
+- Candidate: `…/prop_r002_fe2b86/cand_r002_0_spatial-grounding` (`orchestrator.py` 700 L + 7 modules).
   Score: `…/cand_r2_0_spatial-grounding_r002/score.json` — SR 0.0, SubtaskSR 0.33,
   per_position_SR [1.0, 0.12, 0.1111, 0.0], distance_progress 0.173, static_collision 2.86,
   90 090 tok / 744.1 s per episode, 50/50 episodes complete, read-audit clean.

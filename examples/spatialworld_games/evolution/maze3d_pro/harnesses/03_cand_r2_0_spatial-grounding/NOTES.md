@@ -150,7 +150,7 @@ Cost: the full-resolution census is ~2 ms/step against a ~2000 ms model call.
 ## module map
 | file | role |
 |------|------|
-| harness.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `ActionPlanner` for the episode; `compose_system_prompt()` recomposes the prompt from the .md priors. Unchanged this iter except its docstring. |
+| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `ActionPlanner` for the episode; `compose_system_prompt()` recomposes the prompt from the .md priors. Unchanged this iter except its docstring. |
 | tools/plan.py | **CHANGED.** The planner: the frame-difference outcome ledger (unchanged), plus the exact-colour census, the distance ladder, the on-stair latch, floor staleness, the climb spend/budget ledgers, the three grounded `govern` branches, and the rendering of memory.md. |
 | tools/vlm.py | The perceive → inject memory → ask → govern step. Appends the block to a stashed pristine `conversation_history[0]`, never splices it. **Untouched.** |
 | tools/action.py | the maze3d_pro action/key algebra + the engine `Action` contract (w/s carry granularity 1/2/3; a/d turn; q/e climb); `retarget` strips `granularity`/`repeat`/`json_data` first. Only two stale comments corrected (they asserted the `[Q] UP` prompt). |
@@ -163,7 +163,7 @@ Cost: the full-resolution census is ~2 ms/step against a ~2000 ms model call.
 
 ## evolvable levers (axes)
 - **prose**: AGENT.md / rules.md / skills/*.md / memory.md — what the agent is told.
-- **code**: harness.py / tools/*.py — the mechanism (compose, capture, measure, decide, govern).
+- **code**: orchestrator.py / tools/*.py — the mechanism (compose, capture, measure, decide, govern).
 - **tuning, all now priced**: `STALE_LIMIT` (interior optimum at 4, curve measured),
   `CLIMB_BUDGET` / `CLIMB_PROBES` (both inert — do not re-sweep), `_ADJACENT_FRAC` (a factor-4 gap,
   nothing to tune), `stall_limit` / `turn_sense` / `_NULL_FRAC` (inherited, unswept).
@@ -202,4 +202,4 @@ and in the priors are **properties of the renderer**, measured from frames the a
 
 ## files
 tools/plan.py (the mechanism), AGENT.md, rules.md, skills/navigation.md, memory.md,
-tools/action.py (two comments), harness.py (docstring), NOTES.md
+tools/action.py (two comments), orchestrator.py (docstring), NOTES.md

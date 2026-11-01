@@ -9,7 +9,7 @@ optimized. `system_prompt.txt` is kept as the prompt-only fallback and is NOT a 
 ## module map
 | file | role |
 |------|------|
-| harness.py | ENTRYPOINT. `build_agent(evaluator)` composes the priors and returns the async per-step fn backed by ONE episode-scoped `Arbiter`. |
+| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` composes the priors and returns the async per-step fn backed by ONE episode-scoped `Arbiter`. |
 | AGENT.md | role framing + the perception facts verified against this renderer (the panels are a complete specification, scoring is exact-match, one highlighted cube, a wall move still costs a decision). |
 | rules.md | the legal action set (6 cursor steps + the place/remove toggle) + control mapping + observation tips. |
 | skills/building.md | the build-strategy prior (view analysis / error correction). |
@@ -25,7 +25,7 @@ optimized. `system_prompt.txt` is kept as the prompt-only fallback and is NOT a 
 
 ## evolvable levers (axes)
 - prose: AGENT.md / rules.md / skills/*.md / memory.md — what the agent is told.
-- code: harness.py / tools/*.py — the mechanism (fit, read, reckon, rank, arbitrate).
+- code: orchestrator.py / tools/*.py — the mechanism (fit, read, reckon, rank, arbitrate).
 - the ranking key in `debt.py:rank_cells` is the single highest-leverage lever in the tree:
   forced-first and the layer tier are both load-bearing, the rim is measured from the admitted
   volume's own centroid rather than the grid's, and the walk term is the tie-break inside a tier.
@@ -96,6 +96,6 @@ it is why the lattice is fitted rather than tabulated.
 ## files
 `tools/lattice.py` (new) · `tools/panels.py` (new) · `tools/reckon.py` (new) · `tools/debt.py`
 (new) · `tools/keys.py` (algebra, two-way) · `tools/vlm.py` (rewritten) · `tools/frame.py`
-(refusal-safe) · `harness.py` (wires the arbiter) · `skills/grounding.md` (new prior) ·
+(refusal-safe) · `orchestrator.py` (wires the arbiter) · `skills/grounding.md` (new prior) ·
 `memory.md` (schema now live) · `AGENT.md` (verified perception facts) ·
 `traces_notes/measurements.md` (new, outside the genome) · `NOTES.md`

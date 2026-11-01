@@ -96,7 +96,7 @@ if _pkg:
     sys.modules.setdefault(_pkg, types.ModuleType(_pkg))
 
 
-# High-level action codes (matching harness.py's ACTION_TO_STEP map).
+# High-level action codes (matching orchestrator.py's ACTION_TO_STEP map).
 _FORWARD = 0
 _ROTATE_LEFT = 1
 _ROTATE_RIGHT = 2
@@ -239,7 +239,7 @@ def _rotation_burst(current: str, target: str) -> List[int]:
 
 # --- iter_004 (retuned in iter_009): red-signal-ahead detection -------
 # obs['rgb'] is uint8 (600, 720, 3) per the workspace probe (pinned in
-# harness.py's docstring). A typical traffic-signal lamp head occupies
+# orchestrator.py's docstring). A typical traffic-signal lamp head occupies
 # ~10-15 px across at that resolution; an "ahead" signal projects in the
 # upper-third / center of the frame.
 #
@@ -706,7 +706,7 @@ class ActivePerception:
         #                   the fallback for a corner the strafes cannot clear
         #                   (and used immediately when the depth frame is
         #                   missing or the two sides are too close to call).
-        #   past 4      ->  yield; the leg is wedged and harness.py's STUCK
+        #   past 4      ->  yield; the leg is wedged and orchestrator.py's STUCK
         #                   backstop owns it.
         # Composition: strictly the complement of momentum (d), which requires
         # a forward that DID move. Anti-spin above still pre-empts it, and the

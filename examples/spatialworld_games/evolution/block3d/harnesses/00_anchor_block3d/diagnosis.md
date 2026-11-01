@@ -228,13 +228,13 @@ leaving it dead — keep that; it is the only self-derived-state channel in the 
 
 ## 1. What this harness does (mechanism)
 
-`harness.py` is a pass-through wrapper. Nothing in it decides anything.
+`orchestrator.py` is a pass-through wrapper. Nothing in it decides anything.
 
-- **`compose_system_prompt()`** (`harness.py:21`) concatenates `AGENT.md` + `skills/building.md` +
+- **`compose_system_prompt()`** (`orchestrator.py:21`) concatenates `AGENT.md` + `skills/building.md` +
   `rules.md` onto `evaluator.current_prompt`, reproducing `system_prompt.txt` in order. It supplies no
   coordinates, no clamp model, no toggle-parity model, no plan, and never says **which way a key moves
   the highlight on screen**.
-- **`build_agent(evaluator)`** (`harness.py:34`) puts `HERE` on `sys.path`, purges `sys.modules["tools*"]`
+- **`build_agent(evaluator)`** (`orchestrator.py:34`) puts `HERE` on `sys.path`, purges `sys.modules["tools*"]`
   so a sibling's `tools/` is never inherited (**keep this line**), and returns
   `agent(frame_data) -> await tools.vlm.decide(...)`.
 - **`tools/vlm.py:decide`** is two statements: hand the frame to `evaluator.baseline_step` — the
@@ -245,7 +245,7 @@ leaving it dead — keep that; it is the only self-derived-state channel in the 
 (never called), `tools/action.py` (never called — but its `KEY_MAPPING` is **correct**, and is what
 every reckoning and every rig in this tree uses), `memory.md` (read by nothing), and
 `system_prompt.md`/`.txt` (byte-identical duplicates read by nothing; `.txt` is outside the evolvable
-bundle — a trap for the next editor). `harness.py`'s docstring still opens *"Rich **MAZE** harness"*.
+bundle — a trap for the next editor). `orchestrator.py`'s docstring still opens *"Rich **MAZE** harness"*.
 
 **Contract facts that bound any fix:** primary `won` = exact set equality, binary per level; callbacks
 ≤ `max_steps` = 100; unit actions ≤ `max_steps // 2` = 50 (2 game steps each); a `None` return costs 1
@@ -421,7 +421,7 @@ costs a full decision and changes nothing; that three silhouettes admit a *famil
 only if all three of its shadows land on lit tiles; that the episode ends on exact set equality, so an
 extra block is as fatal as a missing one. `prop_r004/cand_r004_0/AGENT.md` already carries most of it.
 **⚠ `pre_eval_gate` case-insensitively substring-scans `system_prompt.txt`, `AGENT.md`, `rules.md`,
-`memory.md`, `skills/*.md`** against `privileged_keys` and AST-scans `harness.py` + `tools/*.py`; one
+`memory.md`, `skills/*.md`** against `privileged_keys` and AST-scans `orchestrator.py` + `tools/*.py`; one
 occurrence rejects the candidate with no evaluation spent. Write *"the engine's match counter"* and
 *"the cells that must hold a block"*. `NOTES.md` / `diagnosis.md` / `traces_*/` are not scanned.
 **Predicted effect on the primary: ~0.** Its value is stopping the next decoder inheriting a wrong

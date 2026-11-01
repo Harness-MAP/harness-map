@@ -222,10 +222,10 @@ def validate(adapter, genome: Genome) -> bool:
     d = Path(genome.source_dir)
     if not d.is_dir():
         return False
-    # A candidate must keep the root harness.py its parent had: without it the evaluator
+    # A candidate must keep the root orchestrator.py its parent had: without it the evaluator
     # fails silently to 0 instead of being caught here.
     par = Path(genome.parent_dir) if getattr(genome, "parent_dir", None) else None
-    if par and (par / "harness.py").exists() and not (d / "harness.py").exists():
+    if par and (par / "orchestrator.py").exists() and not (d / "orchestrator.py").exists():
         return False
     pys = sorted(d.rglob("*.py"))
     if not pys:
@@ -385,7 +385,7 @@ def unbundle_harness(text: str, base_dir, out_dir) -> Path:
         shutil.copytree(base_dir, out, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     marks = list(_FILE_RE.finditer(text))
     if not marks:
-        (out / "harness.py").write_text(text)
+        (out / "orchestrator.py").write_text(text)
         return out
     for i, m in enumerate(marks):
         rel = m.group(1).strip()

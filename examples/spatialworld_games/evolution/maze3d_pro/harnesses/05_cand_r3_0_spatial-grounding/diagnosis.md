@@ -51,7 +51,7 @@ poses on L5/L9/L20) — it is not a route length, so every "how close did it get
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:build_agent(evaluator)` composes the system prior from `AGENT.md` + `skills/*.md` +
+`orchestrator.py:build_agent(evaluator)` composes the system prior from `AGENT.md` + `skills/*.md` +
 `rules.md`, opens **one** `tools.plan.ActionPlanner` per episode, and returns
 `agent(frame_data) -> vlm.decide(...)`. Each decision is
 

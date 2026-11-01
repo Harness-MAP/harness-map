@@ -23,7 +23,7 @@ drawn `>` in both stuck R3 runs. It is compounded by a ModalStage/FoeStage `[yn]
 TASK-GAPs: no Sokoban planner and no Quest item opener.
 
 ## 1. What this harness does (mechanism)
-`harness.py:PipelineHarness.act` builds a `StepContext` (`tools/context.py`) and runs every stage's `pre()` in
+`orchestrator.py:PipelineHarness.act` builds a `StepContext` (`tools/context.py`) and runs every stage's `pre()` in
 this order:
 
 Legal → Modal → Door → Bump → Hazard → Foe → Nav → Orbit.

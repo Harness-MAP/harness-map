@@ -14,7 +14,7 @@ is next to it. Classification: **VLM-CEILING** on reading the table, plus a **HA
 veto. The fix is to move the visit-count decision into code, not to re-word the table.
 
 ## 1. What this harness does (mechanism)
-- `harness.py:LedgerHarness.act` does the following each step:
+- `orchestrator.py:LedgerHarness.act` does the following each step:
   1. `Ledger.observe(text)` parses the cursor `(x,y)` (stored as `y-1`), the `map:` block (rows 1–21), `Dlvl`, and
      prose lines that contain `lava|water … adjacent <dirs>`.
   2. It increments `visits[pos]`. If the previous committed `(pos, dir)` left the cursor unmoved, it adds that pair to `failed`.
@@ -97,7 +97,7 @@ direction was vetoed. Kills do not move you either, so a successful fight is als
 
 ## 5. Concrete changes to try (ranked by leverage)
 
-1. **Make visit counts binding in code (orbit breaker).** `harness.py:LedgerHarness.act` + `tools/action_io.py:extract_action`.
+1. **Make visit counts binding in code (orbit breaker).** `orchestrator.py:LedgerHarness.act` + `tools/action_io.py:extract_action`.
    - Compute `passable = {d: visits for rows if glyph not impassable and d not vetoed}` and `m = min(passable.values())`.
    - Accept the model's first mention only if it is in `{d : visits[d] == m}`, or if it targets an adjacent creature.
    - Otherwise return the min-visit passable direction, with a *fixed* tie order. Per the memory notes, a total order avoids 2-cycles.
@@ -106,14 +106,14 @@ direction was vetoed. Kills do not move you either, so a successful fight is als
      MazeWalk is where the wins are, so expect MW15 2/5→3–4/5 and MW9 4/5→5/5. The 65% "skip an unvisited neighbour" rate
      should drop to ~0.
    - Keep one model call per step so the model still arbitrates among equal-visit options, which preserves the naive decision locus.
-2. **Stop booking melee as a failed move.** `harness.py:Ledger.observe`:
+2. **Stop booking melee as a failed move.** `orchestrator.py:Ledger.observe`:
    - Skip `self.failed.add(...)` when the last target glyph was a letter (creature) or when the new message matches
      `You (miss|hit|kill)|bites|misses|The .* (is killed|dies)`.
    - Clear `failed` entries for `pos` when a creature newly appears there.
    - *Predicted:* removes the 8/8-vetoed lockup in QM/03 steps 49–56 and the retreat-on-veto at QM/03 step 42.
    - The effect on survival is modest. The memory notes say CB-Dark is dice at n=5, so price any CB change on ≥200 episodes.
      Still, it removes wasted wall bumps under fire and the forced retreats that give free bites.
-3. **Veto impassable glyphs ex ante.** `harness.py:LedgerHarness.act`, `vetoed |= {d : glyph in '|-'}`. Also:
+3. **Veto impassable glyphs ex ante.** `orchestrator.py:LedgerHarness.act`, `vetoed |= {d : glyph in '|-'}`. Also:
    - `' '` (unseen): veto it once the level has produced one `It's solid stone.`, or when the neighbour is unseen and no prose noun
      names it. On MazeWalk/R3 this was a no-move 91/91 times, on Quest-Easy 3/25.
    - `#`: veto only when a prose line says `bars adjacent <d>`. `#` is a corridor on R3, where it was 0/88 no-moves, and bars on Boxoban.

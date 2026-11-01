@@ -25,11 +25,11 @@ away. Everything else in the loop is downstream of that one call.
 
 ## 1. What this harness does (mechanism)
 
-`harness.py::run_episode`, one outer iteration per *decision* (not per env step). Seven modules:
+`orchestrator.py::run_episode`, one outer iteration per *decision* (not per env step). Seven modules:
 
 | order | call site | what it owns |
 |---|---|---|
-| 1 | `active.should_emit` (`harness.py:301`) | **short-circuits perceive+plan entirely** when it returns a list. Owns (a) the ORIENTATION cardinal burst `[rot…, -1]`, (a″) the **relative-turn burst** `[rot, -1]` (`active_perception.py:431-440`), (a′) the red-signal idle, (b/b′) anti-spin + wall recovery, (d) **forward momentum, cap 2** → 3 forwards per perceive+plan pair. |
+| 1 | `active.should_emit` (`orchestrator.py:301`) | **short-circuits perceive+plan entirely** when it returns a list. Owns (a) the ORIENTATION cardinal burst `[rot…, -1]`, (a″) the **relative-turn burst** `[rot, -1]` (`active_perception.py:431-440`), (a′) the red-signal idle, (b/b′) anti-spin + wall recovery, (d) **forward momentum, cap 2** → 3 forwards per perceive+plan pair. |
 | 2 | `perceiver.perceive` | 1 VLM call, 4 images (RGB, hint, `object_mask`, JET depth) → free-text `Description`. |
 | 3 | `planner.plan` | 1 text-only VLM call → `{Summary, Match, Actions}`. |
 | 4 | `completion.verify` (`:391`) | honours a planner `-1` only if `planner_match == 1 and forward_streak >= 1`. |
@@ -144,7 +144,7 @@ The cap is not a safety mechanism; it is a lottery, and it loses 3 episodes and 
 
 ### 2.4 The blocked-commit fallback walks the agent *out* of the zone
 
-`harness.py:495-519`. When the xcheck blocks, the planner's surviving actions are `[a for a in
+`orchestrator.py:495-519`. When the xcheck blocks, the planner's surviving actions are `[a for a in
 planner_actions if a in allowed]` — but the planner emitted a bare `[-1]`, so the list is empty and
 `EMPTY_FALLBACK` injects **`[0]` (Move_Forward)**. With momentum that is 1500 cm per rejection. Trace
 the distances in the table above: 74 → 1 574 → 3 074; 112 → 1 388 → 2 888; 978 → 522 → 2 022. **Every
@@ -256,7 +256,7 @@ criterion. **Change the ROAD commit path one lever at a time**, and keep §5-A s
 ---
 
 ### A. Stop walking away from a blocked commit — replace `EMPTY_FALLBACK` with a zero-displacement hold
-`harness.py:495-519`. When `commit_done` was revoked (XCHECK_BLOCK) or the planner's surviving action
+`orchestrator.py:495-519`. When `commit_done` was revoked (XCHECK_BLOCK) or the planner's surviving action
 list is empty, **do not inject `[0]`**. Emit a net-zero re-look instead: either nothing (fall through
 to the next perceive+plan on a fresh frame) or the in-place pair `[2, 1]` already used by the traffic
 idle. Also reset `active._consecutive_momentum` so the next decision is not a 1500 cm momentum burst.

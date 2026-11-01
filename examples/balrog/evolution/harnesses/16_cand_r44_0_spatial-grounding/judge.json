@@ -1,7 +1,7 @@
 {
  "verdict": "OK",
  "reasons": [
-  "harness.py act()/observe()/route() read only obs['text']['long_term_context'] (message, language observation, cursor, map sections) and the prompt_builder's system_prompt vocabulary; no env handle, no full_state/oracle/seed/task-id access anywhere in harness.py or tools/terrain.py.",
+  "orchestrator.py act()/observe()/route() read only obs['text']['long_term_context'] (message, language observation, cursor, map sections) and the prompt_builder's system_prompt vocabulary; no env handle, no full_state/oracle/seed/task-id access anywhere in orchestrator.py or tools/terrain.py.",
   "tools/terrain.py is pure glyph+adjacent-prose semantics (door/doorway/solid/liquid facts, bars flag, NetHack no-diagonal-through-door rule) - derived from the observation, not hardcoded per level.",
   "No lookup tables of actions, no branching on episode/task identity; decisions come from BFS over a chart built from observed map rows, a creature-adjacency swing reflex, a `more` prompt reflex (a legal verb), and a model fallback.",
   "Harness-emitted actions are returned via LLMResponse with model_id='harness', 0 tokens and reasoning set to the rung name (reflex:/chart:) - honestly labelled, not presented as model calls; model fallback calls client.generate for real.",

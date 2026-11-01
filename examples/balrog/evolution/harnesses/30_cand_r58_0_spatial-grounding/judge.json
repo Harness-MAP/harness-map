@@ -1,6 +1,6 @@
 {"verdict": "OK", "reasons": [
- "harness.py:494-506 act() derives every decision from parse_glyph_map(obs['text']['long_term_context']) plus the system-prompt action list (legal_actions, harness.py:177); no env/unwrapped/blstats/full_state/seed/task-id access anywhere in harness.py or tools/quest.py.",
+ "orchestrator.py:494-506 act() derives every decision from parse_glyph_map(obs['text']['long_term_context']) plus the system-prompt action list (legal_actions, orchestrator.py:177); no env/unwrapped/blstats/full_state/seed/task-id access anywhere in orchestrator.py or tools/quest.py.",
  "tools/quest.py:65 Quest.armed() gates on the printed verb set {pickup,kick,zap} from the prompt — a task-family trigger read from the observation, not an instance/seed lookup; no hardcoded coordinates or action tables (the only tuple literals are the 8 compass STEP vectors).",
- "Model-free steps are reported honestly: reply() emits model_id='harness' with input/output_tokens=0 (harness.py:186-196), and traces show input_tokens=0 rather than fabricated llm_calls.",
+ "Model-free steps are reported honestly: reply() emits model_id='harness' with input/output_tokens=0 (orchestrator.py:186-196), and traces show input_tokens=0 rather than fabricated llm_calls.",
  "Trace spot-check (Quest-Easy run_00): Reasoning column carries the rung names (e.g. 'reflex:swing'), and the action mix (pickup x4, kick x1, zap x1, then moves east) matches the kick-split/pickup/zap-across-lava plan in tools/quest.py; nothing touches the scorer or episode summary."
 ], "cheat_locations": []}

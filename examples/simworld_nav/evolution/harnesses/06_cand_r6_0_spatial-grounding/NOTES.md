@@ -21,7 +21,7 @@ existing capabilities.
 
 | module | role | this iter |
 |---|---|---|
-| `harness.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ 4 wiring points (burst gate, FINISH commit gate, face-scan trigger + heading bookkeeping, terminal-pose composer) |
+| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ 4 wiring points (burst gate, FINISH commit gate, face-scan trigger + heading bookkeeping, terminal-pose composer) |
 | `modules/viewpoint_controller.py` | **POSE arbitration** — leg taxonomy, approach-before-turn, face-before-look, face-before-commit | ★ **NEW MODULE** |
 | `modules/active_perception.py` | cardinal burst, relative-turn burst, red idle, anti-spin, momentum | **untouched** (its turn burst is now *gated*, not rewritten) |
 | `modules/completion_checker.py` | owns the appearance verdict behind every `-1` | **untouched** (`request_side_scan`'s dead depth trigger is now bypassed; `scan_reach` / `_binary_reach_vlm_call` still do the judging) |
@@ -41,7 +41,7 @@ existing capabilities.
 | **terminal-pose composer** (single call site) | code | `commit_pose_prefix` + the harness trim loop | **NEW** |
 | arrival recognizer (criterion / evidence / schedule / confirmations) | code | `completion_checker` | **CLOSED this iter — untouched on purpose** (5 prior candidates, none beat the anchor) |
 | ORIENTATION cardinal burst | code | `active_perception` (a) | **do not touch** — 50/50, and `gate_burst` is a verified pass-through for it |
-| stuck detector scoped to the current burst | code | `harness.py:~281` | **still open** — `forward_count` counts `chosen_actions`, not history, so `>3` is unreachable when 801/918 plans are 1 action long |
+| stuck detector scoped to the current burst | code | `orchestrator.py:~281` | **still open** — `forward_count` counts `chosen_actions`, not history, so `>3` is unreachable when 801/918 plans are 1 action long |
 | overshoot / "I have passed it" state | code | `spatial_memory` | **still open** — nothing records that the window was entered and left |
 | `completion_checker.request_side_scan` | code | `completion_checker:768` | **now dead** — the trigger moved to the controller; the function is left in place rather than deleted so a future iter can A/B the two triggers |
 
@@ -112,7 +112,7 @@ halves:
     criterion.
   * a FINISH commit that still arrives from the travel heading (a planner `-1`
     that survived the cross-check) gets the quarter-turn toward the named side
-    prepended. This is composed in the **one** place in `harness.py` where a `-1`
+    prepended. This is composed in the **one** place in `orchestrator.py` where a `-1`
     is materialised, and returns `[]` when the body is already faced, so the
     rotation can never be applied twice.
 
@@ -200,7 +200,7 @@ plus fake-env `run_episode` dry runs):
   `request_face_scan`, `face_code`/`restore_code`/`note_faced`/`note_restored`,
   `allow_forward_commit`, `commit_pose_prefix`)
 - `modules/__init__.py` — export `ViewpointController`
-- `harness.py` — import + instantiate the node; `gate_burst` wrapped around
+- `orchestrator.py` — import + instantiate the node; `gate_burst` wrapped around
   `active.should_emit`; `allow_forward_commit` guard on
   `proactive_commit_check`; the side-scan block re-pointed from
   `completion.request_side_scan` to `viewpoint.request_face_scan` with

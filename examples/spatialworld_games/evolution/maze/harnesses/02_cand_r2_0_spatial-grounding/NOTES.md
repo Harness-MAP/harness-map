@@ -2,7 +2,7 @@
 
 | file | components | role | levers here |
 |---|---|---|---|
-| `harness.py` | `_read`, `compose_system_prompt`, `build_agent` | entrypoint, prompt composition, agent install | composition order |
+| `orchestrator.py` | `_read`, `compose_system_prompt`, `build_agent` | entrypoint, prompt composition, agent install | composition order |
 | `tools/vlm.py` | `decide` | frame digest, settlement ledger, message-0 graft, one frozen-VLM call | `grain`=2, `qbin`=24, `stall_cap`=6, `_CUES` rungs 1/3/5, graft point, settle rule |
 | `tools/action.py` | `key_for`, `granularity_steps` | action/key algebra, cells per granularity | label normalisation, `_MIN_CELLS`=1 |
 | `tools/frame.py` | `capture` | evaluator screenshot helper | — |
@@ -24,7 +24,7 @@ The gradient was an archive-coverage steer, not a score diagnosis: cell 20 of K0
 ## files:
 
 - `tools/vlm.py` — the ledger, the module-level `_MARK` / `_FROZEN` / `_BET` / `_STASH` / `_GRAFT` / `_CUES` plumbing, `_SHEET` loaded from `memory.md`.
-- `harness.py` — module-level `_PURGE`, `build_agent` slimmed to the path guard.
+- `orchestrator.py` — module-level `_PURGE`, `build_agent` slimmed to the path guard.
 - `tools/action.py` — `key_for` normalisation, `_MIN_CELLS`.
 - `tools/frame.py` — `capture` total.
 - `memory.md` — commented sketch replaced by the live sheet template.

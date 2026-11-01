@@ -35,7 +35,7 @@ the plan call retries once when it is cut off mid-JSON.
 |---|---|---|
 | `modules/arrival_gate.py` | the `-1` LICENSE | ★ the FINISH leg's question, answer type, schedule and confirmation rule |
 | `modules/planner.py` | perceive→action list | ★ **bundled bug fix only** — one retry on `finish_reason == "length"` |
-| `harness.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ★ **one expression**: the commit's trace label can now read `FIN_REACH` |
+| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ★ **one expression**: the commit's trace label can now read `FIN_REACH` |
 | `modules/road_geometry.py` | ROAD position conjunct (iter 13) | **untouched — byte-identical** |
 | `modules/completion_checker.py` | legacy recognizer + schedule constants | **untouched — byte-identical** |
 | `modules/viewpoint_controller.py` | leg typing, TURN approach, commit pose | **untouched — byte-identical** |
@@ -66,7 +66,7 @@ are byte-for-byte the parent's.)*
 | `MAX_CLAIMABLE_CROSSINGS` 2 → 1 | code/const | `road_geometry` | **REFUTED by the r13 run** (all 6 fatal ROAD commits were edge #1; all 4 edge-#2 claims passed) |
 | **F4: crop the identity images to the named side** | code | `_identity_call` | **still open** — the ranked fix for the 5 long-ROAD fatal commits; an image-prep axis, deliberately not mixed with this one |
 | **F5: let the geometric veto spend one ask per leg** | code | `proactive_commit` | **still open** — cost 7 ROAD legs this run |
-| **an arrival CONTROLLER** (slow / stop / back up) | code | `harness.py` burst executor | **still open** — every in-ball frame in the run is a `Move_Forward` |
+| **an arrival CONTROLLER** (slow / stop / back up) | code | `orchestrator.py` burst executor | **still open** — every in-ball frame in the run is a `Move_Forward` |
 
 ## change
 
@@ -238,7 +238,7 @@ calls** against the run's 3 744, partly offset by F6's 23 recovered cycles
 (a) **71 % of legs never commit** under the shipped rule. That is not a
 regression — the parent's figure is 100 % — but it means the dominant failure
 mode is unchanged in *kind*, and the remaining headroom to the 0.20 ceiling is
-in the arrival **controller** (nothing in `harness.py` can slow, stop or back
+in the arrival **controller** (nothing in `orchestrator.py` can slow, stop or back
 up; every in-ball frame in the run is a `Move_Forward`), which is the next
 gradient and a different axis.
 (b) **The Monte-Carlo assumes per-frame independence.** Real readings on
@@ -319,7 +319,7 @@ Loaded through the evaluator's own `spec_from_file_location(f"{pkg}.harness",
   `allow_planner_commit`
 - `modules/planner.py` — `_finish_reason`; the `_ask` closure and the single
   retry on a truncated plan call; `PLAN_RETRY_TRUNC` marker in `reason`
-- `harness.py` — one expression: the commit label reads `arrival.last_channel`
+- `orchestrator.py` — one expression: the commit label reads `arrival.last_channel`
   before falling back to `GEO_REACH` / `REACH_COMMIT`
 - `NOTES.md` — this file
 

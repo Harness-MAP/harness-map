@@ -8,7 +8,7 @@ Token-level only, in the sense the steer asks for: the component graph is byte-f
 parent's (`SpatialMemory → PromptAssembler → Perceiver → Planner → AffordanceEstimator /
 ActivePerception → CompletionChecker`), the same seven modules, the same call sites, the same
 wiring in `run_episode`. **No file was added, no module introduced, no stage added to or removed
-from the loop, and `harness.py` was not edited at all.** What changed is the code *inside* one
+from the loop, and `orchestrator.py` was not edited at all.** What changed is the code *inside* one
 component: two new methods on `CompletionChecker`, three new per-leg state fields, one extracted
 probe function, and the gate block at the top of `proactive_commit_check`.
 
@@ -26,7 +26,7 @@ ROAD 12/50 → 1/50. This one rewrites **when the question is asked** and leaves
 
 | module | role | this iter |
 |---|---|---|
-| `harness.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | untouched |
+| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | untouched |
 | `modules/spatial_memory.py` | odometry + step / boundary bookkeeping | untouched |
 | `modules/prompt_assembler.py` | composes the live VLM prompt | untouched |
 | `modules/perceiver.py` | 1 VLM call: frames → description | untouched |
@@ -43,7 +43,7 @@ ROAD 12/50 → 1/50. This one rewrites **when the question is asked** and leaves
 | arrival-window cue (running-median drop) | code | `CompletionChecker._update_arrival_window` | **NEW this iter** — schedules looks, never commits |
 | three-mode look schedule (near / far / sweep) | code | `CompletionChecker._reach_schedule` | **NEW this iter** |
 | far-field budget reserve | code/const | `FAR_FIRE_RESERVE = 4` of cap 12 | **NEW this iter** |
-| blocked-commit fallback walks the agent 1500 cm out of the zone | code | `harness.py:495-519` `EMPTY_FALLBACK` | untouched — **the next obvious lever** (diagnosis §5-A, "cannot cause a false commit") |
+| blocked-commit fallback walks the agent 1500 cm out of the zone | code | `orchestrator.py:495-519` `EMPTY_FALLBACK` | untouched — **the next obvious lever** (diagnosis §5-A, "cannot cause a false commit") |
 | xcheck cap-exhaustion returns `True` (the lottery) | code | `cross_check_planner_commit` | untouched — diagnosis §5-B, pairs with §5-A |
 | relative-turn commit with zero translation | code | `active_perception` rule (a″) | untouched — diagnosis §5-C, worth +4–7 TURNING legs |
 | RANGE-vs-IDENTITY split in the arrival prompt | prose-in-code | `_binary_reach_vlm_call` sys_prompt | untouched — deliberately: it is the lever r001 moved when ROAD collapsed to 1/50 |
@@ -88,7 +88,7 @@ it was, only shifted slightly later. The total cost cap (`MAX_REACH_FIRES_PER_SU
 unchanged — this reallocates the budget, it does not enlarge it.
 
 **Not changed, on purpose:** the recognizer prompt, its evidence channels, the commit criterion, the
-accept-validator, the xcheck, the planner gate, and `harness.py`. The cue **never commits** — it only
+accept-validator, the xcheck, the planner gate, and `orchestrator.py`. The cue **never commits** — it only
 decides where the looks go, and the recognizer keeps the last word.
 
 ## why
@@ -145,5 +145,5 @@ consecutive looks through the gap** — while a leg with no named side reproduce
   `CompletionChecker._reach_schedule`; the gate block of `proactive_commit_check` rewritten; `Tuple` import
 - `NOTES.md` — this file
 
-*(unchanged: `harness.py`, `AGENT.md`, `rules.md`, `__init__.py`, and
+*(unchanged: `orchestrator.py`, `AGENT.md`, `rules.md`, `__init__.py`, and
 `modules/{spatial_memory,prompt_assembler,perceiver,planner,affordance_estimator,active_perception}.py`)*

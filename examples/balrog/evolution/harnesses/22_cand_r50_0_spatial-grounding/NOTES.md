@@ -4,7 +4,7 @@
 Code: where the decision is made, and what the value table is grounded on. Steered toward the
 r026 wiring (a remembered chart plus a BFS route decides each step). The `LearnerAgent` hub,
 the TD(lambda) credit and the tie-break consult all stay, but they now own only the residue
-where the chart has no route. It is still one module (`harness.py`) and `build_agent` is unchanged.
+where the chart has no route. It is still one module (`orchestrator.py`) and `build_agent` is unchanged.
 
 ## change:
 New hub methods: `chart`, `passable`, `frontier` and `route`.
@@ -30,4 +30,4 @@ no wall-aware route to a charted `>`, and 4 losses had `>` on screen. The BFS-ch
 harness reaches `>` in 21 steps with 0 model calls.
 
 ## files:
-`harness.py`, `NOTES.md`.
+`orchestrator.py`, `NOTES.md`.

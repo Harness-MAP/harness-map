@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| harness.py | `GradientAgent.act` builds a step context `c` and runs `STAGES = (prompt, orient, stairs, swing, descend, consult)`; first answer wins, rung -> `reasoning`. Loads tools/ via importlib under a per-candidate name. | code |
+| orchestrator.py | `GradientAgent.act` builds a step context `c` and runs `STAGES = (prompt, orient, stairs, swing, descend, consult)`; first answer wins, rung -> `reasoning`. Loads tools/ via importlib under a per-candidate name. | code |
 | tools/field.py | frame decoder only: sections, `clauses()` (prose `<noun> adjacent <dirs>`), `glyph`, modal detection (incl. cursor on row 0) | code |
 | tools/chart.py | NEW `Chart`: terrain/visits/bump edges/door SQUARES/bars flag; `edge()` (no diagonal through a door), `reach()`, `field(pos)` = reverse Dijkstra seeded on a REACHABLE `>` else reachable frontier | code |
 | AGENT.md / rules.md | two-line priors, seen only by `consult` | prose |
@@ -38,4 +38,4 @@ The steer exemplars r041/r046 reached 0.375 with exactly this wiring: a chart mo
 Stub check: the field routes through a doorway drawn `-`, a no-move blocks only that edge, and a `[yn]` frame at y=0 returns `reflex:more`.
 
 ## files:
-harness.py (rewired), tools/field.py (parser only), tools/chart.py (new), tools/__init__.py (new), NOTES.md
+orchestrator.py (rewired), tools/field.py (parser only), tools/chart.py (new), tools/__init__.py (new), NOTES.md

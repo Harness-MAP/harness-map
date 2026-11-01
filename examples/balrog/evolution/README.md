@@ -19,16 +19,16 @@ in the router (edits the proposer was steered toward from two sibling cells, `ca
 `cand_r58_0`).
 
 **The anchor** (`harnesses/00_anchor_naive`) is BALROG's published naive agent, reproduced in the
-harness layout: `harness.py` appends the same instruction and extracts the action with the same
+harness layout: `orchestrator.py` appends the same instruction and extracts the action with the same
 filter as `balrog/agents/naive.py`; the structural split into `tools/` modules adds no behaviour
-(see the docstring in its `harness.py`). The text priors `AGENT.md`, `rules.md`, `memory.md` and
+(see the docstring in its `orchestrator.py`). The text priors `AGENT.md`, `rules.md`, `memory.md` and
 `system_prompt.txt` start empty.
 
 ## What is in a harness directory
 
 | file | written by | content |
 |---|---|---|
-| `harness.py`, `tools/*.py`, `skills/*.md`, `AGENT.md`, `rules.md`, `memory.md`, `system_prompt.txt` | the proposer | the harness as evaluated (the anchor's are the starting point) |
+| `orchestrator.py`, `tools/*.py`, `skills/*.md`, `AGENT.md`, `rules.md`, `memory.md`, `system_prompt.txt` | the proposer | the harness as evaluated (the anchor's are the starting point) |
 | `NOTES.md` | the proposer | its own account of the change: module map, the axis it worked on, what changed and why |
 | `DESIGN.txt` | the proposer | a design note, present when the proposer chose to write one |
 | `diagnosis.md` | the diagnostician | the report on this harness's evaluation, which the proposer reads when the harness is bred from |

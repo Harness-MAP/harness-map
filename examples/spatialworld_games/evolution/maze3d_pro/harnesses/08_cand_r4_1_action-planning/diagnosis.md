@@ -16,7 +16,7 @@ draw**, which makes the `climb_up`/`climb_down` precondition literally unsatisfi
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:build_agent(evaluator)` is the agent factory the extended evaluator installs as
+`orchestrator.py:build_agent(evaluator)` is the agent factory the extended evaluator installs as
 `ai_model_func`. Two things happen in it and nothing else:
 
 1. `evaluator.current_prompt = compose_system_prompt()` — concatenates `AGENT.md` +
@@ -32,7 +32,7 @@ calls the VLM, parses the JSON and returns an engine `Action`.
 Consequences that matter, all verified in this tree:
 
 * **The closure holds zero state.** No per-episode object, no previous frame, no step counter, no
-  ledger. `grep -n "self\.\|nonlocal\|= {}\|= \[\]" harness.py tools/vlm.py` finds nothing but a
+  ledger. `grep -n "self\.\|nonlocal\|= {}\|= \[\]" orchestrator.py tools/vlm.py` finds nothing but a
   docstring. There is no place in this harness where a loop-break *could* live.
 * **`tools/action.py` and `tools/frame.py` are dead.** `key_for`, `granularity_steps` and
   `capture()` are referenced only from docstrings; no module calls them. 2 of the 3 tool modules are
@@ -194,7 +194,7 @@ Cross-check against the numeric pre-pass: `steps_taken == max_steps == 100` in a
 > landed** (0.08 → 0.28–0.36); reproduce them, don't re-derive them. §5.4–5.6 are the live frontier.
 
 ### 5.1 Give the harness a per-episode state object and an exact outcome bit *(highest leverage; CONFIRMED)*
-*Files: `harness.py:build_agent` (construct one state object per episode and close over it),
+*Files: `orchestrator.py:build_agent` (construct one state object per episode and close over it),
 `tools/vlm.py:decide` (observe → inject → delegate → govern), a new `tools/<state>.py`.*
 Hash `frame_data.image` each step; `prev == cur` ⇒ the last action was inert. Keep a
 `(view_digest, action) → outcome` ledger, dead-reckon heading (a turn is never blocked) and a local

@@ -18,7 +18,7 @@ This is +0.225 over the parent r035 (0.150). It ties the chain's navigation-only
 **Binding constraint: TASK-GAP.** Navigation is effectively solved: MW 10/10, R3 4/5, bump rate ≤3%, and 0 model tokens on those tasks. **20 of the 25 losses** are on Boxoban and Quest. The harness has no lever there at all: it has no push planner, and it never emits `pickup`, `apply`, `kick` or `zap`. A smaller share (one R3 episode and the Quest-Medium deaths) comes from two routing gaps that are fixable in the harness.
 
 ## 1. What this harness does (mechanism)
-Everything is in `harness.py:LearnerAgent.act`, one module with no tools. The order is:
+Everything is in `orchestrator.py:LearnerAgent.act`, one module with no tools. The order is:
 1. **Prompt reflexes:** `[yn]` marks the last swung glyph as peaceful and answers `more` (at most 2 in a row). Other prompts get `esc` only if it is in the vocabulary.
 2. **`observe()`:** books door cells, from prose `doorway`/`open door`/`broken door` or from "door opens". Any other no-move books the `(square, bearing)` edge as blocked.
 3. **`credit()`:** a TD(λ) update, and folds the frame into `self.drawn`.

@@ -44,7 +44,7 @@ frames long).
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:build_agent(evaluator)` is the agent factory the extended evaluator installs as
+`orchestrator.py:build_agent(evaluator)` is the agent factory the extended evaluator installs as
 `ai_model_func`. Exactly two things happen in it:
 
 1. `evaluator.current_prompt = compose_system_prompt()` — concatenates `AGENT.md` + `skills/*.md`
@@ -62,9 +62,9 @@ frame, maintain the rolling image+text history, call the VLM, parse the JSON, re
 Three consequences, all verified in this tree:
 
 * **Zero state.** There is no object, no counter, no previous frame, no ledger anywhere in
-  `harness.py` + `tools/vlm.py`. **There is no place in this harness where a loop-break could
+  `orchestrator.py` + `tools/vlm.py`. **There is no place in this harness where a loop-break could
   live.**
-* **`tools/action.py` and `tools/frame.py` are dead.** `harness.py` imports `tools.vlm` and nothing
+* **`tools/action.py` and `tools/frame.py` are dead.** `orchestrator.py` imports `tools.vlm` and nothing
   else; `key_for`, `granularity_steps` and `capture` appear only at their own `def` lines.
   `memory.md` is read by no `.py` at all, and its own header says so. These three are exactly the
   surfaces §5.1–§5.4 need — they are already in the genome, so wiring them costs no new module.
@@ -297,7 +297,7 @@ floor changes actually land. That is the gradient, in order.
 ## 5. Concrete changes to try (ranked by leverage)
 
 ### 5.1 Give the episode a state object and a `(cell, heading) → blocked` ledger with a forced escape
-**Files:** `harness.py:build_agent` (construct one ledger per episode and close over it),
+**Files:** `orchestrator.py:build_agent` (construct one ledger per episode and close over it),
 `tools/vlm.py:decide` (fold the previous step's outcome, then govern the proposal),
 `tools/action.py` (the chart + the escape ranking — it is already in the genome and currently dead).
 
@@ -477,7 +477,7 @@ injected wording template in `memory.md`.
 * **The pre-eval gate text-scans the agent-facing priors case-insensitively** — `system_prompt.txt`,
   `AGENT.md`, `rules.md`, `memory.md`, `skills/*.md` — for
   `gt.json`, `maze_file`, `distance_to_exit`, `distance_to_food`, `cube_solved`, `current_floor`,
-  `target_blocks`, `matched_blocks`, and **AST-scans `harness.py` + `tools/*.py`** for the same names
+  `target_blocks`, `matched_blocks`, and **AST-scans `orchestrator.py` + `tools/*.py`** for the same names
   used as an attribute or a string subscript. Never let those spellings into prose or code — not even
   in a comment that discusses them. `NOTES.md` and `diagnosis.md` are proposer-facing and are **not**
   scanned (which is why they appear freely above).

@@ -8,4 +8,4 @@ Code, the decision wiring. A chart (BFS route) now drives each step. The value l
 Per the diagnosis, 27% of moves were bumps, a drawn `>` had no pull, and doors got pinned. The steer points toward r026's chart and route wiring.
 
 ## files:
-harness.py, NOTES.md, DESIGN.txt
+orchestrator.py, NOTES.md, DESIGN.txt

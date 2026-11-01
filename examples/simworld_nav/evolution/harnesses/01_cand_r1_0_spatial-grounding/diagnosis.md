@@ -20,11 +20,11 @@ unreachable** regardless of the recogniser.
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:run_episode` — one iteration per *decision*, not per env step.
+`orchestrator.py:run_episode` — one iteration per *decision*, not per env step.
 
 | # | call site | authority over the outcome |
 |---|---|---|
-| 1 | `active.should_emit` (`harness.py:301`) | **short-circuits perceive+plan entirely** when it returns a list. Owns (a) the ORIENTATION cardinal burst `[rot…, -1]`, (a″) the **relative-TURN burst `[rot, -1]`** (`active_perception.py:431-440`), (a′) the red-light idle, (b) anti-spin, (b′) wall recovery, (d) the cap-2 forward-momentum cadence → **PP → m → m**, i.e. 3 forwards = 1 500 cm per VLM pair. |
+| 1 | `active.should_emit` (`orchestrator.py:301`) | **short-circuits perceive+plan entirely** when it returns a list. Owns (a) the ORIENTATION cardinal burst `[rot…, -1]`, (a″) the **relative-TURN burst `[rot, -1]`** (`active_perception.py:431-440`), (a′) the red-light idle, (b) anti-spin, (b′) wall recovery, (d) the cap-2 forward-momentum cadence → **PP → m → m**, i.e. 3 forwards = 1 500 cm per VLM pair. |
 | 2 | `perceiver.perceive` | 1 VLM call, **4 images** (RGB, robot_view hint, object_mask, JET depth) + rolling summary → free-text `Description`. |
 | 3 | `planner.plan` | 1 **text-only** call over that description → `{Summary, Match, Actions}`. |
 | 4 | `completion.verify` (`:389`) | honours a planner `-1` iff `planner_match == 1 and forward_streak >= 1`. |
@@ -149,7 +149,7 @@ is right in shape and broken in its cap semantics (§2.4).
 
 `completion_checker.py:748-749`: when the per-subtask cap is spent it returns **`True`** ("defer"),
 so the **third** planner `-1` in a subtask commits *unverified*, at whatever position the agent has
-drifted to. And `harness.py:495 + 519`: when the cross-check *does* block a bare `[-1]`, the affordance
+drifted to. And `orchestrator.py:495 + 519`: when the cross-check *does* block a bare `[-1]`, the affordance
 filter strips `-1`, `chosen_actions` goes empty, and `EMPTY_FALLBACK` injects a **Move_Forward** —
 the veto physically carries the agent out of the window it was standing in, 1 500 cm per cycle
 (momentum cadence).
@@ -214,7 +214,7 @@ committing **0**.
   ever read on any episode. Cost: ep_20_20_21 (19/20 forwards moved < 1 cm), ep_20_22_21 (19/22),
   ep_20_8_11 (7/11) mashed a wall until the env's repeated-position terminator killed them — 3
   episodes, 0 legs.
-- **The STUCK detector is a no-op** (`harness.py:280`): `forward_count = sum(1 for a in chosen_actions
+- **The STUCK detector is a no-op** (`orchestrator.py:280`): `forward_count = sum(1 for a in chosen_actions
   if a == 0)` counts the *current burst* (length 1–3), not history, so `forward_count > 3` essentially
   never holds. `SpatialMemory.forward_count_since_boundary()` is the intended signal and is never
   called. `STUCK` appears in 3/50 notes while 118 forwards across the run moved < 1 cm.
@@ -251,9 +251,9 @@ perceive+plan channel and denies it in the 2-image REACH channel that holds the 
 in **what the harness shows the recogniser and what criterion it asks for**, not in the weights.
 Concretely fixable in code:
 1. `active_perception.py:431-440` — TURN burst commits without approaching (§2.5, 7/7, deterministic).
-2. `completion_checker.py:749` + `harness.py:495,519` — cross-check cap defers to `True` and the veto
+2. `completion_checker.py:749` + `orchestrator.py:495,519` — cross-check cap defers to `True` and the veto
    *moves the agent* (§2.4, 5 episodes).
-3. `spatial_memory.py:66` + `harness.py:280` — two recovery mechanisms wired to constants (§2.7).
+3. `spatial_memory.py:66` + `orchestrator.py:280` — two recovery mechanisms wired to constants (§2.7).
 
 **Secondary: TASK-GAP.** §2.6 — the harness has no representation of the *terminal pose* the FINISH
 leg is graded on, even though the instruction states it and `_named_side()` already parses it. Leg 3
@@ -286,7 +286,7 @@ dict/counter keyed by instruction so the subtask-change reset at `:400-403` stil
   survive to attempt leg 3. Cost: 2 of TURNING's 50 free substeps.
 - **Cheapest high-confidence item in this report.** Ship it alone and it is measurable.
 
-### B — Emit the facing rotation before the FINISH `-1`. `modules/completion_checker.py` (new helper) + `harness.py:430-444`
+### B — Emit the facing rotation before the FINISH `-1`. `modules/completion_checker.py` (new helper) + `orchestrator.py:430-444`
 `_named_side(instruction)` already exists (`completion_checker.py:248`). On a FINISH-style leg
 ("… on your left/right, **stop and face that building**") prepend one rotation to the commit burst:
 `planner_actions = [1, -1]` for *left*, `[2, -1]` for *right* (`1 = Rotate_Left = −90°`,
@@ -307,13 +307,13 @@ dict/counter keyed by instruction so the subtask-change reset at `:400-403` stil
   before `-1` on ROAD (position is identical, ROAD is position-only); commit **from** the turned pose
   on FINISH.
 
-### C — Stop the cross-check from delaying and displacing the commit. `modules/completion_checker.py:748-749`, `harness.py:495-519`
+### C — Stop the cross-check from delaying and displacing the commit. `modules/completion_checker.py:748-749`, `orchestrator.py:495-519`
 Two one-line semantics changes:
 1. `:749` — on `fires >= MAX_XCHECK_FIRES_PER_SUBTASK` return **`False`**, not `True`. A spent budget
    means "cannot verify", which must not mean "commit anyway". Better still: **cache the verdict per
    (subtask, forward_streak-bucket)** so a re-asked identical claim costs nothing and the cap stops
    being a countdown to a free pass.
-2. `harness.py:519` — when a bare `[-1]` is vetoed, do **not** inject `Move_Forward`. Emit a
+2. `orchestrator.py:519` — when a bare `[-1]` is vetoed, do **not** inject `Move_Forward`. Emit a
    **position-preserving** probe instead (yaw to the named side → `scan_reach` → yaw back, the
    existing `:459-476` machinery) or, failing that, re-perceive after a net-zero `[2, 1]` pair.
 - **Why:** §2.4 — the veto costs 1 500 cm per cycle and the third claim always commits. 3 episodes
@@ -330,7 +330,7 @@ Two one-line semantics changes:
 Two independent edits to `_binary_reach_vlm_call`:
 1. **Evidence.** It currently sends RGB + hint and nothing else. Attach `obs['object_mask']` and
    `obs['depth']` with the same captions `prompt_assembler.py:130-137` already uses, and pass the
-   current perceiver `Description` (thread it from `harness.py:314`) as text context. §2.3 is the
+   current perceiver `Description` (thread it from `orchestrator.py:314`) as text context. §2.3 is the
    direct evidence: the 4-image channel is right on the exact frames the 2-image channel refuses.
 2. **Criterion.** Delete the "*clearly visible and prominent in the current view*" clause (`:565-566`)
    — all 8 far-field false positives quote it back verbatim ("visible **ahead**", "visible in both
@@ -365,12 +365,12 @@ Which is closest to the reference viewpoint: NEWEST / MIDDLE / OLDEST / NONE?"* 
   speculative lever. Prototype it as a *logging-only* verdict first (emit the ordinal answer into
   `notes` without acting on it) so the next iter can price its accuracy before wiring it to `-1`.
 
-### F — Resurrect the two dead safety nets. `modules/spatial_memory.py:66`, `modules/active_perception.py:520-533`, `harness.py:280`
+### F — Resurrect the two dead safety nets. `modules/spatial_memory.py:66`, `modules/active_perception.py:520-533`, `orchestrator.py:280`
 `info['agent_collision']` is **not** in the sanctioned surface (`rules.md`) — do **not** wire it.
 Drive both mechanisms off `moving_distance`, which is sanctioned and already computed:
 - wall recovery (b′): fire on `last action == 0 and moving_distance_delta(window=1) < 1.0`, dropping
   the `static_collision_delta > 0` conjunct entirely;
-- the stuck detector (`harness.py:280`): call `memory.forward_count_since_boundary()` instead of
+- the stuck detector (`orchestrator.py:280`): call `memory.forward_count_since_boundary()` instead of
   counting the current burst.
 - **Predicted:** recovers the 3 wedged episodes (20_21 19/20 stalled forwards, 22_21 19/22, 8_11 7/11)
   from 0 legs to at least a chance at leg 1. Small (+0.02 SubtaskSR at most) but the code is already
@@ -431,7 +431,7 @@ Carried forward from the prior `diagnosis.md`, **re-confirmed on 50 episodes** w
 
 ## 7. Provenance
 
-- Candidate: `$OUT_DIR` = `simworld_gym/simworld_config/harnesses/nav` (`harness.py` 613 L + 7 modules,
+- Candidate: `$OUT_DIR` = `simworld_gym/simworld_config/harnesses/nav` (`orchestrator.py` 613 L + 7 modules,
   2 705 L total). Score: `runs_adaptive/nav_hard__hard5010_adaptive_k4c1/arm_hard5010_adaptive_k4c1/
   anchor_nav_r000/score.json` — SR 0.0, SubtaskSR 0.36, per_position_SR [1.0, 0.24, 0.1111, 0.0],
   distance_progress_mean 0.145, moving_distance_mean 26 856 cm, 80 746 tok / 799 s per episode.

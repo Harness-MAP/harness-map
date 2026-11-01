@@ -17,7 +17,7 @@ forward motion, landing **78–980 cm** outside the intersection box in 7/7 fail
 
 ## 1. What this harness does (mechanism)
 
-`run_episode` (harness.py, 613 loc) runs perceive→plan→gate→act per step over 7 modules:
+`run_episode` (orchestrator.py, 613 loc) runs perceive→plan→gate→act per step over 7 modules:
 
 ```
  ActivePerception.should_emit  ──(non-None)──► short-circuit: execute burst, skip perceive+plan
@@ -28,9 +28,9 @@ forward motion, landing **78–980 cm** outside the intersection box in 7/7 fail
  Planner   (VLM #2: description → {Actions:[...], Match:0|1, Summary})
         ▼
  CompletionChecker.verify           — honor planner `-1` iff Match==1 AND forward_streak>=1
-        ├─ cross_check_planner_commit  (VLM #3, binary REACH) → may REVOKE     [harness.py:413]
-        ├─ proactive_commit_check      (VLM #3, binary REACH) → may INJECT -1  [harness.py:430]
-        └─ request_side_scan + scan_reach (turn-to-face + binary REACH)        [harness.py:459]
+        ├─ cross_check_planner_commit  (VLM #3, binary REACH) → may REVOKE     [orchestrator.py:413]
+        ├─ proactive_commit_check      (VLM #3, binary REACH) → may INJECT -1  [orchestrator.py:430]
+        └─ request_side_scan + scan_reach (turn-to-face + binary REACH)        [orchestrator.py:459]
         ▼
  burst executor: env.step per action; `-1` → env grades the leg
 ```
@@ -98,7 +98,7 @@ question and revoked it:
 | xcheck did not run | 3 | 7 |
 
 Those 7 are free legs thrown away. Worse, the recovery is wrong: with `commit_done=False` the
-planner's `[-1]` filters to an empty list, so `harness.py:519` injects a **forward** (`EMPTY_FALLBACK`,
+planner's `[-1]` filters to an empty list, so `orchestrator.py:519` injects a **forward** (`EMPTY_FALLBACK`,
 21 occurrences / 11 episodes), pushing the agent *out* of the ±2000 window it was standing in.
 
 ### 2.4 TURNING — the turn burst commits before reaching the intersection (7/7 failures)
@@ -140,7 +140,7 @@ module's own comments already record as unusable ("`near_frac == 0.000` on 24/24
 is why `_strongly_far` was disabled). The gate fails **closed**, so the lever is off.
 
 ### 2.7 Secondary: the stuck detector cannot fire
-`harness.py:280` — `forward_count = sum(1 for a in chosen_actions if a == 0)` counts the *current
+`orchestrator.py:280` — `forward_count = sum(1 for a in chosen_actions if a == 0)` counts the *current
 burst*, not history; 801/918 plans are 1 action long, so `forward_count > 3` is unreachable in the
 common case. Measured: 8 episodes contain a run of ≥4 forwards with <50 cm of progress (longest runs:
 19, 19, 19, 19, 12, 9, 8, 8 steps); only 3 were flagged `STUCK`. ep_20_20/21 issued 20 forwards for
@@ -215,10 +215,10 @@ only on an explicit `1`, restoring the heading otherwise.
 **Predicted:** attacks the 22-episode bucket (§2.2). Even a 3× recall improvement on those 43 in-window
 fires converts ~8–10 ROAD legs ⇒ ROAD SR 0.24 → ~0.40, SubtaskSR **+0.04–0.06**.
 **Wiring caveat:** after a ROAD commit via side-scan the agent is yawed 90° off the travel axis —
-`harness.py:459-490` must restore the heading on a *commit* as well as on a miss, or fix A's turn
+`orchestrator.py:459-490` must restore the heading on a *commit* as well as on a miss, or fix A's turn
 burst will double-rotate on the next leg.
 
-### C. `harness.py:430` + `completion_checker.py:606` — make the FINISH commit a *pose*, not a sighting
+### C. `orchestrator.py:430` + `completion_checker.py:606` — make the FINISH commit a *pose*, not a sighting
 FINISH is the only leg graded on yaw as well as position, and nothing sets the yaw: 6/7 fatal FINISH
 commits had a 270° heading error. On a FINISH-shaped leg (`_named_side` present and the instruction
 contains "stop and face"), forbid `proactive_commit_check` from injecting a bare `-1` from the travel
@@ -233,12 +233,12 @@ simultaneously satisfies the yaw criterion.
 implicitly relied on, and blocked 7 true commits vs 11 false ones (§2.3) — roughly a coin flip, with
 asymmetric cost since the AT-window ones are unrecoverable. Two options, in order of preference:
 (i) make the cross-check the **turn-and-look** of (B) instead of a second forward-facing call;
-(ii) if it still returns 0, recover with an in-place look/hold rather than `harness.py:519`'s forced
+(ii) if it still returns 0, recover with an in-place look/hold rather than `orchestrator.py:519`'s forced
 `EMPTY_FALLBACK` forward, which walks the agent out of the window it was standing in.
 **Predicted:** recovers up to 7 ROAD legs directly (SubtaskSR +0.03), net of whatever the 11 blocked
 false commits cost back — so pair it with (B) so the replacement evidence is genuinely independent.
 
-### E. `harness.py:280` — fix the stuck counter's scope, and give it a recovery
+### E. `orchestrator.py:280` — fix the stuck counter's scope, and give it a recovery
 Count forwards over the per-subtask action history (`SpatialMemory` already logs it) instead of over
 `chosen_actions`; and on trigger, strafe (action 3/4) + re-perceive instead of `break`.
 **Predicted:** small — touches 4–8 episodes (§2.7), most of which were far from any waypoint. Low
@@ -271,4 +271,4 @@ completion_checker.py:382, and confirmed by §2.6's dead side-scan).
 Verified untouched by all five prior candidates, i.e. **genuinely open**:
 `active_perception.py:431-440` (the zero-motion turn burst — §5A),
 `completion_checker.py:801` (the dead `_side_band_near` side-scan gate — §5B),
-`harness.py:280` (the burst-scoped stuck counter — §5E).
+`orchestrator.py:280` (the burst-scoped stuck counter — §5E).

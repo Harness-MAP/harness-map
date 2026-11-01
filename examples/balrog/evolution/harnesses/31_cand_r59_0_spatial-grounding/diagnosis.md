@@ -17,7 +17,7 @@ This candidate is r058 (25/40) re-expressed, not a regression. Of the two tasks 
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:GradientAgent.act` parses the frame (`tools/field.py:parse_tty_frame`). It then runs `STAGES = (prompt, orient, stairs, swing, door, cross, hold, kit, fetch, descend, consult)`, and the first stage that answers is emitted with its rung in `reasoning`.
+`orchestrator.py:GradientAgent.act` parses the frame (`tools/field.py:parse_tty_frame`). It then runs `STAGES = (prompt, orient, stairs, swing, door, cross, hold, kit, fetch, descend, consult)`, and the first stage that answers is emitted with its rung in `reasoning`.
 
 - **`orient`**:
   - `Chart.fold` records drawn glyphs, door squares (from `+`, prose `doorway`/`open door`, or "The door opens."), bumps into `blocked`, and locked doors into `locked`.
@@ -99,7 +99,7 @@ This candidate is r058 (25/40) re-expressed, not a regression. Of the two tasks 
    - Gate it off when `}` is drawn, so Quest keeps its own owners.
    - **Predicted effect:** R3 run_03-type levels finish in ~10 steps instead of timing out (memory: +2/−0 over 125 R3 levels, 0 arms changed off R3). MazeWalk has no unreachable-`>` state, so it is unaffected.
 
-3. **`harness.py:st_consult` (Quest menu) + `st_prompt`: stop the peaceful bump loop.**
+3. **`orchestrator.py:st_consult` (Quest menu) + `st_prompt`: stop the peaceful bump loop.**
    - On "Really attack … [yn]", book `(pos, dir)` into `chart.blocked` using `chart.pending`.
    - Answer the prompt with `southeast` (= `n`, a single keystroke) instead of `more`, which costs a second wasted `more` on "Unknown command '^M'".
    - Saves ~3 steps per bump. It only matters for efficiency and budget on Quest; low leverage.

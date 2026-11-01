@@ -25,7 +25,7 @@ state the harness was already generating and throwing away.
 
 | module | role | this iter |
 |---|---|---|
-| `harness.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | comment only (the FINISH-conjunct narration at `:522` was stale) |
+| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | comment only (the FINISH-conjunct narration at `:522` was stale) |
 | `modules/arrival_gate.py` | owns the LICENSE for every non-orient `-1` | ★ **the whole change** — see below |
 | `modules/road_geometry.py` | free ROAD position channel (`object_mask` rising edge) | untouched — 70 % of asks moved in-window, 97 % licence→pass |
 | `modules/completion_checker.py` | recognizer + schedule constants, imported by the gate | untouched (no constant in it retuned) |
@@ -48,8 +48,8 @@ state the harness was already generating and throwing away.
 | text-free `_IDENTITY_SYS` | prose-in-code | `arrival_gate` | **frozen — do not touch.** 91 % in-window ROAD recall; the only arrival signal in the harness |
 | `RoadGeometry` operating point (`ARRIVAL_FRAC`, band geometry) | const | `road_geometry` | **frozen** — measured-flat plateaus |
 | `MAX_CLAIMABLE_CROSSINGS = 2` | const | `road_geometry` | untouched — 2 named ROAD legs lost to it (diagnosis F5); deliberately deferred so it does not confound this measurement |
-| FINISH burst truncation (≤2 translations/iteration) | code | `harness.py` | untouched — diagnosis F3(b); it changes `RoadGeometry`'s sampling cadence, so it must not ship with this |
-| persistent wedge counter / overshoot flag | code | `harness.py`, `spatial_memory` | untouched — diagnosis F6, the largest remaining open population (19/31 FINISH legs leave the road polygon) |
+| FINISH burst truncation (≤2 translations/iteration) | code | `orchestrator.py` | untouched — diagnosis F3(b); it changes `RoadGeometry`'s sampling cadence, so it must not ship with this |
+| persistent wedge counter / overshoot flag | code | `orchestrator.py`, `spatial_memory` | untouched — diagnosis F6, the largest remaining open population (19/31 FINISH legs leave the road polygon) |
 | ORIENT cardinal burst · TURNING approach latch | code | `active_perception`, `viewpoint_controller` | **do not touch** — 50/50 and 90 % conditional |
 
 ## change
@@ -211,7 +211,7 @@ next if this lands.
   `_note_identity` / `_prior_zero_run` / `_finish_history_ok` added; `_identity_call` takes
   `cur_idx` and logs; `proactive_commit` FINISH branch + FINISH ask cap + side-veto removal;
   `allow_planner_commit` FINISH branch; module docstring updated.
-- `harness.py` — comment only (`:522`, the stale `_FRONTAGE_SYS` narration at the
+- `orchestrator.py` — comment only (`:522`, the stale `_FRONTAGE_SYS` narration at the
   `proactive_commit` call site). No code changed; `run_episode` signature and `EpisodeResult`
   verified intact.
 - `NOTES.md` — this file.

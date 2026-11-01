@@ -4,7 +4,7 @@
                                         the whole stack (the model is not called this step).
   post(ctx, action) -> action          runs AFTER the model, innermost-first; may rewrite it.
 
-The pipeline (harness.py) owns ordering; stages own one concern each and keep their own state.
+The pipeline (orchestrator.py) owns ordering; stages own one concern each and keep their own state.
 """
 from __future__ import annotations
 

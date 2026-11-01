@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| harness.py | `LearnerAgent` hub; `STAGES = (prompt, orient, sokoban, stairs, swing, cross, hold, kit, fetch, route, learner)`; first stage to answer wins, rung -> `reasoning`. `load_tool(name)` imports any `tools/<name>.py` under a path-unique `sys.modules` key. Chart (`observe/passable/frontier/route`) + TD learner. | code |
+| orchestrator.py | `LearnerAgent` hub; `STAGES = (prompt, orient, sokoban, stairs, swing, cross, hold, kit, fetch, route, learner)`; first stage to answer wins, rung -> `reasoning`. `load_tool(name)` imports any `tools/<name>.py` under a path-unique `sys.modules` key. Chart (`observe/passable/frontier/route`) + TD learner. | code |
 | tools/quest.py | Quest-pair owner (unchanged, byte-identical): kick-split, pickup, zap/apply across lava, hold | code |
 | tools/sokoban.py | NEW `Sokoban` owner: `read` frame -> floor/boulders/goals, `solve` push-level A* (cost = moves, h = sum of wall-only pull distances, dead squares pruned on walls only), `simulate`, per-level plan cache with expect-and-replan | code |
 | AGENT.md | one tie-break sentence for the learner consult | prose |
@@ -33,4 +33,4 @@ which draws 3 `{` and solves with the start square as the 4th goal. Expected res
 and `bars` never appears in their prose).
 
 ## files:
-harness.py (loader, `sokoban` stage, `bars` flag in observe/passable), tools/sokoban.py (new), NOTES.md
+orchestrator.py (loader, `sokoban` stage, `bars` flag in observe/passable), tools/sokoban.py (new), NOTES.md

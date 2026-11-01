@@ -35,7 +35,7 @@ renders that text.
    so that it could only learn from the rendered frames and the harness contract; the simplest way
    is to run the search in a container that mounts only the run directory and the anchor.
 4. **Anchor harnesses**, one per game, in the layout of
-   `harness_map/meta_agent/skills/proposer/SKILL.md`. `harness.py` exports
+   `harness_map/meta_agent/skills/proposer/SKILL.md`. `orchestrator.py` exports
    `build_agent(evaluator)` returning an async per-step function `agent(frame_data) -> Action`;
    the paper's anchors compose the system prompt from `AGENT.md`, `skills/*.md` and `rules.md`
    and delegate each step to the frozen model through `evaluator.baseline_step`, reproducing

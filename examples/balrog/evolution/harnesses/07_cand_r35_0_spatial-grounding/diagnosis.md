@@ -13,7 +13,7 @@ frame had already drawn as impassable. It has no route to a drawn `>`. The failu
 > action *i* with the frame of row *i−1* (the frame the agent decided from).
 
 ## 1. What this harness does (mechanism)
-`harness.py:LearnerAgent.act`, one module, no tools:
+`orchestrator.py:LearnerAgent.act`, one module, no tools:
 1. **Reflexes.** If `fr["prompt"]` is set, emit `y` for `[yn]`+attack, `more` for `--More--`, or `esc`
    for anything else. On a remembered `>`, emit `down`.
 2. **`credit()`** computes a TD(λ) update over `(square, move)` values. The rewards are +0.05 per new drawn
@@ -107,7 +107,7 @@ missing route-to-`>` and the missing Boxoban/Quest mechanisms. The VLM is not th
 consulted only on ties, and its answer does not change the outcome.
 
 ## 5. Concrete changes to try (ranked by leverage)
-1. **A glyph-gated action set (`harness.py:act`, before ranking).** Build
+1. **A glyph-gated action set (`orchestrator.py:act`, before ranking).** Build
    `passable(fr, pos, d)` from the drawn target glyph. Drop any bearing whose target is blank `' '`
    (stone), `-`, `|`, or, on Boxoban, `#` (bars). Treat `+` as a door, since it may be locked: allow
    it and let the one-shot bump pin handle it. Keep the existing −1 pin as the fallback for anything

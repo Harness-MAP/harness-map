@@ -22,7 +22,7 @@
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:LearnerAgent.act()` parses the frame with `parse_glyph_map`. It runs `forget()` when `Dlvl` changes, then runs `STAGES` in order. The first stage that answers wins, and its rung is written to `reasoning`.
+`orchestrator.py:LearnerAgent.act()` parses the frame with `parse_glyph_map`. It runs `forget()` when `Dlvl` changes, then runs `STAGES` in order. The first stage that answers wins, and its rung is written to `reasoning`.
 
 1. **`prompt`:** `more` (at most 2 in a row), `esc`, and Quest direction/item answers.
 2. **`orient`:** `observe`, `credit`, `deadly`, and `Quest.observe` / `goal_kind`.
@@ -78,7 +78,7 @@ All 20 episodes won. Quest runs on `tools/quest.py`, byte-identical with r058, w
 | Failure | Episodes | Cause | Class |
 |---|---|---|---|
 | CB-Dark melee death at the corridor mouth, 3-on-1 | 4 | §2C | dice / closed axis |
-| R3: drawn `>` unreachable, frontier picked by bearing order | 1 (run_03) | §2B, `harness.py:route` | HARNESS-BUG |
+| R3: drawn `>` unreachable, frontier picked by bearing order | 1 (run_03) | §2B, `orchestrator.py:route` | HARNESS-BUG |
 | Boxoban one-frame solver dropout → learner ping-pong | 0 losses (~6 steps, 1 consult) | §2A, `tools/sokoban.py:step` | efficiency bug |
 
 ## 4. Binding constraint
@@ -89,7 +89,7 @@ All 20 episodes won. Quest runs on `tools/quest.py`, byte-identical with r058, w
 
 ## 5. Concrete changes to try (ranked by leverage)
 
-### 5.1 `harness.py:LearnerAgent.route`: make a drawn but unreachable `>` attract the frontier (R3 +1, low risk)
+### 5.1 `orchestrator.py:LearnerAgent.route`: make a drawn but unreachable `>` attract the frontier (R3 +1, low risk)
 
 **Current behaviour:** when `stairs` is non-empty but BFS never reaches one, `route` still breaks on the first frontier in BFS order.
 

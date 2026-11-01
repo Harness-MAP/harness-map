@@ -18,7 +18,7 @@ shows the biggest single lever on that question is **a prompt-composition bug in
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:run_episode` is the anchor's 7-node loop plus one new node, `ViewpointController`
+`orchestrator.py:run_episode` is the anchor's 7-node loop plus one new node, `ViewpointController`
 (`modules/viewpoint_controller.py`, 436 lines, no VLM call), wired at four sites:
 
 ```
@@ -30,13 +30,13 @@ SpatialMemory → PromptAssembler → Perceiver(VLM) → Planner(VLM)
       ↘ [D] viewpoint.commit_pose_prefix at the single `-1` materialisation site
 ```
 
-* **[A] `harness.py:329` → `gate_burst`** — on a `TURN` leg the `[rotate, -1]` burst from
+* **[A] `orchestrator.py:329` → `gate_burst`** — on a `TURN` leg the `[rotate, -1]` burst from
   `active_perception` is *captured*, single forwards are emitted instead, and the burst is released when
   `side_building_fraction(obs, turn_side) ≤ 0.10` past `APPROACH_FLOOR_FORWARDS = 2`, else unconditionally at
   `APPROACH_CAP_FORWARDS = 3`.
-* **[B] `harness.py:466` → `allow_forward_commit`** — returns `False` on a `FINISH` leg, so
+* **[B] `orchestrator.py:466` → `allow_forward_commit`** — returns `False` on a `FINISH` leg, so
   `proactive_commit_check` (the forward-facing reach) may no longer inject a `-1` there.
-* **[C] `harness.py:518-553` → `request_face_scan`** — on `ROAD`/`FINISH` legs with a named side, at cadence
+* **[C] `orchestrator.py:518-553` → `request_face_scan`** — on `ROAD`/`FINISH` legs with a named side, at cadence
   (`K_FACE_STREAK=4`, `K_FACE_INTERVAL=4`, `MAX_FACE_SCANS_PER_LEG=4`), yaw 90° toward the named side, run
   `completion.scan_reach` on the new frame, commit on `Match==1`; on `ROAD` restore the heading first, on
   `FINISH` keep the faced pose.
@@ -165,7 +165,7 @@ and commits on **10**. Same story on FINISH: 4 of 14 FINISH legs entered the des
 committed there — `ep_20_4_21` then committed 8 973 cm later.
 
 Two pre-existing bugs that the counts above depend on, both still live:
-* `harness.py:~293` `forward_count = sum(1 for a in chosen_actions if a == 0)` counts only the **current
+* `orchestrator.py:~293` `forward_count = sum(1 for a in chosen_actions if a == 0)` counts only the **current
   burst**, so `> 3` is unreachable when plans are 1 action long. `ep_20_20_21` sat wedged against a building
   (`building=1` from step 0, `moving_distance` frozen at 136 for 11 steps, 9 human collisions) and `STUCK`
   never fired; it died on a failed `-1` instead.
@@ -239,21 +239,21 @@ and both images). *Predicted:* in-window ROAD recall 24 % → ~60-100 %, out-of-
 **(2) `modules/completion_checker.py` — add a second, independent `_junction_vlm_call(obs)` and require the
 conjunction before any ROAD `-1`.** One image (`obs['rgb']`), no hint, no instruction text, the §4 row-3
 prompt, `temperature=0.0`, `max_tokens=512`. Gate: `commit ⇔ image_match(no text) AND in_junction`. Wire it
-in `harness.py` at the `proactive_commit_check` site and inside `verify`'s planner-`-1` path.
+in `orchestrator.py` at the `proactive_commit_check` site and inside `verify`'s planner-`-1` path.
 *Predicted:* ROAD 10/45 → ~19/45 at a *lower* false-fire rate than today (measured 6/14 recall, 0/14 fire on
 the same frames) ⇒ SubtaskSR +0.045, and ~9 more episodes reach TURNING, where §2A shows 90 % conversion
 ⇒ a further +0.04. Two extra VLM calls per arrival check; cost is 46.3k tok/ep against no budget pressure.
 *Why:* the ROAD leg's grading point **is** the intersection ("stop at the intersection with X on your left");
 the harness has never asked about the junction, only about the building.
 
-**(3) `harness.py:518-553` + `modules/viewpoint_controller.py:request_face_scan` — delete the face-scan
+**(3) `orchestrator.py:518-553` + `modules/viewpoint_controller.py:request_face_scan` — delete the face-scan
 commit path.** Keep `gate_burst`; make `request_face_scan` return `None` unconditionally (or remove the
 block). *Predicted:* removes 9 of the 17 fatal commits outright and returns 256 substeps (10 % of ROAD
 substeps, 12–18 % of budget on tight legs) for **0** forgone matches — it has never once committed a leg
 correctly. FINISH goes from "commits early and dies" to "keeps walking with 250–330 substeps in hand", which
 is the only state from which (2)/(5) can score. *Why:* §2B, §2C — 0/128 on ROAD, 9/9 fatal on FINISH.
 
-**(4) `modules/completion_checker.py` + `harness.py` — make `-1` require k=2 confirmations at ≥1 forward
+**(4) `modules/completion_checker.py` + `orchestrator.py` — make `-1` require k=2 confirmations at ≥1 forward
 apart, on every leg except ORIENT.** Hold a per-leg `pending_commit` when the gate first returns true, emit
 one forward, re-ask, and commit only on a second true; drop the pending state on a false.
 *Predicted:* would have blocked **all 9** fatal `SIDE_SCAN_COMMIT`s and is untested-by-construction today
@@ -276,7 +276,7 @@ arrival evidence emit the 3 forwards. *Predicted:* recovers `ep_20_19_21` (enter
 3 forwards took it to `y = 178`) and protects the 9 current TURN passes, whose ROAD legs were mostly
 committed *without* arrival evidence. Honest signal only (which harness path emitted the previous `-1`).
 
-**(7) `harness.py:~293` — scope the stuck detector to history, not the current burst.**
+**(7) `orchestrator.py:~293` — scope the stuck detector to history, not the current burst.**
 `forward_count` must count forwards since the last odometry change across steps, not `sum(a == 0 for a in
 chosen_actions)`; with 1-action plans the `> 3` test is unreachable. *Predicted:* catches the 4
 frozen-20-positions deaths and `ep_20_20_21` (11 steps wedged, `moving_distance` frozen at 136, `STUCK`

@@ -20,7 +20,7 @@ offered as fresh, the reasoning column left empty).
 > the menus. Without it, "model follows option 1" reads as 31–53% instead of 68–99%. Re-use this alignment.
 
 ## 1. What this harness does (mechanism)
-`harness.py:MenuHarness.act`, once per step:
+`orchestrator.py:MenuHarness.act`, once per step:
 1. `Ledger.observe` parses the cursor `(x, y-1)`, `Dlvl`, and the 21 `map:` rows. From prose lines containing
    `adjacent` it builds `deadly` (lava/water) and `blocked` (wall/bars, not door). It increments `visits[pos]`.
    It books `(pos, dir)` as failed on a no-move, unless the target glyph was a letter or the message has combat text.

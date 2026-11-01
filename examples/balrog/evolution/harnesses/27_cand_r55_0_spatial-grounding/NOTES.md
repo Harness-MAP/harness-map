@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| harness.py | `PipelineHarness.act`: context → `pre` hooks outer→inner (first non-None short-circuits, NO model call) → else one model call → `snap` → `post` hooks inner→outer; deciding stage written to `reasoning` | code |
+| orchestrator.py | `PipelineHarness.act`: context → `pre` hooks outer→inner (first non-None short-circuits, NO model call) → else one model call → `snap` → `post` hooks inner→outer; deciding stage written to `reasoning` | code |
 | tools/context.py | NEW. `StepContext` from the observation: cursor (row = y−1), Dlvl, map rows, message-only combat flag, `<noun> adjacent <dirs>` prose, `creature_dirs()` (letter glyph in the ring) | code |
 | tools/chart.py | NEW. Per-level map memory (all drawn glyphs, visits, bump-closed edges booked only without a combat message, prose-noun doors/walls/lava outranking glyphs) + `route()`: BFS to a drawn `>`, else the nearest unvisited square bordering undrawn space; distance then compass order, re-elected every step; no diagonals through doors | code |
 | tools/stages.py | NEW. Legal (audit) · Modal (`[yn]`→y, `--More--`→more) · Hazard (post veto onto `}`/lava/water) · Route (owns the chart; short-circuits with the BFS hop unless a creature is adjacent) · Bump (post veto of refused/wall moves → least-visited passable) | code |
@@ -35,5 +35,5 @@ versus 0.150 for r029 with the real model. The real model now only handles fight
 drops sharply on the maze tasks.
 
 ## files:
-harness.py (rewritten), tools/context.py (new), tools/chart.py (new), tools/stages.py (new), tools/action_io.py,
+orchestrator.py (rewritten), tools/context.py (new), tools/chart.py (new), tools/stages.py (new), tools/action_io.py,
 tools/prompting.py, AGENT.md, memory.md (emptied), NOTES.md

@@ -201,7 +201,7 @@ the pristine anchor. Full detail and the probe sources: `traces_diag/channels.md
 | **`conversation_history[0]["content"][0]["text"]` mutated in place** | **LIVE** | 1080 chars/turn moved the ladder to +**827** (507 image + 320 text) |
 
 Consequences for the gradient:
-* **`memory.md` cannot be wired the way its own comment says.** "harness.py can fill this per step and
+* **`memory.md` cannot be wired the way its own comment says.** "orchestrator.py can fill this per step and
   inject it into the prompt" via `compose_system_prompt`/`current_prompt` measures **exactly zero**
   after turn 1. The working route is the in-place system-message mutation, and it only lands from
   **turn 2** (`conversation_history` is empty on turn 1). Write it as

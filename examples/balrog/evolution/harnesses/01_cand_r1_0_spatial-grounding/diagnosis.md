@@ -15,7 +15,7 @@ plus a TASK-GAP on Quest and Boxoban.**
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:GroundedHarness.act` runs this loop:
+`orchestrator.py:GroundedHarness.act` runs this loop:
 
 1. `perception.parse` extracts the message, the cursor, a map grid aligned on `@`, and per-direction
    `X adjacent <dirs>` nouns.
@@ -162,7 +162,7 @@ Wins: MazeWalk 10/10 (2-cycle ≤ 6 %), R3 4/5. The anchor's MazeWalk rate was 4
    (= `northwest`) for `Improvise?`, so key those two cases separately.
    *Predicted:* frees up to 54 steps/episode on Quest-Easy. This is a precondition for fix 3.
 
-5. **`harness.py:act`: skip the model call when `g.recommended` is set.** Use `_Resp(g.recommended,
+5. **`orchestrator.py:act`: skip the model call when `g.recommended` is set.** Use `_Resp(g.recommended,
    "route")` and call the model only when the planner has no recommendation. Evidence: 99.2 % copy rate
    and 0 live overrides. *Predicted:* primary unchanged, cost down about 90 %, lower variance (temp=1.0
    noise removed from the 19 divergent steps).

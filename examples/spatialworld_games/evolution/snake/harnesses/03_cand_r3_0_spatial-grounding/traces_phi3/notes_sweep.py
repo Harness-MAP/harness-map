@@ -19,7 +19,7 @@ HEAD = "# Snake candidate — the pellet warrant, and a second chance to satisfy
 S = {}
 S["axis"] = """## axis:
 Code lever, token-level: `tools/vlm.py` is rewritten and NOTHING else in the genome changes.
-`harness.py`, `tools/action.py`, `tools/frame.py`, `tools/__init__.py` and every `.md` prior are
+`orchestrator.py`, `tools/action.py`, `tools/frame.py`, `tools/__init__.py` and every `.md` prior are
 byte-identical to the parent — `compose_system_prompt()` returns the parent's 1624 characters
 exactly — so the module wiring (`harness.build_agent` -> `tools.vlm.decide` ->
 `evaluator.baseline_step`) is untouched and what moved is the control flow and the constants
@@ -122,7 +122,7 @@ model decides first on every turn and `_vlm_calls` is never zero.
 S["map"] = """## module map:
 | file | state |
 |---|---|
-| `harness.py` | unchanged. `build_agent` installs the composed prior and returns `tools.vlm.decide`. |
+| `orchestrator.py` | unchanged. `build_agent` installs the composed prior and returns `tools.vlm.decide`. |
 | `AGENT.md`, `rules.md`, `memory.md`, `skills/strategy.md` | unchanged, byte for byte. |
 | `tools/action.py` | unchanged — and finally wired: `is_reversal` and `DIRECTION_VECTORS`/`KEY_MAPPING` are now read by `tools/vlm.py` instead of being named only in a docstring. |
 | `tools/frame.py` | unchanged (still dormant: `frame_data.image` is current, so no capture wrapper is needed). |

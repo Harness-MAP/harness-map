@@ -24,7 +24,7 @@ from typing import Any, Dict, List, Optional
 
 # Self-register so @dataclass below can resolve string annotations when
 # imported via importlib.util.spec_from_file_location (validate_harness.py
-# path). Matches the boilerplate at workspace/branches/react_h0/harness.py
+# path). Matches the boilerplate at workspace/branches/react_h0/orchestrator.py
 # lines 30-38.
 sys.modules.setdefault(__name__, types.ModuleType(__name__))
 _pkg = __name__.rsplit(".", 1)[0] if "." in __name__ else None
@@ -43,7 +43,7 @@ class _StepRecord:
 class SpatialMemory:
     """Per-episode pose/step log.
 
-    Public API (consumed by harness.py + downstream proposers):
+    Public API (consumed by orchestrator.py + downstream proposers):
       - log_step(action, info)
       - boundary()
       - since_subtask_advance() -> int

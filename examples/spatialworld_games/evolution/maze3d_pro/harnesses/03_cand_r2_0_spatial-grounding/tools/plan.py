@@ -137,7 +137,7 @@ Reply with ONLY the JSON object in the format specified above."""
 
 
 class ActionPlanner:
-    """Episode-local state + the governor. One instance per episode, built in harness.py.
+    """Episode-local state + the governor. One instance per episode, built in orchestrator.py.
 
     The four tuning constants are CLASS attributes, read through `self`, so an offline rig can
     sweep them (`plan.ActionPlanner.STALE_LIMIT = n`) without touching the shipped defaults."""

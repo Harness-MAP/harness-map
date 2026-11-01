@@ -13,7 +13,7 @@ adjacent-noun prose, legal set) and carries `notes` (lines stages inject into th
 LegalStage (outermost, audits vocabulary), ModalStage (answers `[yn]`/`--More--` without the model),
 HazardStage (prose lava/water or `}` glyph -> note + veto), BumpStage (a move that left the hero in
 place books (square,dir); repeats vetoed), OrbitStage (immediate reversal onto a square visited >=2x
-redirected to the least-visited open neighbour). `harness.py:PipelineHarness.act` runs pre hooks
+redirected to the least-visited open neighbour). `orchestrator.py:PipelineHarness.act` runs pre hooks
 outer->inner, then the model (reply snapped to the legal set via `action_io.snap`), then post hooks
 inner->outer. `prompting.build_messages` gained a `notes` argument. `build_agent` entry point kept.
 
@@ -24,7 +24,7 @@ wall bumps 28% of steps (b), lava deaths (c) and modal-prompt lock (d) — each 
 ## module map / levers
 | file | role | lever |
 |---|---|---|
-| harness.py | pipeline driver, stack ordering | code |
+| orchestrator.py | pipeline driver, stack ordering | code |
 | tools/context.py | observation -> StepContext | code |
 | tools/stages.py | the five stages + `default_stack()` order | code |
 | tools/action_io.py | stock regex + legal_actions + snap | code |
@@ -32,4 +32,4 @@ wall bumps 28% of steps (b), lava deaths (c) and modal-prompt lock (d) — each 
 | AGENT.md / rules.md / skills/ | empty prose priors | prose |
 
 ## files:
-harness.py, tools/context.py (new), tools/stages.py (new), tools/action_io.py, tools/prompting.py, NOTES.md
+orchestrator.py, tools/context.py (new), tools/stages.py (new), tools/action_io.py, tools/prompting.py, NOTES.md

@@ -75,7 +75,7 @@ _DGM_STUBS = {
     # DGM_outer imports `self_improve` at module level; importing it for real pulls docker,
     # anthropic, openai and the SWE-bench harness. The arm never calls it (our testbed replaces it).
     "self_improve_step": {"self_improve": "DGM's Docker/SWE-bench self-improve step is replaced "
-                                          "by the testbed adapter; see dgm_arm.py"},
+                                          "by the testbed adapter; see dgm.py"},
     # Only `setup_logger` is imported from this, and only by DGM_outer.main (which we do not call).
     "utils.docker_utils": {"setup_logger": "DGM's docker logger is not used; the arm passes its "
                                            "own logger into filter_compiled"},

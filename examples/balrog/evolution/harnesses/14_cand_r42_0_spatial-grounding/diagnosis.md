@@ -21,7 +21,7 @@ Behind that bug, the remaining zeros are the same three TASK-GAPs as in r041's d
 - the fight is taken on the room-mouth square.
 
 ## 1. What this harness does (mechanism)
-`harness.py:PipelineHarness.act` builds a `StepContext` (`tools/context.py`). It then runs `pre()` on the stack in order `Legal > Modal > Hazard > Field`; the first stage that answers short-circuits the stack, and the outer `post()` hooks still run. If no stage answers, the model is called with `ctx.notes`, its reply is `snap`ped, and every `post()` runs.
+`orchestrator.py:PipelineHarness.act` builds a `StepContext` (`tools/context.py`). It then runs `pre()` on the stack in order `Legal > Modal > Hazard > Field`; the first stage that answers short-circuits the stack, and the outer `post()` hooks still run. If no stage answers, the model is called with `ctx.notes`, its reply is `snap`ped, and every `post()` runs.
 
 - **ModalStage:** on `[yn` / `--More--` / a trailing `?`, it emits the first of `y`, `more`, `esc` that is legal. `y` is not in BALROG's vocabulary, so it always emits **`more`**.
 - **HazardStage:** vetoes steps onto `}`, or onto squares whose prose names lava/water.

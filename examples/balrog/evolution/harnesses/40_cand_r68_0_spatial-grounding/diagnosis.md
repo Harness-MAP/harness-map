@@ -17,7 +17,7 @@
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:LearnerAgent.act()` parses the frame (`parse_glyph_map`), runs `forget()` on a `Dlvl` change, and then runs `STAGES = (prompt, orient, sokoban, stairs, swing, cross, hold, kit, fetch, route, learner)`. The first stage that returns a reply wins, and its rung is written to `reasoning`.
+`orchestrator.py:LearnerAgent.act()` parses the frame (`parse_glyph_map`), runs `forget()` on a `Dlvl` change, and then runs `STAGES = (prompt, orient, sokoban, stairs, swing, cross, hold, kit, fetch, route, learner)`. The first stage that returns a reply wins, and its rung is written to `reasoning`.
 
 - **`st_prompt`:** `more` (at most 2 in a row), `esc`, and Quest item/direction answers.
 - **`st_orient`:** `observe` (doors, bars, bumps), `credit` (updates `drawn` and the TD values), `deadly`, and `quest.observe` / `goal_kind`.
@@ -107,7 +107,7 @@ Runs 00–02 share a **byte-identical prefix through step 18**: the same 10-step
 
 ## 5. Concrete changes to try (ranked by leverage)
 
-### 5.1 `tools/sokoban.py` + `harness.py:st_sokoban`: latch the arm per level (cost → 0, −6 steps, zero primary risk)
+### 5.1 `tools/sokoban.py` + `orchestrator.py:st_sokoban`: latch the arm per level (cost → 0, −6 steps, zero primary risk)
 **Change:**
 - Add `self.live = False` to `Sokoban.__init__`. It already resets on `forget()`, because `forget()` rebuilds `Sokoban()`.
 - In `st_sokoban`:

@@ -3,7 +3,7 @@
 ## module map
 | file | role |
 |---|---|
-| harness.py | `Ledger` (per-level visits + failed (square, direction) moves, parsed from cursor/map/prose) and `LedgerHarness` (one model call per step, same as naive) |
+| orchestrator.py | `Ledger` (per-level visits + failed (square, direction) moves, parsed from cursor/map/prose) and `LedgerHarness` (one model call per step, same as naive) |
 | tools/prompting.py | naive transcript + priors + `render_ledger`: an 8-row neighbour table (glyph, visits, move-failed, DEADLY) |
 | tools/action_io.py | `legal_actions` from the system prompt; `extract_action` = whole-word projection onto the legal set with a veto list and a fallback |
 | AGENT.md / memory.md | two short priors explaining the ledger columns |
@@ -16,7 +16,7 @@ state into a free-text memory. This one keeps the naive decision locus and groun
 and output.
 
 ## change:
-Added a `Ledger` to harness.py. Each step it reads the cursor `(x, y)`, the `map:` block (row = y−1),
+Added a `Ledger` to orchestrator.py. Each step it reads the cursor `(x, y)`, the `map:` block (row = y−1),
 `Dlvl` and the adjacent lava/water prose. It counts visits per square and records a (square,
 direction) pair as failed when the last move left the cursor unmoved. It resets when the level
 changes. prompting.py renders the eight compass neighbours as a table after the transcript.
@@ -31,4 +31,4 @@ from a stateless, ungrounded call. The ledger addresses the orbits (visit counts
 moves) and the lava deaths (DEADLY veto), and it keeps the model as the decision maker.
 
 ## files:
-harness.py, tools/prompting.py, tools/action_io.py, AGENT.md, memory.md, NOTES.md
+orchestrator.py, tools/prompting.py, tools/action_io.py, AGENT.md, memory.md, NOTES.md

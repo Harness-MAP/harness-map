@@ -20,7 +20,7 @@ The cost is about 15x r041's 21.9k tokens/ep.
 Everything else is the known TASK-GAP residue (Boxoban and Quest).
 
 ## 1. What this harness does (mechanism)
-- `harness.py:PipelineHarness.act` runs this sequence each step:
+- `orchestrator.py:PipelineHarness.act` runs this sequence each step:
   1. `Chart.observe(text)` updates the per-level glyphs, visits, prose-named wall squares, and terrain-refused `(square, dir)` edges.
   2. `Chart.plan(legal)` runs a BFS to a charted `>`, or else to the nearest frontier (never stood on AND borders an uncharted square).
   3. The stage `pre` hooks run: Veto, Swing, Route.

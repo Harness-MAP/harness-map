@@ -17,7 +17,7 @@ levels have their exit on floor 2.
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:build_agent(evaluator)` is the agent factory the extended evaluator installs as
+`orchestrator.py:build_agent(evaluator)` is the agent factory the extended evaluator installs as
 `ai_model_func`. Exactly two things happen in it:
 
 1. `evaluator.current_prompt = compose_system_prompt()` — concatenates `AGENT.md` + `skills/*.md`
@@ -33,10 +33,10 @@ prompt-only baseline.** Everything else in the directory is scaffolding.
 
 Verified properties of that mechanism, all re-measured in this tree:
 
-* **Zero state.** `grep -nE 'self\.|nonlocal|= \{\}|= \[\]|prev|hash|md5|digest|counter' harness.py
+* **Zero state.** `grep -nE 'self\.|nonlocal|= \{\}|= \[\]|prev|hash|md5|digest|counter' orchestrator.py
   tools/vlm.py` returns exactly one hit, inside a docstring. There is no object, no counter, no
   previous frame, no ledger — **no place in this harness where a loop-break could live.**
-* **`tools/action.py` and `tools/frame.py` are dead.** `harness.py:44` imports `tools.vlm` and
+* **`tools/action.py` and `tools/frame.py` are dead.** `orchestrator.py:44` imports `tools.vlm` and
   nothing else; `key_for`, `granularity_steps` and `capture()` appear only at their own `def` lines.
   Two of three tool modules are inert decoration.
 * **`memory.md` is dead.** No `.py` in the candidate mentions it — `compose_system_prompt()` reads
@@ -217,7 +217,7 @@ Cross-check against the numeric pre-pass: `steps_taken == max_steps == 100` in a
 > 0.080. Reproduce them; do not re-derive them. §5.4, §5.5, §5.7 are the live frontier.
 
 ### 5.1 Give the harness a per-episode state object and an exact outcome bit *(CONFIRMED)*
-*Files: `harness.py:build_agent` (build one state object per episode, close over it),
+*Files: `orchestrator.py:build_agent` (build one state object per episode, close over it),
 `tools/vlm.py:decide` (observe → inject → delegate → govern), a new `tools/<state>.py`.*
 Hash `frame_data.image` each step; `prev == cur` ⇒ the last action was inert. Wrap the whole step in
 `try/except` falling back to the pristine `baseline_step`, so the mechanism can never cost an

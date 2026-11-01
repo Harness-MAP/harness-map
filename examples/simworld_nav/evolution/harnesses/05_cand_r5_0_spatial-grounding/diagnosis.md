@@ -30,12 +30,12 @@ frozen model's ceiling.
 
 ## 1. What this harness does (mechanism)
 
-`harness.py::run_episode`, one iteration per *decision* (not per env step). Seven modules; the
+`orchestrator.py::run_episode`, one iteration per *decision* (not per env step). Seven modules; the
 commit is decided in exactly four places.
 
 | # | call site | role in the outcome |
 |---|---|---|
-| 1 | `active.should_emit` (`harness.py:301`) | **short-circuits perceive+plan** when it returns a list. Owns (a) the ORIENTATION cardinal burst `[rot…, -1]`, (a'') the relative-turn burst `[rot, -1]`, (a') the red-signal idle, (b) anti-spin, and (d) the **cap-2 forward-momentum** cadence. |
+| 1 | `active.should_emit` (`orchestrator.py:301`) | **short-circuits perceive+plan** when it returns a list. Owns (a) the ORIENTATION cardinal burst `[rot…, -1]`, (a'') the relative-turn burst `[rot, -1]`, (a') the red-signal idle, (b) anti-spin, and (d) the **cap-2 forward-momentum** cadence. |
 | 2 | `perceiver.perceive` | 1 VLM call, 4 images (RGB, hint, seg mask, JET depth) → free-text `Description`. **2713 in / 214 out tok, 4.1 s.** |
 | 3 | `planner.plan` | 1 text-only VLM call → `{Summary, Match, Actions}`. **1241 in / 230 out tok, 2.9 s.** |
 | 4 | `completion.verify` (`:391`) | honours a planner `-1` only if `forward_streak ≥ 1` on a non-orient leg. |
@@ -100,7 +100,7 @@ The model reproduces the outcome to two digits. Now read the same formula as a h
 
 **The 6× gap between 1.10 and 6.61 is pure harness policy.** `completion_checker.py:653-655` spaces
 fires 5 forwards apart = **2500 cm of travel**, against a pass window that is only ~4000 cm deep; and
-`harness.py:525` executes the momentum burst without ever re-consulting the checker between forwards.
+`orchestrator.py:525` executes the momentum burst without ever re-consulting the checker between forwards.
 The window is sampled roughly once, by construction.
 
 ### 2.3 The recognizer is **deterministic per frame** — so resampling is worthless and more *distinct* frames is the only lever
@@ -217,7 +217,7 @@ of these five die at L1 2022–3537 having been at L1 22–574 a few steps earli
 
 ### 2.8 The harness's own STUCK detector is dead code; the env has a wedge terminator the harness does not model
 
-`harness.py:280`: `forward_count = sum(1 for a in chosen_actions if a == 0)` — `chosen_actions` is the
+`orchestrator.py:280`: `forward_count = sum(1 for a in chosen_actions if a == 0)` — `chosen_actions` is the
 **current burst**, which is `[0]` on a momentum tick. `forward_count > 3` is therefore unreachable in
 the common path; STUCK fired in **3/50** episodes. Meanwhile `traffic_world.py:371-382` terminates the
 episode when the **last 20 positions are all within 1 cm**, which killed 4 episodes outright
@@ -275,7 +275,7 @@ Read-audit: **0 forbidden reads, 0 undeclared reads** on all 50 episodes.
 **Primary: HARNESS-BUG (sampling coverage).** §2.2 is a closed-form account of the ROAD rate:
 `1 − (1 − 0.205)^1.10 = 0.22` vs observed 0.24. The recall term 0.205 is the frozen model's ceiling
 and the chain has spent seven attempts on it (§6.1). The **exponent is ours**: `K_REACH_INTERVAL = 5`
-spaces fires 2500 cm apart inside a ~4000 cm window, and the burst executor (`harness.py:525`) never
+spaces fires 2500 cm apart inside a ~4000 cm window, and the burst executor (`orchestrator.py:525`) never
 re-consults the checker between the momentum forwards. Raising the exponent from 1.10 to 6.61 costs
 **1041 input tokens and 0.5 s per extra call** — the arrival call is 9.1 % of input tokens and ~7 % of
 the latency of a perceive+plan pair, so a 6× increase is ≈ +38 % tokens and ≈ +3 % wall-clock.
@@ -304,7 +304,7 @@ coverage fix, because the coverage fix changes the miss distribution it would be
 
 ## 5. Concrete changes to try (the gradient — ranked by leverage)
 
-### A — Ask the arrival question once per forward step, not once per 5. `harness.py:525` + `modules/completion_checker.py:96,653-655` — **the whole thesis of this diagnosis**
+### A — Ask the arrival question once per forward step, not once per 5. `orchestrator.py:525` + `modules/completion_checker.py:96,653-655` — **the whole thesis of this diagnosis**
 
 Two edits, smallest first; ship **A2 only if A1 lands**, so the exponent is attributable.
 
@@ -321,7 +321,7 @@ Two edits, smallest first; ship **A2 only if A1 lands**, so the exponent is attr
 Raises in-window fires **1.10 → ~2.25** (bounded by the perceive cadence). Predicted
 `P(commit | window) 0.22 → 0.40`.
 
-**A2 (the real fix): fire inside the burst executor.** In `harness.py`'s `for chosen_action in
+**A2 (the real fix): fire inside the burst executor.** In `orchestrator.py`'s `for chosen_action in
 list(chosen_actions):` loop (`:525`), after a `chosen_action == 0` step lands and `obs` is refreshed,
 call `completion.proactive_commit_check(...)` with the updated `obs`; on `Match=1`, break the burst
 and execute `-1`. This is the only way to reach the 6.61 frames — the momentum burst currently walks
@@ -407,7 +407,7 @@ sentence) and keep only the `SENSOR LEGEND` block already written at `:65-79`.
   description is an input to the planner commit channel. **Ship it bundled with A1, not as a
   candidate of its own.**
 
-### F — Make STUCK real. `harness.py:280`
+### F — Make STUCK real. `orchestrator.py:280`
 
 ```python
 forward_count = memory.forward_count_since_boundary()   # accessor exists, spatial_memory.py:97
@@ -470,7 +470,7 @@ i.e. laundered `target_location`. Lowest confidence; re-measure first.
 
 ## 7. Provenance / anti-cheat
 
-- Candidate: `$OUT_DIR` = `simworld_gym/simworld_config/harnesses/nav` (`harness.py` 613 loc +
+- Candidate: `$OUT_DIR` = `simworld_gym/simworld_config/harnesses/nav` (`orchestrator.py` 613 loc +
   7 modules, 2705 loc total). Byte-identical to `anchor_nav_r000/source/` except for this file.
 - Traces: `runs_adaptive/nav_hard__hard5010_adaptive_k4c1/arm_hard5010_adaptive_k4c1/anchor_nav/traces/`
   — 50 episodes, 3014 env steps, 2184 VLM calls (918 perceive / 918 plan / 348 arrival).

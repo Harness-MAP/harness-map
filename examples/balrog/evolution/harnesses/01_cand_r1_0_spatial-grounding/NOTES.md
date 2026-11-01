@@ -20,7 +20,7 @@ to a drawn `>`, or else to the nearest unvisited frontier square, whose first ho
 action with whole-word matching. It answers open modal prompts (`--More--`, `[yn]`, "What do you
 want to…") with `more`/`esc` WITHOUT a model call. `arbitrate()` overrides a vetoed reply with the
 recommended move, and falls back to the route instead of BALROG's silent `north`.
-`harness.py` orchestrates all of this and writes the deciding component into `response.reasoning`.
+`orchestrator.py` orchestrates all of this and writes the deciding component into `response.reasoning`.
 `skills/spatial.md` explains the grounding block to the model.
 
 ## why:
@@ -34,6 +34,6 @@ Replay smoke test over the anchor's 2874 recorded steps (stub model echoing the 
 model 1810, override-veto 919, modal 134, fallback-route 11. validate_harness: PASS.
 
 ## files:
-harness.py (rewritten), tools/perception.py (new), tools/spatial_memory.py (new),
+orchestrator.py (rewritten), tools/perception.py (new), tools/spatial_memory.py (new),
 tools/grounding.py (new), tools/action_io.py (rewritten), tools/prompting.py (grounding slot),
 skills/spatial.md (new), NOTES.md

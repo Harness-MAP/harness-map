@@ -29,13 +29,13 @@ modules such as `road_geometry.py`, `arrival_gate.py` and `viewpoint_controller.
 
 | file | written by | content |
 |---|---|---|
-| `harness.py`, `modules/*.py`, `AGENT.md`, `rules.md` | the proposer | the harness as evaluated (`run_episode(env, task_spec, vlm_clients, trace_dir)` is the entry point) |
+| `orchestrator.py`, `modules/*.py`, `AGENT.md`, `rules.md` | the proposer | the harness as evaluated (`run_episode(env, task_spec, vlm_clients, trace_dir)` is the entry point) |
 | `NOTES.md` | the proposer | its own account of the change: axis, module map, what changed and why; its first line names the parent |
 | `diagnosis.md` | the diagnostician | the report on this harness's evaluation, read by the proposer when the harness is bred from |
 | `score.json` | the evaluator | the search-set evaluation: `SubtaskSR`, `SR`, `per_position_SR`, and one row per episode |
 
 The harness modules import `prompt_template` and `utils` from SimWorld-Robotics'
-`baseline/single` directory through a hard-coded `_BASELINE_DIR` constant (in `harness.py` and
+`baseline/single` directory through a hard-coded `_BASELINE_DIR` constant (in `orchestrator.py` and
 in the modules that build prompts); point it at your checkout before running one of them. The
 bundles are otherwise unchanged from the run.
 

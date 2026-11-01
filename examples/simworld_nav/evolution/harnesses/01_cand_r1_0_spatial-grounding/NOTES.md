@@ -23,7 +23,7 @@ against it.
 
 | module | role | this iter |
 |---|---|---|
-| `harness.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ four commit sites route through `CompletionChecker.commit_burst`; `forward_streak` threaded into the cross-check |
+| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ four commit sites route through `CompletionChecker.commit_burst`; `forward_streak` threaded into the cross-check |
 | `modules/spatial_memory.py` | scratchpad: per-step action + odometry ring | untouched |
 | `modules/prompt_assembler.py` | composes the VLM prompt from the sanctioned surface | untouched |
 | `modules/perceiver.py` | 1 VLM call: 4 images → free-text description | untouched |
@@ -43,7 +43,7 @@ against it.
 | arrival criterion wording | prose-in-code | `_binary_reach_vlm_call` sys_prompt | **replaced this iter** (visibility → position) |
 | arrival evidence set (mask/depth/description into the REACH call) | code | `_binary_reach_vlm_call` user_content | untouched — next obvious lever |
 | overshoot / "I have passed it" state | code | `spatial_memory` + `completion_checker` | untouched — largest open population |
-| stuck detector wired to `forward_count_since_boundary` | code | `harness.py:~280` | untouched — still a no-op |
+| stuck detector wired to `forward_count_since_boundary` | code | `orchestrator.py:~280` | untouched — still a no-op |
 | planner `Match` in the Output Format | prose | `planner.reasoning_template` | untouched — 12% of replies drop it |
 | ORIENTATION cardinal burst | code | `active_perception` (a) | **do not touch** — 50/50 |
 
@@ -67,7 +67,7 @@ cannot leak across legs. The commit latch `_turn_burst_done_for` now closes at t
 burst. Still zero VLM calls — the whole approach is short-circuit path.
 
 **2. Every `-1` is composed, not literal** (`completion_checker.commit_burst` +
-four call sites in `harness.py`). The FINISH leg is graded on facing as well as position:
+four call sites in `orchestrator.py`). The FINISH leg is graded on facing as well as position:
 its instruction always says "… on your left/right, stop and **face that building**", and a
 bare `-1` stops the robot looking along the street. `commit_burst(instruction)` returns
 `[Rotate_Left, -1]` when the instruction names the left, `[Rotate_Right, -1]` for the
@@ -153,7 +153,7 @@ building-on-the-left instruction.
 
 - `modules/active_perception.py` — approach constants + `_approach_delta` helper + three phase fields; relative-turn rule (a″) rewritten as a staged latch
 - `modules/completion_checker.py` — `_is_finish_instruction` / `_FACE_BUILDING_RE` / `_INTERSECTION_RE` / action-code constants; `CompletionChecker.commit_burst`; `_xcheck_verdict_cache` field, `XCHECK_CACHE_STREAK_BUCKET`, `MAX_XCHECK_FIRES_PER_SUBTASK` 2→3; `cross_check_planner_commit` cap branch + memo (+ `forward_streak` kwarg, defaulted); `_binary_reach_vlm_call` system prompt + closing user turn
-- `harness.py` — `facing_side_already` per-decision flag; `forward_streak` threaded into `cross_check_planner_commit`; REACH / side-scan / planner-trim commit sites route through `commit_burst`
+- `orchestrator.py` — `facing_side_already` per-decision flag; `forward_streak` threaded into `cross_check_planner_commit`; REACH / side-scan / planner-trim commit sites route through `commit_burst`
 - `NOTES.md` — this file
 
 *(unchanged: `AGENT.md`, `rules.md`, `modules/{spatial_memory,prompt_assembler,perceiver,planner,affordance_estimator}.py`, `__init__.py`)*

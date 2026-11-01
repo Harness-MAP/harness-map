@@ -24,7 +24,7 @@ These two bugs account for both R3 losses, which is the only headroom left on th
 - the fight is taken on the room-mouth square.
 
 ## 1. What this harness does (mechanism)
-`harness.py:GroundedHarness.act` runs these steps in order:
+`orchestrator.py:GroundedHarness.act` runs these steps in order:
 1. `perception.parse`, then `SpatialMemory.observe`.
 2. `action_io.modal_response`: `--More--`, `[yn`, or "what do you want" → `more`/`esc`. "staircase down here" → `down`.
 3. **Route rung:** `grounding.ground` → `plan_route` runs a BFS over `seen`. The target is a drawn `>`, or else the nearest *unstood* frontier. Its first hop is emitted with no model call.
@@ -126,7 +126,7 @@ A CSV row is (action, the observation AFTER that action). `pos` is `(x, cursor.y
    - On the frame whose message contains `really attack`, convict `(last_pos, last_move)` in `temp` **before** the modal answer runs. `last_move` is still the compass move at that point.
    - Make `note_action` of `more`/`esc` leave `last_move` untouched while a prompt is open.
 
-4. **Melee posture rung before the route rung (`harness.py`, new `tools/melee.py`). Price on ≥200 CB-Dark + QM episodes; the target key is survival first.**
+4. **Melee posture rung before the route rung (`orchestrator.py`, new `tools/melee.py`). Price on ≥200 CB-Dark + QM episodes; the target key is survival first.**
    - Swing: if a letter glyph (`isalpha`, not `@`) is adjacent in `percept.grid`, emit that bearing. When several are adjacent, prefer the letter on the bearing the hero entered from, i.e. along the corridor axis. Never step onto a non-letter square while any letter is adjacent.
    - Hold: if a letter is drawn within Chebyshev distance 3 and the current square has ≤2 passable neighbours (a corridor square), emit `search` (spend the turn, don't move) instead of advancing. The route's next hop would open ≥3 bearings.
    - **Evidence:** QM/02 is the sole survivor, and it did exactly this: 8 `east` swings from (34,13) with HP 16→11. All 9 deaths stepped to (35,x).

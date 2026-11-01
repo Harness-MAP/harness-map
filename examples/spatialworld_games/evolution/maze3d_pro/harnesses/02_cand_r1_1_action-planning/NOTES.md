@@ -7,7 +7,7 @@ pristine VLM step and keeps no state). Iter 1, axis **action-planning**. The fro
 ## module map
 | file | role |
 |------|------|
-| harness.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and now builds ONE `tools.plan.ActionPlanner` per episode and threads it through `tools.vlm.decide`; `compose_system_prompt()` recomposes the prompt from the .md priors (unchanged, byte-identical output). |
+| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and now builds ONE `tools.plan.ActionPlanner` per episode and threads it through `tools.vlm.decide`; `compose_system_prompt()` recomposes the prompt from the .md priors (unchanged, byte-identical output). |
 | **tools/plan.py** | **NEW — the mechanism.** `ActionPlanner`: measures each action's outcome by comparing consecutive `frame_data.image` frames, keeps a refused-translation ledger keyed on the frame fingerprint, governs the model's proposal, and renders the per-turn working-memory block. |
 | tools/vlm.py | the perceive->VLM->parse->GOVERN step. Still calls `evaluator.baseline_step` every step (parsing/fallback/legal set untouched); adds observe -> inject-memory -> govern around it. Owns `_inject_memory`. |
 | tools/action.py | the action/key algebra, now ACTIVE: `name_for(key)` (the inverse table — the engine dispatches on `action.key`), `inverse_climb`, and `retarget(...)` which builds a re-aimed Action from a proposal's metadata envelope. |
@@ -17,7 +17,7 @@ pristine VLM step and keeps no state). Iter 1, axis **action-planning**. The fro
 
 ## evolvable levers (axes)
 - prose: AGENT.md / rules.md / skills/*.md — what the agent is told (untouched this iter).
-- code:  harness.py / tools/*.py — the mechanism. Within tools/plan.py the live sub-levers are the
+- code:  orchestrator.py / tools/*.py — the mechanism. Within tools/plan.py the live sub-levers are the
   outcome test (`_SAMPLE` / `_DIFF_EPS` / `_NULL_FRAC`), the ledger key (currently the frame
   fingerprint), the veto set in `govern`, the escape rule in `_reaim`, `stall_limit`,
   `climb_lock_span`, and `turn_sense` (handedness).
@@ -109,7 +109,7 @@ deliberately not touched: JSON parsing, the fallback, the key table, granularity
   governs; added `_inject_memory` (stash-and-append on `conversation_history[0]`).
 - `tools/action.py` — added `name_for`, `inverse_climb`, `retarget`, `TURN_ACTIONS`,
   `CLIMB_ACTIONS`, `LEGAL_ACTIONS`, `REVERSE_KEY_MAPPING`.
-- `harness.py` — `build_agent` builds the per-episode planner and threads it into `vlm.decide`;
+- `orchestrator.py` — `build_agent` builds the per-episode planner and threads it into `vlm.decide`;
   added `_int_or`.
 - `memory.md` — now the live runtime template for the injected block.
 - unchanged: `AGENT.md`, `rules.md`, `skills/navigation.md`, `tools/frame.py`, `tools/__init__.py`,

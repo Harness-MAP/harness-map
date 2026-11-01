@@ -18,18 +18,18 @@ the side the instruction names (§2.4). That is the largest single uncollected p
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:159 run_episode` is one `while not terminated and len(actions_log) < max_steps`
+`orchestrator.py:159 run_episode` is one `while not terminated and len(actions_log) < max_steps`
 loop wiring 7 modules in fixed order:
 
 | order | call site | role |
 |---|---|---|
-| 1 | `harness.py:280` stuck detector | `forward_count > 3 ∧ Δmoving_distance < 0.5 → break` |
-| 2 | `harness.py:301` `ActivePerception.should_emit` | deterministic burst that **short-circuits the whole VLM pipeline**: (a) cardinal burst `[rot…, -1]` on "face <cardinal>"; (a'') relative-turn burst `[rot, -1]` on "turn left/right" (`active_perception.py:432-440`, once-per-instruction latch); (a') red-signal idle `[2,1]`; (b) anti-spin; (d) forward momentum |
+| 1 | `orchestrator.py:280` stuck detector | `forward_count > 3 ∧ Δmoving_distance < 0.5 → break` |
+| 2 | `orchestrator.py:301` `ActivePerception.should_emit` | deterministic burst that **short-circuits the whole VLM pipeline**: (a) cardinal burst `[rot…, -1]` on "face <cardinal>"; (a'') relative-turn burst `[rot, -1]` on "turn left/right" (`active_perception.py:432-440`, once-per-instruction latch); (a') red-signal idle `[2,1]`; (b) anti-spin; (d) forward momentum |
 | 3 | `Perceiver.perceive` | 1 VLM call over 4 images (RGB, leg hint, `object_mask`, JET depth) → free-text `Description` |
 | 4 | `Planner.plan` | 1 **text-only** VLM call over that description → `{Summary, Match, Actions}` |
 | 5 | `AffordanceEstimator.estimate` | full-motion-set stub |
-| 6 | `harness.py:391` `CompletionChecker.verify` | honour planner `-1` iff `Match==1 ∧ forward_streak ≥ 1` |
-| 7 | `harness.py:413` `cross_check_planner_commit` → `:430` `proactive_commit_check` → `:459` `request_side_scan`/`scan_reach` | the four commit gates |
+| 6 | `orchestrator.py:391` `CompletionChecker.verify` | honour planner `-1` iff `Match==1 ∧ forward_streak ≥ 1` |
+| 7 | `orchestrator.py:413` `cross_check_planner_commit` → `:430` `proactive_commit_check` → `:459` `request_side_scan`/`scan_reach` | the four commit gates |
 
 All four commit gates terminate in **one function**, `completion_checker.py:530
 _binary_reach_vlm_call`, which shows the frozen VLM the current RGB + the leg's reference
@@ -126,7 +126,7 @@ opposite hypothesis (fire every step) and the data refutes it.*
 `simple_world.py:384-397`: a `FINISH` leg passes only if `L1 < dist_threshold` **and**
 `(target_yaw − agent_yaw) % 360 < 45`. The instruction always says
 *"…on your left/right, **stop and face that building**."* The harness's FINISH commit is a
-bare `[-1]` — there is no rotation anywhere in the commit path (`harness.py:529-548`), and the
+bare `[-1]` — there is no rotation anywhere in the commit path (`orchestrator.py:529-548`), and the
 one mechanism that would turn (`request_side_scan`, `:459`) is gated on `_side_band_near`,
 which is measured noise (§3).
 
@@ -181,11 +181,11 @@ third**, by which point the agent has walked out of the window:
 
 Two of those first proposals were inside the window. Note also the blocked proposal is
 `[-1]` *only*, so after `XCHECK_BLOCK` the affordance filter yields `[]` and
-`harness.py:519 EMPTY_FALLBACK` injects a forward — the veto literally pushes the agent
+`orchestrator.py:519 EMPTY_FALLBACK` injects a forward — the veto literally pushes the agent
 further past the waypoint. `EMPTY_FALLBACK` (21) and `XCHECK_BLOCK` (18) always co-occur.
 
 ### 2.7 The stuck detector is dead code on the dominant path
-`harness.py:280`: `forward_count = sum(1 for a in chosen_actions if a == 0)` counts over the
+`orchestrator.py:280`: `forward_count = sum(1 for a in chosen_actions if a == 0)` counts over the
 **current burst only**, and 750/918 bursts are `[0]`, so `forward_count > 3` is unreachable
 except on the 75 `[0,0,0,0]` bursts. Measured consequence: 119/2 812 forwards (4.2 %) produced
 < 50 cm of displacement, and three episodes were wedged against geometry for most of their
@@ -238,7 +238,7 @@ Cross-check vs the numeric pre-pass: `per_position_SR` [1.00, 0.24, 0.111, 0.00]
 Add a `_named_side(instruction)` parse (the same `on your left|right` regex already in
 `completion_checker.py:250-260`) and make every FINISH commit a **two-action burst**
 `[Rotate_Left if side=="left" else Rotate_Right, -1]` instead of `[-1]`. Apply it at all three
-places that can set `planner_actions = [-1]` (`harness.py:437`, `:472`, and the `commit_done`
+places that can set `planner_actions = [-1]` (`orchestrator.py:437`, `:472`, and the `commit_done`
 trim at `:523`), gated on "the instruction contains *stop and face that building*".
 *Why it works:* the rotation is **in place** — `simple_world.py` only updates
 `_agent_location` on translation actions — so it cannot break the location half of the
@@ -289,14 +289,14 @@ junction correctly, and it costs nothing.
 ### E. `modules/completion_checker.py:748` — **stop letting the cost cap approve**
 `if fires >= MAX_XCHECK_FIRES_PER_SUBTASK: return True` → return `False` (budget spent means
 "no more claims this leg"), or better: allow exactly one refusal per leg and then stop
-re-asking. Also fix the companion bug at `harness.py:507-521`: a blocked `[-1]` falls through
+re-asking. Also fix the companion bug at `orchestrator.py:507-521`: a blocked `[-1]` falls through
 to `EMPTY_FALLBACK` and injects a forward, pushing the agent *out* of the window — on a block,
 hold position (emit nothing / a net-zero `[2,1]`) instead.
 *Predicted:* removes 3 fatal commits (§2.6) and stops the veto from manufacturing overshoot.
 *Note:* the chain found the cross-check itself is net-positive (20/22 vetoes were genuine
 saves) — fix its arbitration, do not delete it.
 
-### F. `harness.py:280` — **scope the stuck detector to the leg, not the burst**
+### F. `orchestrator.py:280` — **scope the stuck detector to the leg, not the burst**
 Count forwards from `SpatialMemory`'s per-leg history (or a `nonlocal` counter) instead of
 `chosen_actions`, and test Δ`moving_distance` over the last N forwards.
 *Predicted:* recovers the 3 fully-wedged episodes (§2.7) from a silent 95 %-blocked walk into
@@ -365,7 +365,7 @@ hard-coded. Every recommendation in §5 decides from `obs['rgb']`, `obs['object_
 ---
 
 ## 7. Provenance
-- Candidate: `$OUT_DIR` = `simworld_gym/simworld_config/harnesses/nav` — `harness.py` (613 L)
+- Candidate: `$OUT_DIR` = `simworld_gym/simworld_config/harnesses/nav` — `orchestrator.py` (613 L)
   + 7 modules (2 092 L), `AGENT.md`, `rules.md`, `NOTES.md`.
 - Score: `…/arm_hard5010_adaptive_k4c1/anchor_nav_r000/score.json` — 50/50 episodes,
   `complete: true`, subset `search_hard_50`, model pool `[Qwen3-VL-30B-A3B-Instruct]`.

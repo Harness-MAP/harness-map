@@ -1,4 +1,4 @@
-"""Naive H_0 module package — exports the 7 modules wired by harness.py."""
+"""Naive H_0 module package — exports the 7 modules wired by orchestrator.py."""
 from .spatial_memory import SpatialMemory  # noqa: F401
 from .perceiver import Perceiver  # noqa: F401
 from .planner import Planner  # noqa: F401

@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| harness.py | `LearnerAgent`: builds a per-step context `c`, runs `STAGES = (prompt, orient, stairs, fight, quest, fetch, route, learner)`; first stage to answer wins, rung -> `reasoning`. Holds the TD value learner (last stage). Loads tools/ via `importlib` under a per-candidate module name (no `sys.path` cache collisions). | code |
+| orchestrator.py | `LearnerAgent`: builds a per-step context `c`, runs `STAGES = (prompt, orient, stairs, fight, quest, fetch, route, learner)`; first stage to answer wins, rung -> `reasoning`. Holds the TD value learner (last stage). Loads tools/ via `importlib` under a per-candidate module name (no `sys.path` cache collisions). | code |
 | tools/frame.py | observation parser (`parse_glyph_map`, `clause_index`), `glyph`, `decide_action`, STEP/ORDER/CARDINALS/LETHAL/WALL | code |
 | tools/chart.py | `Chart`: drawn glyphs, doors, bump-closed edges, visits, stood; `bfs`, `route` -> (hop, 'stairs'/'frontier'/None), `toward(goals)` | code |
 | tools/quest.py | NEW `Quest`: inventory letters from `x - a <thing>.`, spawn/item `pickup`, walk targets (items, then lava banks with a valid crossing), fire `apply`/`zap` ACROSS lava, answers the letter / `Improvise?` / direction prompts via the key-bound vocab words | code |
@@ -16,7 +16,7 @@ split). The parent's monolithic `act()` becomes an ordered stage table over thre
 and the new structure hosts a new task-mechanism stage (quest + fetch) the monolith had no slot for.
 
 ## change:
-Split harness.py into tools/frame.py (parsing), tools/chart.py (map memory + BFS; `route` now also
+Split orchestrator.py into tools/frame.py (parsing), tools/chart.py (map memory + BFS; `route` now also
 returns its kind, and `toward` routes to arbitrary goal sets), and tools/quest.py (new). `act()`
 now runs `STAGES` in order; every stage abstains or answers. The existing reflexes/route/learner
 behaviour is preserved stage-for-stage (prompt -> chart+credit -> stairs -> swing -> route -> learner).
@@ -37,4 +37,4 @@ stage-table structure (the steer) is what makes the mechanism a separable, attri
 A stub test confirmed the order pickup -> walk to bank -> apply -> letter -> improvise(y) -> aim.
 
 ## files:
-harness.py (rewired), tools/__init__.py, tools/frame.py, tools/chart.py, tools/quest.py (new), NOTES.md
+orchestrator.py (rewired), tools/__init__.py, tools/frame.py, tools/chart.py, tools/quest.py (new), NOTES.md

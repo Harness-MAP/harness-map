@@ -79,7 +79,7 @@ Reply with ONLY the JSON object in the format specified above."""
 
 
 class ActionPlanner:
-    """Episode-local state + the governor. One instance per episode, built in harness.py."""
+    """Episode-local state + the governor. One instance per episode, built in orchestrator.py."""
 
     def __init__(self, max_steps: int = 100, stall_limit: int = 4,
                  climb_lock_span: int = 8, template: str = ""):

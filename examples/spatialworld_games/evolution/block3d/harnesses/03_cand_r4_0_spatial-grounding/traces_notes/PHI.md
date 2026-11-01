@@ -78,7 +78,7 @@ Per module (`silhouette` is the largest, so it is the "main module"; the other s
 
 | module | components |
 |---|---|
-| `harness.py` | 3 — `_read`, `compose_system_prompt`, `build_agent` |
+| `orchestrator.py` | 3 — `_read`, `compose_system_prompt`, `build_agent` |
 | `tools/__init__.py` | 0 (a module node only) |
 | `tools/action.py` | 1 — `key_for` |
 | `tools/book.py` | 1 — `BuildState` |

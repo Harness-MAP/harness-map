@@ -21,7 +21,7 @@ Classification: **TASK-GAP** (Quest and Boxoban have no owner) plus **HARNESS-BU
 
 ## 1. What this harness does (mechanism)
 
-`harness.py:GroundedAgent.act`:
+`orchestrator.py:GroundedAgent.act`:
 1. `grid.parse_glyph_map` decodes the hero square, its 8 neighbours, the lava named in the prose, and foes. A foe is a letter on the current frame.
 2. `learn` records `(pos, dir)` in `refused` when a move does not change the position. On "The door opens." the harness only **discards** that refused edge.
 3. `chart.merge` folds the `map:` rows into a per-level terrain dict and adds `pos` to `stood`.
@@ -82,7 +82,7 @@ The VLM owns 1696 steps; the judge counted 538 frontier, 55 stairs and 113 swing
 
 ### 1. Transplant the Quest owner
 Source: `prop_r058/cand_r058_0_spatial-grounding/tools/quest.py`, or r059's copy.
-- **Where:** call it in `harness.py:GroundedAgent.own` **before** the swing reflex and `route`. Arm it only when `{"pickup","kick","zap"} ⊆ legal`: that is observation-only and true only on the Quest pair.
+- **Where:** call it in `orchestrator.py:GroundedAgent.own` **before** the swing reflex and `route`. Arm it only when `{"pickup","kick","zap"} ⊆ legal`: that is observation-only and true only on the Quest pair.
 - **What to bring:** its `cross`, `hold`, `kit` and `fetch` stages, with their rung names written to `reasoning`.
 - **`hold` must pre-empt `reflex:swing` and `route:frontier`.** The QM deaths come from walking *into* the room (§2c), not from swinging.
 - **Predicted:** Quest 0/10 → 9–10/10, primary **+0.22–0.25**. Quest-Easy tokens fall from ~450k to ~0.
@@ -98,7 +98,7 @@ Copy `prop_r008/cand_r008_0_spatial-grounding/tools/sokoban.py` as `tools/sokoba
 
 ### 3. Fix open doors in `tools/chart.py`
 This is cheap, in-cell, and recovers the 2 R3 losses.
-- **(a) Opened doors.** In `harness.py:act`, on "The door opens." compute `door = before_pos + BEARINGS[prev_action]` and add it to a new `chart["doors"]` set. `merge` must keep `doors` across frames and reset it on a `Dlvl` change. `passable` returns True for `c in chart["doors"]`.
+- **(a) Opened doors.** In `orchestrator.py:act`, on "The door opens." compute `door = before_pos + BEARINGS[prev_action]` and add it to a new `chart["doors"]` set. `merge` must keep `doors` across frames and reset it on a `Dlvl` change. `passable` returns True for `c in chart["doors"]`.
 - **(b) Already-open doors** (R3/01 case). In `passable`, a `-` or `|` counts as a door when its two orthogonal neighbours on one axis are both charted-passable, e.g. `.` on the west and `#` on the east. Treat it as passable.
 - **(c) No diagonal steps into or out of a door square.** Door squares here mean `+`, `chart["doors"]`, and the inferred doors from (b). In `route`, skip a diagonal `d` when either `cur` or `nxt` is one of them. NetHack refuses these moves, and memory shows doorless prose `doorway` allows diagonals, so exclude those from the rule.
 - **Predicted:** R3/01 routes 12 squares to `>`, and R3/03 walks out the opened west door. R3 goes 3/5 → 4–5/5, primary **+0.025–0.05**. MazeWalk has no doors, so it is unaffected.

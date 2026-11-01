@@ -21,7 +21,7 @@ with five episodes each (40 episodes per evaluation); the evaluation budget is N
 3. **Meta-agent**: the Claude Code CLI (`claude`) on `PATH`, or set `meta_agent.backbone` in
    `config.json` to `cli:codex` or `chat-loop` (see the top-level README).
 4. **Anchor harness**: BALROG's `balrog/agents/naive.py` placed in the harness layout described
-   in `harness_map/meta_agent/skills/proposer/SKILL.md`, with `harness.py` exporting
+   in `harness_map/meta_agent/skills/proposer/SKILL.md`, with `orchestrator.py` exporting
    `build_agent(client_factory, prompt_builder)` that returns a BALROG agent. The paper's anchor
    reproduces the naive agent unchanged.
 5. **Evaluator** (`BALROG_EVALUATOR` in `run.sh`): a script run under the BALROG interpreter as
@@ -51,7 +51,7 @@ P = ⌈log2 k0⌉ and C = 2 (k0 ≤ 4) or 1 (k0 ≥ 8): k0 = 2, 4, 8, 16, 32 giv
 Evaluations go through `evaluate_batch`, so the LLM judge reviews every candidate.
 
 The CVT in the paper's BALROG runs was fit on a fixed corpus of 48 structural variants of the
-naive anchor (the anchor plus copies with the `tools/` modules inlined into `harness.py` or kept
+naive anchor (the anchor plus copies with the `tools/` modules inlined into `orchestrator.py` or kept
 separate, and the text priors filled with placeholder text or left empty), never evaluated. By
 default `run_benchmark.py` fits it on meta-agent variants instead; to reproduce the paper's
 partition, build that corpus as a directory of harness directories and pass `--corpus DIR`.

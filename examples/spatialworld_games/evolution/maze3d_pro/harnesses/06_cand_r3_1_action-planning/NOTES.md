@@ -248,7 +248,7 @@ module's helpers and constant tables into the class that owns their state moves 
 
 | file | what it is | kind | state |
 |---|---|---|---|
-| `harness.py` | entrypoint. `compose_system_prompt()` rebuilds the prior from `AGENT.md` + `skills/*.md` + `rules.md`; `build_agent(evaluator)` opens ONE `ActionPlanner` per episode and returns `agent(frame_data)`. | code | stable — do not change the factory |
+| `orchestrator.py` | entrypoint. `compose_system_prompt()` rebuilds the prior from `AGENT.md` + `skills/*.md` + `rules.md`; `build_agent(evaluator)` opens ONE `ActionPlanner` per episode and returns `agent(frame_data)`. | code | stable — do not change the factory |
 | `tools/sight.py` → `Scene` | the frame decoded: colour census + **rangefinder** (centre column) + **flank strip** (side bands) + `stride()`/`bearings()`/`junction`. | code | **this iteration.** Exact; extend, do not re-derive |
 | `tools/sight.py` → `StairSense` | the stair-underfoot latch, its one-press budget, and the floor price (`STALE_FLOOR`, `FLOOR_PATIENCE`). | code | latch exact (110 TP / 1 FP / 0 FN live); the **price** is the open question (see watch) |
 | `tools/plan.py` → `ActionPlanner` | the governor: view fingerprint + ledgers, the veto chain (incl. `holding_stair`), the flank-aimed sweep, the supplied stride, the working-memory block. | code | **this iteration.** Next: the transition ledger (§5.4) and the return-to-stair (§5.5) |
@@ -263,5 +263,5 @@ module's helpers and constant tables into the class that owns their state moves 
 
 ## files
 
-`tools/sight.py` (rewritten), `tools/plan.py` (rewritten), `harness.py` (docstring),
+`tools/sight.py` (rewritten), `tools/plan.py` (rewritten), `orchestrator.py` (docstring),
 `AGENT.md`, `rules.md`, `skills/navigation.md`, `memory.md`, `NOTES.md`.

@@ -4,12 +4,12 @@ RICH anchor for the SpatialWorld maze game (change #4). It reproduces the prompt
 while exposing the canonical rich-harness surface, so the agentic proposer has real code + prose
 levers to evolve. The frozen agent (Qwen3-VL-30B-A3B-Instruct) and the SpatialWorld engine are
 untouched; only this harness is optimized. Kept ALONGSIDE `system_prompt.txt` (the prompt-only
-fallback still runs when GAME_HARNESS_DIR has no harness.py).
+fallback still runs when GAME_HARNESS_DIR has no orchestrator.py).
 
 ## module map
 | file | role |
 |------|------|
-| harness.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn; `compose_system_prompt()` recomposes the prompt from the .md priors. Reuses the evaluator's engine handles; returns an engine Action each step. |
+| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn; `compose_system_prompt()` recomposes the prompt from the .md priors. Reuses the evaluator's engine handles; returns an engine Action each step. |
 | AGENT.md | role framing + verified perception facts (reading the HUD / compass / walls / exit). |
 | rules.md | the legal action set (move_forward / turn_left / turn_right) + the granularity contract. |
 | skills/navigation.md | the navigation-strategy prior (open path / wall ahead / avoid spinning). |
@@ -20,7 +20,7 @@ fallback still runs when GAME_HARNESS_DIR has no harness.py).
 
 ## evolvable levers (axes)
 - prose: AGENT.md / rules.md / skills/*.md / memory.md — what the agent is told.
-- code:  harness.py / tools/*.py — the mechanism (compose, capture, decide, action algebra, memory).
+- code:  orchestrator.py / tools/*.py — the mechanism (compose, capture, decide, action algebra, memory).
 
 ## anti-cheat
 Decide from the observation only. Never wire oracle/privileged state (the exit's coordinates, the

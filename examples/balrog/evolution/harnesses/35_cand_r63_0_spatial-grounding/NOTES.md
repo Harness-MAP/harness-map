@@ -1,7 +1,7 @@
 # NOTES — cand_r063_0_spatial-grounding (parent r053 one-hop menu; steered toward r027's gradient walker)
 
 ## module map
-- `harness.py` — entry (`build_agent` → `MenuHarness`). `Ledger` keeps visits, failed (square,dir) edges, and now a
+- `orchestrator.py` — entry (`build_agent` → `MenuHarness`). `Ledger` keeps visits, failed (square,dir) edges, and now a
   terrain chart + door memory + potential field. `MenuHarness.act`: modal/stairs reflexes → field-ranked menu →
   code emits option 1 when the field (or a `>`/creature neighbour) decides → otherwise ONE model call with the menu.
 - `tools/field.py` (new) — `flood`: reverse multi-source BFS from drawn `>` (else the unvisited frontier), visit-weighted.
@@ -28,4 +28,4 @@ call is pure cost (308k tok/ep). r027's field walker got MW 10/10 at 0 calls. Ex
 Quest/Boxoban unaddressed (fall back to the model menu when the field is flat).
 
 ## files
-harness.py, tools/field.py (new), NOTES.md
+orchestrator.py, tools/field.py (new), NOTES.md

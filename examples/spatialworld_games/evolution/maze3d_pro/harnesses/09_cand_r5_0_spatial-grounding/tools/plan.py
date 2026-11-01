@@ -170,7 +170,7 @@ class MazeChart:
 class Pilot:
     """Episode-local perception, reckoning, charting and governing. One instance per episode."""
 
-    # ── levers (CLASS attributes: harness.py purges sys.modules["tools*"], so a rig must set
+    # ── levers (CLASS attributes: orchestrator.py purges sys.modules["tools*"], so a rig must set
     #    them AFTER build_agent or it silently measures the shipped config) ──
     OBEY_MODE = "route"        # "route": a proposal that disagrees with the charted route is
                                #   displaced (the model is still obeyed whenever it agrees, when

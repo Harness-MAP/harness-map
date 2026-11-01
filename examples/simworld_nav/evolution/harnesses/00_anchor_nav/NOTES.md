@@ -11,7 +11,7 @@ perception facts) and `rules.md` (action set, sanctioned inputs, anti-cheat).
 
 ## Entrypoint contract — KEEP INTACT (a changed signature / broken import scores 0)
 ```python
-# harness.py
+# orchestrator.py
 def run_episode(env, task_spec, vlm_clients, trace_dir=None) -> EpisodeResult
 #   returns EpisodeResult(success, subtask_success, steps, actions, llm_calls, notes, observations)
 ```
@@ -23,7 +23,7 @@ TURN_AT_INTERSECTION→REACH_DESTINATION legs passed) is the graded, discriminat
 ## Module map (the CODE levers — this is where behaviour lives)
 | file | class | loc | role |
 |---|---|---|---|
-| `harness.py` | — | ~640 | ENTRYPOINT + orchestrator: the per-step loop, action-code↔env-step map, stuck detector |
+| `orchestrator.py` | — | ~640 | ENTRYPOINT + orchestrator: the per-step loop, action-code↔env-step map, stuck detector |
 | `modules/spatial_memory.py` | SpatialMemory | 149 | honest odometry + step / subtask-boundary bookkeeping (self-derived state, never oracle) |
 | `modules/prompt_assembler.py` | PromptAssembler | 135 | builds the chat-completions messages; the LIVE system/user text comes from `perception_template()` here (NOT from AGENT.md/rules.md) |
 | `modules/perceiver.py` | Perceiver | 126 | one VLM call: RGB(+landmark hint) → JSON scene description |
@@ -33,12 +33,12 @@ TURN_AT_INTERSECTION→REACH_DESTINATION legs passed) is the graded, discriminat
 | `modules/completion_checker.py` | CompletionChecker | 759 | last-line authority on the `-1` subtask commit (heaviest evolved lever) |
 
 ## Two evolvable axes (for attribution)
-- **CODE levers** — `harness.py` + `modules/*.py`: the mechanism (control flow, VLM call+parse+
+- **CODE levers** — `orchestrator.py` + `modules/*.py`: the mechanism (control flow, VLM call+parse+
   fallback, look-scan tactics, commit-timing, memory maintenance, the live prompt text in
   `prompt_assembler.perception_template`). **This is the productive surface** — every score move in
   the lineage came from a code edit.
 - **PROSE docs** — `AGENT.md` / `rules.md`: the task contract + the anti-cheat rule + the audit
-  vocabulary. `harness.py` does NOT inject these into the agent prompt, so editing them changes the
+  vocabulary. `orchestrator.py` does NOT inject these into the agent prompt, so editing them changes the
   contract/audit view, not the agent's live instructions. To change what the agent is TOLD, edit
   `perception_template()` (in `prompt_assembler.py`) and the planner/perceiver prompt strings.
 - **NOT a lever** — `system_prompt.txt` (redundant reference; the harness never reads it), `NOTES.md`

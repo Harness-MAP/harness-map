@@ -1,5 +1,5 @@
 <!-- memory.md — a per-step scratchpad TEMPLATE (evolvable lever).
-     harness.py can fill this per step and inject it into the prompt to give the frozen agent
+     orchestrator.py can fill this per step and inject it into the prompt to give the frozen agent
      self-derived working state. This candidate does NOT inject it: the same state (head cell,
      heading, the recent-cell trail and a per-cell visit count) is now maintained in code by
      tools/vlm.py, where it gates the key that is actually pressed instead of being advice the
