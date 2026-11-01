@@ -1,0 +1,346 @@
+diff --git a/mllm_base_agent/environments/game/games/Block3D/block3d_adapter.py b/mllm_base_agent/environments/game/games/Block3D/block3d_adapter.py
+index 4ab4d7f..65cf095 100644
+--- a/mllm_base_agent/environments/game/games/Block3D/block3d_adapter.py
++++ b/mllm_base_agent/environments/game/games/Block3D/block3d_adapter.py
+@@ -154,8 +154,7 @@ class Block3DGameAdapter:
+         self._draw_3d_scene(render_screen)
+ 
+         #       
+-        render_screen.blit(self.debug_font.render(f"Cursor: {tuple(self.cursor)}", True, self.WHITE),
+-                          (self.SCREEN_WIDTH - 200, self.SCREEN_HEIGHT - 40))
++        pass  # HUD removed (pure-visual)
+ 
+         if self.won:
+             render_screen.blit(self.large_font.render("VICTORY!", True, self.GREEN), (500, 50))
+@@ -321,14 +320,10 @@ class Block3DGameAdapter:
+             screen.blit(self.bold_font.render(title, True, color), (pad, y_off - 20))
+             pygame.draw.rect(screen, self.GRID_COLOR, (pad, y_off, self.GRID_SIZE * vs, self.GRID_SIZE * vs), 1)
+ 
+-            screen.blit(self.font.render(origin_x_label, True, self.GRAY), (pad - 10, y_off))
+-            end_label = "0" if origin_x_label == "5" else "5"
+-            screen.blit(self.font.render(end_label, True, self.GRAY), (pad + self.GRID_SIZE * vs + 2, y_off))
+-
+-            screen.blit(self.font.render(xlabel, True, self.GRAY),
+-                       (pad + self.GRID_SIZE * vs // 2 - 20, y_off + self.GRID_SIZE * vs + 5))
+-            screen.blit(self.font.render(ylabel, True, self.GRAY),
+-                       (pad + 5, y_off + self.GRID_SIZE * vs // 2))
++            # Pure-visual: no axis scale ticks (0/5) and no X/Y axis letters, since a labeled coordinate
++            # frame across the three views lets a harness read block positions as (x,y,z) text. The view
++            # titles (which projection) are kept.
++            _ = (origin_x_label, xlabel, ylabel)
+ 
+             for (x, y, z) in self.target_blocks:
+                 u, v = mapping(x, y, z)
+@@ -374,8 +369,7 @@ class Block3DGameAdapter:
+         pygame.draw.line(screen, self.COLOR_X, origin, self._iso_project(7,0,0), 3)
+         pygame.draw.line(screen, self.COLOR_Y, origin, self._iso_project(0,7,0), 3)
+         pygame.draw.line(screen, self.COLOR_Z, origin, self._iso_project(0,0,7), 3)
+-        screen.blit(self.bold_font.render("X", True, self.COLOR_X), self._iso_project(7.2,0,0))
+-        screen.blit(self.bold_font.render("Y", True, self.COLOR_Y), self._iso_project(0,7.2,0))
++        # Pure-visual: no X/Y gizmo letters; the colored axis lines remain.
+         
+         #        
+         self._draw_projection_lines(screen)
+@@ -443,7 +437,8 @@ class Block3DGameAdapter:
+         x, y = pos
+         pygame.draw.circle(screen, self.EYE_COLOR, (int(x), int(y)), 8, 2)
+         pygame.draw.circle(screen, self.EYE_COLOR, (int(x), int(y)), 3)
+-        screen.blit(self.debug_font.render(text, True, self.EYE_COLOR), (x + 15, y - 10))
++        # Pure-visual: no eye-icon text label; the eye glyph (circles) remains.
++        _ = text
+ 
+     #        (    )
+     @classmethod
+diff --git a/mllm_base_agent/environments/game/games/Snake/snake_adapter.py b/mllm_base_agent/environments/game/games/Snake/snake_adapter.py
+index cec14bf..a9ac8b7 100644
+--- a/mllm_base_agent/environments/game/games/Snake/snake_adapter.py
++++ b/mllm_base_agent/environments/game/games/Snake/snake_adapter.py
+@@ -458,12 +458,11 @@ class SnakeGameAdapter:
+             tz = hz + dz * self.CUBE_SPACING * 0.8
+             text_pos_screen, _ = self._project_point(tx, ty, tz)
+             
+-            pygame.draw.line(screen, color, head_pos_screen, text_pos_screen, 2)
+-            
+-            text_surf = self.font.render(label, True, self.WHITE)
+-            text_rect = text_surf.get_rect(center=text_pos_screen)
+-            pygame.draw.rect(screen, (0,0,0), text_rect.inflate(4,4))
+-            screen.blit(text_surf, text_rect)
++            # Pure-visual: the direction guide (a connector line plus an R/L/U/D/W/S letter, drawn only
++            # for neighbours that are in bounds and not part of the body) marks the legal moves exactly,
++            # so it is not drawn. The agent infers safe moves from the rendered 3D scene (grid frame and
++            # head/body/food spheres).
++            _ = (label, color, text_pos_screen, head_pos_screen)
+ 
+     def _draw_axis_gizmo(self, screen):
+         """     """
+@@ -473,7 +472,8 @@ class SnakeGameAdapter:
+         for x, y, z, label, color in axes:
+             end_pos, _ = self._project_point(x, y, z, offset_x=origin[0], offset_y=origin[1], scale_mult=1.0)
+             pygame.draw.line(screen, color, origin, end_pos, 3)
+-            screen.blit(self.font.render(label, True, color), end_pos)
++            # Pure-visual: no X/Y/Z gizmo letters; the colored axis lines remain for orientation.
++            _ = label
+ 
+     def _get_z_depth(self, point):
+         """[  ]           (     )"""
+diff --git a/mllm_base_agent/environments/game/games/maze3d_pro/maze3d_pro_adapter.py b/mllm_base_agent/environments/game/games/maze3d_pro/maze3d_pro_adapter.py
+index df1b161..b7286d0 100644
+--- a/mllm_base_agent/environments/game/games/maze3d_pro/maze3d_pro_adapter.py
++++ b/mllm_base_agent/environments/game/games/maze3d_pro/maze3d_pro_adapter.py
+@@ -160,7 +160,7 @@ class Maze3DProGame:
+         surface.blit(overlay, (0,0))
+ 
+         #     
+-        info = f"POS: {self.px},{self.py} | FLOOR: {self.pz+1} | DIR: {self.pDir}"
++        info = ""  # pose removed (pure-visual)
+         text_surf = self.font.render(info, True, COLORS['text'])
+         surface.blit(text_surf, (20, 20))
+ 
+@@ -176,7 +176,7 @@ class Maze3DProGame:
+             if (self.pz - 1) in self.tower_data: 
+                 tips.append("[E] DOWN")
+             
+-            if tips:
++            if False:  # pure-visual: no stair control tips ([Q] UP / [E] DOWN); the agent recognises stairs from the scene
+                 t_surf = self.large_font.render(" | ".join(tips), True, (0, 255, 255))
+                 #            
+                 surface.blit(t_surf, (SCREEN_WIDTH//2 - t_surf.get_width()//2, SCREEN_HEIGHT - 80))
+diff --git a/mllm_base_agent/environments/game/utils/openai_utils.py b/mllm_base_agent/environments/game/utils/openai_utils.py
+index 759fd99..4edda5a 100644
+--- a/mllm_base_agent/environments/game/utils/openai_utils.py
++++ b/mllm_base_agent/environments/game/utils/openai_utils.py
+@@ -10,6 +10,8 @@ OpenAI API
+ 
+ import base64
+ import io
++import os
++import re
+ import time
+ import logging
+ from typing import List, Dict, Any, Optional, Union, Literal
+@@ -34,11 +36,115 @@ MODEL_API_MAPPING = {
+ 
+ }
+ 
+-#       
++#
+ DEFAULT_API_TYPE = "chat"
+ MODEL_HISTORY_TURNS = 29
+ 
+-# API      
++# ── image-budget guard ────────────────────────────────────────────────────────
++# The agent keeps a window of past frames, EACH carrying its own image, so a long
++# trajectory sends many images per request. The vLLM server caps images/prompt via
++# `--limit-mm-per-prompt`; when the request exceeds that cap it 400s ("At most N
++# image(s) may be provided in one prompt"). Retrying the identical oversized request
++# is futile — it deterministically fails — so without this guard the run aborts
++# mid-trajectory and reports the task as failed although the cause is a serving
++# limit, not a model failure.
++#
++# `_IMAGE_CAP`: the per-prompt image budget the client self-enforces. None = no
++# client-side limit (send whatever the history window produces).
++# It can be pre-set (env SPATIALWORLD_MAX_IMAGES / set_image_cap()), OR it is
++# LEARNED automatically the first time the server rejects a request — thereafter
++# every request is pre-trimmed to the discovered cap, keeping the most-recent
++# frames (including the current observation) and dropping the oldest images while
++# preserving their text. This turns a fatal abort into graceful visual-memory
++# degradation with a clear warning.
++_ENV_IMAGE_CAP = os.environ.get("SPATIALWORLD_MAX_IMAGES", "").strip()
++_IMAGE_CAP: Optional[int] = int(_ENV_IMAGE_CAP) if _ENV_IMAGE_CAP.isdigit() else None
++_IMAGE_CAP_ERROR_RE = re.compile(r"at most\s+(\d+)\s+image", re.IGNORECASE)
++_IMAGE_PART_TYPES = ("input_image", "image_url")
++_OMITTED_FRAME_PLACEHOLDER = "[earlier frame image omitted to fit the model's per-request image limit]"
++
++# Per-request output-token budget. Reasoning ("Thinking") backbones spend most of
++# their budget on the <think> block before emitting the action JSON, so the default
++# 4096 truncates them mid-thought (finish_reason=length, empty content -> the step's
++# action fails to parse -> a silent degenerate run). Override with GAME_MAX_TOKENS
++# for reasoning models (e.g. 12288); non-reasoning Instruct models are fine at 4096.
++_env_maxtok = os.environ.get("GAME_MAX_TOKENS", "").strip()
++_MAX_OUTPUT_TOKENS = int(_env_maxtok) if _env_maxtok.isdigit() and int(_env_maxtok) > 0 else 4096
++
++
++def set_image_cap(max_images: Optional[int]) -> None:
++    """Set the per-request image budget the client self-enforces (None = unlimited)."""
++    global _IMAGE_CAP
++    _IMAGE_CAP = None if max_images is None else max(0, int(max_images))
++
++
++def get_image_cap() -> Optional[int]:
++    """Return the current per-request image budget (None = unlimited)."""
++    return _IMAGE_CAP
++
++
++def count_images(conversation_history: List[Dict[str, Any]]) -> int:
++    """Count image parts across a (responses-format) conversation history."""
++    n = 0
++    for msg in conversation_history:
++        content = msg.get("content") if isinstance(msg, dict) else None
++        if not isinstance(content, list):
++            continue
++        for part in content:
++            if isinstance(part, dict) and part.get("type") in _IMAGE_PART_TYPES:
++                n += 1
++    return n
++
++
++def limit_images_in_history(
++    conversation_history: List[Dict[str, Any]],
++    max_images: Optional[int],
++) -> List[Dict[str, Any]]:
++    """Return a copy of `conversation_history` carrying at most `max_images` images.
++
++    Images are dropped OLDEST-first (their surrounding text is kept; each dropped
++    image is replaced by a short text placeholder), so the most recent `max_images`
++    frames — including the current observation in the final message — are always
++    retained. Never mutates the input (the caller reuses it as persistent history).
++    A `max_images` of None or negative means "no limit" and returns the input as-is.
++    """
++    if max_images is None or max_images < 0:
++        return conversation_history
++    total = count_images(conversation_history)
++    if total <= max_images:
++        return conversation_history
++
++    to_drop = total - max_images
++    dropped = 0
++    new_history: List[Dict[str, Any]] = []
++    for msg in conversation_history:
++        content = msg.get("content") if isinstance(msg, dict) else None
++        if dropped >= to_drop or not isinstance(content, list):
++            new_history.append(msg)
++            continue
++        new_content: List[Any] = []
++        for part in content:
++            if (
++                dropped < to_drop
++                and isinstance(part, dict)
++                and part.get("type") in _IMAGE_PART_TYPES
++            ):
++                new_content.append({"type": "input_text", "text": _OMITTED_FRAME_PLACEHOLDER})
++                dropped += 1
++            else:
++                new_content.append(part)
++        new_msg = dict(msg)
++        new_msg["content"] = new_content
++        new_history.append(new_msg)
++    return new_history
++
++
++def _parse_server_image_cap(exc: Exception) -> Optional[int]:
++    """If `exc` is the server's 'At most N image(s)...' rejection, return N, else None."""
++    m = _IMAGE_CAP_ERROR_RE.search(str(exc))
++    return int(m.group(1)) if m else None
++
++# API
+ ApiType = Literal["responses", "chat", "responses_jd"]
+ 
+ 
+@@ -365,7 +471,7 @@ def create_openai_response(
+     generation_config = {
+         "response_modalities": ["TEXT"],
+         "temperature": 1.0,           #     temperature   1
+-        "maxOutputTokens": 4096,      #       Token    4096
++        "maxOutputTokens": _MAX_OUTPUT_TOKENS,      # output-token budget (env GAME_MAX_TOKENS)
+         "topP": 0.9                   #     top_p   0.9
+     }
+ 
+@@ -373,46 +479,74 @@ def create_openai_response(
+     if api_type is None:
+         api_type = get_api_type_for_model(model)
+ 
++    global _IMAGE_CAP
+     last_exc: Optional[Exception] = None
+-    total_attempts = retry_times + 1
+-
+-    for attempt in range(total_attempts):
++    total_attempts = max(1, retry_times + 1)  # always attempt at least once (guards retry_times<=-1)
++    attempt = 0
++    relearned_cap = False  # allow ONE free retry when the server's image cap is first discovered
++
++    while attempt < total_attempts:
++        # Pre-trim to the current image budget so we never re-send a payload the
++        # server already told us is too large.
++        call_history = limit_images_in_history(conversation_history, _IMAGE_CAP)
+         try:
+             if api_type == "responses":
+                 return client.responses.create(
+                     model=model,
+-                    input=conversation_history,
++                    input=call_history,
+                     temperature=1.0,
+-                    max_output_tokens=4096,
+-                    top_p=0.9     
++                    max_output_tokens=_MAX_OUTPUT_TOKENS,
++                    top_p=0.9
+                 )
+             elif api_type == "responses_jd":
+-                extra_body = convert_to_responses_jd_format(conversation_history)
++                extra_body = convert_to_responses_jd_format(call_history)
+                 extra_body['generation_config'] = generation_config
+                 return client.responses.create(
+                     model=model,
+                     extra_body=extra_body
+                 )
+             elif model.strip().lower() == "gpt-5":
+-                chat_history = convert_to_chat_format(conversation_history)
++                chat_history = convert_to_chat_format(call_history)
+                 return client.chat.completions.create(
+                     model=model,
+                     messages=chat_history,
+                     temperature=1.0,
+-                    max_tokens=4096,
+-                    # top_p=0.9     #   OpenAI  API  top_p  
++                    max_tokens=_MAX_OUTPUT_TOKENS,
++                    # top_p=0.9     #   OpenAI  API  top_p
+                 )
+             else:  # api_type == "chat"
+-                chat_history = convert_to_chat_format(conversation_history)
++                chat_history = convert_to_chat_format(call_history)
+                 return client.chat.completions.create(
+                     model=model,
+                     messages=chat_history,
+                     temperature=1.0,
+-                    max_tokens=4096,
+-                    top_p=0.9     #   OpenAI  API  top_p  
++                    max_tokens=_MAX_OUTPUT_TOKENS,
++                    top_p=0.9     #   OpenAI  API  top_p
+                 )
+         except Exception as exc:
+             last_exc = exc
++
++            # Server rejected the request for carrying too many images. This is a
++            # deterministic serving/harness limit, not a transient error: learn the
++            # cap, trim to it, and retry immediately (no backoff sleep). The first
++            # discovery gets a free retry so it isn't charged against the retry budget.
++            cap = _parse_server_image_cap(exc)
++            if cap is not None and count_images(call_history) > cap:
++                sent = count_images(call_history)
++                _IMAGE_CAP = cap if _IMAGE_CAP is None else min(_IMAGE_CAP, cap)
++                msg = (
++                    f"Server image cap = {cap}, but request carried {sent} images. "
++                    f"Trimming to the {cap} most-recent frames and retrying. Visual "
++                    f"memory is reduced for the rest of this run — raise the server's "
++                    f"--limit-mm-per-prompt to keep the full history window."
++                )
++                _logger.warning(msg)
++                print(f"[WARNING] {msg}", flush=True)
++                if not relearned_cap:
++                    relearned_cap = True
++                    continue  # free retry with the freshly-trimmed payload
++                # already spent the free retry; fall through to normal accounting
++
+             remaining = total_attempts - attempt - 1
+             if remaining > 0:
+                 msg = (
+@@ -426,6 +560,7 @@ def create_openai_response(
+                 msg = f"API call failed after {total_attempts} attempt(s): {exc}"
+                 _logger.error(msg)
+                 print(f"[ERROR] {msg}", flush=True)
++            attempt += 1
+ 
+     raise last_exc
+ 
+diff --git a/mllm_base_agent/environments/game/core/__init__.py b/mllm_base_agent/environments/game/core/__init__.py
+new file mode 100644
+index 0000000..e69de29

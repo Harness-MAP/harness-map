@@ -1,0 +1,3 @@
+## validation (offline, no engine)
+
+Drove the real `build_agent` / `decide` against a stubbed evaluator that reproduces SpatialWorld's message-0 semantics (system turn built once, then reused by reference) with synthetic frames: 13/13 checks pass — step 1 silent, every later turn carries the sheet, `AVAILABLE ACTIONS` and `RESPONSE FORMAT` present exactly once in every system message, the streak rising 0/1/2/3 on repeats and zeroing on a changed frame, the cap holding at 6, a one-shade pixel wobble still reading as unchanged, a turn key settled like a forward, zero `slips`, and every `Action` passed through untouched. All five modules compile and the component graph, role labels and main module are byte-identical to the anchor's.

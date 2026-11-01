@@ -1,0 +1,58 @@
+[
+ {
+  "level": "level_5",
+  "index": 0,
+  "label": "anchor_maze3d_pro",
+  "score": 0.0,
+  "steps": 100,
+  "outcome": "score 0.00 in 100 steps",
+  "source_video": "maze3d_pro_openai_evaluation_20261005_133039.mp4",
+  "eval_dir": "maze3d_pro_5_dlaejbkc",
+  "file": "level_5__00_anchor_maze3d_pro.mp4"
+ },
+ {
+  "level": "level_5",
+  "index": 4,
+  "label": "cand_r2_1_action-planning",
+  "score": 0.0,
+  "steps": 100,
+  "outcome": "score 0.00 in 100 steps",
+  "source_video": "maze3d_pro_openai_evaluation_20261005_211615.mp4",
+  "eval_dir": "maze3d_pro_5_gp832ga7",
+  "file": "level_5__04_cand_r2_1_action-planning.mp4"
+ },
+ {
+  "level": "level_5",
+  "index": 7,
+  "label": "cand_r4_0_spatial-grounding",
+  "score": 1.0,
+  "steps": 56,
+  "outcome": "solved in 56 steps",
+  "source_video": "maze3d_pro_openai_evaluation_20261006_030933.mp4",
+  "eval_dir": "maze3d_pro_5_xv1semrg",
+  "file": "level_5__07_cand_r4_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "level_5",
+  "index": 12,
+  "label": "cand_r6_1_action-planning",
+  "score": 1.0,
+  "steps": 18,
+  "outcome": "solved in 18 steps",
+  "source_video": "maze3d_pro_openai_evaluation_20261006_114816.mp4",
+  "eval_dir": "maze3d_pro_5_ffdwkkpi",
+  "file": "level_5__12_cand_r6_1_action-planning.mp4"
+ },
+ {
+  "level": "level_5",
+  "index": null,
+  "label": "progression_grid",
+  "file": "level_5__progression_grid.mp4",
+  "panels": [
+   "level_5__00_anchor_maze3d_pro.mp4",
+   "level_5__04_cand_r2_1_action-planning.mp4",
+   "level_5__07_cand_r4_0_spatial-grounding.mp4",
+   "level_5__12_cand_r6_1_action-planning.mp4"
+  ]
+ }
+]

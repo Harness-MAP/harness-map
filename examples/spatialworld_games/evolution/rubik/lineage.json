@@ -1,0 +1,440 @@
+{
+ "meta": {
+  "title": "SpatialWorld rubik",
+  "bench": "games",
+  "primary": "score",
+  "best_primary": 1.0,
+  "best_label": "cand_r2_1_action-planning",
+  "first_reached_at_eval": 4,
+  "n_harnesses": 4,
+  "n_evaluated_in_run": 6,
+  "path_to_best": [
+   "anchor_rubik",
+   "cand_r1_0_spatial-grounding",
+   "cand_r2_1_action-planning"
+  ],
+  "run": "rubik__k4_claude_pv"
+ },
+ "harnesses": [
+  {
+   "index": 0,
+   "label": "anchor_rubik",
+   "dir": "harnesses/00_anchor_rubik",
+   "parent": null,
+   "parent_dir": null,
+   "cell_depth": 0,
+   "primary": 0.05,
+   "delta_vs_parent": null,
+   "vector": {
+    "rubik": 0.05
+   },
+   "dense": {},
+   "n_files": 12,
+   "diff_vs_parent": null,
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "rubik rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "rubik/level_01",
+     0.0
+    ],
+    [
+     "rubik/level_02",
+     1.0
+    ],
+    [
+     "rubik/level_03",
+     0.0
+    ],
+    [
+     "rubik/level_04",
+     0.0
+    ],
+    [
+     "rubik/level_05",
+     0.0
+    ],
+    [
+     "rubik/level_06",
+     0.0
+    ],
+    [
+     "rubik/level_07",
+     0.0
+    ],
+    [
+     "rubik/level_08",
+     0.0
+    ],
+    [
+     "rubik/level_09",
+     0.0
+    ],
+    [
+     "rubik/level_10",
+     0.0
+    ],
+    [
+     "rubik/level_11",
+     0.0
+    ],
+    [
+     "rubik/level_12",
+     0.0
+    ],
+    [
+     "rubik/level_13",
+     0.0
+    ],
+    [
+     "rubik/level_14",
+     0.0
+    ],
+    [
+     "rubik/level_15",
+     0.0
+    ],
+    [
+     "rubik/level_16",
+     0.0
+    ],
+    [
+     "rubik/level_17",
+     0.0
+    ],
+    [
+     "rubik/level_18",
+     0.0
+    ],
+    [
+     "rubik/level_19",
+     0.0
+    ],
+    [
+     "rubik/level_20",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 1,
+   "label": "cand_r1_0_spatial-grounding",
+   "dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "parent": "anchor_rubik",
+   "parent_dir": "harnesses/00_anchor_rubik",
+   "cell_depth": 1,
+   "primary": 0.05,
+   "delta_vs_parent": 0.0,
+   "vector": {
+    "rubik": 0.05
+   },
+   "dense": {},
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 8,
+    "insertions": 534,
+    "deletions": 55
+   },
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "Rubik candidate \u2014 refuse the turns that undo the algorithm",
+   "episodes": [
+    [
+     "rubik/level_01",
+     0.0
+    ],
+    [
+     "rubik/level_02",
+     0.0
+    ],
+    [
+     "rubik/level_03",
+     0.0
+    ],
+    [
+     "rubik/level_04",
+     0.0
+    ],
+    [
+     "rubik/level_05",
+     1.0
+    ],
+    [
+     "rubik/level_06",
+     0.0
+    ],
+    [
+     "rubik/level_07",
+     0.0
+    ],
+    [
+     "rubik/level_08",
+     0.0
+    ],
+    [
+     "rubik/level_09",
+     0.0
+    ],
+    [
+     "rubik/level_10",
+     0.0
+    ],
+    [
+     "rubik/level_11",
+     0.0
+    ],
+    [
+     "rubik/level_12",
+     0.0
+    ],
+    [
+     "rubik/level_13",
+     0.0
+    ],
+    [
+     "rubik/level_14",
+     0.0
+    ],
+    [
+     "rubik/level_15",
+     0.0
+    ],
+    [
+     "rubik/level_16",
+     0.0
+    ],
+    [
+     "rubik/level_17",
+     0.0
+    ],
+    [
+     "rubik/level_18",
+     0.0
+    ],
+    [
+     "rubik/level_19",
+     0.0
+    ],
+    [
+     "rubik/level_20",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 2,
+   "label": "cand_r2_0_spatial-grounding",
+   "dir": "harnesses/02_cand_r2_0_spatial-grounding",
+   "parent": "cand_r1_0_spatial-grounding",
+   "parent_dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "cell_depth": 1,
+   "primary": 0.45,
+   "delta_vs_parent": 0.4,
+   "vector": {
+    "rubik": 0.45
+   },
+   "dense": {},
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 8,
+    "insertions": 1122,
+    "deletions": 462
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "Rubik candidate \u2014 walk the neighbourhood of the start instead of fleeing it",
+   "episodes": [
+    [
+     "rubik/level_01",
+     1.0
+    ],
+    [
+     "rubik/level_02",
+     1.0
+    ],
+    [
+     "rubik/level_03",
+     1.0
+    ],
+    [
+     "rubik/level_04",
+     1.0
+    ],
+    [
+     "rubik/level_05",
+     1.0
+    ],
+    [
+     "rubik/level_06",
+     1.0
+    ],
+    [
+     "rubik/level_07",
+     0.0
+    ],
+    [
+     "rubik/level_08",
+     0.0
+    ],
+    [
+     "rubik/level_09",
+     0.0
+    ],
+    [
+     "rubik/level_10",
+     1.0
+    ],
+    [
+     "rubik/level_11",
+     1.0
+    ],
+    [
+     "rubik/level_12",
+     0.0
+    ],
+    [
+     "rubik/level_13",
+     0.0
+    ],
+    [
+     "rubik/level_14",
+     0.0
+    ],
+    [
+     "rubik/level_15",
+     0.0
+    ],
+    [
+     "rubik/level_16",
+     0.0
+    ],
+    [
+     "rubik/level_17",
+     0.0
+    ],
+    [
+     "rubik/level_18",
+     0.0
+    ],
+    [
+     "rubik/level_19",
+     0.0
+    ],
+    [
+     "rubik/level_20",
+     1.0
+    ]
+   ]
+  },
+  {
+   "index": 3,
+   "label": "cand_r2_1_action-planning",
+   "dir": "harnesses/03_cand_r2_1_action-planning",
+   "parent": "cand_r1_0_spatial-grounding",
+   "parent_dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "cell_depth": 1,
+   "primary": 1.0,
+   "delta_vs_parent": 0.95,
+   "vector": {
+    "rubik": 1.0
+   },
+   "dense": {},
+   "n_files": 34,
+   "diff_vs_parent": {
+    "files": 28,
+    "insertions": 3315,
+    "deletions": 519
+   },
+   "on_path_to_best": true,
+   "is_best": true,
+   "proposer_note": "axis=action-planning; backbone=cli:claude; produced_sentinel=True",
+   "heading": "Rubik candidate \u2014 read the cube off the screen, then unwind the scramble",
+   "episodes": [
+    [
+     "rubik/level_01",
+     1.0
+    ],
+    [
+     "rubik/level_02",
+     1.0
+    ],
+    [
+     "rubik/level_03",
+     1.0
+    ],
+    [
+     "rubik/level_04",
+     1.0
+    ],
+    [
+     "rubik/level_05",
+     1.0
+    ],
+    [
+     "rubik/level_06",
+     1.0
+    ],
+    [
+     "rubik/level_07",
+     1.0
+    ],
+    [
+     "rubik/level_08",
+     1.0
+    ],
+    [
+     "rubik/level_09",
+     1.0
+    ],
+    [
+     "rubik/level_10",
+     1.0
+    ],
+    [
+     "rubik/level_11",
+     1.0
+    ],
+    [
+     "rubik/level_12",
+     1.0
+    ],
+    [
+     "rubik/level_13",
+     1.0
+    ],
+    [
+     "rubik/level_14",
+     1.0
+    ],
+    [
+     "rubik/level_15",
+     1.0
+    ],
+    [
+     "rubik/level_16",
+     1.0
+    ],
+    [
+     "rubik/level_17",
+     1.0
+    ],
+    [
+     "rubik/level_18",
+     1.0
+    ],
+    [
+     "rubik/level_19",
+     1.0
+    ],
+    [
+     "rubik/level_20",
+     1.0
+    ]
+   ]
+  }
+ ]
+}

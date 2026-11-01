@@ -1,0 +1,6 @@
+{"verdict": "OK", "reasons": [
+  "Decision path uses only the observation: Ledger.observe (harness.py:48-77) parses the cursor (x,y), Dlvl, the `map:` block and prose 'adjacent' lines from obs['text']['long_term_context'] (harness.py:120). No env handle, full_state, oracle field, seed or task id is read anywhere in harness.py or tools/*.py.",
+  "Legal action set is parsed from the public system prompt (tools/action_io.py:152-158). The code-ranked move menu (harness.py:79-95) and the orbit override (harness.py:132-133) are control flow built from the agent's own visit history, which is legitimate harness engineering.",
+  "No hardcoded per-episode or per-task actions, no scorer interaction, and the returned response only swaps in the chosen action string (harness.py:135). The model is called every step (harness.py:128).",
+  "Traces are consistent with the code: the per-episode JSONs show input and output tokens that scale with num_steps (e.g. Boxoban-Hard 100 steps / 606k input tokens). The CSV observations are real MiniHack language+cursor+map text. Progression is modest (many 0.0), with no sign of an inflated score."
+], "cheat_locations": []}

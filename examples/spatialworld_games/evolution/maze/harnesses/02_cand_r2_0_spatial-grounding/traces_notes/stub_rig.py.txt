@@ -1,0 +1,104 @@
+"""Offline stub rig for the maze candidate: drives the REAL build_agent/decide against a stubbed
+evaluator that mimics SpatialWorld's message-0 semantics (system turn built once, then reused by
+reference). Lives OUTSIDE the candidate dir so it is not part of the genome."""
+import sys, os, asyncio, importlib.util, types
+import numpy as np
+
+OUT = os.environ["OUT_DIR"]
+BASE = ("SYSTEM PRIOR TEXT\n\nAVAILABLE ACTIONS:\n- move_forward: ...\n\n"
+        "RESPONSE FORMAT:\nYou must respond with a JSON object ...")
+
+
+class Act:
+    def __init__(self, key, gran=None):
+        self.type = "key_press"; self.key = key
+        self.metadata = {"granularity": gran} if gran else {}
+
+
+class FD:
+    def __init__(self, img, n): self.image = img; self.frame_number = n
+
+
+class StubEval:
+    def __init__(self, script):
+        self.script = list(script); self.i = 0
+        self.conversation_history = []
+        self.current_prompt = None
+        self.history_window = 29
+        self.seen = []                       # the system text as the model would have seen it
+
+    async def baseline_step(self, fd):
+        first = not self.conversation_history
+        if first:
+            self.conversation_history = [{"role": "system",
+                                          "content": [{"type": "input_text",
+                                                       "text": (self.current_prompt or "") + "\n\n" + BASE}]}]
+        self.seen.append(self.conversation_history[0]["content"][0]["text"])
+        self.conversation_history.append({"role": "user", "content": [{"type": "input_text",
+                                                                       "text": "step"}]})
+        a = self.script[min(self.i, len(self.script) - 1)]; self.i += 1
+        return Act(*a)
+
+
+def load():
+    for m in [k for k in list(sys.modules) if k == "tools" or k.startswith("tools.")]:
+        sys.modules.pop(m, None)
+    spec = importlib.util.spec_from_file_location("cand_harness", os.path.join(OUT, "harness.py"))
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    return mod
+
+
+def main():
+    h = load()
+    rng = np.random.default_rng(0)
+    A = rng.integers(0, 255, (120, 160, 3), dtype=np.uint8)
+    B = rng.integers(0, 255, (120, 160, 3), dtype=np.uint8)
+    C = A.copy(); C[0, 0, 0] = (int(A[0, 0, 0]) + 1) % 256          # 1-shade wobble: same bucket
+    # frames: A A A A B B A  -> stall should rise on repeats, reset on the change
+    frames = [A, A, A, A, B, B, A]
+    ev = StubEval([("w", "small")] * 7)
+    agent = h.build_agent(ev)
+    out = []
+    for i, img in enumerate(frames):
+        act = asyncio.get_event_loop().run_until_complete(agent(FD(img, i)))
+        book = getattr(ev, "_maze_frame_ledger")
+        out.append((i, act.key, book["stall"], book["slips"], book["step"], bool(book["advice"])))
+    print("step key stall slips bookstep cued")
+    for r in out: print("  ", r)
+    sysmsgs = ev.seen
+    ok = []
+    ok.append(("prior composed", (ev.current_prompt or "").startswith("You are a professional 3D maze")))
+    ok.append(("turn1 silent", "WORKING MEMORY" not in sysmsgs[0]))
+    ok.append(("turn2+ carries sheet", all("WORKING MEMORY" in s for s in sysmsgs[1:])))
+    ok.append(("RESPONSE FORMAT kept", all("RESPONSE FORMAT" in s for s in sysmsgs)))
+    ok.append(("AVAILABLE ACTIONS kept", all("AVAILABLE ACTIONS" in s for s in sysmsgs)))
+    ok.append(("base never duplicated", all(s.count("RESPONSE FORMAT") == 1 for s in sysmsgs)))
+    ok.append(("no slips", all(r[3] == 0 for r in out)))
+    ok.append(("stall rises on repeats", [r[2] for r in out][:5] == [0, 1, 2, 3, 0]))
+    ok.append(("stall zero after change", out[5][2] == 1 and out[6][2] == 0))
+    ok.append(("actions passed through", all(r[1] == "w" for r in out)))
+    # bucket tolerance: a one-shade wobble must NOT count as movement
+    ev2 = StubEval([("w", "small")] * 3); ag2 = h.build_agent(ev2)
+    for i, img in enumerate([A, C, C]):
+        asyncio.get_event_loop().run_until_complete(ag2(FD(img, i)))
+    ok.append(("qbin tolerates 1-shade wobble", getattr(ev2, "_maze_frame_ledger")["stall"] >= 1))
+    # cap
+    ev3 = StubEval([("w", "small")] * 12); ag3 = h.build_agent(ev3)
+    for i in range(12):
+        asyncio.get_event_loop().run_until_complete(ag3(FD(A, i)))
+    b3 = getattr(ev3, "_maze_frame_ledger")
+    ok.append(("stall capped at 6", b3["stall"] == 6))
+    # a turn that does nothing is also settled
+    ev4 = StubEval([("a", None)] * 4); ag4 = h.build_agent(ev4)
+    for i in range(4):
+        asyncio.get_event_loop().run_until_complete(ag4(FD(A, i)))
+    ok.append(("turn key also settles", getattr(ev4, "_maze_frame_ledger")["stall"] == 3))
+    print("\n--- checks ---")
+    for n, v in ok: print(("  PASS " if v else "  FAIL ") + n)
+    print("\nlast system message tail:\n", sysmsgs[-1][-460:])
+    print("\nRESULT:", "ALL PASS" if all(v for _n, v in ok) else "FAILURES")
+    return 0 if all(v for _n, v in ok) else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

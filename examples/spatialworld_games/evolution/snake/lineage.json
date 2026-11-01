@@ -1,0 +1,439 @@
+{
+ "meta": {
+  "title": "SpatialWorld snake",
+  "bench": "games",
+  "primary": "score",
+  "best_primary": 1.0,
+  "best_label": "cand_r3_0_spatial-grounding",
+  "first_reached_at_eval": 4,
+  "n_harnesses": 4,
+  "n_evaluated_in_run": 16,
+  "path_to_best": [
+   "anchor_snake",
+   "cand_r3_0_spatial-grounding"
+  ],
+  "run": "snake__k32_claude_pv"
+ },
+ "harnesses": [
+  {
+   "index": 0,
+   "label": "anchor_snake",
+   "dir": "harnesses/00_anchor_snake",
+   "parent": null,
+   "parent_dir": null,
+   "cell_depth": 0,
+   "primary": 0.0,
+   "delta_vs_parent": null,
+   "vector": {
+    "snake": 0.0
+   },
+   "dense": {},
+   "n_files": 13,
+   "diff_vs_parent": null,
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "snake rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "snake/run_001",
+     0.0
+    ],
+    [
+     "snake/run_002",
+     0.0
+    ],
+    [
+     "snake/run_003",
+     0.0
+    ],
+    [
+     "snake/run_004",
+     0.0
+    ],
+    [
+     "snake/run_005",
+     0.0
+    ],
+    [
+     "snake/run_006",
+     0.0
+    ],
+    [
+     "snake/run_007",
+     0.0
+    ],
+    [
+     "snake/run_008",
+     0.0
+    ],
+    [
+     "snake/run_009",
+     0.0
+    ],
+    [
+     "snake/run_010",
+     0.0
+    ],
+    [
+     "snake/run_011",
+     0.0
+    ],
+    [
+     "snake/run_012",
+     0.0
+    ],
+    [
+     "snake/run_013",
+     0.0
+    ],
+    [
+     "snake/run_014",
+     0.0
+    ],
+    [
+     "snake/run_015",
+     0.0
+    ],
+    [
+     "snake/run_016",
+     0.0
+    ],
+    [
+     "snake/run_017",
+     0.0
+    ],
+    [
+     "snake/run_018",
+     0.0
+    ],
+    [
+     "snake/run_019",
+     0.0
+    ],
+    [
+     "snake/run_020",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 1,
+   "label": "cand_r1_0_spatial-grounding",
+   "dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "parent": "anchor_snake",
+   "parent_dir": "harnesses/00_anchor_snake",
+   "cell_depth": 1,
+   "primary": 0.4375,
+   "delta_vs_parent": 0.4375,
+   "vector": {
+    "snake": 0.4375
+   },
+   "dense": {},
+   "n_files": 22,
+   "diff_vs_parent": {
+    "files": 13,
+    "insertions": 614,
+    "deletions": 40
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "Snake candidate \u2014 dead-reckoned legality audit over the frozen model's pick",
+   "episodes": [
+    [
+     "snake/run_001",
+     0.5
+    ],
+    [
+     "snake/run_002",
+     0.0
+    ],
+    [
+     "snake/run_003",
+     0.25
+    ],
+    [
+     "snake/run_004",
+     0.25
+    ],
+    [
+     "snake/run_005",
+     1.0
+    ],
+    [
+     "snake/run_006",
+     0.25
+    ],
+    [
+     "snake/run_007",
+     0.25
+    ],
+    [
+     "snake/run_008",
+     0.25
+    ],
+    [
+     "snake/run_009",
+     0.5
+    ],
+    [
+     "snake/run_010",
+     0.75
+    ],
+    [
+     "snake/run_011",
+     0.5
+    ],
+    [
+     "snake/run_012",
+     0.25
+    ],
+    [
+     "snake/run_013",
+     1.0
+    ],
+    [
+     "snake/run_014",
+     0.25
+    ],
+    [
+     "snake/run_015",
+     0.0
+    ],
+    [
+     "snake/run_016",
+     1.0
+    ],
+    [
+     "snake/run_017",
+     0.5
+    ],
+    [
+     "snake/run_018",
+     1.0
+    ],
+    [
+     "snake/run_019",
+     0.0
+    ],
+    [
+     "snake/run_020",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 2,
+   "label": "cand_r2_0_spatial-grounding",
+   "dir": "harnesses/02_cand_r2_0_spatial-grounding",
+   "parent": "anchor_snake",
+   "parent_dir": "harnesses/00_anchor_snake",
+   "cell_depth": 1,
+   "primary": 0.1125,
+   "delta_vs_parent": 0.1125,
+   "vector": {
+    "snake": 0.1125
+   },
+   "dense": {},
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 6,
+    "insertions": 457,
+    "deletions": 77
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "Snake candidate \u2014 the lattice ballot",
+   "episodes": [
+    [
+     "snake/run_001",
+     0.0
+    ],
+    [
+     "snake/run_002",
+     0.0
+    ],
+    [
+     "snake/run_003",
+     0.5
+    ],
+    [
+     "snake/run_004",
+     0.25
+    ],
+    [
+     "snake/run_005",
+     0.25
+    ],
+    [
+     "snake/run_006",
+     0.5
+    ],
+    [
+     "snake/run_007",
+     0.0
+    ],
+    [
+     "snake/run_008",
+     0.25
+    ],
+    [
+     "snake/run_009",
+     0.0
+    ],
+    [
+     "snake/run_010",
+     0.0
+    ],
+    [
+     "snake/run_011",
+     0.0
+    ],
+    [
+     "snake/run_012",
+     0.0
+    ],
+    [
+     "snake/run_013",
+     0.0
+    ],
+    [
+     "snake/run_014",
+     0.25
+    ],
+    [
+     "snake/run_015",
+     0.0
+    ],
+    [
+     "snake/run_016",
+     0.0
+    ],
+    [
+     "snake/run_017",
+     0.0
+    ],
+    [
+     "snake/run_018",
+     0.0
+    ],
+    [
+     "snake/run_019",
+     0.0
+    ],
+    [
+     "snake/run_020",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 3,
+   "label": "cand_r3_0_spatial-grounding",
+   "dir": "harnesses/03_cand_r3_0_spatial-grounding",
+   "parent": "anchor_snake",
+   "parent_dir": "harnesses/00_anchor_snake",
+   "cell_depth": 1,
+   "primary": 1.0,
+   "delta_vs_parent": 1.0,
+   "vector": {
+    "snake": 1.0
+   },
+   "dense": {},
+   "n_files": 22,
+   "diff_vs_parent": {
+    "files": 10,
+    "insertions": 1175,
+    "deletions": 13
+   },
+   "on_path_to_best": true,
+   "is_best": true,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "Snake candidate \u2014 the pellet warrant, and a second chance to satisfy it",
+   "episodes": [
+    [
+     "snake/run_001",
+     1.0
+    ],
+    [
+     "snake/run_002",
+     1.0
+    ],
+    [
+     "snake/run_003",
+     1.0
+    ],
+    [
+     "snake/run_004",
+     1.0
+    ],
+    [
+     "snake/run_005",
+     1.0
+    ],
+    [
+     "snake/run_006",
+     1.0
+    ],
+    [
+     "snake/run_007",
+     1.0
+    ],
+    [
+     "snake/run_008",
+     1.0
+    ],
+    [
+     "snake/run_009",
+     1.0
+    ],
+    [
+     "snake/run_010",
+     1.0
+    ],
+    [
+     "snake/run_011",
+     1.0
+    ],
+    [
+     "snake/run_012",
+     1.0
+    ],
+    [
+     "snake/run_013",
+     1.0
+    ],
+    [
+     "snake/run_014",
+     1.0
+    ],
+    [
+     "snake/run_015",
+     1.0
+    ],
+    [
+     "snake/run_016",
+     1.0
+    ],
+    [
+     "snake/run_017",
+     1.0
+    ],
+    [
+     "snake/run_018",
+     1.0
+    ],
+    [
+     "snake/run_019",
+     1.0
+    ],
+    [
+     "snake/run_020",
+     1.0
+    ]
+   ]
+  }
+ ]
+}

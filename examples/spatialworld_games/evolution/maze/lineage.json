@@ -1,0 +1,439 @@
+{
+ "meta": {
+  "title": "SpatialWorld maze",
+  "bench": "games",
+  "primary": "score",
+  "best_primary": 1.0,
+  "best_label": "cand_r4_0_spatial-grounding",
+  "first_reached_at_eval": 4,
+  "n_harnesses": 4,
+  "n_evaluated_in_run": 16,
+  "path_to_best": [
+   "anchor_maze",
+   "cand_r4_0_spatial-grounding"
+  ],
+  "run": "maze__k32_claude_pv"
+ },
+ "harnesses": [
+  {
+   "index": 0,
+   "label": "anchor_maze",
+   "dir": "harnesses/00_anchor_maze",
+   "parent": null,
+   "parent_dir": null,
+   "cell_depth": 0,
+   "primary": 0.25,
+   "delta_vs_parent": null,
+   "vector": {
+    "maze": 0.25
+   },
+   "dense": {},
+   "n_files": 13,
+   "diff_vs_parent": null,
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "maze rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze/level_01",
+     0.0
+    ],
+    [
+     "maze/level_02",
+     0.0
+    ],
+    [
+     "maze/level_03",
+     1.0
+    ],
+    [
+     "maze/level_04",
+     1.0
+    ],
+    [
+     "maze/level_05",
+     1.0
+    ],
+    [
+     "maze/level_06",
+     0.0
+    ],
+    [
+     "maze/level_07",
+     0.0
+    ],
+    [
+     "maze/level_08",
+     0.0
+    ],
+    [
+     "maze/level_09",
+     1.0
+    ],
+    [
+     "maze/level_10",
+     0.0
+    ],
+    [
+     "maze/level_11",
+     0.0
+    ],
+    [
+     "maze/level_12",
+     0.0
+    ],
+    [
+     "maze/level_13",
+     0.0
+    ],
+    [
+     "maze/level_14",
+     0.0
+    ],
+    [
+     "maze/level_15",
+     0.0
+    ],
+    [
+     "maze/level_16",
+     0.0
+    ],
+    [
+     "maze/level_17",
+     0.0
+    ],
+    [
+     "maze/level_18",
+     0.0
+    ],
+    [
+     "maze/level_19",
+     1.0
+    ],
+    [
+     "maze/level_20",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 1,
+   "label": "cand_r1_0_spatial-grounding",
+   "dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "parent": "anchor_maze",
+   "parent_dir": "harnesses/00_anchor_maze",
+   "cell_depth": 1,
+   "primary": 0.4,
+   "delta_vs_parent": 0.15,
+   "vector": {
+    "maze": 0.4
+   },
+   "dense": {},
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 385,
+    "deletions": 13
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze rich harness \u2014 spatial grounding",
+   "episodes": [
+    [
+     "maze/level_01",
+     1.0
+    ],
+    [
+     "maze/level_02",
+     1.0
+    ],
+    [
+     "maze/level_03",
+     1.0
+    ],
+    [
+     "maze/level_04",
+     1.0
+    ],
+    [
+     "maze/level_05",
+     1.0
+    ],
+    [
+     "maze/level_06",
+     1.0
+    ],
+    [
+     "maze/level_07",
+     1.0
+    ],
+    [
+     "maze/level_08",
+     0.0
+    ],
+    [
+     "maze/level_09",
+     0.0
+    ],
+    [
+     "maze/level_10",
+     0.0
+    ],
+    [
+     "maze/level_11",
+     0.0
+    ],
+    [
+     "maze/level_12",
+     0.0
+    ],
+    [
+     "maze/level_13",
+     0.0
+    ],
+    [
+     "maze/level_14",
+     0.0
+    ],
+    [
+     "maze/level_15",
+     1.0
+    ],
+    [
+     "maze/level_16",
+     0.0
+    ],
+    [
+     "maze/level_17",
+     0.0
+    ],
+    [
+     "maze/level_18",
+     0.0
+    ],
+    [
+     "maze/level_19",
+     0.0
+    ],
+    [
+     "maze/level_20",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 2,
+   "label": "cand_r2_0_spatial-grounding",
+   "dir": "harnesses/02_cand_r2_0_spatial-grounding",
+   "parent": "anchor_maze",
+   "parent_dir": "harnesses/00_anchor_maze",
+   "cell_depth": 1,
+   "primary": 0.35,
+   "delta_vs_parent": 0.1,
+   "vector": {
+    "maze": 0.35
+   },
+   "dense": {},
+   "n_files": 17,
+   "diff_vs_parent": {
+    "files": 10,
+    "insertions": 287,
+    "deletions": 48
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "module map and levers",
+   "episodes": [
+    [
+     "maze/level_01",
+     0.0
+    ],
+    [
+     "maze/level_02",
+     0.0
+    ],
+    [
+     "maze/level_03",
+     1.0
+    ],
+    [
+     "maze/level_04",
+     1.0
+    ],
+    [
+     "maze/level_05",
+     1.0
+    ],
+    [
+     "maze/level_06",
+     1.0
+    ],
+    [
+     "maze/level_07",
+     1.0
+    ],
+    [
+     "maze/level_08",
+     0.0
+    ],
+    [
+     "maze/level_09",
+     0.0
+    ],
+    [
+     "maze/level_10",
+     0.0
+    ],
+    [
+     "maze/level_11",
+     0.0
+    ],
+    [
+     "maze/level_12",
+     0.0
+    ],
+    [
+     "maze/level_13",
+     0.0
+    ],
+    [
+     "maze/level_14",
+     0.0
+    ],
+    [
+     "maze/level_15",
+     0.0
+    ],
+    [
+     "maze/level_16",
+     1.0
+    ],
+    [
+     "maze/level_17",
+     0.0
+    ],
+    [
+     "maze/level_18",
+     0.0
+    ],
+    [
+     "maze/level_19",
+     1.0
+    ],
+    [
+     "maze/level_20",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 3,
+   "label": "cand_r4_0_spatial-grounding",
+   "dir": "harnesses/03_cand_r4_0_spatial-grounding",
+   "parent": "anchor_maze",
+   "parent_dir": "harnesses/00_anchor_maze",
+   "cell_depth": 1,
+   "primary": 1.0,
+   "delta_vs_parent": 0.75,
+   "vector": {
+    "maze": 1.0
+   },
+   "dense": {},
+   "n_files": 19,
+   "diff_vs_parent": {
+    "files": 14,
+    "insertions": 566,
+    "deletions": 60
+   },
+   "on_path_to_best": true,
+   "is_best": true,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "axis: code lever \u2014 the per-step decision inside `tools/vlm.py:decide` (token level, graph frozen)",
+   "episodes": [
+    [
+     "maze/level_01",
+     1.0
+    ],
+    [
+     "maze/level_02",
+     1.0
+    ],
+    [
+     "maze/level_03",
+     1.0
+    ],
+    [
+     "maze/level_04",
+     1.0
+    ],
+    [
+     "maze/level_05",
+     1.0
+    ],
+    [
+     "maze/level_06",
+     1.0
+    ],
+    [
+     "maze/level_07",
+     1.0
+    ],
+    [
+     "maze/level_08",
+     1.0
+    ],
+    [
+     "maze/level_09",
+     1.0
+    ],
+    [
+     "maze/level_10",
+     1.0
+    ],
+    [
+     "maze/level_11",
+     1.0
+    ],
+    [
+     "maze/level_12",
+     1.0
+    ],
+    [
+     "maze/level_13",
+     1.0
+    ],
+    [
+     "maze/level_14",
+     1.0
+    ],
+    [
+     "maze/level_15",
+     1.0
+    ],
+    [
+     "maze/level_16",
+     1.0
+    ],
+    [
+     "maze/level_17",
+     1.0
+    ],
+    [
+     "maze/level_18",
+     1.0
+    ],
+    [
+     "maze/level_19",
+     1.0
+    ],
+    [
+     "maze/level_20",
+     1.0
+    ]
+   ]
+  }
+ ]
+}

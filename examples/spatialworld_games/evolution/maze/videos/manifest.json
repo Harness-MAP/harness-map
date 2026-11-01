@@ -1,0 +1,58 @@
+[
+ {
+  "level": "level_6",
+  "index": 0,
+  "label": "anchor_maze",
+  "score": 0.0,
+  "steps": 100,
+  "outcome": "score 0.00 in 100 steps",
+  "source_video": "maze_openai_evaluation_20261005_053707.mp4",
+  "eval_dir": "maze_6_74redmv6",
+  "file": "level_6__00_anchor_maze.mp4"
+ },
+ {
+  "level": "level_6",
+  "index": 1,
+  "label": "cand_r1_0_spatial-grounding",
+  "score": 1.0,
+  "steps": 48,
+  "outcome": "solved in 48 steps",
+  "source_video": "maze_openai_evaluation_20261006_134255.mp4",
+  "eval_dir": "maze_6_gg99dvjq",
+  "file": "level_6__01_cand_r1_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "level_6",
+  "index": 2,
+  "label": "cand_r2_0_spatial-grounding",
+  "score": 1.0,
+  "steps": 20,
+  "outcome": "solved in 20 steps",
+  "source_video": "maze_openai_evaluation_20261006_140054.mp4",
+  "eval_dir": "maze_6_a4igmoru",
+  "file": "level_6__02_cand_r2_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "level_6",
+  "index": 3,
+  "label": "cand_r4_0_spatial-grounding",
+  "score": 1.0,
+  "steps": 10,
+  "outcome": "solved in 10 steps",
+  "source_video": "maze_openai_evaluation_20261006_142508.mp4",
+  "eval_dir": "maze_6_la8n69na",
+  "file": "level_6__03_cand_r4_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "level_6",
+  "index": null,
+  "label": "progression_grid",
+  "file": "level_6__progression_grid.mp4",
+  "panels": [
+   "level_6__00_anchor_maze.mp4",
+   "level_6__01_cand_r1_0_spatial-grounding.mp4",
+   "level_6__02_cand_r2_0_spatial-grounding.mp4",
+   "level_6__03_cand_r4_0_spatial-grounding.mp4"
+  ]
+ }
+]

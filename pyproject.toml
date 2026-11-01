@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "harness-map"
+version = "0.1.0"
+description = "Harness-MAP: quality-diversity evolution of agent harnesses with an LLM meta-agent"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "sentence-transformers>=2.2",
+    "einops",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0"]
+
+[tool.setuptools.packages.find]
+include = ["harness_map*"]
+
+[tool.setuptools.package-data]
+harness_map = ["meta_agent/skills/*/SKILL.md"]

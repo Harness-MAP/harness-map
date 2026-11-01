@@ -1,0 +1,3831 @@
+{
+ "meta": {
+  "title": "SimWorld-MMNav hard",
+  "bench": "nav",
+  "primary": "SubtaskSR",
+  "best_primary": 0.555,
+  "best_label": "cand_r15_0_spatial-grounding",
+  "first_reached_at_eval": 16,
+  "n_harnesses": 16,
+  "n_evaluated_in_run": 16,
+  "path_to_best": [
+   "anchor_nav",
+   "cand_r6_0_spatial-grounding",
+   "cand_r9_0_spatial-grounding",
+   "cand_r13_0_spatial-grounding",
+   "cand_r15_0_spatial-grounding"
+  ],
+  "run": "hard5010_adaptive_k4c1"
+ },
+ "harnesses": [
+  {
+   "index": 0,
+   "label": "anchor_nav",
+   "dir": "harnesses/00_anchor_nav",
+   "parent": null,
+   "parent_dir": null,
+   "cell_depth": null,
+   "primary": 0.36,
+   "delta_vs_parent": null,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1451
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1451,
+    "per_position_SR": [
+     1.0,
+     0.24,
+     0.1111,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 14,
+   "diff_vs_parent": null,
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES.md \u2014 SimWorld-MMNav anchor (module map \u00b7 evolvable levers \u00b7 contract)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 1,
+   "label": "cand_r1_0_spatial-grounding",
+   "dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "parent": "anchor_nav",
+   "parent_dir": "harnesses/00_anchor_nav",
+   "cell_depth": null,
+   "primary": 0.285,
+   "delta_vs_parent": -0.075,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1256
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1256,
+    "per_position_SR": [
+     1.0,
+     0.02,
+     0.0222,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 342,
+    "deletions": 28
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r001_0_spatial-grounding` (iter 1, parent `anchor_nav`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 2,
+   "label": "cand_r2_0_spatial-grounding",
+   "dir": "harnesses/02_cand_r2_0_spatial-grounding",
+   "parent": "cand_r1_0_spatial-grounding",
+   "parent_dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "cell_depth": null,
+   "primary": 0.33,
+   "delta_vs_parent": 0.045,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.173
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.173,
+    "per_position_SR": [
+     1.0,
+     0.12,
+     0.1111,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 280,
+    "deletions": 116
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r002_0_spatial-grounding` (iter 2, parent `cand_r1_0_spatial-grounding`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 3,
+   "label": "cand_r3_0_spatial-grounding",
+   "dir": "harnesses/03_cand_r3_0_spatial-grounding",
+   "parent": "anchor_nav",
+   "parent_dir": "harnesses/00_anchor_nav",
+   "cell_depth": null,
+   "primary": 0.36,
+   "delta_vs_parent": 0.0,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1288
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1288,
+    "per_position_SR": [
+     1.0,
+     0.22,
+     0.1333,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 1,
+    "insertions": 186,
+    "deletions": 17
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r003_0_spatial-grounding` (iter 3, parent `anchor_nav`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 4,
+   "label": "cand_r4_0_spatial-grounding",
+   "dir": "harnesses/04_cand_r4_0_spatial-grounding",
+   "parent": "cand_r1_0_spatial-grounding",
+   "parent_dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "cell_depth": null,
+   "primary": 0.355,
+   "delta_vs_parent": 0.07,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1844
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1844,
+    "per_position_SR": [
+     1.0,
+     0.18,
+     0.1556,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 287,
+    "deletions": 159
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r004_0_spatial-grounding` (iter 4, parent `cand_r1_0_spatial-grounding`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 5,
+   "label": "cand_r5_0_spatial-grounding",
+   "dir": "harnesses/05_cand_r5_0_spatial-grounding",
+   "parent": "anchor_nav",
+   "parent_dir": "harnesses/00_anchor_nav",
+   "cell_depth": null,
+   "primary": 0.345,
+   "delta_vs_parent": -0.015,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1597
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1597,
+    "per_position_SR": [
+     1.0,
+     0.2,
+     0.0889,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 305,
+    "deletions": 4
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r5_0_spatial-grounding` (iter 5, parent `anchor_nav`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 6,
+   "label": "cand_r6_0_spatial-grounding",
+   "dir": "harnesses/06_cand_r6_0_spatial-grounding",
+   "parent": "anchor_nav",
+   "parent_dir": "harnesses/00_anchor_nav",
+   "cell_depth": null,
+   "primary": 0.37,
+   "delta_vs_parent": 0.01,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1607
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1607,
+    "per_position_SR": [
+     1.0,
+     0.2,
+     0.2,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 536,
+    "deletions": 11
+   },
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r006_0_spatial-grounding` (iter 6, parent `anchor_nav`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 7,
+   "label": "cand_r7_0_spatial-grounding",
+   "dir": "harnesses/07_cand_r7_0_spatial-grounding",
+   "parent": "cand_r2_0_spatial-grounding",
+   "parent_dir": "harnesses/02_cand_r2_0_spatial-grounding",
+   "cell_depth": null,
+   "primary": 0.345,
+   "delta_vs_parent": 0.015,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1823
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1823,
+    "per_position_SR": [
+     1.0,
+     0.14,
+     0.1556,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 247,
+    "deletions": 274
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r007_0_spatial-grounding` (iter 7, parent `cand_r2_0_spatial-grounding`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 8,
+   "label": "cand_r8_0_spatial-grounding",
+   "dir": "harnesses/08_cand_r8_0_spatial-grounding",
+   "parent": "anchor_nav",
+   "parent_dir": "harnesses/00_anchor_nav",
+   "cell_depth": null,
+   "primary": 0.35,
+   "delta_vs_parent": -0.01,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1574
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1574,
+    "per_position_SR": [
+     1.0,
+     0.18,
+     0.1333,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 382,
+    "deletions": 4
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r008_0_spatial-grounding` (iter 8, parent `anchor_nav`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 9,
+   "label": "cand_r9_0_spatial-grounding",
+   "dir": "harnesses/09_cand_r9_0_spatial-grounding",
+   "parent": "cand_r6_0_spatial-grounding",
+   "parent_dir": "harnesses/06_cand_r6_0_spatial-grounding",
+   "cell_depth": null,
+   "primary": 0.4,
+   "delta_vs_parent": 0.03,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1986
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1986,
+    "per_position_SR": [
+     1.0,
+     0.26,
+     0.2667,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 16,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 594,
+    "deletions": 93
+   },
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r009_0_spatial-grounding` (iter 9, parent `cand_r6_0_spatial-grounding`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 10,
+   "label": "cand_r10_0_spatial-grounding",
+   "dir": "harnesses/10_cand_r10_0_spatial-grounding",
+   "parent": "cand_r2_0_spatial-grounding",
+   "parent_dir": "harnesses/02_cand_r2_0_spatial-grounding",
+   "cell_depth": null,
+   "primary": 0.535,
+   "delta_vs_parent": 0.205,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.2279
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.2279,
+    "per_position_SR": [
+     1.0,
+     0.6,
+     0.4889,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 206,
+    "deletions": 11
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r010_0_spatial-grounding` (iter 10, parent `cand_r2_0_spatial-grounding`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.75
+    ]
+   ]
+  },
+  {
+   "index": 11,
+   "label": "cand_r11_0_spatial-grounding",
+   "dir": "harnesses/11_cand_r11_0_spatial-grounding",
+   "parent": "cand_r4_0_spatial-grounding",
+   "parent_dir": "harnesses/04_cand_r4_0_spatial-grounding",
+   "cell_depth": null,
+   "primary": 0.48,
+   "delta_vs_parent": 0.125,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.2147
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.2147,
+    "per_position_SR": [
+     1.0,
+     0.46,
+     0.4,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 477,
+    "deletions": 10
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r11_0_spatial-grounding` (iter 11, parent `cand_r4_0_spatial-grounding`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 12,
+   "label": "cand_r12_0_spatial-grounding",
+   "dir": "harnesses/12_cand_r12_0_spatial-grounding",
+   "parent": "anchor_nav",
+   "parent_dir": "harnesses/00_anchor_nav",
+   "cell_depth": null,
+   "primary": 0.335,
+   "delta_vs_parent": -0.025,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1189
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.1189,
+    "per_position_SR": [
+     1.0,
+     0.12,
+     0.1333,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 777,
+    "deletions": 8
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r012_0_spatial-grounding` (iter 12, parent `anchor_nav`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 13,
+   "label": "cand_r13_0_spatial-grounding",
+   "dir": "harnesses/13_cand_r13_0_spatial-grounding",
+   "parent": "cand_r9_0_spatial-grounding",
+   "parent_dir": "harnesses/09_cand_r9_0_spatial-grounding",
+   "cell_depth": null,
+   "primary": 0.55,
+   "delta_vs_parent": 0.15,
+   "vector": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.3036
+   },
+   "dense": {
+    "SR": 0.0,
+    "distance_progress_mean": 0.3036,
+    "per_position_SR": [
+     1.0,
+     0.58,
+     0.5778,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": []
+   },
+   "n_files": 17,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 468,
+    "deletions": 16
+   },
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r13_0_spatial-grounding` (iter 13, parent `cand_r9_0_spatial-grounding`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 14,
+   "label": "cand_r14_0_spatial-grounding",
+   "dir": "harnesses/14_cand_r14_0_spatial-grounding",
+   "parent": "cand_r13_0_spatial-grounding",
+   "parent_dir": "harnesses/13_cand_r13_0_spatial-grounding",
+   "cell_depth": null,
+   "primary": 0.515,
+   "delta_vs_parent": -0.035,
+   "vector": {
+    "SR": 0.04,
+    "distance_progress_mean": 0.2573
+   },
+   "dense": {
+    "SR": 0.04,
+    "distance_progress_mean": 0.2573,
+    "per_position_SR": [
+     1.0,
+     0.48,
+     0.4889,
+     0.0222
+    ],
+    "n_episodes": 50,
+    "successful_episodes": [
+     "ep_20_2_task_dist_11_0_1",
+     "ep_20_18_task_dist_11_0_1"
+    ]
+   },
+   "n_files": 17,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 479,
+    "deletions": 9
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r14_0_spatial-grounding` (iter 14, parent `cand_r13_0_spatial-grounding`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     1.0
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     1.0
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  },
+  {
+   "index": 15,
+   "label": "cand_r15_0_spatial-grounding",
+   "dir": "harnesses/15_cand_r15_0_spatial-grounding",
+   "parent": "cand_r13_0_spatial-grounding",
+   "parent_dir": "harnesses/13_cand_r13_0_spatial-grounding",
+   "cell_depth": null,
+   "primary": 0.555,
+   "delta_vs_parent": 0.005,
+   "vector": {
+    "SR": 0.02,
+    "distance_progress_mean": 0.338
+   },
+   "dense": {
+    "SR": 0.02,
+    "distance_progress_mean": 0.338,
+    "per_position_SR": [
+     1.0,
+     0.58,
+     0.5778,
+     0.0
+    ],
+    "n_episodes": 50,
+    "successful_episodes": [
+     "ep_20_10_task_dist_21_0_1"
+    ]
+   },
+   "n_files": 17,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 215,
+    "deletions": 53
+   },
+   "on_path_to_best": true,
+   "is_best": true,
+   "proposer_note": "",
+   "heading": "NOTES \u2014 `cand_r15_0_spatial-grounding` (iter 15, parent `cand_r13_0_spatial-grounding`)",
+   "episodes": [
+    [
+     "ep_20_0_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_0_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_1_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_2_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_2_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_3_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_3_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_4_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_5_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_6_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_7_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_7_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_8_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_8_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_9_task_dist_21_0_1",
+     0.5
+    ],
+    [
+     "ep_20_10_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_10_task_dist_21_0_1",
+     1.0
+    ],
+    [
+     "ep_20_11_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_11_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_12_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_13_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_13_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_14_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_14_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_15_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_15_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_16_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_17_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_17_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_18_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_18_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_19_task_dist_11_0_1",
+     0.25
+    ],
+    [
+     "ep_20_19_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_20_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_20_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_21_task_dist_11_0_1",
+     0.5
+    ],
+    [
+     "ep_20_21_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_22_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_22_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_23_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_23_task_dist_21_0_1",
+     0.25
+    ],
+    [
+     "ep_20_24_task_dist_11_0_1",
+     0.75
+    ],
+    [
+     "ep_20_24_task_dist_21_0_1",
+     0.75
+    ],
+    [
+     "ep_20_30_task_dist_21_0_1",
+     0.25
+    ]
+   ]
+  }
+ ]
+}

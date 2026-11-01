@@ -1,0 +1,86 @@
+[
+ {
+  "episode": "ep_20_10_task_dist_21_0_1",
+  "index": 0,
+  "label": "anchor_nav",
+  "harness_dir": "harnesses/00_anchor_nav",
+  "success": false,
+  "subtask_sr": 0.5,
+  "subtask_success": [
+   true,
+   false
+  ],
+  "steps": 11,
+  "final_dist_to_target": 58789.5,
+  "distance_progress": 0.0637,
+  "outcome": "not completed: 11 steps, ended 588 m from the target (6 % of the way)",
+  "file": "ep_20_10_task_dist_21_0_1__00_anchor_nav.mp4",
+  "rerun": true
+ },
+ {
+  "episode": "ep_20_10_task_dist_21_0_1",
+  "index": 9,
+  "label": "cand_r9_0_spatial-grounding",
+  "harness_dir": "harnesses/09_cand_r9_0_spatial-grounding",
+  "success": false,
+  "subtask_sr": 0.5,
+  "subtask_success": [
+   true,
+   false
+  ],
+  "steps": 233,
+  "final_dist_to_target": 48710.5,
+  "distance_progress": 0.2242,
+  "outcome": "not completed: 233 steps, ended 487 m from the target (22 % of the way)",
+  "file": "ep_20_10_task_dist_21_0_1__09_cand_r9_0_spatial-grounding.mp4",
+  "rerun": true
+ },
+ {
+  "episode": "ep_20_10_task_dist_21_0_1",
+  "index": 13,
+  "label": "cand_r13_0_spatial-grounding",
+  "harness_dir": "harnesses/13_cand_r13_0_spatial-grounding",
+  "success": false,
+  "subtask_sr": 0.5,
+  "subtask_success": [
+   true,
+   false
+  ],
+  "steps": 233,
+  "final_dist_to_target": 48710.5,
+  "distance_progress": 0.2242,
+  "outcome": "not completed: 233 steps, ended 487 m from the target (22 % of the way)",
+  "file": "ep_20_10_task_dist_21_0_1__13_cand_r13_0_spatial-grounding.mp4",
+  "rerun": true
+ },
+ {
+  "episode": "ep_20_10_task_dist_21_0_1",
+  "index": 15,
+  "label": "cand_r15_0_spatial-grounding",
+  "harness_dir": "harnesses/15_cand_r15_0_spatial-grounding",
+  "success": false,
+  "subtask_sr": 0.5,
+  "subtask_success": [
+   true,
+   false
+  ],
+  "steps": 135,
+  "final_dist_to_target": 3551.4,
+  "distance_progress": 0.9434,
+  "outcome": "not completed: 135 steps, ended 36 m from the target (94 % of the way)",
+  "file": "ep_20_10_task_dist_21_0_1__15_cand_r15_0_spatial-grounding.mp4",
+  "rerun": true
+ },
+ {
+  "episode": "ep_20_10_task_dist_21_0_1",
+  "index": null,
+  "label": "progression_grid",
+  "file": "ep_20_10_task_dist_21_0_1__progression_grid.mp4",
+  "panels": [
+   "ep_20_10_task_dist_21_0_1__00_anchor_nav.mp4",
+   "ep_20_10_task_dist_21_0_1__09_cand_r9_0_spatial-grounding.mp4",
+   "ep_20_10_task_dist_21_0_1__13_cand_r13_0_spatial-grounding.mp4",
+   "ep_20_10_task_dist_21_0_1__15_cand_r15_0_spatial-grounding.mp4"
+  ]
+ }
+]

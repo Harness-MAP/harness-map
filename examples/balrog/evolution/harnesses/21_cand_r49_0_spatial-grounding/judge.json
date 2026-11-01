@@ -1,0 +1,7 @@
+{"verdict": "OK", "reasons": [
+  "harness.py:177-208 act(): the only input to every decision is obs['text']['long_term_context'] (the BALROG language observation: prose, cursor (x=,y=), map: block, Dlvl status line). There are no env/nle handles, no full_state/oracle fields, and no task, seed or episode ids anywhere in harness.py or tools/*.py.",
+  "tools/chart.py: Chart folds only glyphs drawn in the map, the hero's cursor square, and prose messages such as 'door opens' or 'solid stone'. plan() is a BFS over charted squares toward a drawn '>' or a frontier square. This is legitimate code-owned navigation from the observation, and there is no lookup table of actions.",
+  "tools/grid.py: parse_glyph_map decodes the cursor, the 8 neighbours and the 'X adjacent <dirs>' prose lines. Every one of these comes from the text observation, which the trace CSVs confirm (e.g. Boxoban-Medium run_02 Observation shows the cursor and map: block).",
+  "harness.py:113-121: harness-owned steps return an LLMResponse with model_id='harness', 0 tokens and the owner name in reasoning. They are not presented as model calls, and the trace Reasoning column labels them honestly: model 1805, grounded 338, chart:explore 335, chart:route 69, chart:seek 32, fallback 38. Nothing fakes llm_calls.",
+  "The harness never calls env.step, never short-circuits it, and never writes scorer or summary files. The only file reads are its own AGENT.md, rules.md, skills/*.md and memory.md prompt priors."
+], "cheat_locations": []}

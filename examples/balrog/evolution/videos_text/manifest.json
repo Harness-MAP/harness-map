@@ -1,0 +1,218 @@
+[
+ {
+  "episode": "MiniHack-MazeWalk-15x15-v0/00",
+  "index": 0,
+  "label": "anchor_naive",
+  "solved": false,
+  "steps": 100,
+  "outcome": "failed in 100 steps",
+  "file": "MiniHack-MazeWalk-15x15-v0_run00__00_anchor_naive.mp4"
+ },
+ {
+  "episode": "MiniHack-MazeWalk-15x15-v0/00",
+  "index": 7,
+  "label": "cand_r35_0_spatial-grounding",
+  "solved": false,
+  "steps": 100,
+  "outcome": "failed in 100 steps",
+  "file": "MiniHack-MazeWalk-15x15-v0_run00__07_cand_r35_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-MazeWalk-15x15-v0/00",
+  "index": 13,
+  "label": "cand_r41_0_spatial-grounding",
+  "solved": true,
+  "steps": 70,
+  "outcome": "solved in 70 steps",
+  "file": "MiniHack-MazeWalk-15x15-v0_run00__13_cand_r41_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-MazeWalk-15x15-v0/00",
+  "index": 40,
+  "label": "cand_r68_0_spatial-grounding",
+  "solved": true,
+  "steps": 70,
+  "outcome": "solved in 70 steps",
+  "file": "MiniHack-MazeWalk-15x15-v0_run00__40_cand_r68_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-MazeWalk-15x15-v0/00",
+  "index": null,
+  "label": "progression_grid",
+  "file": "MiniHack-MazeWalk-15x15-v0_run00__progression_grid.mp4",
+  "panels": [
+   "MiniHack-MazeWalk-15x15-v0_run00__00_anchor_naive.mp4",
+   "MiniHack-MazeWalk-15x15-v0_run00__07_cand_r35_0_spatial-grounding.mp4",
+   "MiniHack-MazeWalk-15x15-v0_run00__13_cand_r41_0_spatial-grounding.mp4",
+   "MiniHack-MazeWalk-15x15-v0_run00__40_cand_r68_0_spatial-grounding.mp4"
+  ],
+  "shared_crop": [
+   496,
+   64,
+   736,
+   304
+  ]
+ },
+ {
+  "episode": "MiniHack-Corridor-R3-v0/04",
+  "index": 0,
+  "label": "anchor_naive",
+  "solved": false,
+  "steps": 100,
+  "outcome": "failed in 100 steps",
+  "file": "MiniHack-Corridor-R3-v0_run04__00_anchor_naive.mp4"
+ },
+ {
+  "episode": "MiniHack-Corridor-R3-v0/04",
+  "index": 7,
+  "label": "cand_r35_0_spatial-grounding",
+  "solved": true,
+  "steps": 67,
+  "outcome": "solved in 67 steps",
+  "file": "MiniHack-Corridor-R3-v0_run04__07_cand_r35_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-Corridor-R3-v0/04",
+  "index": 13,
+  "label": "cand_r41_0_spatial-grounding",
+  "solved": true,
+  "steps": 41,
+  "outcome": "solved in 41 steps",
+  "file": "MiniHack-Corridor-R3-v0_run04__13_cand_r41_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-Corridor-R3-v0/04",
+  "index": 40,
+  "label": "cand_r68_0_spatial-grounding",
+  "solved": true,
+  "steps": 41,
+  "outcome": "solved in 41 steps",
+  "file": "MiniHack-Corridor-R3-v0_run04__40_cand_r68_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-Corridor-R3-v0/04",
+  "index": null,
+  "label": "progression_grid",
+  "file": "MiniHack-Corridor-R3-v0_run04__progression_grid.mp4",
+  "panels": [
+   "MiniHack-Corridor-R3-v0_run04__00_anchor_naive.mp4",
+   "MiniHack-Corridor-R3-v0_run04__07_cand_r35_0_spatial-grounding.mp4",
+   "MiniHack-Corridor-R3-v0_run04__13_cand_r41_0_spatial-grounding.mp4",
+   "MiniHack-Corridor-R3-v0_run04__40_cand_r68_0_spatial-grounding.mp4"
+  ],
+  "shared_crop": [
+   512,
+   64,
+   1168,
+   319
+  ]
+ },
+ {
+  "episode": "MiniHack-Boxoban-Medium-v0/00",
+  "index": 0,
+  "label": "anchor_naive",
+  "solved": false,
+  "steps": 100,
+  "outcome": "failed in 100 steps",
+  "file": "MiniHack-Boxoban-Medium-v0_run00__00_anchor_naive.mp4"
+ },
+ {
+  "episode": "MiniHack-Boxoban-Medium-v0/00",
+  "index": 7,
+  "label": "cand_r35_0_spatial-grounding",
+  "solved": false,
+  "steps": 100,
+  "outcome": "failed in 100 steps",
+  "file": "MiniHack-Boxoban-Medium-v0_run00__07_cand_r35_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-Boxoban-Medium-v0/00",
+  "index": 13,
+  "label": "cand_r41_0_spatial-grounding",
+  "solved": false,
+  "steps": 100,
+  "outcome": "failed in 100 steps",
+  "file": "MiniHack-Boxoban-Medium-v0_run00__13_cand_r41_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-Boxoban-Medium-v0/00",
+  "index": 40,
+  "label": "cand_r68_0_spatial-grounding",
+  "solved": true,
+  "steps": 38,
+  "outcome": "solved in 38 steps",
+  "file": "MiniHack-Boxoban-Medium-v0_run00__40_cand_r68_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-Boxoban-Medium-v0/00",
+  "index": null,
+  "label": "progression_grid",
+  "file": "MiniHack-Boxoban-Medium-v0_run00__progression_grid.mp4",
+  "panels": [
+   "MiniHack-Boxoban-Medium-v0_run00__00_anchor_naive.mp4",
+   "MiniHack-Boxoban-Medium-v0_run00__07_cand_r35_0_spatial-grounding.mp4",
+   "MiniHack-Boxoban-Medium-v0_run00__13_cand_r41_0_spatial-grounding.mp4",
+   "MiniHack-Boxoban-Medium-v0_run00__40_cand_r68_0_spatial-grounding.mp4"
+  ],
+  "shared_crop": [
+   528,
+   96,
+   720,
+   288
+  ]
+ },
+ {
+  "episode": "MiniHack-Quest-Easy-v0/00",
+  "index": 0,
+  "label": "anchor_naive",
+  "solved": false,
+  "steps": 100,
+  "outcome": "failed in 100 steps",
+  "file": "MiniHack-Quest-Easy-v0_run00__00_anchor_naive.mp4"
+ },
+ {
+  "episode": "MiniHack-Quest-Easy-v0/00",
+  "index": 7,
+  "label": "cand_r35_0_spatial-grounding",
+  "solved": false,
+  "steps": 100,
+  "outcome": "failed in 100 steps",
+  "file": "MiniHack-Quest-Easy-v0_run00__07_cand_r35_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-Quest-Easy-v0/00",
+  "index": 13,
+  "label": "cand_r41_0_spatial-grounding",
+  "solved": false,
+  "steps": 100,
+  "outcome": "failed in 100 steps",
+  "file": "MiniHack-Quest-Easy-v0_run00__13_cand_r41_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-Quest-Easy-v0/00",
+  "index": 40,
+  "label": "cand_r68_0_spatial-grounding",
+  "solved": true,
+  "steps": 48,
+  "outcome": "solved in 48 steps",
+  "file": "MiniHack-Quest-Easy-v0_run00__40_cand_r68_0_spatial-grounding.mp4"
+ },
+ {
+  "episode": "MiniHack-Quest-Easy-v0/00",
+  "index": null,
+  "label": "progression_grid",
+  "file": "MiniHack-Quest-Easy-v0_run00__progression_grid.mp4",
+  "panels": [
+   "MiniHack-Quest-Easy-v0_run00__00_anchor_naive.mp4",
+   "MiniHack-Quest-Easy-v0_run00__07_cand_r35_0_spatial-grounding.mp4",
+   "MiniHack-Quest-Easy-v0_run00__13_cand_r41_0_spatial-grounding.mp4",
+   "MiniHack-Quest-Easy-v0_run00__40_cand_r68_0_spatial-grounding.mp4"
+  ],
+  "shared_crop": [
+   368,
+   96,
+   864,
+   239
+  ]
+ }
+]

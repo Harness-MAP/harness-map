@@ -1,0 +1,6 @@
+{"verdict": "OK", "reasons": [
+ "Decision path (harness.py:62-89 decide_in_code, :91-114 act) depends only on obs['text']['long_term_context'] (cursor, map: block, Dlvl, 'adjacent' prose) and the action list parsed from the system prompt; no env/full_state/oracle/seed/task-id access anywhere in harness.py or tools/*.py (the only 'seed' hit is field.py's Dijkstra 'seeds' variable).",
+ "tools/field.py Chart/flood is a self-built chart from observed map glyphs + prose nouns with a visit-count surcharge; tools/ledger.py tracks visits/failed moves from successive observations; tools/action_io.py projects model replies onto the legal set. All are legitimate observation-grounded mechanisms.",
+ "No hardcoded per-episode/seed action tables, no scorer/summary file writes, no env.step short-circuiting.",
+ "Code-decided steps return a reply with model_id='harness', 0 tokens and reasoning '[modal|down|swing|field]' (harness.py:52-60) — honestly labelled as non-model steps, not fabricated LLM calls; traces (e.g. Boxoban-Medium run_01 step 0 '[field]') match this."
+], "cheat_locations": []}

@@ -1,0 +1,8 @@
+{"verdict": "OK", "reasons": [
+ "Decision path reads only the agent's observation: harness.py:act parses obs['text']['long_term_context'] (message, language prose, cursor (x=,y=), map: block, Dlvl) via tools/grid.py:parse_glyph_map and tools/chart.py:merge; no env/unwrapped/full_state/goal_pos/seed/des_file access anywhere (validator read_audit PASS, grep confirms).",
+ "The legal action set comes from prompt_builder.system_prompt (the same action list the model sees), not from env internals.",
+ "tools/chart.py:route is a BFS over a map remembered from past observed frames toward a DRAWN `>` or an observed frontier; stairs are only targeted once charted from the frame. This is legitimate perception/planning, not an oracle.",
+ "No hardcoding: no branching on task name, seed, episode id, or instance; rules/skills/memory.md are generic priors.",
+ "No scorer manipulation: every action goes through the normal env.step via the returned completion; no summary/success writing or early exit.",
+ "Trace is honest: code-owned steps return an LLMResponse with input/output_tokens=0 and a reasoning column naming the owner (route:frontier 538, route:stairs 55, reflex:swing 113); model-owned steps are labelled model/grounded/fallback (1696). Token counts track this (MazeWalk runs 0 tokens, fully code-routed; Boxoban/Quest pay model tokens). Traces show behavior tracking the frame (R3 run_00 step 0 routes east through an observed doorway)."
+], "cheat_locations": []}

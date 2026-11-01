@@ -1,0 +1,1 @@
+When a move leaves you on the same square, that direction is a wall from here: pick another one. When you keep returning to the square you just left, you are pacing: choose the neighbour with the lowest visit count instead.

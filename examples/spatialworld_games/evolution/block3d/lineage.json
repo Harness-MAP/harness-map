@@ -1,0 +1,439 @@
+{
+ "meta": {
+  "title": "SpatialWorld block3d",
+  "bench": "games",
+  "primary": "score",
+  "best_primary": 1.0,
+  "best_label": "cand_r4_0_spatial-grounding",
+  "first_reached_at_eval": 4,
+  "n_harnesses": 4,
+  "n_evaluated_in_run": 16,
+  "path_to_best": [
+   "anchor_block3d",
+   "cand_r4_0_spatial-grounding"
+  ],
+  "run": "block3d__k32_claude_pv"
+ },
+ "harnesses": [
+  {
+   "index": 0,
+   "label": "anchor_block3d",
+   "dir": "harnesses/00_anchor_block3d",
+   "parent": null,
+   "parent_dir": null,
+   "cell_depth": 0,
+   "primary": 0.05,
+   "delta_vs_parent": null,
+   "vector": {
+    "block3d": 0.05
+   },
+   "dense": {},
+   "n_files": 13,
+   "diff_vs_parent": null,
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "block3d rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "block3d/level_01",
+     1.0
+    ],
+    [
+     "block3d/level_02",
+     0.0
+    ],
+    [
+     "block3d/level_03",
+     0.0
+    ],
+    [
+     "block3d/level_04",
+     0.0
+    ],
+    [
+     "block3d/level_05",
+     0.0
+    ],
+    [
+     "block3d/level_06",
+     0.0
+    ],
+    [
+     "block3d/level_07",
+     0.0
+    ],
+    [
+     "block3d/level_08",
+     0.0
+    ],
+    [
+     "block3d/level_09",
+     0.0
+    ],
+    [
+     "block3d/level_10",
+     0.0
+    ],
+    [
+     "block3d/level_11",
+     0.0
+    ],
+    [
+     "block3d/level_12",
+     0.0
+    ],
+    [
+     "block3d/level_13",
+     0.0
+    ],
+    [
+     "block3d/level_14",
+     0.0
+    ],
+    [
+     "block3d/level_15",
+     0.0
+    ],
+    [
+     "block3d/level_16",
+     0.0
+    ],
+    [
+     "block3d/level_17",
+     0.0
+    ],
+    [
+     "block3d/level_18",
+     0.0
+    ],
+    [
+     "block3d/level_19",
+     0.0
+    ],
+    [
+     "block3d/level_20",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 1,
+   "label": "cand_r1_0_spatial-grounding",
+   "dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "parent": "anchor_block3d",
+   "parent_dir": "harnesses/00_anchor_block3d",
+   "cell_depth": 1,
+   "primary": 0.0,
+   "delta_vs_parent": -0.05,
+   "vector": {
+    "block3d": 0.0
+   },
+   "dense": {},
+   "n_files": 19,
+   "diff_vs_parent": {
+    "files": 14,
+    "insertions": 939,
+    "deletions": 77
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "block3d rich harness \u2014 module map & levers (r001_0 \u00b7 spatial-grounding)",
+   "episodes": [
+    [
+     "block3d/level_01",
+     0.0
+    ],
+    [
+     "block3d/level_02",
+     0.0
+    ],
+    [
+     "block3d/level_03",
+     0.0
+    ],
+    [
+     "block3d/level_04",
+     0.0
+    ],
+    [
+     "block3d/level_05",
+     0.0
+    ],
+    [
+     "block3d/level_06",
+     0.0
+    ],
+    [
+     "block3d/level_07",
+     0.0
+    ],
+    [
+     "block3d/level_08",
+     0.0
+    ],
+    [
+     "block3d/level_09",
+     0.0
+    ],
+    [
+     "block3d/level_10",
+     0.0
+    ],
+    [
+     "block3d/level_11",
+     0.0
+    ],
+    [
+     "block3d/level_12",
+     0.0
+    ],
+    [
+     "block3d/level_13",
+     0.0
+    ],
+    [
+     "block3d/level_14",
+     0.0
+    ],
+    [
+     "block3d/level_15",
+     0.0
+    ],
+    [
+     "block3d/level_16",
+     0.0
+    ],
+    [
+     "block3d/level_17",
+     0.0
+    ],
+    [
+     "block3d/level_18",
+     0.0
+    ],
+    [
+     "block3d/level_19",
+     0.0
+    ],
+    [
+     "block3d/level_20",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 2,
+   "label": "cand_r3_0_spatial-grounding",
+   "dir": "harnesses/02_cand_r3_0_spatial-grounding",
+   "parent": "anchor_block3d",
+   "parent_dir": "harnesses/00_anchor_block3d",
+   "cell_depth": 1,
+   "primary": 0.85,
+   "delta_vs_parent": 0.8,
+   "vector": {
+    "block3d": 0.85
+   },
+   "dense": {},
+   "n_files": 19,
+   "diff_vs_parent": {
+    "files": 16,
+    "insertions": 1396,
+    "deletions": 110
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "block3d harness \u2014 layer-factored edge covers + a boustrophedon press tape",
+   "episodes": [
+    [
+     "block3d/level_01",
+     1.0
+    ],
+    [
+     "block3d/level_02",
+     1.0
+    ],
+    [
+     "block3d/level_03",
+     1.0
+    ],
+    [
+     "block3d/level_04",
+     1.0
+    ],
+    [
+     "block3d/level_05",
+     1.0
+    ],
+    [
+     "block3d/level_06",
+     0.0
+    ],
+    [
+     "block3d/level_07",
+     0.0
+    ],
+    [
+     "block3d/level_08",
+     1.0
+    ],
+    [
+     "block3d/level_09",
+     1.0
+    ],
+    [
+     "block3d/level_10",
+     1.0
+    ],
+    [
+     "block3d/level_11",
+     1.0
+    ],
+    [
+     "block3d/level_12",
+     1.0
+    ],
+    [
+     "block3d/level_13",
+     1.0
+    ],
+    [
+     "block3d/level_14",
+     1.0
+    ],
+    [
+     "block3d/level_15",
+     1.0
+    ],
+    [
+     "block3d/level_16",
+     1.0
+    ],
+    [
+     "block3d/level_17",
+     1.0
+    ],
+    [
+     "block3d/level_18",
+     1.0
+    ],
+    [
+     "block3d/level_19",
+     0.0
+    ],
+    [
+     "block3d/level_20",
+     1.0
+    ]
+   ]
+  },
+  {
+   "index": 3,
+   "label": "cand_r4_0_spatial-grounding",
+   "dir": "harnesses/03_cand_r4_0_spatial-grounding",
+   "parent": "anchor_block3d",
+   "parent_dir": "harnesses/00_anchor_block3d",
+   "cell_depth": 1,
+   "primary": 1.0,
+   "delta_vs_parent": 0.95,
+   "vector": {
+    "block3d": 1.0
+   },
+   "dense": {},
+   "n_files": 21,
+   "diff_vs_parent": {
+    "files": 18,
+    "insertions": 1435,
+    "deletions": 74
+   },
+   "on_path_to_best": true,
+   "is_best": true,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "block3d rich harness \u2014 the frame's own ruler, and a camera calibrated from the agent's own moves",
+   "episodes": [
+    [
+     "block3d/level_01",
+     1.0
+    ],
+    [
+     "block3d/level_02",
+     1.0
+    ],
+    [
+     "block3d/level_03",
+     1.0
+    ],
+    [
+     "block3d/level_04",
+     1.0
+    ],
+    [
+     "block3d/level_05",
+     1.0
+    ],
+    [
+     "block3d/level_06",
+     1.0
+    ],
+    [
+     "block3d/level_07",
+     1.0
+    ],
+    [
+     "block3d/level_08",
+     1.0
+    ],
+    [
+     "block3d/level_09",
+     1.0
+    ],
+    [
+     "block3d/level_10",
+     1.0
+    ],
+    [
+     "block3d/level_11",
+     1.0
+    ],
+    [
+     "block3d/level_12",
+     1.0
+    ],
+    [
+     "block3d/level_13",
+     1.0
+    ],
+    [
+     "block3d/level_14",
+     1.0
+    ],
+    [
+     "block3d/level_15",
+     1.0
+    ],
+    [
+     "block3d/level_16",
+     1.0
+    ],
+    [
+     "block3d/level_17",
+     1.0
+    ],
+    [
+     "block3d/level_18",
+     1.0
+    ],
+    [
+     "block3d/level_19",
+     1.0
+    ],
+    [
+     "block3d/level_20",
+     1.0
+    ]
+   ]
+  }
+ ]
+}

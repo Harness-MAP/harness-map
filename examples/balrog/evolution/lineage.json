@@ -1,0 +1,8094 @@
+{
+ "meta": {
+  "title": "BALROG-MiniHack",
+  "bench": "balrog",
+  "primary": "success",
+  "best_primary": 0.9,
+  "best_label": "cand_r68_0_spatial-grounding",
+  "first_reached_at_eval": 41,
+  "n_harnesses": 41,
+  "n_evaluated_in_run": 48,
+  "path_to_best": [
+   "anchor_naive",
+   "cand_r35_0_spatial-grounding",
+   "cand_r41_0_spatial-grounding",
+   "cand_r68_0_spatial-grounding"
+  ],
+  "run": "adaptive_k16_c1p4"
+ },
+ "harnesses": [
+  {
+   "index": 0,
+   "label": "anchor_naive",
+   "dir": "harnesses/00_anchor_naive",
+   "parent": null,
+   "parent_dir": null,
+   "cell_depth": 0,
+   "primary": 0.1,
+   "delta_vs_parent": null,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 0.6,
+    "MazeWalk-15x15": 0.2,
+    "Corridor-R3": 0.0,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.1,
+    "survival": 0.7,
+    "efficiency": 0.097
+   },
+   "n_files": 9,
+   "diff_vs_parent": null,
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "naive anchor \u2014 module map and evolvable levers",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 1,
+   "label": "cand_r1_0_spatial-grounding",
+   "dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 1,
+   "primary": 0.35,
+   "delta_vs_parent": 0.25,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.325,
+    "survival": 0.85,
+    "efficiency": 0.25825
+   },
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 7,
+    "insertions": 490,
+    "deletions": 39
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r001_0_spatial-grounding",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 2,
+   "label": "cand_r18_0_spatial-grounding",
+   "dir": "harnesses/02_cand_r18_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 1,
+   "primary": 0.175,
+   "delta_vs_parent": 0.075,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 0.8,
+    "MazeWalk-15x15": 0.4,
+    "Corridor-R3": 0.2,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.175,
+    "survival": 0.75,
+    "efficiency": 0.15875
+   },
+   "n_files": 11,
+   "diff_vs_parent": {
+    "files": 5,
+    "insertions": 301,
+    "deletions": 29
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r018_0_spatial-grounding \u2014 middleware pipeline",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 3,
+   "label": "cand_r26_0_spatial-grounding",
+   "dir": "harnesses/03_cand_r26_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 1,
+   "primary": 0.325,
+   "delta_vs_parent": 0.225,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.4,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.3,
+    "survival": 0.775,
+    "efficiency": 0.24875
+   },
+   "n_files": 7,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 264,
+    "deletions": 98
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "NOTES \u2014 cand_r026_0 (one-module pilot)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 4,
+   "label": "cand_r27_0_spatial-grounding",
+   "dir": "harnesses/04_cand_r27_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 1,
+   "primary": 0.325,
+   "delta_vs_parent": 0.225,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.4,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.275,
+    "survival": 0.8,
+    "efficiency": 0.25025
+   },
+   "n_files": 9,
+   "diff_vs_parent": {
+    "files": 6,
+    "insertions": 200,
+    "deletions": 95
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "axis",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 5,
+   "label": "cand_r29_0_spatial-grounding",
+   "dir": "harnesses/05_cand_r29_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 1,
+   "primary": 0.15,
+   "delta_vs_parent": 0.05,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 0.8,
+    "MazeWalk-15x15": 0.4,
+    "Corridor-R3": 0.0,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.15,
+    "survival": 0.75,
+    "efficiency": 0.13425
+   },
+   "n_files": 9,
+   "diff_vs_parent": {
+    "files": 5,
+    "insertions": 134,
+    "deletions": 48
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r029_0 \u2014 neighbour ledger (grounded single call)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 6,
+   "label": "cand_r33_0_spatial-grounding",
+   "dir": "harnesses/06_cand_r33_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 1,
+   "primary": 0.175,
+   "delta_vs_parent": 0.075,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 0.4,
+    "Corridor-R3": 0.0,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.175,
+    "survival": 0.75,
+    "efficiency": 0.14475
+   },
+   "n_files": 10,
+   "diff_vs_parent": {
+    "files": 8,
+    "insertions": 221,
+    "deletions": 93
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r033_0_spatial-grounding",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 7,
+   "label": "cand_r35_0_spatial-grounding",
+   "dir": "harnesses/07_cand_r35_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 1,
+   "primary": 0.15,
+   "delta_vs_parent": 0.05,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 0.0,
+    "Corridor-R3": 0.2,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.15,
+    "survival": 0.825,
+    "efficiency": 0.11125
+   },
+   "n_files": 8,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 266,
+    "deletions": 98
+   },
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "axis:",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 8,
+   "label": "cand_r36_0_spatial-grounding",
+   "dir": "harnesses/08_cand_r36_0_spatial-grounding",
+   "parent": "cand_r26_0_spatial-grounding",
+   "parent_dir": "harnesses/03_cand_r26_0_spatial-grounding",
+   "cell_depth": 1,
+   "primary": 0.375,
+   "delta_vs_parent": 0.05,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.35,
+    "survival": 0.775,
+    "efficiency": 0.27225
+   },
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 6,
+    "insertions": 458,
+    "deletions": 232
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r036_0_spatial-grounding",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 9,
+   "label": "cand_r37_0_spatial-grounding",
+   "dir": "harnesses/09_cand_r37_0_spatial-grounding",
+   "parent": "cand_r29_0_spatial-grounding",
+   "parent_dir": "harnesses/05_cand_r29_0_spatial-grounding",
+   "cell_depth": 1,
+   "primary": 0.325,
+   "delta_vs_parent": 0.175,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.4,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.325,
+    "survival": 0.8,
+    "efficiency": 0.24425
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 7,
+    "insertions": 508,
+    "deletions": 104
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r037_0_spatial-grounding \u2014 middleware pipeline with a code-planner decision stage",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 10,
+   "label": "cand_r38_0_spatial-grounding",
+   "dir": "harnesses/10_cand_r38_0_spatial-grounding",
+   "parent": "cand_r1_0_spatial-grounding",
+   "parent_dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "cell_depth": 1,
+   "primary": 0.325,
+   "delta_vs_parent": -0.025,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.6,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.3,
+    "survival": 0.775,
+    "efficiency": 0.248
+   },
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 40,
+    "deletions": 2
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "NOTES \u2014 cand_r038_0_spatial-grounding (parent cand_r001_0_spatial-grounding)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 11,
+   "label": "cand_r39_0_spatial-grounding",
+   "dir": "harnesses/11_cand_r39_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 1,
+   "primary": 0.125,
+   "delta_vs_parent": 0.025,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 0.8,
+    "MazeWalk-15x15": 0.2,
+    "Corridor-R3": 0.0,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.125,
+    "survival": 0.725,
+    "efficiency": 0.12125
+   },
+   "n_files": 11,
+   "diff_vs_parent": {
+    "files": 6,
+    "insertions": 233,
+    "deletions": 36
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r039_0 \u2014 spatial chart + BFS route hint (grounded single call)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 12,
+   "label": "cand_r40_0_spatial-grounding",
+   "dir": "harnesses/12_cand_r40_0_spatial-grounding",
+   "parent": "cand_r33_0_spatial-grounding",
+   "parent_dir": "harnesses/06_cand_r33_0_spatial-grounding",
+   "cell_depth": 2,
+   "primary": 0.25,
+   "delta_vs_parent": 0.075,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.0,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.25,
+    "survival": 1.0,
+    "efficiency": 0.2035
+   },
+   "n_files": 11,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 116,
+    "deletions": 3
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "axis",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 13,
+   "label": "cand_r41_0_spatial-grounding",
+   "dir": "harnesses/13_cand_r41_0_spatial-grounding",
+   "parent": "cand_r35_0_spatial-grounding",
+   "parent_dir": "harnesses/07_cand_r35_0_spatial-grounding",
+   "cell_depth": 2,
+   "primary": 0.375,
+   "delta_vs_parent": 0.225,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.375,
+    "survival": 0.8,
+    "efficiency": 0.27275
+   },
+   "n_files": 9,
+   "diff_vs_parent": {
+    "files": 1,
+    "insertions": 102,
+    "deletions": 11
+   },
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "axis:",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 14,
+   "label": "cand_r42_0_spatial-grounding",
+   "dir": "harnesses/14_cand_r42_0_spatial-grounding",
+   "parent": "cand_r18_0_spatial-grounding",
+   "parent_dir": "harnesses/02_cand_r18_0_spatial-grounding",
+   "cell_depth": 2,
+   "primary": 0.3,
+   "delta_vs_parent": 0.125,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.4,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.275,
+    "survival": 0.75,
+    "efficiency": 0.23875
+   },
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 5,
+    "insertions": 167,
+    "deletions": 6
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r042_0_spatial-grounding \u2014 middleware pipeline whose innermost stage OWNS movement",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 15,
+   "label": "cand_r43_0_spatial-grounding",
+   "dir": "harnesses/15_cand_r43_0_spatial-grounding",
+   "parent": "cand_r1_0_spatial-grounding",
+   "parent_dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "cell_depth": 2,
+   "primary": 0.325,
+   "delta_vs_parent": -0.025,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.6,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.3,
+    "survival": 0.775,
+    "efficiency": 0.248
+   },
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 91,
+    "deletions": 18
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r043_0_spatial-grounding",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 16,
+   "label": "cand_r44_0_spatial-grounding",
+   "dir": "harnesses/16_cand_r44_0_spatial-grounding",
+   "parent": "cand_r26_0_spatial-grounding",
+   "parent_dir": "harnesses/03_cand_r26_0_spatial-grounding",
+   "cell_depth": 3,
+   "primary": 0.375,
+   "delta_vs_parent": 0.05,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.35,
+    "survival": 0.775,
+    "efficiency": 0.27225
+   },
+   "n_files": 9,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 129,
+    "deletions": 12
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r044_0_spatial-grounding",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 17,
+   "label": "cand_r45_0_spatial-grounding",
+   "dir": "harnesses/17_cand_r45_0_spatial-grounding",
+   "parent": "cand_r29_0_spatial-grounding",
+   "parent_dir": "harnesses/05_cand_r29_0_spatial-grounding",
+   "cell_depth": 3,
+   "primary": 0.3,
+   "delta_vs_parent": 0.15,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 0.8,
+    "Corridor-R3": 0.6,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.3,
+    "survival": 0.85,
+    "efficiency": 0.24175
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 5,
+    "insertions": 309,
+    "deletions": 86
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r045_0_spatial-grounding \u2014 middleware stack over a map-memory Chart",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 18,
+   "label": "cand_r46_0_spatial-grounding",
+   "dir": "harnesses/18_cand_r46_0_spatial-grounding",
+   "parent": "cand_r41_0_spatial-grounding",
+   "parent_dir": "harnesses/13_cand_r41_0_spatial-grounding",
+   "cell_depth": 3,
+   "primary": 0.375,
+   "delta_vs_parent": 0.0,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.375,
+    "survival": 0.775,
+    "efficiency": 0.27275
+   },
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 470,
+    "deletions": 214
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r046_0_spatial-grounding \u2014 staged pipeline over tools/ modules + a Quest lava-crossing stage",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 19,
+   "label": "cand_r47_0_spatial-grounding",
+   "dir": "harnesses/19_cand_r47_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 3,
+   "primary": 0.2,
+   "delta_vs_parent": 0.1,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 0.4,
+    "Corridor-R3": 0.2,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.2,
+    "survival": 0.8,
+    "efficiency": 0.16075
+   },
+   "n_files": 11,
+   "diff_vs_parent": {
+    "files": 6,
+    "insertions": 234,
+    "deletions": 49
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r047_0 \u2014 prose-noun neighbour ledger + code arbitration (single grounded call)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 20,
+   "label": "cand_r48_0_spatial-grounding",
+   "dir": "harnesses/20_cand_r48_0_spatial-grounding",
+   "parent": "cand_r27_0_spatial-grounding",
+   "parent_dir": "harnesses/04_cand_r27_0_spatial-grounding",
+   "cell_depth": 4,
+   "primary": 0.375,
+   "delta_vs_parent": 0.05,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.35,
+    "survival": 0.775,
+    "efficiency": 0.2775
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 241,
+    "deletions": 101
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r048_0_spatial-grounding \u2014 potential-field walker rewired as a STAGE table over tools/field + tools/chart",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 21,
+   "label": "cand_r49_0_spatial-grounding",
+   "dir": "harnesses/21_cand_r49_0_spatial-grounding",
+   "parent": "cand_r33_0_spatial-grounding",
+   "parent_dir": "harnesses/06_cand_r33_0_spatial-grounding",
+   "cell_depth": 4,
+   "primary": 0.325,
+   "delta_vs_parent": 0.15,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.4,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.275,
+    "survival": 0.825,
+    "efficiency": 0.23475
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 168,
+    "deletions": 2
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "axis:",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 22,
+   "label": "cand_r50_0_spatial-grounding",
+   "dir": "harnesses/22_cand_r50_0_spatial-grounding",
+   "parent": "cand_r35_0_spatial-grounding",
+   "parent_dir": "harnesses/07_cand_r35_0_spatial-grounding",
+   "cell_depth": 4,
+   "primary": 0.325,
+   "delta_vs_parent": 0.175,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.4,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.3,
+    "survival": 0.775,
+    "efficiency": 0.24875
+   },
+   "n_files": 9,
+   "diff_vs_parent": {
+    "files": 1,
+    "insertions": 81,
+    "deletions": 4
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "NOTES \u2014 cand_r050_0_spatial-grounding (chart-routed learner)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 23,
+   "label": "cand_r51_0_spatial-grounding",
+   "dir": "harnesses/23_cand_r51_0_spatial-grounding",
+   "parent": "cand_r47_0_spatial-grounding",
+   "parent_dir": "harnesses/19_cand_r47_0_spatial-grounding",
+   "cell_depth": 4,
+   "primary": 0.375,
+   "delta_vs_parent": 0.175,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.35,
+    "survival": 0.775,
+    "efficiency": 0.27225
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 279,
+    "deletions": 33
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r051_0_spatial-grounding \u2014 prose-grounded potential-field walker (steered toward r027)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 24,
+   "label": "cand_r52_0_spatial-grounding",
+   "dir": "harnesses/24_cand_r52_0_spatial-grounding",
+   "parent": "cand_r48_0_spatial-grounding",
+   "parent_dir": "harnesses/20_cand_r48_0_spatial-grounding",
+   "cell_depth": 5,
+   "primary": 0.6,
+   "delta_vs_parent": 0.225,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.8,
+    "Quest-Medium": 1.0
+   },
+   "dense": {
+    "progression": 0.575,
+    "survival": 0.9,
+    "efficiency": 0.3565
+   },
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 344,
+    "deletions": 6
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r052_0_spatial-grounding \u2014 potential-field walker + a Quest-regime module (tools/quest.py)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     1.0
+    ]
+   ]
+  },
+  {
+   "index": 25,
+   "label": "cand_r53_0_spatial-grounding",
+   "dir": "harnesses/25_cand_r53_0_spatial-grounding",
+   "parent": "anchor_naive",
+   "parent_dir": "harnesses/00_anchor_naive",
+   "cell_depth": 5,
+   "primary": 0.225,
+   "delta_vs_parent": 0.125,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 0.6,
+    "Corridor-R3": 0.2,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.2,
+    "survival": 0.775,
+    "efficiency": 0.1895
+   },
+   "n_files": 10,
+   "diff_vs_parent": {
+    "files": 5,
+    "insertions": 176,
+    "deletions": 49
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r053_0 \u2014 code-ranked move menu (grounded single call, r029 region)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 26,
+   "label": "cand_r54_0_spatial-grounding",
+   "dir": "harnesses/26_cand_r54_0_spatial-grounding",
+   "parent": "cand_r26_0_spatial-grounding",
+   "parent_dir": "harnesses/03_cand_r26_0_spatial-grounding",
+   "cell_depth": 5,
+   "primary": 0.375,
+   "delta_vs_parent": 0.05,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.375,
+    "survival": 0.85,
+    "efficiency": 0.27275
+   },
+   "n_files": 11,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 361,
+    "deletions": 193
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r054_0_spatial-grounding: staged pipeline over tools/ modules (from the one-module r026 walker)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 27,
+   "label": "cand_r55_0_spatial-grounding",
+   "dir": "harnesses/27_cand_r55_0_spatial-grounding",
+   "parent": "cand_r29_0_spatial-grounding",
+   "parent_dir": "harnesses/05_cand_r29_0_spatial-grounding",
+   "cell_depth": 5,
+   "primary": 0.275,
+   "delta_vs_parent": 0.125,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 0.8,
+    "Corridor-R3": 0.4,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.275,
+    "survival": 0.825,
+    "efficiency": 0.23399999999999999
+   },
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 8,
+    "insertions": 397,
+    "deletions": 98
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r055_0 \u2014 middleware stage pipeline whose movement locus is a CHART + BFS route",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 28,
+   "label": "cand_r56_0_spatial-grounding",
+   "dir": "harnesses/28_cand_r56_0_spatial-grounding",
+   "parent": "cand_r26_0_spatial-grounding",
+   "parent_dir": "harnesses/03_cand_r26_0_spatial-grounding",
+   "cell_depth": 6,
+   "primary": 0.375,
+   "delta_vs_parent": 0.05,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.375,
+    "survival": 0.775,
+    "efficiency": 0.27275
+   },
+   "n_files": 8,
+   "diff_vs_parent": {
+    "files": 1,
+    "insertions": 83,
+    "deletions": 33
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r056_0_spatial-grounding \u2014 one-module chart pilot rewired as an ordered STAGE PIPELINE",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 29,
+   "label": "cand_r57_0_spatial-grounding",
+   "dir": "harnesses/29_cand_r57_0_spatial-grounding",
+   "parent": "cand_r29_0_spatial-grounding",
+   "parent_dir": "harnesses/05_cand_r29_0_spatial-grounding",
+   "cell_depth": 6,
+   "primary": 0.3,
+   "delta_vs_parent": 0.15,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.2,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.3,
+    "survival": 0.775,
+    "efficiency": 0.2425
+   },
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 8,
+    "insertions": 395,
+    "deletions": 106
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r057_0 \u2014 stage pipeline with a code-owned ROUTE stage (model = fights + residue)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 30,
+   "label": "cand_r58_0_spatial-grounding",
+   "dir": "harnesses/30_cand_r58_0_spatial-grounding",
+   "parent": "cand_r41_0_spatial-grounding",
+   "parent_dir": "harnesses/13_cand_r41_0_spatial-grounding",
+   "cell_depth": 6,
+   "primary": 0.625,
+   "delta_vs_parent": 0.25,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 1.0,
+    "Quest-Medium": 1.0
+   },
+   "dense": {
+    "progression": 0.625,
+    "survival": 0.9,
+    "efficiency": 0.3665
+   },
+   "n_files": 11,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 460,
+    "deletions": 42
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r058_0_spatial-grounding \u2014 charted learner as a STAGE table + a Quest-regime tool module",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     1.0
+    ]
+   ]
+  },
+  {
+   "index": 31,
+   "label": "cand_r59_0_spatial-grounding",
+   "dir": "harnesses/31_cand_r59_0_spatial-grounding",
+   "parent": "cand_r27_0_spatial-grounding",
+   "parent_dir": "harnesses/04_cand_r27_0_spatial-grounding",
+   "cell_depth": 6,
+   "primary": 0.6,
+   "delta_vs_parent": 0.275,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.8,
+    "Quest-Medium": 1.0
+   },
+   "dense": {
+    "progression": 0.575,
+    "survival": 0.9,
+    "efficiency": 0.3565
+   },
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 617,
+    "deletions": 101
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r059_0_spatial-grounding \u2014 field walker rewired as a STAGE table over tools/ modules (+ door/Quest owners)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     1.0
+    ]
+   ]
+  },
+  {
+   "index": 32,
+   "label": "cand_r60_0_spatial-grounding",
+   "dir": "harnesses/32_cand_r60_0_spatial-grounding",
+   "parent": "cand_r33_0_spatial-grounding",
+   "parent_dir": "harnesses/06_cand_r33_0_spatial-grounding",
+   "cell_depth": 7,
+   "primary": 0.35,
+   "delta_vs_parent": 0.175,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.6,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.325,
+    "survival": 0.8,
+    "efficiency": 0.25425
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 141,
+    "deletions": 6
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "axis:",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 33,
+   "label": "cand_r61_0_spatial-grounding",
+   "dir": "harnesses/33_cand_r61_0_spatial-grounding",
+   "parent": "cand_r35_0_spatial-grounding",
+   "parent_dir": "harnesses/07_cand_r35_0_spatial-grounding",
+   "cell_depth": 7,
+   "primary": 0.35,
+   "delta_vs_parent": 0.2,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.4,
+    "CorridorBattle-Dark": 0.4,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.325,
+    "survival": 0.825,
+    "efficiency": 0.26225
+   },
+   "n_files": 9,
+   "diff_vs_parent": {
+    "files": 1,
+    "insertions": 80,
+    "deletions": 2
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r061_0 \u2014 chart-routed learner",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 34,
+   "label": "cand_r62_0_spatial-grounding",
+   "dir": "harnesses/34_cand_r62_0_spatial-grounding",
+   "parent": "cand_r47_0_spatial-grounding",
+   "parent_dir": "harnesses/19_cand_r47_0_spatial-grounding",
+   "cell_depth": 7,
+   "primary": 0.225,
+   "delta_vs_parent": 0.025,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 0.8,
+    "Corridor-R3": 0.0,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.225,
+    "survival": 0.875,
+    "efficiency": 0.20124999999999998
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 145,
+    "deletions": 24
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "axis:",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 35,
+   "label": "cand_r63_0_spatial-grounding",
+   "dir": "harnesses/35_cand_r63_0_spatial-grounding",
+   "parent": "cand_r53_0_spatial-grounding",
+   "parent_dir": "harnesses/25_cand_r53_0_spatial-grounding",
+   "cell_depth": 7,
+   "primary": 0.325,
+   "delta_vs_parent": 0.1,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 0.8,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.325,
+    "survival": 0.775,
+    "efficiency": 0.25725
+   },
+   "n_files": 11,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 111,
+    "deletions": 5
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "NOTES \u2014 cand_r063_0_spatial-grounding (parent r053 one-hop menu; steered toward r027's gradient walker)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 36,
+   "label": "cand_r64_0_spatial-grounding",
+   "dir": "harnesses/36_cand_r64_0_spatial-grounding",
+   "parent": "cand_r58_0_spatial-grounding",
+   "parent_dir": "harnesses/30_cand_r58_0_spatial-grounding",
+   "cell_depth": 8,
+   "primary": 0.875,
+   "delta_vs_parent": 0.25,
+   "vector": {
+    "Boxoban-Hard": 1.0,
+    "Boxoban-Medium": 1.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 1.0,
+    "Quest-Medium": 1.0
+   },
+   "dense": {
+    "progression": 0.875,
+    "survival": 0.9,
+    "efficiency": 0.47325
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 2,
+    "insertions": 243,
+    "deletions": 8
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r064_0_spatial-grounding \u2014 tools/ loader + a Boxoban `sokoban` stage owner (exact push-level A*)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     1.0
+    ]
+   ]
+  },
+  {
+   "index": 37,
+   "label": "cand_r65_0_spatial-grounding",
+   "dir": "harnesses/37_cand_r65_0_spatial-grounding",
+   "parent": "cand_r54_0_spatial-grounding",
+   "parent_dir": "harnesses/26_cand_r54_0_spatial-grounding",
+   "cell_depth": 8,
+   "primary": 0.625,
+   "delta_vs_parent": 0.25,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 1.0,
+    "Quest-Medium": 1.0
+   },
+   "dense": {
+    "progression": 0.625,
+    "survival": 0.9,
+    "efficiency": 0.36625
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 359,
+    "deletions": 2
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r065_0_spatial-grounding \u2014 stage-table chart walker + a separable Quest regime module (steer: r058/r052)",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     1.0
+    ]
+   ]
+  },
+  {
+   "index": 38,
+   "label": "cand_r66_0_spatial-grounding",
+   "dir": "harnesses/38_cand_r66_0_spatial-grounding",
+   "parent": "cand_r26_0_spatial-grounding",
+   "parent_dir": "harnesses/03_cand_r26_0_spatial-grounding",
+   "cell_depth": 8,
+   "primary": 0.375,
+   "delta_vs_parent": 0.05,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.8,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.375,
+    "survival": 0.8,
+    "efficiency": 0.27275
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 4,
+    "insertions": 484,
+    "deletions": 197
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r066_0_spatial-grounding \u2014 chart pilot rewired as a STAGE PIPELINE over tools/ modules",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 39,
+   "label": "cand_r67_0_spatial-grounding",
+   "dir": "harnesses/39_cand_r67_0_spatial-grounding",
+   "parent": "cand_r29_0_spatial-grounding",
+   "parent_dir": "harnesses/05_cand_r29_0_spatial-grounding",
+   "cell_depth": 8,
+   "primary": 0.275,
+   "delta_vs_parent": 0.125,
+   "vector": {
+    "Boxoban-Hard": 0.0,
+    "Boxoban-Medium": 0.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 0.2,
+    "CorridorBattle-Dark": 0.0,
+    "Quest-Easy": 0.0,
+    "Quest-Medium": 0.0
+   },
+   "dense": {
+    "progression": 0.275,
+    "survival": 0.8,
+    "efficiency": 0.22325
+   },
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 9,
+    "insertions": 435,
+    "deletions": 112
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r067_0_spatial-grounding \u2014 middleware pipeline + ledger + BINDING chart route",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 40,
+   "label": "cand_r68_0_spatial-grounding",
+   "dir": "harnesses/40_cand_r68_0_spatial-grounding",
+   "parent": "cand_r41_0_spatial-grounding",
+   "parent_dir": "harnesses/13_cand_r41_0_spatial-grounding",
+   "cell_depth": 9,
+   "primary": 0.9,
+   "delta_vs_parent": 0.525,
+   "vector": {
+    "Boxoban-Hard": 1.0,
+    "Boxoban-Medium": 1.0,
+    "MazeWalk-9x9": 1.0,
+    "MazeWalk-15x15": 1.0,
+    "Corridor-R3": 1.0,
+    "CorridorBattle-Dark": 0.2,
+    "Quest-Easy": 1.0,
+    "Quest-Medium": 1.0
+   },
+   "dense": {
+    "progression": 0.9,
+    "survival": 0.9,
+    "efficiency": 0.491
+   },
+   "n_files": 12,
+   "diff_vs_parent": {
+    "files": 3,
+    "insertions": 711,
+    "deletions": 45
+   },
+   "on_path_to_best": true,
+   "is_best": true,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r068_0_spatial-grounding \u2014 r041 learner rewired onto r064's stage table + tools/ owners, with a `>`-attracted frontier in route()",
+   "episodes": [
+    [
+     "MiniHack-Boxoban-Hard-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Hard-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Boxoban-Medium-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Corridor-R3-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/00",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/01",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/02",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/03",
+     0.0
+    ],
+    [
+     "MiniHack-CorridorBattle-Dark-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-15x15-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-MazeWalk-9x9-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Easy-v0/04",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/00",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/01",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/02",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/03",
+     1.0
+    ],
+    [
+     "MiniHack-Quest-Medium-v0/04",
+     1.0
+    ]
+   ]
+  }
+ ]
+}

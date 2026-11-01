@@ -1,0 +1,58 @@
+[
+ {
+  "level": "run_20",
+  "index": 0,
+  "label": "anchor_snake",
+  "score": 0.0,
+  "steps": 3,
+  "outcome": "score 0.00 in 3 steps",
+  "source_video": "snake_openai_evaluation_20261010_203348.mp4",
+  "eval_dir": "snake_20_rf_99cjm",
+  "file": "run_20__00_anchor_snake.mp4"
+ },
+ {
+  "level": "run_20",
+  "index": 1,
+  "label": "cand_r1_0_spatial-grounding",
+  "score": 0.25,
+  "steps": 100,
+  "outcome": "score 0.25 in 100 steps",
+  "source_video": "snake_openai_evaluation_20261011_153347.mp4",
+  "eval_dir": "snake_20_z4c361fk",
+  "file": "run_20__01_cand_r1_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "run_20",
+  "index": 2,
+  "label": "cand_r2_0_spatial-grounding",
+  "score": 0.25,
+  "steps": 100,
+  "outcome": "score 0.25 in 100 steps",
+  "source_video": "snake_openai_evaluation_20261011_154712.mp4",
+  "eval_dir": "snake_20_sx7wxno1",
+  "file": "run_20__02_cand_r2_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "run_20",
+  "index": 3,
+  "label": "cand_r3_0_spatial-grounding",
+  "score": 1.0,
+  "steps": 16,
+  "outcome": "solved in 16 steps",
+  "source_video": "snake_openai_evaluation_20261011_155105.mp4",
+  "eval_dir": "snake_20_o5r5xk4i",
+  "file": "run_20__03_cand_r3_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "run_20",
+  "index": null,
+  "label": "progression_grid",
+  "file": "run_20__progression_grid.mp4",
+  "panels": [
+   "run_20__00_anchor_snake.mp4",
+   "run_20__01_cand_r1_0_spatial-grounding.mp4",
+   "run_20__02_cand_r2_0_spatial-grounding.mp4",
+   "run_20__03_cand_r3_0_spatial-grounding.mp4"
+  ]
+ }
+]

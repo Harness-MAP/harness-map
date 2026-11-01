@@ -1,0 +1,127 @@
+{
+ "pid": 1617990,
+ "at": 1791003218,
+ "overrides": 5,
+ "honoured": 0,
+ "steps": [
+  {
+   "step": 1,
+   "phase": "survey",
+   "pick": "rotate_cube_y_cw",
+   "played": "rotate_cube_x_cw",
+   "override": true,
+   "ok": true,
+   "menu": [
+    "rotate_cube_x_cw"
+   ],
+   "pose": [
+    "x",
+    1
+   ],
+   "square": true,
+   "purity": 0.889,
+   "seen": "WWWRRYRRY",
+   "live": 6,
+   "plan": [],
+   "surveys": 1,
+   "faults": 0
+  },
+  {
+   "step": 2,
+   "phase": "survey",
+   "pick": "rotate_cube_y_cw",
+   "played": "rotate_cube_x_cw",
+   "override": true,
+   "ok": true,
+   "menu": [
+    "rotate_cube_x_cw"
+   ],
+   "pose": [
+    "x",
+    2
+   ],
+   "square": false,
+   "purity": 0.5,
+   "seen": "YYGOOORRY",
+   "live": 6,
+   "plan": [],
+   "surveys": 1,
+   "faults": 0
+  },
+  {
+   "step": 3,
+   "phase": "solve",
+   "pick": "rotate_cube_y_cw",
+   "played": "rotate_up_acw",
+   "override": true,
+   "ok": true,
+   "menu": [
+    "rotate_up_acw"
+   ],
+   "pose": [
+    "x",
+    2
+   ],
+   "square": true,
+   "purity": 0.889,
+   "seen": "YYGYYGOOO",
+   "live": 0,
+   "plan": [
+    "U'",
+    "R",
+    "B'"
+   ],
+   "surveys": 1,
+   "faults": 0
+  },
+  {
+   "step": 4,
+   "phase": "solve",
+   "pick": "rotate_cube_y_cw",
+   "played": "rotate_right_cw",
+   "override": true,
+   "ok": true,
+   "menu": [
+    "rotate_right_cw"
+   ],
+   "pose": [
+    "x",
+    2
+   ],
+   "square": true,
+   "purity": 0.889,
+   "seen": "GGOYYOYYO",
+   "live": 0,
+   "plan": [
+    "R",
+    "B'"
+   ],
+   "surveys": 1,
+   "faults": 0
+  },
+  {
+   "step": 5,
+   "phase": "solve",
+   "pick": "rotate_cube_y_cw",
+   "played": "rotate_back_acw",
+   "override": true,
+   "ok": true,
+   "menu": [
+    "rotate_back_acw"
+   ],
+   "pose": [
+    "x",
+    2
+   ],
+   "square": true,
+   "purity": 0.889,
+   "seen": "GGGYYYYYY",
+   "live": 0,
+   "plan": [
+    "B'"
+   ],
+   "surveys": 1,
+   "faults": 0
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+Localization (measured on disk after the last prose edit, cvt_v3_k16, balrog role vocabulary):
+cell 8, top six [8, 7, 6, 10, 14, 4] = all tier C (7 nodes / 1 tool module), margin 0.19 over occupied cell 7.
+Occupied before this round: 3 (anchor), 2 (r001-r032 mostly), 15 (r018/r022/r024), 0 (r026), 7 (r027), 1 (r029).
+Graph: build_agent -> GroundedAgent -> {extract_action, parse_glyph_map}; parse_glyph_map -> ring_of_eight (tools/grid.py).
+AGENT.md register decided the cell: the imperative/descriptive draft sat in cell 7 for 6/6 variants, the terse and
+descriptive-list drafts in cell 8 for 12/12 (NOTES full/short/tiny x skill on/off).

@@ -1,0 +1,1653 @@
+{
+ "meta": {
+  "title": "SpatialWorld maze3d_pro",
+  "bench": "games",
+  "primary": "score",
+  "best_primary": 1.0,
+  "best_label": "cand_r6_1_action-planning",
+  "first_reached_at_eval": 13,
+  "n_harnesses": 13,
+  "n_evaluated_in_run": 13,
+  "path_to_best": [
+   "anchor_maze3d_pro",
+   "cand_r6_1_action-planning"
+  ],
+  "run": "maze3d_pro__k2_claude_pv"
+ },
+ "harnesses": [
+  {
+   "index": 0,
+   "label": "anchor_maze3d_pro",
+   "dir": "harnesses/00_anchor_maze3d_pro",
+   "parent": null,
+   "parent_dir": null,
+   "cell_depth": 0,
+   "primary": 0.08,
+   "delta_vs_parent": null,
+   "vector": {
+    "maze3d_pro": 0.08
+   },
+   "dense": {},
+   "n_files": 13,
+   "diff_vs_parent": null,
+   "on_path_to_best": true,
+   "is_best": false,
+   "proposer_note": "",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 1,
+   "label": "cand_r1_0_spatial-grounding",
+   "dir": "harnesses/01_cand_r1_0_spatial-grounding",
+   "parent": "anchor_maze3d_pro",
+   "parent_dir": "harnesses/00_anchor_maze3d_pro",
+   "cell_depth": 1,
+   "primary": 0.32,
+   "delta_vs_parent": 0.24,
+   "vector": {
+    "maze3d_pro": 0.32
+   },
+   "dense": {},
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 7,
+    "insertions": 597,
+    "deletions": 62
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 2,
+   "label": "cand_r1_1_action-planning",
+   "dir": "harnesses/02_cand_r1_1_action-planning",
+   "parent": "anchor_maze3d_pro",
+   "parent_dir": "harnesses/00_anchor_maze3d_pro",
+   "cell_depth": 1,
+   "primary": 0.28,
+   "delta_vs_parent": 0.2,
+   "vector": {
+    "maze3d_pro": 0.28
+   },
+   "dense": {},
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 5,
+    "insertions": 496,
+    "deletions": 34
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=action-planning; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 3,
+   "label": "cand_r2_0_spatial-grounding",
+   "dir": "harnesses/03_cand_r2_0_spatial-grounding",
+   "parent": "cand_r1_1_action-planning",
+   "parent_dir": "harnesses/02_cand_r1_1_action-planning",
+   "cell_depth": 2,
+   "primary": 0.28,
+   "delta_vs_parent": 0.0,
+   "vector": {
+    "maze3d_pro": 0.28
+   },
+   "dense": {},
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 7,
+    "insertions": 423,
+    "deletions": 114
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 4,
+   "label": "cand_r2_1_action-planning",
+   "dir": "harnesses/04_cand_r2_1_action-planning",
+   "parent": "cand_r1_1_action-planning",
+   "parent_dir": "harnesses/02_cand_r1_1_action-planning",
+   "cell_depth": 2,
+   "primary": 0.36,
+   "delta_vs_parent": 0.08,
+   "vector": {
+    "maze3d_pro": 0.36
+   },
+   "dense": {},
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 7,
+    "insertions": 613,
+    "deletions": 161
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=action-planning; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 5,
+   "label": "cand_r3_0_spatial-grounding",
+   "dir": "harnesses/05_cand_r3_0_spatial-grounding",
+   "parent": "cand_r2_1_action-planning",
+   "parent_dir": "harnesses/04_cand_r2_1_action-planning",
+   "cell_depth": 3,
+   "primary": 0.36,
+   "delta_vs_parent": 0.0,
+   "vector": {
+    "maze3d_pro": 0.36
+   },
+   "dense": {},
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 6,
+    "insertions": 620,
+    "deletions": 324
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 6,
+   "label": "cand_r3_1_action-planning",
+   "dir": "harnesses/06_cand_r3_1_action-planning",
+   "parent": "cand_r2_1_action-planning",
+   "parent_dir": "harnesses/04_cand_r2_1_action-planning",
+   "cell_depth": 3,
+   "primary": 0.28,
+   "delta_vs_parent": -0.08,
+   "vector": {
+    "maze3d_pro": 0.28
+   },
+   "dense": {},
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 7,
+    "insertions": 785,
+    "deletions": 520
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=action-planning; backbone=cli:claude; produced_sentinel=True",
+   "heading": "cand_r003_1_action-planning \u2014 the frame as GEOMETRY: a rangefinder, a flank strip, and a supplied stride",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 7,
+   "label": "cand_r4_0_spatial-grounding",
+   "dir": "harnesses/07_cand_r4_0_spatial-grounding",
+   "parent": "anchor_maze3d_pro",
+   "parent_dir": "harnesses/00_anchor_maze3d_pro",
+   "cell_depth": 4,
+   "primary": 0.76,
+   "delta_vs_parent": 0.68,
+   "vector": {
+    "maze3d_pro": 0.76
+   },
+   "dense": {},
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 9,
+    "insertions": 1092,
+    "deletions": 75
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     1.0
+    ]
+   ]
+  },
+  {
+   "index": 8,
+   "label": "cand_r4_1_action-planning",
+   "dir": "harnesses/08_cand_r4_1_action-planning",
+   "parent": "anchor_maze3d_pro",
+   "parent_dir": "harnesses/00_anchor_maze3d_pro",
+   "cell_depth": 4,
+   "primary": 0.88,
+   "delta_vs_parent": 0.8,
+   "vector": {
+    "maze3d_pro": 0.88
+   },
+   "dense": {},
+   "n_files": 14,
+   "diff_vs_parent": {
+    "files": 8,
+    "insertions": 1178,
+    "deletions": 83
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=action-planning; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 9,
+   "label": "cand_r5_0_spatial-grounding",
+   "dir": "harnesses/09_cand_r5_0_spatial-grounding",
+   "parent": "anchor_maze3d_pro",
+   "parent_dir": "harnesses/00_anchor_maze3d_pro",
+   "cell_depth": 5,
+   "primary": 0.96,
+   "delta_vs_parent": 0.88,
+   "vector": {
+    "maze3d_pro": 0.96
+   },
+   "dense": {},
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 11,
+    "insertions": 1184,
+    "deletions": 86
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 10,
+   "label": "cand_r5_1_action-planning",
+   "dir": "harnesses/10_cand_r5_1_action-planning",
+   "parent": "anchor_maze3d_pro",
+   "parent_dir": "harnesses/00_anchor_maze3d_pro",
+   "cell_depth": 5,
+   "primary": 0.68,
+   "delta_vs_parent": 0.6,
+   "vector": {
+    "maze3d_pro": 0.68
+   },
+   "dense": {},
+   "n_files": 13,
+   "diff_vs_parent": {
+    "files": 9,
+    "insertions": 1287,
+    "deletions": 92
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=action-planning; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     0.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 11,
+   "label": "cand_r6_0_spatial-grounding",
+   "dir": "harnesses/11_cand_r6_0_spatial-grounding",
+   "parent": "anchor_maze3d_pro",
+   "parent_dir": "harnesses/00_anchor_maze3d_pro",
+   "cell_depth": 6,
+   "primary": 0.96,
+   "delta_vs_parent": 0.88,
+   "vector": {
+    "maze3d_pro": 0.96
+   },
+   "dense": {},
+   "n_files": 15,
+   "diff_vs_parent": {
+    "files": 11,
+    "insertions": 1539,
+    "deletions": 86
+   },
+   "on_path_to_best": false,
+   "is_best": false,
+   "proposer_note": "axis=spatial-grounding; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     0.0
+    ]
+   ]
+  },
+  {
+   "index": 12,
+   "label": "cand_r6_1_action-planning",
+   "dir": "harnesses/12_cand_r6_1_action-planning",
+   "parent": "anchor_maze3d_pro",
+   "parent_dir": "harnesses/00_anchor_maze3d_pro",
+   "cell_depth": 6,
+   "primary": 1.0,
+   "delta_vs_parent": 0.92,
+   "vector": {
+    "maze3d_pro": 1.0
+   },
+   "dense": {},
+   "n_files": 16,
+   "diff_vs_parent": {
+    "files": 11,
+    "insertions": 1316,
+    "deletions": 81
+   },
+   "on_path_to_best": true,
+   "is_best": true,
+   "proposer_note": "axis=action-planning; backbone=cli:claude; produced_sentinel=True",
+   "heading": "maze3d_pro rich harness \u2014 module map & levers",
+   "episodes": [
+    [
+     "maze3d_pro/level_01",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_02",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_03",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_04",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_05",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_06",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_07",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_08",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_09",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_10",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_11",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_12",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_13",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_14",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_15",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_16",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_17",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_18",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_19",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_20",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_21",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_22",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_23",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_24",
+     1.0
+    ],
+    [
+     "maze3d_pro/level_25",
+     1.0
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+[
+ {
+  "level": "level_12",
+  "index": 0,
+  "label": "anchor_block3d",
+  "score": 0.0,
+  "steps": 50,
+  "outcome": "score 0.00 in 50 steps",
+  "source_video": "block3d_openai_evaluation_20261005_051552.mp4",
+  "eval_dir": "block3d_12_8ozo19xg",
+  "file": "level_12__00_anchor_block3d.mp4"
+ },
+ {
+  "level": "level_12",
+  "index": 1,
+  "label": "cand_r1_0_spatial-grounding",
+  "score": 0.0,
+  "steps": 50,
+  "outcome": "score 0.00 in 50 steps",
+  "source_video": "block3d_openai_evaluation_20261006_204717.mp4",
+  "eval_dir": "block3d_12_h72asgst",
+  "file": "level_12__01_cand_r1_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "level_12",
+  "index": 2,
+  "label": "cand_r3_0_spatial-grounding",
+  "score": 1.0,
+  "steps": 15,
+  "outcome": "solved in 15 steps",
+  "source_video": "block3d_openai_evaluation_20261006_205127.mp4",
+  "eval_dir": "block3d_12__sfg0f_p",
+  "file": "level_12__02_cand_r3_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "level_12",
+  "index": 3,
+  "label": "cand_r4_0_spatial-grounding",
+  "score": 1.0,
+  "steps": 15,
+  "outcome": "solved in 15 steps",
+  "source_video": "block3d_openai_evaluation_20261006_205309.mp4",
+  "eval_dir": "block3d_12_4ah3u3cb",
+  "file": "level_12__03_cand_r4_0_spatial-grounding.mp4"
+ },
+ {
+  "level": "level_12",
+  "index": null,
+  "label": "progression_grid",
+  "file": "level_12__progression_grid.mp4",
+  "panels": [
+   "level_12__00_anchor_block3d.mp4",
+   "level_12__01_cand_r1_0_spatial-grounding.mp4",
+   "level_12__02_cand_r3_0_spatial-grounding.mp4",
+   "level_12__03_cand_r4_0_spatial-grounding.mp4"
+  ]
+ }
+]

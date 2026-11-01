@@ -1,0 +1,179 @@
+{
+  "testbed": "spatialworld-3dgames",
+  "search": {
+    "mode": "adaptive",
+    "k0": 4,
+    "budget": 50,
+    "m": 0.5,
+    "strict_coverage": true
+  },
+  "benchmark": {
+    "evaluate": "\"$GAME_PYTHON\" \"$GAME_EVALUATOR\" --harness {harness} --tasks {tasks} --out {out}",
+    "search_split": "maze",
+    "holdout_split": null,
+    "timeout_s": 36000,
+    "judge": false
+  },
+  "splits": {
+    "maze": [
+      {"task_id": "maze/level_01", "game": "maze", "level": 1},
+      {"task_id": "maze/level_02", "game": "maze", "level": 2},
+      {"task_id": "maze/level_03", "game": "maze", "level": 3},
+      {"task_id": "maze/level_04", "game": "maze", "level": 4},
+      {"task_id": "maze/level_05", "game": "maze", "level": 5},
+      {"task_id": "maze/level_06", "game": "maze", "level": 6},
+      {"task_id": "maze/level_07", "game": "maze", "level": 7},
+      {"task_id": "maze/level_08", "game": "maze", "level": 8},
+      {"task_id": "maze/level_09", "game": "maze", "level": 9},
+      {"task_id": "maze/level_10", "game": "maze", "level": 10},
+      {"task_id": "maze/level_11", "game": "maze", "level": 11},
+      {"task_id": "maze/level_12", "game": "maze", "level": 12},
+      {"task_id": "maze/level_13", "game": "maze", "level": 13},
+      {"task_id": "maze/level_14", "game": "maze", "level": 14},
+      {"task_id": "maze/level_15", "game": "maze", "level": 15},
+      {"task_id": "maze/level_16", "game": "maze", "level": 16},
+      {"task_id": "maze/level_17", "game": "maze", "level": 17},
+      {"task_id": "maze/level_18", "game": "maze", "level": 18},
+      {"task_id": "maze/level_19", "game": "maze", "level": 19},
+      {"task_id": "maze/level_20", "game": "maze", "level": 20}
+    ],
+    "block3d": [
+      {"task_id": "block3d/level_01", "game": "block3d", "level": 1},
+      {"task_id": "block3d/level_02", "game": "block3d", "level": 2},
+      {"task_id": "block3d/level_03", "game": "block3d", "level": 3},
+      {"task_id": "block3d/level_04", "game": "block3d", "level": 4},
+      {"task_id": "block3d/level_05", "game": "block3d", "level": 5},
+      {"task_id": "block3d/level_06", "game": "block3d", "level": 6},
+      {"task_id": "block3d/level_07", "game": "block3d", "level": 7},
+      {"task_id": "block3d/level_08", "game": "block3d", "level": 8},
+      {"task_id": "block3d/level_09", "game": "block3d", "level": 9},
+      {"task_id": "block3d/level_10", "game": "block3d", "level": 10},
+      {"task_id": "block3d/level_11", "game": "block3d", "level": 11},
+      {"task_id": "block3d/level_12", "game": "block3d", "level": 12},
+      {"task_id": "block3d/level_13", "game": "block3d", "level": 13},
+      {"task_id": "block3d/level_14", "game": "block3d", "level": 14},
+      {"task_id": "block3d/level_15", "game": "block3d", "level": 15},
+      {"task_id": "block3d/level_16", "game": "block3d", "level": 16},
+      {"task_id": "block3d/level_17", "game": "block3d", "level": 17},
+      {"task_id": "block3d/level_18", "game": "block3d", "level": 18},
+      {"task_id": "block3d/level_19", "game": "block3d", "level": 19},
+      {"task_id": "block3d/level_20", "game": "block3d", "level": 20}
+    ],
+    "maze3d_pro": [
+      {"task_id": "maze3d_pro/level_01", "game": "maze3d_pro", "level": 1},
+      {"task_id": "maze3d_pro/level_02", "game": "maze3d_pro", "level": 2},
+      {"task_id": "maze3d_pro/level_03", "game": "maze3d_pro", "level": 3},
+      {"task_id": "maze3d_pro/level_04", "game": "maze3d_pro", "level": 4},
+      {"task_id": "maze3d_pro/level_05", "game": "maze3d_pro", "level": 5},
+      {"task_id": "maze3d_pro/level_06", "game": "maze3d_pro", "level": 6},
+      {"task_id": "maze3d_pro/level_07", "game": "maze3d_pro", "level": 7},
+      {"task_id": "maze3d_pro/level_08", "game": "maze3d_pro", "level": 8},
+      {"task_id": "maze3d_pro/level_09", "game": "maze3d_pro", "level": 9},
+      {"task_id": "maze3d_pro/level_10", "game": "maze3d_pro", "level": 10},
+      {"task_id": "maze3d_pro/level_11", "game": "maze3d_pro", "level": 11},
+      {"task_id": "maze3d_pro/level_12", "game": "maze3d_pro", "level": 12},
+      {"task_id": "maze3d_pro/level_13", "game": "maze3d_pro", "level": 13},
+      {"task_id": "maze3d_pro/level_14", "game": "maze3d_pro", "level": 14},
+      {"task_id": "maze3d_pro/level_15", "game": "maze3d_pro", "level": 15},
+      {"task_id": "maze3d_pro/level_16", "game": "maze3d_pro", "level": 16},
+      {"task_id": "maze3d_pro/level_17", "game": "maze3d_pro", "level": 17},
+      {"task_id": "maze3d_pro/level_18", "game": "maze3d_pro", "level": 18},
+      {"task_id": "maze3d_pro/level_19", "game": "maze3d_pro", "level": 19},
+      {"task_id": "maze3d_pro/level_20", "game": "maze3d_pro", "level": 20},
+      {"task_id": "maze3d_pro/level_21", "game": "maze3d_pro", "level": 21},
+      {"task_id": "maze3d_pro/level_22", "game": "maze3d_pro", "level": 22},
+      {"task_id": "maze3d_pro/level_23", "game": "maze3d_pro", "level": 23},
+      {"task_id": "maze3d_pro/level_24", "game": "maze3d_pro", "level": 24},
+      {"task_id": "maze3d_pro/level_25", "game": "maze3d_pro", "level": 25}
+    ],
+    "rubik": [
+      {"task_id": "rubik/level_01", "game": "rubik", "level": 1},
+      {"task_id": "rubik/level_02", "game": "rubik", "level": 2},
+      {"task_id": "rubik/level_03", "game": "rubik", "level": 3},
+      {"task_id": "rubik/level_04", "game": "rubik", "level": 4},
+      {"task_id": "rubik/level_05", "game": "rubik", "level": 5},
+      {"task_id": "rubik/level_06", "game": "rubik", "level": 6},
+      {"task_id": "rubik/level_07", "game": "rubik", "level": 7},
+      {"task_id": "rubik/level_08", "game": "rubik", "level": 8},
+      {"task_id": "rubik/level_09", "game": "rubik", "level": 9},
+      {"task_id": "rubik/level_10", "game": "rubik", "level": 10},
+      {"task_id": "rubik/level_11", "game": "rubik", "level": 11},
+      {"task_id": "rubik/level_12", "game": "rubik", "level": 12},
+      {"task_id": "rubik/level_13", "game": "rubik", "level": 13},
+      {"task_id": "rubik/level_14", "game": "rubik", "level": 14},
+      {"task_id": "rubik/level_15", "game": "rubik", "level": 15},
+      {"task_id": "rubik/level_16", "game": "rubik", "level": 16},
+      {"task_id": "rubik/level_17", "game": "rubik", "level": 17},
+      {"task_id": "rubik/level_18", "game": "rubik", "level": 18},
+      {"task_id": "rubik/level_19", "game": "rubik", "level": 19},
+      {"task_id": "rubik/level_20", "game": "rubik", "level": 20}
+    ],
+    "snake": [
+      {"task_id": "snake/run_001", "game": "snake", "seed": 1},
+      {"task_id": "snake/run_002", "game": "snake", "seed": 2},
+      {"task_id": "snake/run_003", "game": "snake", "seed": 3},
+      {"task_id": "snake/run_004", "game": "snake", "seed": 4},
+      {"task_id": "snake/run_005", "game": "snake", "seed": 5},
+      {"task_id": "snake/run_006", "game": "snake", "seed": 6},
+      {"task_id": "snake/run_007", "game": "snake", "seed": 7},
+      {"task_id": "snake/run_008", "game": "snake", "seed": 8},
+      {"task_id": "snake/run_009", "game": "snake", "seed": 9},
+      {"task_id": "snake/run_010", "game": "snake", "seed": 10},
+      {"task_id": "snake/run_011", "game": "snake", "seed": 11},
+      {"task_id": "snake/run_012", "game": "snake", "seed": 12},
+      {"task_id": "snake/run_013", "game": "snake", "seed": 13},
+      {"task_id": "snake/run_014", "game": "snake", "seed": 14},
+      {"task_id": "snake/run_015", "game": "snake", "seed": 15},
+      {"task_id": "snake/run_016", "game": "snake", "seed": 16},
+      {"task_id": "snake/run_017", "game": "snake", "seed": 17},
+      {"task_id": "snake/run_018", "game": "snake", "seed": 18},
+      {"task_id": "snake/run_019", "game": "snake", "seed": 19},
+      {"task_id": "snake/run_020", "game": "snake", "seed": 20}
+    ],
+    "snake_holdout": [
+      {"task_id": "snake/run_021", "game": "snake", "seed": 21},
+      {"task_id": "snake/run_022", "game": "snake", "seed": 22},
+      {"task_id": "snake/run_023", "game": "snake", "seed": 23},
+      {"task_id": "snake/run_024", "game": "snake", "seed": 24},
+      {"task_id": "snake/run_025", "game": "snake", "seed": 25}
+    ]
+  },
+  "score_file": "score.json",
+  "fitness": {
+    "primary": "score",
+    "n": "n_episodes",
+    "valid": "rows"
+  },
+  "episode": {
+    "list_key": "per_episode",
+    "task_id": "task_id",
+    "primary": "score"
+  },
+  "selection": {
+    "greedy_key": [
+      ["primary", "desc"],
+      ["taint", "asc"],
+      ["judge", "asc"],
+      ["cost", "asc"]
+    ]
+  },
+  "audit": {
+    "taint_file": "read_audit.json",
+    "judge_file": "judge.json",
+    "verdict_key": "verdict",
+    "privileged_keys": [
+      "gt.json",
+      "maze_file",
+      "distance_to_exit",
+      "distance_to_food",
+      "cube_solved",
+      "current_floor",
+      "target_blocks",
+      "matched_blocks"
+    ]
+  },
+  "meta_agent": {
+    "backbone": "cli:claude",
+    "timeout_s": 10800
+  }
+}

@@ -1,0 +1,3 @@
+Localization: measured with cvt_v3_k16 and balrog role rules. The 7-node one-tool shape is tier C {4,6,7,8,10,14}, and all of those cells were free.
+Occupied cells at r027: 0 (r026), 2, 3 (anchor), 15.
+Final measurement (NOTES.md in place, doclen 2281): cell 7; the whole top six is tier C; gap to the nearest occupied cell +0.063.
