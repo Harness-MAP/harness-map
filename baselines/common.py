@@ -222,10 +222,10 @@ def validate(adapter, genome: Genome) -> bool:
     d = Path(genome.source_dir)
     if not d.is_dir():
         return False
-    # A candidate must keep the root orchestrator.py its parent had: without it the evaluator
+    # A candidate must keep the entry point its parent had: without it the evaluator
     # fails silently to 0 instead of being caught here.
     par = Path(genome.parent_dir) if getattr(genome, "parent_dir", None) else None
-    if par and (par / "orchestrator.py").exists() and not (d / "orchestrator.py").exists():
+    if par and MH.entry_file(par) and not MH.entry_file(d):
         return False
     pys = sorted(d.rglob("*.py"))
     if not pys:

@@ -199,8 +199,7 @@ def _check_batch_fits(adapter, cands, fits):
 def _evaluate_all(adapter, cands, it, *, check_contract=False):
     """Static gate, `evaluate_batch` (or `evaluate`), judge, diagnosis; one result per candidate."""
     reasons = [_pre_eval_gate(adapter, g) for g in cands]
-    from pathlib import Path as _P
-    if any((_P(getattr(g, "source_dir", ".")) / "orchestrator.py").exists() for g in cands):
+    if any(entry_file(getattr(g, "source_dir", ".")) for g in cands):
         _rej = [f"{getattr(g, 'label', '?')}: {r}" for g, r in zip(cands, reasons) if r]
         print(f"[gate] pre-eval GATE: {sum(1 for r in reasons if r is None)}/{len(cands)} pass"
               + (" | REJECT " + "; ".join(_rej) if _rej else ""))
@@ -237,14 +236,26 @@ def _pre_eval_gate(adapter, genome):
     return _default_pre_eval_gate(adapter, genome)
 
 
+ENTRY_FILES = ("orchestrator.py", "harness.py")          # the entry point; the second is its older name
+
+
+def entry_file(src_dir) -> Optional[Path]:
+    """The harness entry point in `src_dir`, or None when the directory has neither name."""
+    for name in ENTRY_FILES:
+        p = Path(src_dir) / name
+        if p.exists():
+            return p
+    return None
+
+
 def _default_pre_eval_gate(adapter, genome):
     """Reject, without running it, harness code with a syntax error or a privileged-key access."""
     import ast
     from pathlib import Path as _Path
     src_dir = _Path(getattr(genome, "source_dir", "."))
-    entry = src_dir / "orchestrator.py"
-    if not entry.exists():
-        return None                                  # no orchestrator.py: nothing to gate
+    entry = entry_file(src_dir)
+    if entry is None:
+        return None                                  # no entry point: nothing to gate
     py_files = [entry] + sorted(src_dir.glob("tools/*.py"))
     trees = {}
     for f in py_files:

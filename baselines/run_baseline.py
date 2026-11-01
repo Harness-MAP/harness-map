@@ -87,7 +87,7 @@ def _corpus(a, cfg: dict, adapter, k0: int) -> list:
     """Directories the ablations fit their partition on: `--corpus`, else the proposer corpus."""
     anchor_dir = adapter.anchor().source_dir
     if a.corpus:
-        return [anchor_dir] + sorted(d for d in a.corpus.iterdir() if (d / "orchestrator.py").exists())
+        return [anchor_dir] + sorted(d for d in a.corpus.iterdir() if MH.entry_file(d))
     root = Path("runs") / (cfg.get("testbed") or a.config.parent.name)
     return RB.proposer_corpus(adapter, anchor_dir, root / "corpus", k=max(5, k0 + 3))
 

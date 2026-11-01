@@ -1,12 +1,54 @@
-# Harness-MAP
+<h1 align="center">Harness-MAP</h1>
+
+<p align="center"><b>Budget-Efficient Harness Search via Structure-Token Factorization</b></p>
+
+<p align="center">
+  <a href="https://yuanapril.github.io/">Mei Yuan</a> ·
+  <a href="https://zdxdsw.github.io/">Yingshan Chang</a> ·
+  <a href="https://dpfried.github.io/">Daniel Fried</a> ·
+  <a href="https://yonatanbisk.com/">Yonatan Bisk</a><br>
+  Carnegie Mellon University
+</p>
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/1y0b185BGWgLylrryYU_cPm4ZFyRX8sHR/view?usp=sharing"><img src="https://img.shields.io/badge/arXiv-preprint-b31b1b" alt="arXiv"></a>
+  <a href="https://harness-map.github.io/"><img src="https://img.shields.io/badge/Project%20page-harness--map.github.io-1f6feb" alt="Project page"></a>
+  <a href="https://x.com/"><img src="https://img.shields.io/badge/X-thread-000000" alt="X"></a>
+</p>
+<!-- TODO: point the arXiv badge at the arXiv abstract page once the id is assigned, and the X badge at the announcement thread. -->
+
+<p align="center"><img src="assets/teaser.png" alt="Left: naive search in harness space versus Harness-MAP's resolution-adaptive quality-diversity search in structure-token space. Right: success rate against harness evaluations on SpatialWorld-3DGames." width="100%"></p>
+
+<p align="center"><sub><b>Figure 1.</b> <b>(a)</b> A meta-agent searching harness space directly follows one lineage at a time and collapses into local edits. <b>(b)</b> Harness-MAP places every candidate in a structure–token map, breeds from many cells at once, and sub-splits the cells whose fitness varies as the search proceeds. <b>Right:</b> success rate against the number of harness evaluations on SpatialWorld-3DGames with a frozen Qwen3-VL-30B-A3B-Instruct: Harness-MAP (k<sub>0</sub> = 4) reaches 100% inside the 50-evaluation budget, where Meta-Harness, DGM and OpenEvolve reach 68.6%, 34.6% and 22.0%.</sub></p>
+
+## Overview
 
 Harness-MAP evolves the **harness** of an agent — the orchestration code, prompts, skills, tools and
-memory wrapped around a frozen LLM/VLM — with quality-diversity search. An LLM meta-agent proposes
-edits to a multi-file harness, and a CVT-MAP-Elites archive keyed by a structural descriptor of the
-harness source keeps a diverse population of working designs. In its adaptive mode the archive
-refines its resolution where fitness varies and reverts refinements that do not pay off.
+memory wrapped around a frozen LLM/VLM — under a tight evaluation budget. Letting a meta-agent search
+harness space on its own is expensive: hundreds of meta-agent calls, minutes to hours per
+evaluation, and lineages that collapse onto local edits. Harness-MAP factorizes a harness into its
+graph-level program structure and its token-level implementation, lays candidates out on a
+CVT-MAP-Elites map keyed by a structural descriptor of the harness source, and searches the map
+with a resolution-adaptive strategy that sub-splits cells whose fitness varies and retracts
+refinements that do not pay off. The outcome is an archive of diverse, high-quality harnesses
+rather than a single lineage.
 
-## How it works
+With the policy model frozen (`Qwen3-VL-30B-A3B-Instruct`; only the harness changes), the paper's
+searches reach:
+
+| benchmark | anchor → best harness | harness evaluations |
+|---|---|---|
+| SpatialWorld-3DGames (five games) | 10.7% → 100.0% task success | 39 |
+| BALROG-MiniHack | 10.0% → 90.0% task success | 41 |
+| SimWorld-MMNav, easy | 32.0% → 46.5% subtask success | 16 |
+| SimWorld-MMNav, hard | 29.0% → 55.5% subtask success | 16 |
+
+Harness-MAP outperforms Meta-Harness, GEPA, the Darwin Gödel Machine, OpenEvolve and ShinkaEvolve
+on both the search and the held-out tasks under the same budget; the
+[project page](https://harness-map.github.io/) walks through the method, the results and the
+evolved harnesses.
+
+### How it works
 
 ```
 anchor harness ─► descriptor φ ─► CVT partition with k0 cells (fit once on a corpus, then frozen)
@@ -43,73 +85,15 @@ Evaluation budget: **N = ⌈m·k0⌉ + G·P·C**, with P = ⌈log2 k0⌉ in the 
 | `mapelites_hier`     | scheduled coarse→fine re-partition on a centroid ladder (Mouret & Clune 2015, §9.2) |
 | `mapelites_fixed`    | fixed CVT partition (Vassiliades, Chatzilygeroudis & Mouret 2018)           |
 
-## Repository layout
+### The paper's experiments
 
-```
-harness_map/                   the method
-├── main.py                    Genome/Fitness types, config defaults, run(), the adapter protocol,
-│                              Node/Ctx, evaluation gates, fitness_from_dir; re-exports qd/'s names
-├── qd/
-│   ├── descriptors.py         φ: roles, component graph, WL, AST / numeric / doc-text blocks
-│   ├── partition.py           k-means, CVT fit (fit_cvt_blocks), frozen φ (make_phi_blocks), ladder
-│   ├── coverage.py            coverage-gated initialization
-│   ├── archive.py             cells, placement, elites, refine / retreat / advance, steering; breeding one generation
-│   └── modes.py               the three CVT drivers, the N = ⌈m·k0⌉ + G·P·C accounting, run_frontier,
-│                              the per-evaluation ledger and resume from a snapshot
-├── meta_agent/
-│   ├── agent.py               MetaAgent, propose_candidates, run_judge, run_diagnosis, AgenticAdapter
-│   └── skills/{proposer,diagnostician,judge}/SKILL.md
-examples/
-├── run_benchmark.py           generic driver: config + anchor + evaluator command → one search
-├── toy/run_toy.py             the method on a toy task, no model needed
-├── balrog/                    BALROG-MiniHack: config.json, run.sh, README (setup),
-│                              evolution/ (every harness of the paper's best run, with videos)
-├── spatialworld_games/        SpatialWorld 3D games: config.json, run.sh, spatialworld.patch,
-│                              README, evolution/<game>/ (the best run of each game, with videos)
-├── simworld_nav/              SimWorld-Robotics navigation: config.json, run.sh, README,
-│                              evolution/ (the best hard-setting run, with videos)
-└── render/                    episode logs → videos: replay_balrog_episode.py and
-                               replay_rubik_episode.py (engine replays), render_balrog_episode.py
-                               (text frames), render_nav_trace.py, grid_videos.py (2×2 grids)
-baselines/                     the five published methods and two ablations, as arms (readme.md)
-├── run_baseline.py            one driver for every (benchmark × arm) pair, budget-matched to N
-├── {meta_harness,gepa,dgm,openevolve}.py, shinka_arm.py  each runs the pinned upstream clone
-├── {openevolve_cvt,open_harness}.py                      the descriptor-swap ablations
-├── common.py, upstream.py, clone.sh, test_baselines.py
-└── vendor/                    the upstream clones (bash baselines/clone.sh; not committed)
-```
+Each benchmark directory under `examples/` holds the paper's configuration for one benchmark
+(`config.json`), a `run.sh` with placeholders for the benchmark installation, and a README with
+the setup steps and the score file the evaluator must write. The benchmarks themselves are not
+redistributed; `run_benchmark.py` reaches them through an evaluator command you provide.
 
-## Installation
-
-```bash
-git clone https://github.com/Harness-MAP/harness-evolution.git
-cd harness-evolution
-pip install -e .              # numpy, sentence-transformers, einops
-pip install -e ".[openai]"    # optional: the chat-loop meta-agent backbone
-```
-
-Python 3.10 or newer. The descriptor downloads `nomic-ai/CodeRankEmbed` through
-sentence-transformers (with `trust_remote_code=True`) on first use and runs it on CPU; set
-`META_EMB_MODEL` to use a different model.
-
-## Quickstart
-
-```bash
-python examples/toy/run_toy.py
-```
-
-This runs `mapelites_adaptive` end to end on a toy task in about ten seconds, with no GPU and no
-LLM. A "harness" is one number with a two-peaked score, and the example checks that the archive
-keeps both peaks instead of collapsing onto one.
-
-## The three benchmarks of the paper
-
-Each example directory holds the paper's configuration for one benchmark (`config.json`), a
-`run.sh` with placeholders for the benchmark installation, and a README with the setup steps and
-the score file the evaluator must write. The benchmarks themselves are not redistributed;
-`run_benchmark.py` reaches them through an evaluator command you provide.
-
-### Settings
+<details>
+<summary>Settings of the paper's runs</summary>
 
 | | BALROG-MiniHack | SpatialWorld 3D games | SimWorld-MMNav |
 |---|---|---|---|
@@ -139,6 +123,8 @@ BALROG runs instead fit it on a fixed corpus of 48 structural variants of the na
 modules inlined or split out, text priors filled or empty), which `--corpus DIR` accepts.
 G follows from N = ⌈m·k0⌉ + G·P·C.
 
+</details>
+
 Deviations from the official benchmarks: the 3D games run a **pure-visual variant**
 (`spatialworld.patch` strips on-screen position, cursor, axis and move-hint text from block3d,
 maze3d_pro and snake; maze keeps its engine's position-and-heading bar), so their scores are not
@@ -146,22 +132,7 @@ comparable with the SpatialWorld leaderboard; navigation uses a 50/10 search/hel
 split of the SimWorld-MMNav tasks rather than the full set, and BALROG's search scores every
 candidate on fixed per-(task, episode) seeds so all candidates play the same levels.
 
-### Running them
-
-```bash
-MODE=adaptive K0=4 bash examples/balrog/run.sh                      # after editing the placeholders
-GAME=maze3d_pro MODE=adaptive K0=8 bash examples/spatialworld_games/run.sh
-SETTING=hard MODE=adaptive K0=4 bash examples/simworld_nav/run.sh
-```
-
-`MODE` selects `adaptive` (the method), `fixed` or `hier` (the ablations); `K0` the initial cell
-count. `run_benchmark.py` fits the CVT on the anchor plus meta-agent variants of it (cached per
-benchmark), runs one search, and writes `runs/<testbed>/<split>/<mode>_k<k0>/result.json`, the
-candidate directories, the evaluation outputs and a per-evaluation ledger. `search.budget` in a
-config caps N and derives G; `--rounds` sets G directly instead. An interrupted run continues
-with `--resume` (same `--run-dir`; raise `--budget` to extend a finished one).
-
-### The evolution behind the paper's best harnesses
+### The evolution behind the best harnesses
 
 Each benchmark directory has an `evolution/` subdirectory with the paper's best run laid out
 harness by harness: the anchor, then every harness the run evaluated until the best score was
@@ -179,27 +150,77 @@ the scripts that turn an episode log into such a video.
 | SpatialWorld 3D games | adaptive, one run per game (k0 = 32 for maze, block3d and snake, 4 for rubik, 2 for maze3d_pro) | 4 to 13 per game | 1.0 on every game | [`examples/spatialworld_games/evolution/`](examples/spatialworld_games/evolution/README.md) |
 | SimWorld-MMNav, hard | adaptive, k0 = 4 | 16 | SubtaskSR 0.555 at evaluation 16 (held-out 0.567) | [`examples/simworld_nav/evolution/`](examples/simworld_nav/evolution/README.md) |
 
-## Baselines and ablations
+### Baselines and ablations
 
 `baselines/` holds the five published methods the paper compares against — Meta-Harness
 (`meta-harness`), GEPA, the Darwin Gödel Machine, OpenEvolve and ShinkaEvolve — and the two
 descriptor-swap ablations (`openevolve_cvt`: OpenEvolve's search over our CVT cells;
 `open_harness`: our search modes over OpenEvolve's descriptor). Each arm runs the original
-upstream implementation from a pinned clone (`bash baselines/clone.sh` fetches them) and shares
-the anchor, meta-agent, evaluator and splits of the Harness-MAP run it is compared with. Two things
-none of the upstream methods ships are added to every arm identically: the anti-cheat gate every
-candidate must pass before it is scored, and a budget-matched protocol (the same N of candidate
-evaluations, the same stop rules, the winner reported on the held-out split):
+upstream implementation from a pinned clone and shares the anchor, meta-agent, evaluator and
+splits of the Harness-MAP run it is compared with. Two things none of the upstream methods ships
+are added to every arm identically: the anti-cheat gate every candidate must pass before it is
+scored, and a budget-matched protocol (the same N of candidate evaluations, the same stop rules,
+the winner reported on the held-out split). [baselines/readme.md](baselines/readme.md) lists the
+upstream repositories and commits, the settings used for the paper's tables, what each arm
+replaces and every divergence.
+
+## Quickstart
+
+### Install
 
 ```bash
+git clone https://github.com/Harness-MAP/harness-map.git
+cd harness-map
+pip install -e .              # numpy, sentence-transformers, einops
+pip install -e ".[openai]"    # optional: the chat-loop meta-agent backbone
+```
+
+Python 3.10 or newer. The descriptor downloads `nomic-ai/CodeRankEmbed` through
+sentence-transformers (with `trust_remote_code=True`) on first use and runs it on CPU; set
+`META_EMB_MODEL` to use a different model.
+
+### Run the toy example
+
+```bash
+python examples/toy/run_toy.py
+```
+
+This runs `mapelites_adaptive` end to end on a toy task in about ten seconds, with no GPU and no
+LLM. A "harness" is one number with a two-peaked score, and the example checks that the archive
+keeps both peaks instead of collapsing onto one.
+
+### Run a benchmark of the paper
+
+Install the benchmark and the policy model as its README describes
+([BALROG](examples/balrog/README.md), [SpatialWorld 3D games](examples/spatialworld_games/README.md),
+[SimWorld-MMNav](examples/simworld_nav/README.md)), fill in the placeholders of its `run.sh`, then:
+
+```bash
+MODE=adaptive K0=4 bash examples/balrog/run.sh
+GAME=maze3d_pro MODE=adaptive K0=8 bash examples/spatialworld_games/run.sh
+SETTING=hard MODE=adaptive K0=4 bash examples/simworld_nav/run.sh
+```
+
+`MODE` selects `adaptive` (the method), `fixed` or `hier` (the ablations); `K0` the initial cell
+count. `run_benchmark.py` fits the CVT on the anchor plus meta-agent variants of it (cached per
+benchmark), runs one search, and writes `runs/<testbed>/<split>/<mode>_k<k0>/result.json`, the
+candidate directories, the evaluation outputs and a per-evaluation ledger. `search.budget` in a
+config caps N and derives G; `--rounds` sets G directly instead. An interrupted run continues
+with `--resume` (same `--run-dir`; raise `--budget` to extend a finished one).
+
+### Run a baseline
+
+```bash
+bash baselines/clone.sh                                    # the pinned upstream clones, once
 python baselines/run_baseline.py --config examples/balrog/config.json --anchor <ANCHOR_DIR> \
     --baseline meta-harness --budget 50
 ```
 
-[baselines/readme.md](baselines/readme.md) lists the upstream repositories and commits, the
-settings used for the paper's tables, what each arm replaces and every divergence.
+`--baseline` takes `meta-harness`, `gepa`, `dgm`, `openevolve`, `shinka`, `openevolve_cvt` or
+`open_harness`; `python baselines/test_baselines.py` checks the arms against a mock adapter
+without a GPU or a model.
 
-## Running on your own benchmark
+### Run on your own benchmark
 
 A benchmark plugs in through four pieces: an **anchor harness**, an **evaluator** with a task
 split, a **config file** and an **adapter**. The search itself (`main.py`, `qd/`, `meta_agent/`)
@@ -208,7 +229,7 @@ covers the common case of an evaluator that is a shell command writing a score f
 benchmark configs are templates for it. A custom adapter is needed only for in-process
 evaluation, your own batching or a different judge policy.
 
-### 1. Anchor harness
+#### 1. Anchor harness
 
 The skeleton is fixed because the proposer skill relies on it; the content is yours.
 
@@ -224,10 +245,10 @@ harnesses/<task>/
 ```
 
 Your evaluator decides how `orchestrator.py` is run (the three examples each use a different entry
-point). Make sure the anchor runs and scores above zero on some tasks: the search needs a
+point); the search also accepts the older name `harness.py` for the entry point. Make sure the anchor runs and scores above zero on some tasks: the search needs a
 non-degenerate starting point.
 
-### 2. Evaluator and task split
+#### 2. Evaluator and task split
 
 The evaluator runs the frozen model with a harness on a list of tasks and scores the outcome from
 the true final state; it is entirely yours. Keep a **search split** scored during the search and a
@@ -236,7 +257,7 @@ object a harness receives exposes ground truth (goal positions, solutions, inter
 it so that only sanctioned methods are reachable. The static gate and the judge only see what is
 in the code and the traces.
 
-### 3. Config
+#### 3. Config
 
 A JSON file merged over `harness_map.main.DEFAULTS`. The keys the search reads:
 
@@ -267,7 +288,7 @@ evaluator command is a template: `{harness}` is the candidate directory, `{out}`
 for the score file and traces, `{split}` the split name and `{tasks}` a JSON file holding the
 split's task records; environment variables in it are expanded.
 
-### 4. Adapter
+#### 4. Adapter
 
 ```python
 from pathlib import Path
@@ -351,7 +372,7 @@ out = MH.run(MyAdapter(cfg), cfg, mode="mapelites_hier", phi_fn=phi_fn, centroid
 
 Use the same corpus and the same frozen φ for every mode you compare.
 
-### 5. Smoke test, in this order
+#### 5. Smoke test, in this order
 
 1. The anchor evaluates and scores above zero on some tasks.
 2. One `propose` produces an importable child that keeps the entry-point contract and writes `NOTES.md`.
@@ -363,7 +384,7 @@ unchanged (scope `noop`) and coverage stops progressing; check a candidate's `pr
 diff it against its parent before suspecting the descriptor. An unreachable model endpoint can
 make every episode score 0 without raising; check the endpoint before long runs.
 
-## Main search knobs
+### Search knobs
 
 | knob                  | meaning                                                                    |
 |-----------------------|----------------------------------------------------------------------------|
@@ -377,7 +398,7 @@ make every episode score 0 without raising; check the endpoint before long runs.
 | `k_split`, `depth_cap`, `patience` | adaptive only: children per split, maximum split depth, breeding turns before a split is judged |
 | `steer`               | add a search-space direction to each proposer brief                        |
 
-## Meta-agent backbones
+### Meta-agent backbones
 
 | backbone     | how it runs                                                                       |
 |--------------|-----------------------------------------------------------------------------------|
@@ -393,7 +414,7 @@ plus a sentinel file (`NOTES.md`). The command line of each CLI backbone is conf
 > searches inside a container or VM where only the run directory is writable, and keep credentials
 > out of the harness and task directories.
 
-## Environment variables
+### Environment variables
 
 | variable                       | effect                                                              |
 |--------------------------------|---------------------------------------------------------------------|
@@ -405,14 +426,7 @@ plus a sentinel file (`NOTES.md`). The command line of each CLI backbone is conf
 | `META_EMB_MODEL`               | sentence-transformers model for the doc-text block of φ              |
 | `META_AGENT_MAX_TURNS`, `META_BASH_TIMEOUT_S`, `OPENAI_MAX_COMPLETION_TOKENS`, `OPENAI_REASONING_EFFORT` | chat-loop limits (`OPENAI_REASONING_EFFORT=none` disables the reasoning-effort field) |
 
-## Outputs
-
-`run()` returns a dict with `history` (every evaluated harness with its `Fitness`) and `best`. The
-mode adds a report block (`frontier` for adaptive, `fixed`, `hier`) with the final cell table,
-split/retreat logs, steering log, the `budget` and `init` (coverage) reports, and the resolution
-summary. `run_benchmark.py` saves all of it as `result.json`.
-
-## Notes and limitations
+### Notes and limitations
 
 - In the MAP-Elites modes the LLM judge runs only on candidates evaluated through the adapter's
   `evaluate_batch` (`benchmark.judge` in a config); with `evaluate` alone, candidates pass the
@@ -442,6 +456,84 @@ summary. `run_benchmark.py` saves all of it as `result.json`.
 - With σ = 0 every distinct fitness value can trigger a split; set σ to the evaluation noise if
   that is too eager for your benchmark.
 
-## License and citation
+## Structure
 
-<!-- TODO: add the license file and the paper citation before publishing. -->
+```
+harness_map/                   the method
+├── main.py                    Genome/Fitness types, config defaults, run(), the adapter protocol,
+│                              Node/Ctx, evaluation gates, fitness_from_dir; re-exports qd/'s names
+├── qd/
+│   ├── descriptors.py         φ: roles, component graph, WL, AST / numeric / doc-text blocks
+│   ├── partition.py           k-means, CVT fit (fit_cvt_blocks), frozen φ (make_phi_blocks), ladder
+│   ├── coverage.py            coverage-gated initialization
+│   ├── archive.py             cells, placement, elites, refine / retreat / advance, steering; breeding one generation
+│   └── modes.py               the three CVT drivers, the N = ⌈m·k0⌉ + G·P·C accounting, run_frontier,
+│                              the per-evaluation ledger and resume from a snapshot
+├── meta_agent/
+│   ├── agent.py               MetaAgent, propose_candidates, run_judge, run_diagnosis, AgenticAdapter
+│   └── skills/{proposer,diagnostician,judge}/SKILL.md
+examples/
+├── run_benchmark.py           generic driver: config + anchor + evaluator command → one search
+├── toy/run_toy.py             the method on a toy task, no model needed
+├── balrog/                    BALROG-MiniHack: config.json, run.sh, README (setup),
+│                              evolution/ (every harness of the paper's best run, with videos)
+├── spatialworld_games/        SpatialWorld 3D games: config.json, run.sh, spatialworld.patch,
+│                              README, evolution/<game>/ (the best run of each game, with videos)
+├── simworld_nav/              SimWorld-Robotics navigation: config.json, run.sh, README,
+│                              evolution/ (the best hard-setting run, with videos)
+└── render/                    episode logs → videos: replay_balrog_episode.py and
+                               replay_rubik_episode.py (engine replays), render_balrog_episode.py
+                               (text frames), render_nav_trace.py, grid_videos.py (2×2 grids)
+baselines/                     the five published methods and two ablations, as arms (readme.md)
+├── run_baseline.py            one driver for every (benchmark × arm) pair, budget-matched to N
+├── {meta_harness,gepa,dgm,openevolve}.py, shinka_arm.py  each runs the pinned upstream clone
+├── {openevolve_cvt,open_harness}.py                      the descriptor-swap ablations
+├── common.py, upstream.py, clone.sh, test_baselines.py
+└── vendor/                    the upstream clones (bash baselines/clone.sh; not committed)
+assets/                        the teaser figure
+pyproject.toml                 the harness_map package (pip install -e .)
+```
+
+Each `evolution/` directory is laid out as `README.md`, `lineage.json`, `harnesses/<NN>_<label>/`
+(the harness as evaluated, its `NOTES.md` and `diagnosis.md`) and `videos/`.
+
+**What a run writes.** `run()` returns a dict with `history` (every evaluated harness with its
+`Fitness`) and `best`. The mode adds a report block (`frontier` for adaptive, `fixed`, `hier`)
+with the final cell table, split/retreat logs, steering log, the `budget` and `init` (coverage)
+reports, and the resolution summary. `run_benchmark.py` saves all of it as `result.json` in
+`runs/<testbed>/<split>/<mode>_k<k0>/`, next to `candidates/` (one directory per proposed
+harness), `evals/` (the evaluator's score files and traces) and `checkpoints/` (the
+per-evaluation ledger and the resume snapshot).
+
+## Citation
+
+```bibtex
+@article{yuan2026harnessmap,
+  title   = {Harness-MAP: Budget-Efficient Harness Search via Structure-Token Factorization},
+  author  = {Yuan, Mei and Chang, Yingshan and Fried, Daniel and Bisk, Yonatan},
+  journal = {arXiv preprint},
+  year    = {2026}
+}
+```
+
+<!-- TODO: add the arXiv identifier to the entry and a LICENSE file to the repository. -->
+
+## Acknowledgement
+
+The experiments build on three benchmarks and their simulators:
+[BALROG](https://github.com/balrog-ai/BALROG) with [MiniHack](https://github.com/samvelyan/minihack)
+and the [NetHack Learning Environment](https://github.com/heiner/nle),
+[SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld), and
+[SimWorld-Robotics](https://github.com/SCAI-JHU/SimWorld-Robotics) with the SimWorld Unreal Engine
+simulator. The policy model is [Qwen3-VL](https://github.com/QwenLM/Qwen3-VL) served with
+[vLLM](https://github.com/vllm-project/vllm), and the descriptor's text block uses
+[CodeRankEmbed](https://huggingface.co/nomic-ai/CodeRankEmbed) through
+[sentence-transformers](https://github.com/UKPLab/sentence-transformers).
+
+The baselines run the authors' own implementations from pinned clones of
+[Meta-Harness](https://github.com/stanford-iris-lab/meta-harness),
+[GEPA](https://github.com/gepa-ai/gepa), the [Darwin Gödel Machine](https://github.com/jennyzzt/dgm),
+[OpenEvolve](https://github.com/algorithmicsuperintelligence/openevolve) and
+[ShinkaEvolve](https://github.com/SakanaAI/shinkaevolve); we thank their authors for releasing
+them. The archive follows MAP-Elites (Mouret & Clune, 2015) and CVT-MAP-Elites (Vassiliades,
+Chatzilygeroudis & Mouret, 2018).

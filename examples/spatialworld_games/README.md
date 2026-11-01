@@ -17,7 +17,7 @@ renders that text.
 1. **SpatialWorld** at commit 8e10e24 with the patch, and its game environment:
    ```bash
    git clone https://github.com/Hongcheng-Gao/SpatialWorld.git && cd SpatialWorld && git checkout 8e10e24
-   git apply /path/to/harness-evolution/examples/spatialworld_games/spatialworld.patch
+   git apply /path/to/harness-map/examples/spatialworld_games/spatialworld.patch
    ln -s game/Block3D data/Block3D && ln -s game/maze3d data/maze3d && ln -s game/maze3d_pro data/maze3d_pro \
        && ln -s game/rubik_cube data/rubik_cube         # the game runners resolve levels through data/
    cd envs/game && uv sync                             # pygame, PyOpenGL, openai, ...
