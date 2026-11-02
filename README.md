@@ -66,10 +66,10 @@ harness_map/                   the method
     └── skills/{proposer,diagnostician,judge}/SKILL.md
 tests/                         the paper's benchmarks, hands on (README)
 ├── tasks/                     benchmark setup and code (README)
-│   ├── <benchmark>/           the paper's settings, verbatim: task_spec/ (the task splits), meta_config.json (the
-│   │                          search configuration), for navigation settings/ (the task example's real directory);
-│   │                          evaluate.py, the evaluator of the paper's runs (--harness DIR --tasks TASKS.json --out OUT,
-│   │                          or --split / --subset for a split of task_spec/); one task record per video, cut from the splits
+│   ├── <benchmark>/           the paper's settings, verbatim: task_spec/ (the task splits, which the examples' config.json
+│   │                          name), for navigation settings/ (the task example's real directory); evaluate.py, the
+│   │                          evaluator of the paper's runs (--harness DIR --tasks TASKS.json --out OUT, or --split /
+│   │                          --subset for a split of task_spec/); one task record per video, cut from the splits
 │   └── adapter_example.py     a custom adapter skeleton, with the adapter protocol documented
 └── examples/
     ├── run_benchmark.py       generic driver: config + starting harness + evaluator command → one search
@@ -205,7 +205,7 @@ A benchmark plugs in through four pieces; the search itself (`main.py`, `qd/`, `
      "search":     { "mode": "adaptive", "k0": 4, "budget": 50, "children": 2, "m": 0.5, "sigma": 0.0, "strict_coverage": true },
      "benchmark":  { "evaluate": "\"$MY_PYTHON\" evaluator.py --harness {harness} --tasks {tasks} --out {out}",
                      "search_split": "search", "holdout_split": "holdout", "timeout_s": 14400, "judge": true },
-     "splits":     { "search": [ { "task_id": "..." } ], "holdout": [ { "task_id": "..." } ] },   // the task records
+     "splits":     { "search": "my_bench/search.json", "holdout": [ { "task_id": "..." } ] },   // task records: a JSON file or inline
      "meta_agent": { "backbone": "cli:claude", "timeout_s": 10800 },   // or cli:codex / chat-loop
      "score_file": "score.json",
      "fitness":    { "primary": "success", "n": "n_episodes" },        // score-file fields -> Fitness

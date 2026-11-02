@@ -18,7 +18,9 @@ evaluation budget is N = 16.
    # test data: dataset jise/simworld-20k on Hugging Face, file test_settings/single_test.tar.gz,
    # extracted into simworld_gym/envs/setting/single_agent_world/
    ```
-   The single-agent baseline (`baseline/single`) targets the OpenAI Responses API; the paper's
+   The gym reads task data under its own `envs/setting/single_agent_world/`;
+   `tests/tasks/simworld_nav/settings/` holds one hard task (map 20_10, dist_21_0_1) in that layout,
+   enough to replay the task example. The single-agent baseline (`baseline/single`) targets the OpenAI Responses API; the paper's
    runs added a `vllm` backend that converts the agent's `input_text` / `input_image` parts into
    chat-completion requests, a `base_url` argument, and an output-token budget of 8192. The nav
    starting harness imports `prompt_template` and `utils` from that directory, found through
@@ -49,9 +51,9 @@ evaluation budget is N = 16.
    `per_position_SR` (success rate per subtask position, in the order of `rubric_labels`) and
    `per_episode` rows with `episode`, `success`, `subtask_sr`,
    `distance_progress`, `final_dist_to_target` and `total_tokens`; optionally
-   `OUT/diagnostics_summary.json` with `progress_score`. If the simulator dies, restart it and
-   finish the remaining episodes rather than writing a partial score file: the runner marks an
-   evaluation with fewer episodes than the split as invalid.
+   `OUT/diagnostics_summary.json` with `progress_score`. The shipped evaluator bounds every
+   simulator call (`UNREALCV_RPC_TIMEOUT_S`) and retries a failed reset once the simulator's port
+   answers again; the runner marks an evaluation with fewer episodes than the split as invalid.
 
 ## Run
 

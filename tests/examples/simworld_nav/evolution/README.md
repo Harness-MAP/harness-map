@@ -112,7 +112,7 @@ closest. The last column gives the campaign's own evaluation of each harness on 
 | [`ep_20_10_task_dist_21_0_1__15_cand_r15_0_spatial-grounding.mp4`](videos/ep_20_10_task_dist_21_0_1__15_cand_r15_0_spatial-grounding.mp4) | `cand_r15_0_spatial-grounding` (eval 16) | 135 steps along the route to 36 m from the destination (94 %), then an arrival commit; the destination check did not fire | completed in 135 steps |
 | [`ep_20_10_task_dist_21_0_1__progression_grid.mp4`](videos/ep_20_10_task_dist_21_0_1__progression_grid.mp4) | the four above, 2×2 | — | — |
 
-To draw again, evaluate a harness directory on map 20_10, task `dist_21_0_1` with frames kept
-(`EVAL_FORCE_EPISODE=ep_20_10_task_dist_21_0_1` and `EVAL_SAVE_FRAMES=1` in the paper's
-evaluator, one fresh simulator per episode) and render the trace with the command above.
+To draw again, evaluate a harness directory on the task's record
+(`--tasks tests/tasks/simworld_nav/map_20_10_task_dist_21_0_1.json`; the evaluator keeps the frames
+of every model call) and render `<out>/traces/ep_20_10_task_dist_21_0_1` with the command above.
 

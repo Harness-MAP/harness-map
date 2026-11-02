@@ -19,7 +19,8 @@ import sys
 import time
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+REPO = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO))
 
 from harness_map import main as MH                                      # noqa: E402
 from harness_map.main import Fitness, Genome                      # noqa: E402
@@ -32,6 +33,22 @@ STAGE_IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc", "diagnosis*.md", "
 
 def log(msg: str) -> None:
     print(msg, flush=True)
+
+
+def load_splits(cfg: dict) -> dict:
+    """The task records of every split: an inline list, or the path of a JSON file (relative to the repository
+    root) holding the list, with "#key" selecting one key of a JSON object (a list, or {"items": [...]})."""
+    out = {}
+    for name, v in (cfg.get("splits") or {}).items():
+        if isinstance(v, str):
+            path, _, key = v.partition("#")
+            v = json.loads((REPO / path).read_text())
+            if key:
+                v = v[key]
+            if isinstance(v, dict):
+                v = v.get("items") or [{"map": m, "task": t} for m in v["maps"] for t in v["tasks_per_map"]]
+        out[name] = list(v or [])
+    return out
 
 
 # ── budget ─────────────────────────────────────────────────────────────────────────────────────
@@ -69,9 +86,9 @@ class CommandAdapter(AgenticAdapter):
         self.work_root.mkdir(parents=True, exist_ok=True)
         self.start_dir = Path(start_dir)                # the starting harness
         self.search_split, self.holdout_split = search_split, holdout_split
-        splits = cfg.get("splits") or {}
-        self.evolve = list(splits.get(search_split) or [])            # task records of the two
-        self.evalset = list(splits.get(holdout_split) or []) if holdout_split else []   # splits
+        self.splits = load_splits(cfg)
+        self.evolve = self.splits.get(search_split) or []             # task records of the two
+        self.evalset = (self.splits.get(holdout_split) or []) if holdout_split else []   # splits
         self._last_out = {}
 
     def starting_harness(self, cfg=None) -> Genome:
@@ -107,7 +124,7 @@ class CommandAdapter(AgenticAdapter):
         return self._last_out.get(genome.label)
 
     def _run(self, genome: Genome, split: str, tag: str, tasks=None) -> Fitness:
-        tasks = self.cfg["splits"][split] if tasks is None else tasks
+        tasks = self.splits[split] if tasks is None else tasks
         out = self.run_dir / "evals" / f"{genome.label}_{tag}"
         shutil.rmtree(out, ignore_errors=True)
         out.mkdir(parents=True)

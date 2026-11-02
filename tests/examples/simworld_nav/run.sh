@@ -5,7 +5,6 @@ set -euo pipefail
 cd "$(dirname "$0")/../../.."
 
 export SIMWORLD_ROBOTICS_REPO=/path/to/SimWorld-Robotics   # the gym and the baselines
-export SIMWORLD_SETTINGS_DIR=/path/to/single_test          # the extracted test settings (tests/tasks/simworld_nav/settings holds one task)
 export SIMWORLD_PYTHON=/path/to/simworld-env/bin/python
 export NAV_EVALUATOR=tests/tasks/simworld_nav/evaluate.py             # runs a harness on a split, writes score.json
 export UE_PORT=9000                                        # port of the running SimWorld simulator

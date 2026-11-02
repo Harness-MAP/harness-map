@@ -1,33 +1,14 @@
 #!/usr/bin/env python
-"""evaluate.py — score one harness on SpatialWorld 3D-game task records and write score.json.
+"""Run one harness on SpatialWorld 3D-game tasks and write score.json.
 
-The evaluator of the paper's games runs. Each task record is one episode, run in its own subprocess
-(pygame cannot be re-initialized in a process) by episode.py, which reuses SpatialWorld's own
-per-game evaluator classes with the harness's per-step decision function injected. Run it under the
-SpatialWorld game environment's interpreter (pygame, PyOpenGL and the game engine).
+    python evaluate.py --harness DIR --tasks TASKS.json --out OUT     # or --split <game>_evolve | snake_eval
 
-    python evaluate.py --harness DIR --tasks TASKS.json --out OUT
-    python evaluate.py --harness DIR --split maze3d_pro_evolve --out OUT     # a split of task_spec/
-
-TASKS.json is a list of {"task_id": "maze/level_06", "game": "maze", "mode": "level", "level": 6}
-records, or {"task_id": "snake/run_020", "game": "snake", "mode": "run", "seed": 20} for snake;
-`--split NAME` reads task_spec/NAME.json, the paper's own split files (<game>_evolve = the search set
-of a game; snake_eval = snake's five held-out seeds; the other games search every level and have
-no held-out split). tests/tasks/spatialworld_games/*.json are single-level
-examples cut from the evolve files.
-
-Environment: SPATIALWORLD_REPO (the SpatialWorld checkout at 8e10e24 with spatialworld.patch applied;
-default ~/workspace/SpatialWorld), GAME_MODEL (default Qwen3-VL-30B-A3B-Instruct), GAME_API_BASE (the
-vLLM server, default http://127.0.0.1:8000/v1; a comma-separated list spreads the episodes over several
-servers), GAME_API_KEY (EMPTY), GAME_EVAL_WORKERS (parallel episodes; default one per server),
-GAME_EPISODE_TIMEOUT_S (1800), GAME_MAX_STEPS (overrides the game's step cap), GAME_MAX_TOKENS and
-SPATIALWORLD_MAX_IMAGES (the patched game client's output-token budget and image window; the paper used
-32 images), HISTORY_WINDOW, ANTICHEAT_GUARD (default 1: an episode is voided when the harness reads
-engine state other than the frame, reads the level files, or never calls the base model).
-
-Output: OUT/score.json with `score` (mean over the episodes, in [0, 1]), `n_episodes`, `per_episode`
-rows (task_id, game, score, steps, valid, outcome) and `voided` (the task ids of voided episodes);
-OUT/episodes/<task>/ holds each episode's eval_result.json, SpatialWorld's own logs and episode.log.
+Each record ({"game", "level"}, or {"game", "seed"} for snake) is one episode, run in its own subprocess by
+episode.py because pygame cannot be re-initialized in a process. OUT receives score.json (`score` is the mean
+over the episodes, in [0, 1]; `voided` lists the episodes the anti-cheat guard voided) and episodes/<task>/.
+Environment: SPATIALWORLD_REPO, GAME_MODEL, GAME_API_BASE (one vLLM server, or a comma-separated list that
+spreads the episodes), GAME_API_KEY, GAME_EVAL_WORKERS, GAME_EPISODE_TIMEOUT_S (1800), GAME_MAX_STEPS,
+ANTICHEAT_GUARD (1), and the patched game client's GAME_MAX_TOKENS, SPATIALWORLD_MAX_IMAGES (32), HISTORY_WINDOW.
 """
 from __future__ import annotations
 

@@ -113,7 +113,7 @@ intentionally withheld — they are ground truth.
 ```python
 vlm_clients = {
     "Qwen3-VL-30B-A3B-Instruct": openai.OpenAI(base_url=..., api_key="EMPTY"),
-    # the evaluator fills this dict from NAV_MODEL (or the EVAL_ALLOWED_MODELS pool);
+    # the evaluator fills this dict with the client of NAV_MODEL;
     # iterate its keys instead of hard-coding one
 }
 ```

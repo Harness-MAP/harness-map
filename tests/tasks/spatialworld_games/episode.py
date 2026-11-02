@@ -1,36 +1,14 @@
 #!/usr/bin/env python
-"""episode.py — run ONE 3D-game episode by reusing SpatialWorld's own per-game evaluators.
+"""One 3D-game episode through SpatialWorld's own per-game evaluator, with the harness injected.
 
-The per-episode runner of the paper's games evaluator (evaluate.py spawns it once per task record).
-It does not reimplement any game or the perceive -> model -> act loop: it imports SpatialWorld's
-per-game `*OpenAIEvaluator` class from `scripts/game/<game>_openai_evaluation.py`, builds it, and
-calls that class's own `run_evaluation(...)` for a single episode. Everything downstream (the game
-adapter, PygameInputSource, EvaluationEngine, screenshotting, action parsing, scoring) is
-SpatialWorld's, unchanged.
+    python episode.py --game maze --level 6 --log-dir DIR --harness-dir HARNESS     # snake: --seed instead of --level
 
-The harness is injected minimally: if the harness directory has an entry file (`agent.py`, or the
-older `harness.py`) that exports `build_agent(evaluator)`, the per-step decision function it returns
-replaces `evaluator.openai_ai_model` before `run_evaluation`. The pristine per-step model call is kept
-as `evaluator.baseline_step`, so a delegating harness reuses the frozen base model without recursing.
-A harness with only a `system_prompt.txt` runs SpatialWorld's shipped agent on that prompt.
-
-Why a subprocess per episode: pygame is process-global and cannot be re-initialized in-process, so
-evaluate.py runs this script once per episode under the SpatialWorld game interpreter.
-
-    python episode.py --game maze --level 6 --log-dir DIR --harness-dir HARNESS \
-        --model Qwen3-VL-30B-A3B-Instruct --api-base-url http://127.0.0.1:8000/v1
-    # snake takes --seed instead of --level
-
-Scores (the paper's, mirrored in config.json): maze / maze3d_pro = success, block3d = won,
-rubik = cube_solved (all binary), snake = min(score / L, 1) with L = 4 (the edge length).
-Writes `<log-dir>/eval_result.json` (the normalized score evaluate.py reads back) and a
-`<game>_evaluation_summary_*.json` SpatialWorld-style summary for the diagnostician and the judge.
-
-Anti-cheat (ANTICHEAT_GUARD, on by default; set 0 to disable): the harness receives a guarded view
-of the evaluator on which every `evaluator.game.<attr>` other than `.screen` (the rendered frame)
-raises and is recorded, reads of the ground-truth files under SpatialWorld's `data/` from harness
-code are refused and recorded, and the base-model calls are counted. An episode with any recorded
-access, or with zero base-model calls (a hand-coded solver, not a harness), is voided to 0.0.
+The game's `*OpenAIEvaluator` class runs the episode as in SpatialWorld; the harness's build_agent(evaluator)
+replaces its per-step decision, with the pristine model call kept as evaluator.baseline_step to delegate to.
+Scores: maze / maze3d_pro = success, block3d = won, rubik = cube_solved, snake = min(score / 4, 1). With
+ANTICHEAT_GUARD=1 (the default) an episode is voided when the harness reads engine state other than the frame,
+reads the level files under data/, or never calls the model. Writes <log-dir>/eval_result.json. The GAME_*
+variables are the argument defaults; HISTORY_WINDOW caps the turns the model is shown.
 """
 from __future__ import annotations
 
@@ -114,8 +92,7 @@ def _run_kwargs(game: str, max_steps: int | None, initial_prompt, level: int, lo
 
 # ── anti-cheat guards ───────────────────────────────────────────────────────────────────────────
 class _GameGuard:
-    """Wraps `evaluator.game` for the harness: `.screen` passes through, every other read or write
-    is recorded and raises."""
+    """`evaluator.game` as the harness sees it: `.screen` passes through, every other read or write is recorded and raises."""
     __slots__ = ("_real", "_sink")
     _ALLOWED = frozenset({"screen"})            # the frame the model is already shown
 
@@ -158,10 +135,8 @@ _DATA_DIR = str((SPATIALWORLD_REPO / "data").resolve())   # ground-truth tree (s
 
 
 class _DiskGuard:
-    """Blocks the harness from reading the ground-truth files under SpatialWorld's data/ (rubik
-    scrambles, maze layouts, block targets). Patches os.open, which open(), FileIO and importlib all
-    funnel through, so an imported data module is caught too. The engine reads the same tree
-    legitimately during setup, so only reads whose caller is inside the harness directory are refused."""
+    """Refuses reads of the level files under SpatialWorld's data/ from harness code: os.open is patched (open(),
+    FileIO and importlib all go through it), and a read is refused only when its caller is inside the harness."""
     __slots__ = ("_hdir", "_sink", "_real")
 
     def __init__(self, harness_dir, sink):
@@ -209,8 +184,7 @@ def _entry_file(hdir: Path) -> Path | None:
 
 
 def _load_harness(entry: Path):
-    """Load the harness entry file under a fresh module name, with its directory importable so
-    `from tools import ...` resolves to this harness's tools/."""
+    """Load the harness entry file with its directory importable, so `from tools import ...` is this harness's tools/."""
     hdir = entry.parent
     if str(hdir) not in sys.path:
         sys.path.insert(0, str(hdir))
@@ -225,7 +199,7 @@ def _load_harness(entry: Path):
 async def run_one(*, game: str, level: int, seed: int | None, model: str, api_base: str,
                   api_key: str, max_steps: int | None, harness_dir: str | None,
                   log_dir: str) -> dict:
-    """Run one episode via SpatialWorld's own evaluator + run_evaluation; return a result dict."""
+    """One episode through SpatialWorld's evaluator and its run_evaluation; returns the result dict."""
     if game not in GAMES:
         raise SystemExit(f"episode.py: unknown game {game!r}; known: {sorted(GAMES)}")
     spec = GAMES[game]
