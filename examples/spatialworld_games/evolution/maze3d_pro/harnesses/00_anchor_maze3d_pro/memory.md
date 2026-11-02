@@ -1,5 +1,5 @@
 <!-- memory.md — a per-step scratchpad TEMPLATE (evolvable lever).
-     orchestrator.py can fill this per step and inject it into the prompt to give the frozen agent
+     agent.py can fill this per step and inject it into the prompt to give the frozen agent
      self-derived working state (last POS/DIR, recent actions, a stuck counter). The ANCHOR does
      NOT inject it — keeping the composed prompt equal to the baseline — so it starts empty.
      A proposer that wants working memory wires compose_system_prompt (or tools/vlm.py) to render

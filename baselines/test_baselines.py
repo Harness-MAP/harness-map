@@ -84,13 +84,13 @@ class MockAdapter:
         """ONE text file, so the harness is a single GEPA component a reflection LM can rewrite."""
         d = self.root / name
         d.mkdir(parents=True, exist_ok=True)
-        (d / "orchestrator.py").write_text("BITS = %r\n" % (bits,))
+        (d / "agent.py").write_text("BITS = %r\n" % (bits,))
         return d
 
     @staticmethod
     def _read(d: Path):
         import ast, re
-        m = re.search(r"BITS\s*=\s*(\[[^\]]*\])", (d / "orchestrator.py").read_text())
+        m = re.search(r"BITS\s*=\s*(\[[^\]]*\])", (d / "agent.py").read_text())
         bits = ast.literal_eval(m.group(1)) if m else [0] * N_BITS
         bits = [int(bool(b)) for b in bits][:N_BITS]
         return bits + [0] * (N_BITS - len(bits))
@@ -355,14 +355,14 @@ def test_bundle_roundtrip():
     root = Path(tempfile.mkdtemp())
     try:
         src = root / "h"; (src / "modules").mkdir(parents=True)
-        (src / "orchestrator.py").write_text("import modules.a\nX = 1\n")
+        (src / "agent.py").write_text("import modules.a\nX = 1\n")
         (src / "modules" / "__init__.py").write_text("")
         (src / "modules" / "a.py").write_text("def go():\n    return 42\n")
         (src / "notes.md").write_text("not bundled, but must survive\n")
 
         b = C.bundle_harness(src)
         files = C._FILE_RE.findall(b)
-        check(set(files) == {"orchestrator.py", "modules/__init__.py", "modules/a.py"},
+        check(set(files) == {"agent.py", "modules/__init__.py", "modules/a.py"},
               f"every .py file becomes its own region ({files})")
         check(b.count("# EVOLVE-BLOCK-START") == len(files)
               and b.count("# EVOLVE-BLOCK-END") == len(files),
@@ -382,7 +382,7 @@ def test_bundle_roundtrip():
 
         # a mangled bundle must fail loudly, not silently run the anchor
         out3 = C.unbundle_harness("total garbage, no markers", src, root / "out3")
-        check((out3 / "orchestrator.py").read_text() == "total garbage, no markers",
+        check((out3 / "agent.py").read_text() == "total garbage, no markers",
               "a bundle with no markers is written as-is so it fails validation, not silently "
               "reverting to the anchor")
 

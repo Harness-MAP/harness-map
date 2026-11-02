@@ -3,7 +3,7 @@
 ## module map
 | file | role |
 |---|---|
-| orchestrator.py | `ChartHarness`: observe → Chart → one model call → legal projection + veto → record the move for blocked-edge detection. Writes `route=…picked=…` to `response.reasoning` |
+| agent.py | `ChartHarness`: observe → Chart → one model call → legal projection + veto → record the move for blocked-edge detection. Writes `route=…picked=…` to `response.reasoning` |
 | tools/chart.py | NEW. `Chart`: per-level map memory (last-seen glyphs, visits, blocked (square,dir) edges, adjacent lava/water) + `plan()` BFS to a charted `>` or else the nearest frontier (never-stood-on or unseen-bordering passable square) |
 | tools/prompting.py | naive transcript + priors (AGENT.md, rules.md, memory.md, skills) + `render_chart`: ROUTE line + 8-row neighbour table |
 | tools/action_io.py | `legal_actions` from the system prompt; whole-word projection of the reply onto the legal set with a veto set and a fallback (no more coercion to `north`) |
@@ -17,7 +17,7 @@ glyphs of every square it has seen, then plans over that memory with a BFS that 
 edges.
 
 ## change:
-Added tools/chart.py and rewired orchestrator.py around it. Each step the Chart folds in the `map:` block
+Added tools/chart.py and rewired agent.py around it. Each step the Chart folds in the `map:` block
 (row = y−1), the cursor, `Dlvl` (a level change resets it) and the adjacent-hazard prose. When a move
 leaves the cursor where it was, that (square, direction) edge is recorded as blocked. `plan()` runs a
 BFS over the charted passable squares. Walls, unseen squares, `}` and creature letters are excluded,
@@ -35,4 +35,4 @@ immediate neighbours. A multi-hop route turns "least-visited neighbour" into "th
 unexplored ground or the stairs you already saw", which is what breaks orbits in mazes and corridors.
 
 ## files:
-orchestrator.py, tools/chart.py (new), tools/prompting.py, tools/action_io.py, AGENT.md, memory.md, NOTES.md
+agent.py, tools/chart.py (new), tools/prompting.py, tools/action_io.py, AGENT.md, memory.md, NOTES.md

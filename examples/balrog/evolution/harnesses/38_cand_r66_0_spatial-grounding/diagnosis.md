@@ -23,7 +23,7 @@ Both are validated modules, and both already fit this exact `GroundedAgent`/`too
 This is a **TASK-GAP with a known, verified fix**: 20 of the 25 losses come from two missing stage owners. The one fixable remainder is R3/03, where the `>` is drawn but unreachable.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:GroundedAgent.act` builds a context `c` and walks `STAGES = (prompt, orient, stairs, fight, quest, fetch, route, model)`. The first answer wins, and its rung goes to `reasoning`. A blank `Reasoning` in the CSV means the model's template was emitted, i.e. a VLM step.
+`agent.py:GroundedAgent.act` builds a context `c` and walks `STAGES = (prompt, orient, stairs, fight, quest, fetch, route, model)`. The first answer wins, and its rung goes to `reasoning`. A blank `Reasoning` in the CSV means the model's template was emitted, i.e. a VLM step.
 - `st_orient`:
   - `chart.book()` credits the last move. "The door opens." marks a door; any other no-move closes the (square, bearing) edge.
   - `chart.fold()` charts glyphs plus prose door/bar nouns.
@@ -119,7 +119,7 @@ It is not VLM-CEILING: on every lost Quest and Boxoban episode, the VLM is reach
    - Tie-break in the level frame so the order stays total. It is a total order, so re-electing the goal every step remains a fixed point.
    - Predicted: R3/03 converts (→5/5, +0.025). It is inert on MazeWalk, where `>` is either reachable or not drawn.
 
-4. **Make `peaceful` a model-level veto (orchestrator.py).**
+4. **Make `peaceful` a model-level veto (agent.py).**
    - In `st_prompt`, mark the foe peaceful on any `Really attack` prompt, whatever `last[2]` was: take the square from `pending` (prev + move) and the glyph from the chart.
    - In `st_orient`, add to `c["bad"]` every direction whose target glyph is in `self.peaceful`.
    - This removes QE/04's roughly 60-step `east`→`[yn]`→`more` loop.

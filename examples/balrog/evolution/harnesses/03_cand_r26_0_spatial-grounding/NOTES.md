@@ -2,7 +2,7 @@
 
 ## axis:
 Code: the component graph and where the decision is made. The anchor was three modules
-(`orchestrator.py` + `tools/prompting.py` + `tools/action_io.py`) and asked the model every turn.
+(`agent.py` + `tools/prompting.py` + `tools/action_io.py`) and asked the model every turn.
 This candidate is ONE module with no `tools/` package. `build_agent` constructs the hub
 `GroundedAgent`. The hub calls `parse_glyph_map`, which calls `clause_index`, and it also calls
 `decide_action`. Everything else is a method of the hub. The map now drives each step, and the
@@ -36,4 +36,4 @@ prompt. The model was re-deciding from a transcript with no memory. A remembered
 bump ledger addresses the orbits and the stone bumps on MazeWalk and Corridor-R3.
 
 ## files:
-`orchestrator.py` (rewritten as one module), `tools/` removed, `NOTES.md`.
+`agent.py` (rewritten as one module), `tools/` removed, `NOTES.md`.

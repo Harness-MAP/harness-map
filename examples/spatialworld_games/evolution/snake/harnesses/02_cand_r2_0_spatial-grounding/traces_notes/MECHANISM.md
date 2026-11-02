@@ -7,14 +7,14 @@ free: it reaches the diagnostician and the next proposer without moving the desc
 
 | file | role now | state |
 |---|---|---|
-| `orchestrator.py` | entrypoint + prior composer | UNCHANGED. `build_agent(evaluator)` still returns the per-step `agent(frame_data)`; `compose_system_prompt()` still rebuilds the prompt from `AGENT.md` + `skills/*.md` + `rules.md`, in that order, byte-equal to `system_prompt.txt`. |
+| `agent.py` | entrypoint + prior composer | UNCHANGED. `build_agent(evaluator)` still returns the per-step `agent(frame_data)`; `compose_system_prompt()` still rebuilds the prompt from `AGENT.md` + `skills/*.md` + `rules.md`, in that order, byte-equal to `system_prompt.txt`. |
 | `tools/vlm.py` | the mechanism (now the main module: 5 of the 11 components) | REWRITTEN. `_function_globals`, `LatticeLedger`, `_ballot_card`, `_resolve_move`, `decide`. |
 | `tools/action.py` | key / direction algebra | UNCHANGED. `KEY_MAPPING` and `DIRECTION_VECTORS` are imported by name, which adds no module edge. |
 | `tools/frame.py` | screenshot bridge | UNCHANGED and unused — the evaluator captures its own frame. |
 | `AGENT.md` | role + verified perception facts | three false claims removed (see below). |
 | `rules.md` | contract + legal actions + anti-cheat | the phantom direction-letter HUD removed; the ballot channel documented. |
 | `skills/strategy.md` | strategy prior | UNCHANGED. |
-| `memory.md` | scratchpad template | UNCHANGED and still dormant. Its advertised wiring (`orchestrator.py` filling it per step into `evaluator.current_prompt`) is a DEAD channel on this build: `current_prompt` is read on turn 1 only. The ballot is the live replacement. |
+| `memory.md` | scratchpad template | UNCHANGED and still dormant. Its advertised wiring (`agent.py` filling it per step into `evaluator.current_prompt`) is a DEAD channel on this build: `current_prompt` is read on turn 1 only. The ballot is the live replacement. |
 
 ## the two seams, and why these two
 

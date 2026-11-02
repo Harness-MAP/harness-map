@@ -4,12 +4,12 @@
 - **Corridor-R3, CB-Dark, Quest-Easy and Quest-Medium are 0/20.** These losses come from **a single parser bug**:
   - `tools/grid.py:parse_glyph_map` classifies every prose `"<noun> adjacent <dirs>"` line as a creature ("foe") unless the noun is in a short exact-match exclusion list.
   - `horizontal wall`, `vertical wall`, `southeast corner`, `northeast room corner` and items such as `horn` and `sky blue potion` therefore all become foes.
-  - `orchestrator.py:GroundedAgent.reflex` rung 3 (`reflex:swing`) then attacks the wall **every step for 100 steps**.
+  - `agent.py:GroundedAgent.reflex` rung 3 (`reflex:swing`) then attacks the wall **every step for 100 steps**.
 
 **Binding constraint: HARNESS-BUG.** A wall/item noun misread as a creature pins the agent into an infinite swing that no veto can override. It is fixable with a one-line change to the foe classifier.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:GroundedAgent.act` runs these steps each turn:
+`agent.py:GroundedAgent.act` runs these steps each turn:
 1. `fold_chart` merges the `map:` rows into a per-Dlvl chart.
 2. `parse_glyph_map` produces `pos`, `ring` (the 8 neighbours classified by map glyph), `lava` and `foes` (both from the prose lines), and `down`.
 3. `learn` books a `(square, bearing)` refusal after a no-move.
@@ -65,11 +65,11 @@ The result is an absorbing state. This is the same failure class as the known "a
    - After computing `ring`, set `frame["foes"] = {d: ch for d, (k, ch, _) in ring.items() if k == "creature"}`. That uses the existing `ch.isalpha() and ch != "@"` test.
    - If you want to keep prose, add a whitelist instead: accept a noun only if the ring glyph at that bearing `isalpha()`.
    - **Predicted effect:** R3, CB-Dark and Quest leave the swing trap and fall through to `field:descend`, which is the same chart-plus-field that solved MW 10/10. The chain's chart-plus-route candidates (r001, r036) hit R3 at about 4/5. **Expected primary is about 0.35–0.45** (MW 10 + R3 3–4 + CB-Dark 1–2), up from 0.25.
-2. **`orchestrator.py:reflex` rung 3: swing only if the previous swing was not a no-op into a non-letter.**
+2. **`agent.py:reflex` rung 3: swing only if the previous swing was not a no-op into a non-letter.**
    - Skip `d` if `(pos, d) in self.refused`.
    - Also skip it if the last message was `It's a wall.`/`It's solid stone.`
    - This is a belt-and-braces guard so that any future misclassification costs one step, not 100. Refusals already book correctly for walls because `learn` uses the map kind.
-3. **`orchestrator.py:reflex` rung 3 on Quest: never swing at a lava-adjacent or item glyph.** Quest's `horn`, potions and wands are `(`, `!` and `/`, which are not letters. Fix 1 therefore handles this automatically. If items are ever re-added from prose, route them through a pickup rung, not the swing rung. The chain's memory says Quest needs pickup, then `apply`/`zap` toward the lava; that is a separate, later lever.
+3. **`agent.py:reflex` rung 3 on Quest: never swing at a lava-adjacent or item glyph.** Quest's `horn`, potions and wands are `(`, `!` and `/`, which are not letters. Fix 1 therefore handles this automatically. If items are ever re-added from prose, route them through a pickup rung, not the swing rung. The chain's memory says Quest needs pickup, then `apply`/`zap` toward the lava; that is a separate, later lever.
 4. **Boxoban cost (secondary key):** the model is called on about 85% of Boxoban steps at about 7k input tokens per call for zero wins.
    - When `any(ch == "`" for ch in terrain.values())` and no `>` is drawn, a cheap model-free rung makes cost drop by about 10× without changing primary. Examples: the least-visited ring neighbour, or a push-space A* toward `{`/`^` targets. Prior chain work reached 19/20 on Boxoban with a push-space A*.
    - This is the biggest remaining *cost* lever once primary is recovered.

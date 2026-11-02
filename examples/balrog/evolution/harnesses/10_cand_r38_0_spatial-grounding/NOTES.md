@@ -1,7 +1,7 @@
 # NOTES — cand_r038_0_spatial-grounding (parent cand_r001_0_spatial-grounding)
 
 ## module map
-- `orchestrator.py` — ENTRYPOINT (`build_agent` -> `GroundedHarness.act`). This candidate turns it into a **staged
+- `agent.py` — ENTRYPOINT (`build_agent` -> `GroundedHarness.act`). This candidate turns it into a **staged
   controller**: modal reflex -> stairs -> chart route -> model fallback.
 - `tools/perception.py` — parses message, cursor, map grid and adjacent prose nouns (unchanged).
 - `tools/spatial_memory.py` — tracks visits, refused (cell, dir) pairs and the persistent seen-map (unchanged).
@@ -39,5 +39,5 @@ From diagnosis (iter 1):
 - Expected: primary >= parent (orbit fix on QM/R3, QE/04 unlocked), cost well below the parent.
 
 ## files:
-`orchestrator.py` (act() rewired into stages, plus `_prompt_open`), `tools/grounding.py` (frontier retires stood cells;
+`agent.py` (act() rewired into stages, plus `_prompt_open`), `tools/grounding.py` (frontier retires stood cells;
 total-order key), `NOTES.md`.

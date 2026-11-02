@@ -30,7 +30,7 @@ BFS planner that owns movement. The model is consulted only when no stage answer
     total order. It emits `down` when standing on the charted `>`. When nothing reachable is
     unexplored, it `search`es up to 10 times per square before handing off to the model.
   - **Orbit**: applies only to model proposals.
-- `orchestrator.py:PipelineHarness.act` runs ALL pre hooks so every stateful stage observes every frame.
+- `agent.py:PipelineHarness.act` runs ALL pre hooks so every stateful stage observes every frame.
   The first legal answer wins and its stage becomes `ctx.source`. If there is no answer, it calls the
   model (reply snapped to the earliest legal mention). Post hooks then run inner to outer, and the
   provenance trail is written to `response.reasoning`. Stage exceptions are caught per stage.
@@ -56,7 +56,7 @@ expected to move.
 ## module map / levers
 | file | role | lever |
 |---|---|---|
-| orchestrator.py | pipeline driver: all-pre, first-answer, post, provenance | code |
+| agent.py | pipeline driver: all-pre, first-answer, post, provenance | code |
 | tools/context.py | observation → StepContext (+ shared state fields) | code |
 | tools/stages.py | 8 stages + `default_stack()` order; Nav = the planner | code |
 | tools/action_io.py | legal-set parse, whole-word mentions, `snap` | code |
@@ -64,5 +64,5 @@ expected to move.
 | AGENT.md / memory.md / rules.md / skills/ | prose for fallback frames | prose |
 
 ## files:
-orchestrator.py, tools/context.py (new, from r018), tools/stages.py (new), tools/action_io.py (+snap),
+agent.py, tools/context.py (new, from r018), tools/stages.py (new), tools/action_io.py (+snap),
 tools/prompting.py, AGENT.md, memory.md, NOTES.md

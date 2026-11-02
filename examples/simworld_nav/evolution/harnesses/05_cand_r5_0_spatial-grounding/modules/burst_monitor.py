@@ -6,7 +6,7 @@ Until now every arrival question in this harness was asked at a *decision*
 frame: the loop perceives, plans, and only then consults
 `CompletionChecker.proactive_commit_check`. But the loop does not decide once
 per env step — `ActivePerception`'s momentum cadence emits a burst of
-translations per decision, and `orchestrator.py`'s burst executor walks that whole
+translations per decision, and `agent.py`'s burst executor walks that whole
 burst without ever re-consulting the checker. Measured on this arm (diagnosis
 §2.2): one perceive+plan per **3.28 env steps**, and inside the pass window of
 a ROAD leg — **6.61 forward frames deep** — the arrival question is asked

@@ -166,7 +166,7 @@ class _LegState:
 class RoadGeometry:
     """Per-episode geometric arrival sensor, keyed by the structural leg index.
 
-    Public API (consumed by orchestrator.py):
+    Public API (consumed by agent.py):
       - update(obs, cur_idx) -> dict(ok, event, crossings, arrival)
       - crossings(cur_idx)   -> int
       - summary()            -> str   (one-line digest for notes/traces)

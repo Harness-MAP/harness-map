@@ -43,7 +43,7 @@ not a sentence.
 
 | module | role | this iter |
 |---|---|---|
-| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ★ 5 sites: `RoadGeometry` imported + instantiated + handed to the gate; the new sensor stage inside the perceive branch; a `GEO_REACH` vs `REACH_COMMIT` note label; `road.summary()` appended to `notes`; docstring 9 → 10 nodes |
+| `agent.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ★ 5 sites: `RoadGeometry` imported + instantiated + handed to the gate; the new sensor stage inside the perceive branch; a `GEO_REACH` vs `REACH_COMMIT` note label; `road.summary()` appended to `notes`; docstring 9 → 10 nodes |
 | `modules/road_geometry.py` | **the position conjunct** — roadway-class band fraction + per-leg rising-edge state machine | ★ **NEW MODULE** |
 | `modules/arrival_gate.py` | the `-1` LICENSE | ★ `geo=` field; `_place_verdict` asks geometry first; `proactive_commit` gets the free veto + the event-keyed schedule; `allow_planner_commit` gets the free veto + the **fail-closed** cap |
 | `modules/__init__.py` | package exports | ★ export `RoadGeometry`; docstring 9 → 10 nodes |
@@ -70,7 +70,7 @@ are byte-for-byte the parent's.)*
 | `MAX_CLAIMABLE_CROSSINGS = 2` | code/const | `road_geometry` | **measured this iter** — 25/45 → 31/45 leg coverage for 7 extra far-field opportunities; **3 is the obvious next value, not an axis** |
 | band geometry `(0.45-0.70) × (0.30-0.70)` | code/const | `road_geometry` | measured flat across 0.40-0.65 … 0.50-0.75 — **do not spend an iter on it** |
 | "arming" (require a closed reading before edge #1) | code | `road_geometry` | **MEASURED AND REJECTED** — 24/45 vs 25/45; a ROAD leg does not generally start in a junction |
-| **env-step-rate sampling of the detector** (diagnosis F1's pacing half) | code | `orchestrator.py` burst executor | **still open, deliberately deferred** — see §risk (c); the measured operating point is a *rising edge at loop cadence* and a denser cadence moves it |
+| **env-step-rate sampling of the detector** (diagnosis F1's pacing half) | code | `agent.py` burst executor | **still open, deliberately deferred** — see §risk (c); the measured operating point is a *rising edge at loop cadence* and a denser cadence moves it |
 | **the "have I passed it?" self-referential call** | code | would be a new `road_geometry` consumer | **still open** — gradient F4; now cheap, the frame history and an edge counter both exist |
 | **FINISH leg** (`_FRONTAGE_SYS`, 0/12) | code | `arrival_gate` + `viewpoint_controller` | **still open and still 0.00** — gradient F3 (ask from the faced pose). Not taken: it is a *pose* axis and would confound this measurement |
 | text-free `_IDENTITY_SYS` | prose-in-code | `arrival_gate` | **keep, do not touch** — 93 % in-window, the chain's biggest perception win |
@@ -106,7 +106,7 @@ instruction does; "Turn left at the intersection" also names one but classifies
 as `LEG_TURN` and is excluded, because it is graded on **heading** and already
 owned by the turn-approach latch. ORIENT, TURNING and FINISH are untouched.
 
-**2. `orchestrator.py` — a new sensor stage.** `road.update(obs, instruction,
+**2. `agent.py` — a new sensor stage.** `road.update(obs, instruction,
 cur_idx)` runs at the top of the **perceive branch**, on the same frame the
 perceiver sees. That placement is deliberate and is the whole reason the number
 in §why transfers: those are exactly the frames the operating point was measured
@@ -320,7 +320,7 @@ evaluator's own `spec_from_file_location(f"{pkg}.harness", …)` path):
   imported; `_place_verdict` geometry-first; `proactive_commit` free veto +
   event-keyed schedule; `allow_planner_commit` free veto + fail-closed cap
 - `modules/__init__.py` — export `RoadGeometry`; docstring 9 → 10 nodes
-- `orchestrator.py` — import + instantiate `RoadGeometry` and hand it to the gate; the
+- `agent.py` — import + instantiate `RoadGeometry` and hand it to the gate; the
   new sensor stage inside the perceive branch; the `GEO_REACH` note label;
   `road.summary()` into `notes`; module-list docstring 9 → 10
 - `NOTES.md` — this file

@@ -12,7 +12,7 @@ Code: where the decision is made. The parent let the model choose and the map on
   1. The first step toward a reachable `>` (`chart:route`).
   2. Otherwise, the frontier square nearest to a drawn but unreachable `>`. This is the goal-attracted seek (`chart:seek`), and it fixes r027's bug where only `>` was used as a target.
   3. Otherwise, the nearest frontier by a total order (dist, visits, y, x), chosen again every step (`chart:explore`).
-- **`orchestrator.py`**
+- **`agent.py`**
   - `GroundedAgent.walk` answers before the model and returns a no-token LLMResponse with the owner written in `reasoning`. It emits `down` when standing on a charted `>`.
   - The old model-plus-vet path is kept for the leftover cases. `vet` now also rejects a move into a square the chart has marked as stone.
   - Every bearing move sets `chart.pending` so the next frame can judge the result.
@@ -23,4 +23,4 @@ Code: where the decision is made. The parent let the model choose and the map on
 The diagnosis for r033 found the model making about 88% of moves. That led to 160 bumps into solid stone and revisit rates of 52–70%, which lost the MW15 and R3 episodes. It also found that a far `>` was ignored (R3/02). The steer points toward r027's structure, where code does the navigation, and r027 got MW15 to 5/5 at 0 tokens. This version also fixes r027's two recorded field bugs: the door that opens being treated as a wall, and seeding only from `>` when it is unreachable. Expected result: MW15 and R3 wins go up, and cost drops sharply on the maze and corridor tasks.
 
 ## files:
-tools/chart.py (new), orchestrator.py, tools/grid.py
+tools/chart.py (new), agent.py, tools/grid.py

@@ -1,10 +1,10 @@
 # cand_r036_0_spatial-grounding
 
 ## axis:
-Component graph / module wiring (code). The parent r026 is ONE module (`orchestrator.py` holds parsing,
+Component graph / module wiring (code). The parent r026 is ONE module (`agent.py` holds parsing,
 chart, reflexes, planner and model call in a single class). Following the steer toward r001's
 structure, this candidate splits it into a perception → chart → reflex → planner → arbiter
-PIPELINE under `tools/`. `orchestrator.py` is now only the orchestrator of the rung ladder. It also
+PIPELINE under `tools/`. `agent.py` is now only the orchestrator of the rung ladder. It also
 fixes the r026 diagnosis HARNESS-BUGs at the module where each belongs.
 
 ## change:
@@ -24,7 +24,7 @@ New modules:
 - `tools/action_io.py`: legal set and whole-word projection. `arbitrate()` never passes an unlisted
   string through: attack/yes goes to the foe bearing, else the least-visited safe move.
 - `tools/prompting.py`: prior composition and banned-move tail, unchanged in content.
-- `orchestrator.py`: orchestrator. It resets the chart on a new system prompt (reused agent) and writes
+- `agent.py`: orchestrator. It resets the chart on a new system prompt (reused agent) and writes
   the deciding rung into `reasoning` (`model:<pick>`, `arbiter:*`, `chart:search`, …).
 
 ## why:
@@ -43,5 +43,5 @@ recorded action):
 Expected: R3 2/5 → 4/5. QE/QM depend on the model after the prompts close.
 
 ## files:
-orchestrator.py (rewritten as orchestrator), tools/perception.py, tools/chart.py, tools/reflex.py,
+agent.py (rewritten as orchestrator), tools/perception.py, tools/chart.py, tools/reflex.py,
 tools/action_io.py, tools/prompting.py (all new), NOTES.md

@@ -4,7 +4,7 @@
 Code: where the decision is made. The parent asks the model on every turn and passes its reply
 through a regex. Here a per-episode learner chooses each move. It keeps optimistic action values
 per square, and an eligibility trace credits those values with a reward read from the frame. The
-model is asked only to break ties, once per square. `tools/` is gone: `orchestrator.py` holds
+model is asked only to break ties, once per square. `tools/` is gone: `agent.py` holds
 `build_agent`, the hub `LearnerAgent`, `decide_action`, and `parse_glyph_map` -> `clause_index`.
 
 ## change:
@@ -32,7 +32,7 @@ On a stub 11x11 maze with a random model the learner reached `>` 20/20 (median ~
 16 model calls).
 
 ## files:
-`orchestrator.py` (rewritten as one module), `tools/` and `skills/` removed, `NOTES.md`.
+`agent.py` (rewritten as one module), `tools/` and `skills/` removed, `NOTES.md`.
 
 Localization record (phi-free .txt): measured cell 12 (tier A, 6-node zero-tool), margin 0.38 over taken cell 0; taken at r035 = {0,1,2,3,7,8,15}.
 

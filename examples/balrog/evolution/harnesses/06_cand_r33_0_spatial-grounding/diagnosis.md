@@ -13,7 +13,7 @@ that is not adjacent, or toward an item/objective. The agent therefore paces loc
 fallback.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:GroundedAgent.act` does the following:
+`agent.py:GroundedAgent.act` does the following:
 1. `tools/grid.py:parse_glyph_map` reads the `(x=,y=)` cursor and the `map:` block (row = y−1) and classifies the
    8 neighbours as wall/lava/creature/stairs down/boulder/open/dark. It also reads prose `X adjacent <dirs>`
    into `lava` and `foes`, and records the last `>` it sees in `down`.
@@ -100,7 +100,7 @@ already showed that the same map decode plus a BFS/field walker scores 10/10 Maz
 mostly silent.
 
 ## 5. Concrete changes (ranked by leverage)
-1. **Add a BFS router and let it decide; the model breaks ties or acts as fallback** (`orchestrator.py`, new
+1. **Add a BFS router and let it decide; the model breaks ties or acts as fallback** (`agent.py`, new
    `route()` next to `vet`, and let `grid.parse_glyph_map` return the full `rows` grid).
    - Build a passable set: floor-ish glyphs, `>`, doorways, `+` (closed doors are passable via auto-open;
      book a refusal when a move fails). Treat blank as passable at cost 3 so that gaps like R3/02 (13–17,5) are
@@ -112,11 +112,11 @@ mostly silent.
    - Emit the first hop of the path. Consult the VLM only when no target is routable.
    - Predicted: R3 from 0/5 to 2–4/5 (R3/02 is solvable on frame 0), MW15 from 2/5 to 4–5/5, and cost down
      roughly 5–10x, because the model is skipped whenever a route exists.
-2. **Make `dark` a soft wall in `forbidden`/`score`** (`orchestrator.py:forbidden`). If any open, unrefused neighbour
+2. **Make `dark` a soft wall in `forbidden`/`score`** (`agent.py:forbidden`). If any open, unrefused neighbour
    exists, veto a model move into `dark`. Keep `dark` only as a router edge with a penalty. Predicted: MW
    no-moves drop from 28% toward under 5% (89/94 blank moves were bumps). Do *not* make blank hard stone
    everywhere: the known trap is that it starves the frontier on dark levels and blocks the R3 gaps.
-3. **Add an item/objective rung for the Quest pair** (`orchestrator.py`, before the router). Gate it on the prose
+3. **Add an item/objective rung for the Quest pair** (`agent.py`, before the router). Gate it on the prose
    noun `horn`/`wand` being drawn and `pickup`/`apply`/`zap` being in `legal()`: route to the item square, emit
    `pickup`, then `apply`/`zap` toward the `}` bearing. Handle the `[yn]`/direction prompts with an explicit
    modal answerer (see r027's `y`/`more`/`esc`). Sibling lineages price this at QM 0→3/5 and QE 0→2/5. QM run 00
@@ -131,7 +131,7 @@ mostly silent.
    (siblings: one push-space A* gives 19/20 when the optimal plan is ≤99 steps; Boxoban is fully drawn and
    premapped, and `#` is BARS there). If the proposer has no budget for a solver, leave Boxoban alone. Prose
    alone will not move it.
-6. **Cut cost** (`orchestrator.py:act`): after change 1, skip the VLM call whenever the router answers. When it is
+6. **Cut cost** (`agent.py:act`): after change 1, skip the VLM call whenever the router answers. When it is
    consulted, elide the replayed history down to the current frame plus the grounding block.
 
 ## 6. Exhausted — do NOT repeat

@@ -39,8 +39,8 @@ rich-harness surface. Read in full, it is four hops and no policy.
 
 | file | what it actually does |
 |---|---|
-| `orchestrator.py:build_agent` | puts `HERE` on `sys.path`, purges any inherited `tools` module, sets `evaluator.current_prompt = compose_system_prompt()`, returns `async agent(frame_data) -> vlm.decide(...)`. |
-| `orchestrator.py:compose_system_prompt` | `AGENT.md` + `skills/*.md` (none exist) + `rules.md`, stripped and newline-joined. Verified byte-equal to the shipped `system_prompt.txt` modulo whitespace. |
+| `agent.py:build_agent` | puts `HERE` on `sys.path`, purges any inherited `tools` module, sets `evaluator.current_prompt = compose_system_prompt()`, returns `async agent(frame_data) -> vlm.decide(...)`. |
+| `agent.py:compose_system_prompt` | `AGENT.md` + `skills/*.md` (none exist) + `rules.md`, stripped and newline-joined. Verified byte-equal to the shipped `system_prompt.txt` modulo whitespace. |
 | `tools/vlm.py:decide` | `step = evaluator.baseline_step or evaluator.openai_ai_model; return await step(frame_data)`. **That is the entire decision.** |
 | `tools/action.py` | 70 lines of correct, **never-called** tables (`FACE_KEYS`, `VIEW_AXES`, `LEGAL_ACTIONS`, `is_legal`, `is_view_rotation`, `direction_const`). Dormant by design. |
 | `tools/frame.py:capture` | `evaluator.capture_game_screenshot()` — **never called**; `baseline_step` captures its own frame. |

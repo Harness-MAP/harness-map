@@ -26,7 +26,7 @@ self-displacing veto** (XCHECK_BLOCK 18 → **117**, each one injecting a `Move_
 | # | edit | file | verdict |
 |---|---|---|---|
 | 1 | TURN burst spends 2 approach forwards before `[rotate, -1]`, odometry stall-guarded | `active_perception.py:504-532` | **correct, but starved** — 1 opportunity in 50 eps; it worked on that one |
-| 2 | `commit_burst()` composes the terminal pose; FINISH gets `[Rotate_side, -1]` | `completion_checker.py:568-604` + `orchestrator.py:459,515-523` | predicate **100 % correct (199/199 FINISH, 0/561 false)** — **but double-applied at runtime → 180°, not 90°, 6/6** |
+| 2 | `commit_burst()` composes the terminal pose; FINISH gets `[Rotate_side, -1]` | `completion_checker.py:568-604` + `agent.py:459,515-523` | predicate **100 % correct (199/199 FINISH, 0/561 false)** — **but double-applied at runtime → 180°, not 90°, 6/6** |
 | 3 | xcheck cap branch `True` → `False`; verdict memo per `(subtask, streak//2)`; cap 2→3 | `completion_checker.py:920-935, 954` | **harmful** — see §2.3 |
 | 4 | REACH system prompt: visibility criterion → frame-geometry position criterion | `completion_checker.py:695-725` | **dominant cause of the regression** — see §2.2 |
 
@@ -34,11 +34,11 @@ self-displacing veto** (XCHECK_BLOCK 18 → **117**, each one injecting a `Move_
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:run_episode`, one iteration per *decision* (not per env step). Unchanged from the parent:
+`agent.py:run_episode`, one iteration per *decision* (not per env step). Unchanged from the parent:
 
 | # | call site | authority over `-1` |
 |---|---|---|
-| 1 | `active.should_emit` (`orchestrator.py:~305` → `active_perception.py:420`) | short-circuits perceive+plan. Owns the ORIENTATION cardinal burst, **(a″) the relative-TURN burst (now latched, edit 1)**, red idle, anti-spin, and the cap-2 momentum cadence → 3 forwards per VLM pair |
+| 1 | `active.should_emit` (`agent.py:~305` → `active_perception.py:420`) | short-circuits perceive+plan. Owns the ORIENTATION cardinal burst, **(a″) the relative-TURN burst (now latched, edit 1)**, red idle, anti-spin, and the cap-2 momentum cadence → 3 forwards per VLM pair |
 | 2 | `perceiver.perceive` | 1 call, **4 images** (RGB, robot_view hint, object_mask, JET depth) |
 | 3 | `planner.plan` | 1 **text-only** call over that description → `{Summary, Match, Actions}` |
 | 4 | `completion.verify` (`:398`) | honours a planner `-1` iff `planner_match == 1 ∧ forward_streak >= 1` |
@@ -135,7 +135,7 @@ restating whichever branch of the prompt it lands on.
 `completion_checker.py:925-935` now returns `False` when `fires >= MAX_XCHECK_FIRES_PER_SUBTASK` (3),
 and `:920-922` returns a memoised `False` for a repeat claim in the same `streak//2` bucket. **Both
 paths cost nothing**, so a leg can now veto an unlimited number of claims with no grounding at all.
-Downstream, `orchestrator.py` line 518 strips the `-1`, `chosen_actions` goes empty, and `:548-550`
+Downstream, `agent.py` line 518 strips the `-1`, `chosen_actions` goes empty, and `:548-550`
 `EMPTY_FALLBACK` injects a **`Move_Forward`** — the veto physically carries the agent out of the window
 it is standing in, 500 cm per action, 1 500 cm per cycle.
 
@@ -166,7 +166,7 @@ pass window — 16 claims, gaps **58 / 220 / 220 / 296 / 480 / 574 / 649 / 710 /
 on cap/memo exhaustion). In the parent, 10 such claims produced 3 commits.
 
 **Collateral:** the 118 injected fallback forwards are unsteered and the STUCK detector is still a
-no-op (`orchestrator.py:273-285`, carried-forward defect). Stalled forwards (Δposition < 1 cm) rose
+no-op (`agent.py:273-285`, carried-forward defect). Stalled forwards (Δposition < 1 cm) rose
 **118/2 812 (4.2 %) → 281/3 118 (9.0 %)**; `static_collision_mean` 1.78 → **5.12**; cost/ep 80.7k →
 **97.2k**. The collision and cost regressions are entirely secondary to this loop.
 
@@ -180,10 +180,10 @@ The predicate is perfect: run over all 760 instruction strings in
 But the REACH-commit path composes the burst **twice**:
 
 ```python
-# orchestrator.py:459  (proactive REACH path)
+# agent.py:459  (proactive REACH path)
 planner_actions = completion.commit_burst(instruction)     # -> [Rotate_Left, -1]
 ...
-# orchestrator.py:515-523  (the trim loop, run on EVERY commit)
+# agent.py:515-523  (the trim loop, run on EVERY commit)
 trimmed = []
 for a in planner_actions:              # a = Rotate_Left, then a = -1
     if a == -1:
@@ -273,10 +273,10 @@ which are the free ORIENTATION cardinal burst.
 1. `completion_checker.py:695-725` — the replaced criterion is **anti-correlated with arrival**
    (LR 0.40). The prompt's clauses are being *recited*, not applied; the geometric feature it asks for
    (facade frame share) is measured **flat at 0.28 everywhere** (§2.2). Cost: **−8 leg-1 passes**.
-2. `completion_checker.py:925-935` + `:920-922` + `orchestrator.py:548-550` — a free, unbounded veto whose
+2. `completion_checker.py:925-935` + `:920-922` + `agent.py:548-550` — a free, unbounded veto whose
    only side effect is to walk the agent away from the window it is standing in (§2.3).
    Cost: **−3 leg-1 passes**, +97 blocks, +97 unsteered forwards, ×2.9 collisions, +20 % cost.
-3. `orchestrator.py:459` — `commit_burst` applied twice on the REACH path → 180° terminal pose (§2.4).
+3. `agent.py:459` — `commit_burst` applied twice on the REACH path → 180° terminal pose (§2.4).
    Cost: 0 points *here* (nothing reached FINISH), but it silently negates edit (2), which is the
    only mechanism that can ever make leg 3 non-zero.
 
@@ -305,14 +305,14 @@ Restore the parent's `_binary_reach_vlm_call` system prompt byte-for-byte. Not a
   (direct A/B on the same 50 tasks, p = 0.0021).
 - **Do not replace it with a third wording.** §6.
 
-### B — **Strip the cross-check's veto authority over the FIRST planner claim of a leg, and make any veto position-preserving.** `modules/completion_checker.py:925-935`, `orchestrator.py:548-550`
+### B — **Strip the cross-check's veto authority over the FIRST planner claim of a leg, and make any veto position-preserving.** `modules/completion_checker.py:925-935`, `agent.py:548-550`
 Three coupled edits:
 1. `cross_check_planner_commit` — gate **only the first claim per `cur_idx`**. If the first claim of a
    leg is refused, record it; on the **second** claim of the same leg, honour the planner
    (`return True`). The cap/memo then bounds cost without ever becoming a standing veto. Neither
    `True` (parent: rubber-stamps the 3rd claim at whatever position the vetoes walked to) nor `False`
    (this iter: unbounded free veto) is right — **the cap should not be the thing that decides.**
-2. `orchestrator.py:548-550` — a blocked `-1` must **not** inject `Move_Forward`. Emit a net-zero probe
+2. `agent.py:548-550` — a blocked `-1` must **not** inject `Move_Forward`. Emit a net-zero probe
    (`[Rotate_Left, Rotate_Right]`, in-place per `rules.md`) or simply re-perceive. §2.3: the fallback
    forward is what turns a 842 cm claim into a 2 342 cm one and then a 3 842 cm one.
 3. Delete `_xcheck_verdict_cache` (`:555`, `:920-922`, `:954`) or make it cache **only `True`**. A
@@ -321,7 +321,7 @@ Three coupled edits:
 - **Predicted:** recovers the 9-episode in-window-planner-veto population; leg 1 **+0.06-0.14** on top
   of A, and removes the +20 % cost / ×2.9 collision tax. Confidence high — deterministic, 9 traced instances.
 
-### C — **Fix the double-apply.** `orchestrator.py:459` — one line
+### C — **Fix the double-apply.** `agent.py:459` — one line
 ```python
 -   planner_actions = completion.commit_burst(instruction)
 +   planner_actions = [-1]     # the trim loop at :515-523 composes the pose
@@ -345,7 +345,7 @@ and thread the current perceiver `Description` in as text.
   is a 0.58-precision detector. Ship it **alone**, on top of A/B/C, so attribution stays clean.
 - **Cost:** ~+1 300 input tok per REACH call; well inside budget even at the restored 97k/ep.
 
-### F — **Promote the planner's first in-window claim to a commit path, floored on motion.** `orchestrator.py:398-431`
+### F — **Promote the planner's first in-window claim to a commit path, floored on motion.** `agent.py:398-431`
 §2.6: `first planner -1 per leg` is in-window 7/12 = 0.58, and a `forward_streak >= K_REACH_FORWARD_STREAK`
 (=4) floor on the *planner* path — the constant already exists and is already applied to the proactive
 path — removes 2 of the 5 out-of-window claims (streaks 0 and 3) and **0** of the 7 in-window ones
@@ -359,7 +359,7 @@ path — removes 2 of the 5 out-of-window claims (streaks 0 and 3) and **0** of 
 `modules/planner.py:120-133` — the shared `reasoning_template` Output Format omits `Match`, so
 `verify()`'s `planner_match == 1` silently fails on ~12 % of replies. With F/B making the planner channel
 load-bearing this stops being latent. Also `spatial_memory.py:66` (`coll = 0` hard-coded) and
-`orchestrator.py:273-285` (STUCK counts the current burst, not history) — both still dead, and the stalled-forward
+`agent.py:273-285` (STUCK counts the current burst, not history) — both still dead, and the stalled-forward
 rate **doubled to 9.0 %** this iter, so they now cost more than they did in the parent.
 
 ---
@@ -386,7 +386,7 @@ rate **doubled to 9.0 %** this iter, so they now cost more than they did in the 
 - **A blocked `-1` must never be replaced by `Move_Forward`.** Traced end to end on ep_20_9_11:
   842 → 2 342 → 3 842 → … → 50 000 cm, 35 cycles.
 - **Verify a commit-composition change by driving the REACH path**, not only the planner path. The
-  double-apply at `orchestrator.py:459` survived a full fake-env dry run for exactly this reason.
+  double-apply at `agent.py:459` survived a full fake-env dry run for exactly this reason.
 - **`_is_finish_instruction` is correct and does not need re-deriving** — 199/199 FINISH, 0/561 others,
   over every `task_config.json` in `hard/`. Keep it verbatim if the composer is rewritten.
 
@@ -408,7 +408,7 @@ rate **doubled to 9.0 %** this iter, so they now cost more than they did in the 
 
 ## 7. Provenance
 
-- Candidate: `$OUT_DIR` = `…/prop_r001_df84f4/cand_r001_0_spatial-grounding` (`orchestrator.py` 644 L +
+- Candidate: `$OUT_DIR` = `…/prop_r001_df84f4/cand_r001_0_spatial-grounding` (`agent.py` 644 L +
   7 modules, 3 019 L). Score: `…/arm_hard5010_adaptive_k4c1/cand_r1_0_spatial-grounding_r001/score.json`
   — SR 0.0, SubtaskSR 0.285, per_position_SR [1.0, 0.02, 0.0222, 0.0], distance_progress 0.1256,
   static_collision 5.12, 97 152 tok / 857.8 s per episode, 50/50 episodes complete.

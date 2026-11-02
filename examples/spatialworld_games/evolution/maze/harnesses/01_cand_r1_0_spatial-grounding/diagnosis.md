@@ -19,7 +19,7 @@ re-probe a measured wall is worth **12–13/20**; adding a frame-measured local 
 
 ```
 config.py::_apply_harness
-  └─ orchestrator.py:build_agent(evaluator)
+  └─ agent.py:build_agent(evaluator)
        ├─ evaluator.current_prompt = compose_system_prompt()
        │      AGENT.md  +  skills/navigation.md  +  rules.md      (concatenated, in that order)
        └─ async agent(frame_data) -> tools.vlm.decide(evaluator, frame_data)
@@ -203,7 +203,7 @@ not need the VLM to be smart. It needs local wall occupancy plus a visited set.
 
 ### 5.1 `tools/pose.py` — a measured pose/transition ledger. **Prerequisite for everything else.**
 
-New module `tools/pose.py`; instantiate **once** in `orchestrator.py:build_agent` (closure state, so it
+New module `tools/pose.py`; instantiate **once** in `agent.py:build_agent` (closure state, so it
 lives for the episode) and thread it through `tools/vlm.py:decide`.
 
 ```

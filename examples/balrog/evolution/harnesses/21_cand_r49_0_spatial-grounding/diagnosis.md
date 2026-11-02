@@ -12,7 +12,7 @@ That beats the r033 parent (0.175), mainly because MW15 went from 2/5 to 5/5. It
 **Binding constraint: a HARNESS-BUG in `tools/grid.py:parse_glyph_map`.** Every prose noun that is not on a short whitelist gets booked as a *foe*. That includes `vertical wall`, `horizontal wall`, `southeast corner`, `vertical open door`, `horn`, `dart` and `giant rat corpse`. `GroundedAgent.walk` then returns None whenever the hero is next to any wall. So the new chart walker is switched off in every room and doorway, and the model plus the old vet path own those steps, including the vet's "`-`/`|` = wall" door bug. After that fix, the remaining 20 losses are the known Boxoban and Quest TASK-GAP.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:GroundedAgent.act` runs these steps in order:
+`agent.py:GroundedAgent.act` runs these steps in order:
 1. `parse_glyph_map`: finds the cursor, classifies the 8 neighbours from the map glyphs, and parses the `X adjacent <dirs>` prose into `lava` and `foes`.
 2. `learn`: updates visits and refused edges.
 3. `Chart.fold`: folds terrain for the current Dlvl and books the verdict on `pending` (door opens, stone, or blocked edge).
@@ -101,12 +101,12 @@ After the fix, the binding constraint is the same **TASK-GAP** as r048: Boxoban 
 - Predicted effect: on the 245 R3 non-chart frames, `walk` would have answered on all of them, since the census found 0 real creatures. That removes the R3/03 orbit, and R3/01 goes through the opened door at row 71 (29 steps before the cap).
 - Also fix `ground()`: never relabel a non-creature as `(attack by moving ...)`.
 
-### 2. `orchestrator.py:forbidden` / `vet` must ask the chart, not the ring glyph
+### 2. `agent.py:forbidden` / `vet` must ask the chart, not the ring glyph
 - Replace `kind in ("lava","wall")` with `not self.chart.passable(target, self.bars)`. The ring may still veto lava, but a square in `chart.opened` must be allowed.
 - Keep the diagonal-door rule: reuse `self.chart.step_ok(pos, d, self.bars) is None` as the veto.
 - Predicted effect: R3/01's 29-step `east/west` 2-cycle is gone even if a real creature hands the turn to the model at a doorway. It also stops vet-chosen `solid stone` bumps (R3/01 rows 75–90).
 
-### 3. `orchestrator.py:act`: never send `open` to the model; answer `In what direction?` in code
+### 3. `agent.py:act`: never send `open` to the model; answer `In what direction?` in code
 - If the message contains `In what direction?`, emit the bearing of the adjacent `+` (from `chart.terrain`), else `esc`.
 - Better still, remove `open`/`close` from what the model may emit (project `open` to the `+` bearing). Bumping a door auto-opens it, and the chart already books `The door opens.`
 - This saves the 8 wasted steps in R3/01 rows 62–69.

@@ -17,16 +17,16 @@ through the acceptance window (closest approach median ≈ 210 cm, best 16 cm) a
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:run_episode` is the parent's 8-node loop with a 9th node, `ArrivalGate`
+`agent.py:run_episode` is the parent's 8-node loop with a 9th node, `ArrivalGate`
 (`modules/arrival_gate.py`, 502 lines), which takes the `-1` **license** away from
 `CompletionChecker._binary_reach_vlm_call` and makes it a **conjunction of two independent VLM calls**:
 
 ```
 SpatialMemory → PromptAssembler → Perceiver(VLM) → Planner(VLM) → AffordanceEstimator
    ↘ ActivePerception.should_emit → ViewpointController.gate_burst   (TURN approach, iter 6, kept)
-   ↘ CompletionChecker.verify  →  [X] ArrivalGate.allow_planner_commit   (orchestrator.py:462)
-   ↘ if not commit_done        →  [P] ArrivalGate.proactive_commit       (orchestrator.py:498)
-   ↘ ViewpointController.commit_pose_prefix at the single `-1` materialisation site (orchestrator.py:549)
+   ↘ CompletionChecker.verify  →  [X] ArrivalGate.allow_planner_commit   (agent.py:462)
+   ↘ if not commit_done        →  [P] ArrivalGate.proactive_commit       (agent.py:498)
+   ↘ ViewpointController.commit_pose_prefix at the single `-1` materialisation site (agent.py:549)
 ```
 
 Both commit sites run the same conjunction:
@@ -150,7 +150,7 @@ left**, stop and face that building"*, and its hint image is (the perceiver's ow
 *"a close-up of the target building's facade, **directly in front** of the agent"*. The body travels along
 the street; the destination facade is **90° off-axis**. `_FRONTAGE_SYS` asks whether a facade "fills a large
 part of the frame" — from a heading where, by construction, it cannot. The one component that would have
-fixed this, `viewpoint.commit_pose_prefix`, is applied at `orchestrator.py:549` — *after* `commit_done` is
+fixed this, `viewpoint.commit_pose_prefix`, is applied at `agent.py:549` — *after* `commit_done` is
 already true, i.e. **after** the question has been asked and answered 0. Same cause explains FINISH identity
 recall (2/10 in-window) being 4.7× worse than ROAD's (39/42) through identical code.
 
@@ -169,7 +169,7 @@ if fires >= MAX_XCHECK_FIRES_PER_SUBTASK:      # == 2, imported from completion_
 
 The run exhibits the resulting signature 10 times, exactly as predicted by the code
 — `XCHECK_BLOCK; EMPTY_FALLBACK; XCHECK_BLOCK; EMPTY_FALLBACK; …` (21 blocks / 22 empty fallbacks run-wide):
-the planner proposes `-1`, the gate blocks it twice, `orchestrator.py:585` injects one forward each time, and on
+the planner proposes `-1`, the gate blocks it twice, `agent.py:585` injects one forward each time, and on
 the **third** proposal the cap is spent and the `-1` executes **ungated**. In 6 of the 15 fatal commits the
 rejected `-1` came through this hole, including **all four FINISH deaths**:
 
@@ -237,11 +237,11 @@ all three failures are about *when*, *how often*, and *from where* the harness a
 ## 5. Concrete changes to try (the gradient — ranked by leverage)
 
 ### F1 — Local arrival search: when identity fires, slow down and ask every step
-*(`orchestrator.py` burst materialisation ≈ `:546-562`; `modules/arrival_gate.py:proactive_commit`)*
+*(`agent.py` burst materialisation ≈ `:546-562`; `modules/arrival_gate.py:proactive_commit`)*
 
 Add an **APPROACH latch** to `ArrivalGate`: the first time `_identity_call` returns 1 on a ROAD/FINISH leg,
 set `self._approach[cur_idx] = True`. While latched, for up to `N≈10` translations:
-1. `orchestrator.py` truncates `chosen_actions` to **one** forward per loop iteration (the forwards still happen —
+1. `agent.py` truncates `chosen_actions` to **one** forward per loop iteration (the forwards still happen —
    what changes is that the loop re-decides between them instead of executing 3–7 blind);
 2. the gate's interval drops to `1` for that leg, so `_place_call` runs on **every** 500 cm;
 3. commit on the **first** `place == 1`.
@@ -268,7 +268,7 @@ re-asking.
 for F3 (otherwise a fixed frontage question is still bypassable).
 
 ### F3 — Ask the FINISH place question from the pose its answer requires
-*(move `viewpoint.commit_pose_prefix` from `orchestrator.py:549` to before `_place_call` in
+*(move `viewpoint.commit_pose_prefix` from `agent.py:549` to before `_place_call` in
 `arrival_gate.py:_place_verdict`, FINISH only)*
 
 On a FINISH leg: yaw toward the named side **first** (2 substeps), then run `_identity_call` *and*

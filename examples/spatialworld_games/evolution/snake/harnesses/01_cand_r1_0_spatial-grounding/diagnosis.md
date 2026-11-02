@@ -238,7 +238,7 @@ Cheap, and it removes the prose cause of the `move_down` deaths and the 16×-off
 *Caveat:* judge L4 by the closing rate and the `move_down`-at-spawn count in the next trace, not by
 the scalar. Prose alone cannot fix a wall death the harness does not test for — ship it **with** L1.
 
-### L5 · `orchestrator.py:compose_system_prompt` — actually wire `memory.md`  (speculative)
+### L5 · `agent.py:compose_system_prompt` — actually wire `memory.md`  (speculative)
 
 `memory.md` is a documented lever that nothing reads. Once L1 exists the harness *has* self-derived
 state (head cell, heading, recent keys, visit counts) worth rendering into the prompt each turn. Low

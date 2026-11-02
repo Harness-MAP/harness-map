@@ -43,7 +43,7 @@ r014's placement claim verifies to four decimals (cell 8, d 1.2084, runner-up 27
 proposer evolves. Control flow, end to end:
 
 ```
-config.py::_apply_harness  ->  orchestrator.py::build_agent(evaluator)
+config.py::_apply_harness  ->  agent.py::build_agent(evaluator)
       |                              |
       |                              +-- evaluator.current_prompt = compose_system_prompt()
       |                              |      = AGENT.md + skills/*.md + rules.md, in that order
@@ -55,7 +55,7 @@ config.py::_apply_harness  ->  orchestrator.py::build_agent(evaluator)
                                                fall back to a default, return Action(key_press))
 ```
 
-* `orchestrator.py` — 2.5 kB. `compose_system_prompt()` concatenates the three `.md` priors so the
+* `agent.py` — 2.5 kB. `compose_system_prompt()` concatenates the three `.md` priors so the
   composed text is **byte-identical to `system_prompt.txt`** (verified: `diff system_prompt.md
   system_prompt.txt` is empty). `build_agent` pops any inherited `tools*` from `sys.modules` so a
   sibling candidate's `tools/` can never leak in, then returns the per-step fn.
@@ -411,7 +411,7 @@ are two constraints; G0 fixes both.
 
 | step | what |
 |---|---|
-| 1 | `cp -r traces_diag/ab11/R_touraim <cand>` — code byte-for-byte (`orchestrator.py`, `tools/{__init__,action,frame,vlm}.py`, `AGENT.md`, `rules.md`, `memory.md`) |
+| 1 | `cp -r traces_diag/ab11/R_touraim <cand>` — code byte-for-byte (`agent.py`, `tools/{__init__,action,frame,vlm}.py`, `AGENT.md`, `rules.md`, `memory.md`) |
 | 2 | add `system_prompt.txt` **and** `system_prompt.md` + `skills/strategy.md` from the anchor (this *widens* the margin, §5b) |
 | 3 | `NOTES.md` **≤ 260 chars**, or omit it; park the narrative + rigs in `traces_notes/` (φ-free) |
 | 4 | verify with `traces_diag/ab13/phi13.py <cand>` (~15 s) **before** shipping |

@@ -54,7 +54,7 @@ and the rig tables are in `traces_notes/MECHANISM.md`.
 
 | file | role |
 |---|---|
-| `orchestrator.py` | Unchanged evaluator-facing `build_agent(evaluator)` factory and sorted Markdown composer. |
+| `agent.py` | Unchanged evaluator-facing `build_agent(evaluator)` factory and sorted Markdown composer. |
 | `AGENT.md` | Unchanged Rubik role and fixed face-centre facts. |
 | `skills/near_ball_sweep.md` | The static search contract: no view turns, four turns of one face, the inverse at two turns out, how to read the menu. |
 | `rules.md` | Unchanged legal face and view move taxonomy and baseline guidance. |
@@ -87,5 +87,5 @@ rather than reading the answer.
 - `tools/frame.py` — the capture/digest pair, now documented as a render rather than a signal.
 - `memory.md` — the brief template; the dead `word`/`stood`/`screen` fields are gone.
 - `skills/near_ball_sweep.md` — new; replaces `skills/macro_commitment.md` (deleted, refuted).
-- `orchestrator.py` — docstrings retargeted to the router; the factory and composer are unchanged.
+- `agent.py` — docstrings retargeted to the router; the factory and composer are unchanged.
 - `traces_notes/MECHANISM.md` — the implementation record; outside the agent's prompt.

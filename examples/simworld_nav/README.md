@@ -36,7 +36,7 @@ evaluation budget is N = 16.
    The anchor's spatial tools use the simulator's depth observation; the paper's runs optionally
    replaced it with a metric-depth estimate from a Depth Anything 3 service.
 4. **Meta-agent**: the Claude Code CLI (`claude`) on `PATH`, or another backbone (top-level README).
-5. **Anchor harness**: the multi-module navigation harness (`orchestrator.py` plus `modules/`:
+5. **Anchor harness**: the multi-module navigation harness (`agent.py` plus `modules/`:
    perceiver, spatial memory, planner, prompt assembler, active perception, completion checker)
    in the layout of `harness_map/meta_agent/skills/proposer/SKILL.md`; the paper's anchor runs
    the ReAct baseline agent through these modules unchanged.

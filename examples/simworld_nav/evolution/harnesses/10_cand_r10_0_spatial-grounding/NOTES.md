@@ -8,7 +8,7 @@ Token-level, in the sense the steer asks for: the component graph is byte-for-by
 parent's — the same seven modules, the same call sites, the same wiring in `run_episode`.
 **No file added, no module introduced, no stage added to or removed from the loop.** Three
 files differ (`modules/completion_checker.py` +194 lines, `modules/prompt_assembler.py` 14,
-`orchestrator.py` 9, the last of which is one note label). Everything that moved is code *inside*
+`agent.py` 9, the last of which is one note label). Everything that moved is code *inside*
 components.
 
 The unifying idea, and it is one sentence: **a leg whose stop condition is a geometric event
@@ -31,7 +31,7 @@ same structure available; it had simply never been read.
 
 | module | role | this iter |
 |---|---|---|
-| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ one note label (`ROAD_ARRIVAL` vs `REACH_COMMIT`) so the trace can attribute the commit to a channel. No control flow touched. |
+| `agent.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ one note label (`ROAD_ARRIVAL` vs `REACH_COMMIT`) so the trace can attribute the commit to a channel. No control flow touched. |
 | `modules/spatial_memory.py` | scratchpad: per-step action + odometry ring | untouched |
 | `modules/prompt_assembler.py` | composes the perceive prompt (4 channels + legend) | ★ the segmentation legend now names the real classes (see change 4) |
 | `modules/perceiver.py` | 1 VLM call: 4 images → free-text description | untouched |
@@ -50,11 +50,11 @@ same structure available; it had simply never been read.
 | arrival-call **criterion wording** | prose-in-code | `_binary_reach_vlm_call` sys_prompt | **CLOSED, do not touch** (three operating points, flat ROC) |
 | cross-check arbitration (refusal allowance / cost cap / accept memo) | code | `cross_check_planner_commit` | kept verbatim — now reached only on FINISH legs |
 | segmentation **legend** | prose | `prompt_assembler` ×2, `completion_checker` ×1 | ★ corrected this iter — it had denied the existence of the cue |
-| blocked-commit HOLD response | code | `orchestrator.py` `HOLD_PROBE` | kept verbatim; now also absorbs a geometric veto of a bare planner `-1` |
+| blocked-commit HOLD response | code | `agent.py` `HOLD_PROBE` | kept verbatim; now also absorbs a geometric veto of a bare planner `-1` |
 | terminal-pose composer (`commit_burst`) | code | `completion_checker` | kept verbatim — ROAD commits stay a bare `-1`, FINISH keeps its quarter turn |
 | turn-approach latch (`_TURN_APPROACH_FORWARDS`) | code | `active_perception` | untouched, but see §why — it is now the next thing to look at |
 | **FINISH leg** (0.00 for ten iters) | code | `completion_checker` + side scan | **the open axis, deliberately NOT taken** — it would confound this measurement |
-| stall recovery / the dead stuck detector (`forward_count` over one burst) | code | `orchestrator.py:~300` | untouched — known-dead, next-largest open population |
+| stall recovery / the dead stuck detector (`forward_count` over one burst) | code | `agent.py:~300` | untouched — known-dead, next-largest open population |
 
 ## change
 
@@ -177,5 +177,5 @@ junction-at-spawn case commits immediately.
   `_binary_reach_vlm_call`.
 - `modules/prompt_assembler.py` — the segmentation legend, in the perceive system prompt and
   in the mask attachment caption.
-- `orchestrator.py` — one note label (`ROAD_ARRIVAL` vs `REACH_COMMIT`) at the existing REACH
+- `agent.py` — one note label (`ROAD_ARRIVAL` vs `REACH_COMMIT`) at the existing REACH
   commit site. No control flow changed.

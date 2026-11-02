@@ -23,7 +23,7 @@ The one-call decision path, the parser and the legal action set are unchanged.
 
 | file | role |
 |---|---|
-| `orchestrator.py` | Unchanged evaluator-facing `build_agent(evaluator)` factory and sorted Markdown composer. |
+| `agent.py` | Unchanged evaluator-facing `build_agent(evaluator)` factory and sorted Markdown composer. |
 | `AGENT.md` | Unchanged Rubik role and fixed face-centre facts. |
 | `skills/macro_commitment.md` | Milestone ladder, relative-face macros, case gates, atomic program counter. |
 | `rules.md` | Unchanged legal face and view move taxonomy and baseline guidance. |
@@ -57,5 +57,5 @@ the frozen model was not called, as proposer scope requires.
 - `tools/action.py` — the 18-action algebra plus the rule table and the word reduction.
 - `tools/vlm.py` — the turn: inform, delegate, commit.
 - `tools/frame.py` — the still-frame digest the ledger reports.
-- `orchestrator.py` — docstrings retargeted from maze to rubik; the factory and composer are unchanged.
+- `agent.py` — docstrings retargeted from maze to rubik; the factory and composer are unchanged.
 - `traces_notes/MECHANISM.md` — the implementation record; outside the agent's prompt.

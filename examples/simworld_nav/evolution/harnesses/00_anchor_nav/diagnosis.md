@@ -19,7 +19,7 @@ died on an env deadline the harness does not know exists.
 
 `git diff` vs the anchor is **one hunk, `modules/prompt_assembler.py:115-130`**: the aux-image loop
 now tries `("depth_map", "depth")` in order instead of only `"depth_map"`. This is the **first half**
-of the parent diagnosis's §5-C. Nothing else moved (`orchestrator.py` and the other six modules are
+of the parent diagnosis's §5-C. Nothing else moved (`agent.py` and the other six modules are
 byte-identical to the anchor).
 
 **It works, verified:** `read_audit.json` records `obs.depth` 9× (ep_11) / 57× (ep_21) and
@@ -36,11 +36,11 @@ expensive half.
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:run_episode`, one iteration per decision (not per env step):
+`agent.py:run_episode`, one iteration per decision (not per env step):
 
 | order | call site | role in the outcome |
 |---|---|---|
-| 1 | `active.should_emit` (`orchestrator.py:305`) | **short-circuits perceive+plan entirely** when it returns a list. Owns the ORIENTATION cardinal burst `[rot…, -1]` and the cap-2 **forward-momentum** cadence (PP → m1 → m2 → …, i.e. **3 forwards per VLM pair**). |
+| 1 | `active.should_emit` (`agent.py:305`) | **short-circuits perceive+plan entirely** when it returns a list. Owns the ORIENTATION cardinal burst `[rot…, -1]` and the cap-2 **forward-momentum** cadence (PP → m1 → m2 → …, i.e. **3 forwards per VLM pair**). |
 | 2 | `perceiver.perceive` | 1 VLM call, 4 images (RGB, hint, seg mask, jet depth) → free-text `Description`. |
 | 3 | `planner.plan` | 1 text-only VLM call → `{Summary, Match, Actions}`. |
 | 4 | `completion.verify` (`:390`) | honours a planner `-1` only if `planner_match == 1 and forward_streak >= 1` (`completion_checker.py:457`). |
@@ -167,7 +167,7 @@ classified far on 14/14.** The polarity is inverted, not merely folded. Downstre
 - `_strongly_far` (`:335`), the accept-validator that is supposed to veto a geometrically impossible
   `Match=1`: its `near_frac` is driven by sky and measured **0.145–0.436** on 14/14 frames, never
   below the `0.05` veto threshold. **It never vetoes.** At ep_11 step 9 it computed `near_frac =
-  0.436` and waved the fatal commit through (`orchestrator.py:429` → `:611` → `:438`).
+  0.436` and waved the fatal commit through (`agent.py:429` → `:611` → `:438`).
 - `_side_band_near` (`:376`), the trigger for the physical side-scan: fires when the named-side band
   median reads "near", i.e. when that band is **sky**. Measured False on 13/14 frames and **True
   exactly once — ep_11 step 9, `median = 42.7` = pure sky on the left.** Its single firing
@@ -218,7 +218,7 @@ it will bite the moment anything makes the planner willing to commit.
 ### 2.6 Other confirmations (no new action needed)
 
 - **ORIENTATION is solved.** 2/2 via the closed-form cardinal burst, 0 VLM calls. Do not touch it.
-- **STUCK never fires** (`orchestrator.py:283`): the predicate needs `>3` forwards *inside one burst*;
+- **STUCK never fires** (`agent.py:283`): the predicate needs `>3` forwards *inside one burst*;
   40/44 bursts are the bare `[0]`. Consistent with the parent's 0/20.
 - **Cadence:** `active_perception` momentum gives 3 forwards per perceive+plan pair, as designed.
   Per run: ep_11 = 3 plan calls / 6 forwards, ep_21 = 19 plan calls / 63 forwards (3.3 per pair).
@@ -341,7 +341,7 @@ Measured: max NN residual **22.7** RGB units; sky → **255.0** (far extreme) on
 - **Mechanism (not map-tuning):** at an intersection the near block face ends, so the nearest
   building on that side jumps to the far side of the cross street. No coordinate, no cm literal.
 
-### C — Tell the model the truth about the two images it now gets. `modules/prompt_assembler.py:64, 116-120` (+ `AGENT.md`, `rules.md`, `orchestrator.py` docstring)
+### C — Tell the model the truth about the two images it now gets. `modules/prompt_assembler.py:64, 116-120` (+ `AGENT.md`, `rules.md`, `agent.py` docstring)
 
 This candidate shipped the attach; ship the caption:
 
@@ -374,7 +374,7 @@ replies (§2.5). Either add `Match` to the system Output Format, or treat `match
 - **Predicted:** zero on this subset (planner `-1` rate is 0/44); it removes a latent trap for any
   candidate that makes the planner commit.
 
-### E — Do not waste the per-leg step deadline. `modules/active_perception.py`, `orchestrator.py:458-478`
+### E — Do not waste the per-leg step deadline. `modules/active_perception.py`, `agent.py:458-478`
 
 Now that §2.2 has pinned the deadline as a real terminator: every action charges it, including the
 `[2,1]` traffic idle (net-zero displacement, 2 substeps) and each `request_side_scan` turn+restore

@@ -3,7 +3,7 @@
 ## module map
 | file | role |
 |---|---|
-| orchestrator.py | `GroundedHarness.act`: perceive (ledger) → modal reflex → one model call → arbitrate; writes the deciding rule to `response.reasoning` |
+| agent.py | `GroundedHarness.act`: perceive (ledger) → modal reflex → one model call → arbitrate; writes the deciding rule to `response.reasoning` |
 | tools/ledger.py | NEW. `Ledger`: per-level visits, combat-aware failed (square, dir) moves, previous square; `adjacent_nouns`/`classify` turn "<noun> adjacent <dirs>" prose into deadly/blocked/creature/open per neighbour |
 | tools/action_io.py | `legal_actions`, whole-word `mentions`, `arbitrate` (legal projection → deadly/blocked/failed veto → orbit-break → ranked fallback) |
 | tools/prompting.py | naive transcript + priors + `render_table` (glyph, game-text noun, visits, failed, just-left) |
@@ -39,4 +39,4 @@ exemplar, 0.150) fixed lava and illegal verbs with a ledger. Its diagnosis named
 This candidate fixes all three and stays inside the same single-call design.
 
 ## files:
-orchestrator.py, tools/ledger.py (new), tools/action_io.py, tools/prompting.py, AGENT.md, memory.md, NOTES.md
+agent.py, tools/ledger.py (new), tools/action_io.py, tools/prompting.py, AGENT.md, memory.md, NOTES.md

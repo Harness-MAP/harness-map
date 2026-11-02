@@ -4,7 +4,7 @@
                                         (the model is NOT called this step).
   post(ctx, action) -> action          runs AFTER the model, innermost-first; may rewrite it.
 
-Stages share nothing but the per-step context `ctx` (a dict built by orchestrator.py from tools/ledger.py):
+Stages share nothing but the per-step context `ctx` (a dict built by agent.py from tools/ledger.py):
   legal, text, pos, mp, adj, rows, ledger, trail
 Order (outer -> inner): Modal, Melee, Route, Arbitrate.
 """

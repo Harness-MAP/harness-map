@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| orchestrator.py | `FieldHarness.act`: rungs modal → down → kick → swing → descend → consult; rung name → `reasoning` | code |
+| agent.py | `FieldHarness.act`: rungs modal → down → kick → swing → descend → consult; rung name → `reasoning` | code |
 | tools/field.py | NEW `Chart`: per-Dlvl terrain/visits/blocked edges/door squares/prose-solid squares/locked doors; `flood()` = heap Dijkstra seeded `>`@0 AND frontier@25 | code |
 | tools/ledger.py | prose `<noun> adjacent <dirs>` parser + `classify` (kept; now feeds the chart's per-square solidity) | code |
 | tools/prompting.py | transcript + priors + NEIGHBOUR TABLE (used only on `consult`) | code |
@@ -24,7 +24,7 @@ New `tools/field.py:Chart` folds each frame's map per level. It judges passabili
 
 `flood()` seeds the drawn `>` at 0 and every unstood frontier at +25. An unreachable `>` therefore no longer flattens the field; this was r027's Quest/R3 failure.
 
-`orchestrator.py` is rewritten as a rung ladder:
+`agent.py` is rewritten as a rung ladder:
 1. **modal:** a prompt frame (`[yn`, `--More--`, `In what direction?`, cursor on row 0) is answered before any geometry is read. It gets the pending kick bearing, else `more`. `Really attack?` books the edge as peaceful.
 2. **down:** on a charted `>`.
 3. **kick:** a locked cardinal door gets `kick` plus its bearing, up to 4 tries.
@@ -39,4 +39,4 @@ New `tools/field.py:Chart` folds each frame's map per level. It judges passabili
 - Expected: MW 10/10, R3 ≥3/5, and a large token cut.
 
 ## files:
-orchestrator.py (rewritten), tools/field.py (new); tools/ledger.py, tools/prompting.py, tools/action_io.py reused unchanged.
+agent.py (rewritten), tools/field.py (new); tools/ledger.py, tools/prompting.py, tools/action_io.py reused unchanged.

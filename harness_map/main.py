@@ -236,7 +236,7 @@ def _pre_eval_gate(adapter, genome):
     return _default_pre_eval_gate(adapter, genome)
 
 
-ENTRY_FILES = ("orchestrator.py", "harness.py")          # the entry point; the second is its older name
+ENTRY_FILES = ("agent.py", "harness.py")          # the entry point; the second is its older name
 
 
 def entry_file(src_dir) -> Optional[Path]:

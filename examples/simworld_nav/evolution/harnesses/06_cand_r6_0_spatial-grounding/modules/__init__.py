@@ -1,4 +1,4 @@
-"""Naive H_0 module package — exports the modules wired by orchestrator.py.
+"""Naive H_0 module package — exports the modules wired by agent.py.
 
 iter 6 adds an 8th node, `ViewpointController` (POSE arbitration: approach
 before a turn, face before a look, face before a FINISH commit). It sits

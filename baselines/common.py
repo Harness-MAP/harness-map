@@ -385,7 +385,7 @@ def unbundle_harness(text: str, base_dir, out_dir) -> Path:
         shutil.copytree(base_dir, out, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     marks = list(_FILE_RE.finditer(text))
     if not marks:
-        (out / "orchestrator.py").write_text(text)
+        (out / "agent.py").write_text(text)
         return out
     for i, m in enumerate(marks):
         rel = m.group(1).strip()

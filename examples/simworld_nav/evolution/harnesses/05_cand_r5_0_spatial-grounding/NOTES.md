@@ -4,7 +4,7 @@
 
 **Component graph / wiring — a new module and a new edge into the actuation stage.**
 
-`modules/burst_monitor.py` (`BurstMonitor`) is added as the **8th module**, and `orchestrator.py`'s
+`modules/burst_monitor.py` (`BurstMonitor`) is added as the **8th module**, and `agent.py`'s
 burst executor is rewritten from a fixed `for` loop over `chosen_actions` into a **queue** that
 consults the monitor after *every* translation it executes and can truncate its own remainder
 into a `-1`. Until now the arrival channel was reachable from exactly one place in the graph —
@@ -21,7 +21,7 @@ to the anchor** — §6.1/§6.7 of the gradient close those, and this iter does 
 
 | module | role | this iter |
 |---|---|---|
-| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ☆ burst executor is a truncatable queue; monitor consulted per translation; decision-level arrival check deduped against the monitor's frame |
+| `agent.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ☆ burst executor is a truncatable queue; monitor consulted per translation; decision-level arrival check deduped against the monitor's frame |
 | `modules/burst_monitor.py` | **in-burst arrival sampling policy** | ★ NEW — when to ask, per-leg budget, per-leg-**type** acceptance rule |
 | `modules/completion_checker.py` | owns every `-1`; owns the arrival *question* | ☆ +`binary_reach()` public delegate for the monitor. Nothing else touched |
 | `modules/active_perception.py` | cardinal burst, red idle, anti-spin, cap-2 momentum | untouched (§6.3 — ORIENTATION is 50/50) |
@@ -39,7 +39,7 @@ to the anchor** — §6.1/§6.7 of the gradient close those, and this iter does 
 | vote / self-consistency on one frame | — | — | **CLOSED** (10/10 identical prompts → identical verdicts, §6.2) |
 | xcheck cap-exhaustion semantics (`return True`) | code | `cross_check_planner_commit:748` | untouched — §5-D memo is the next separable candidate |
 | TURNING approach latch (`[0]*2 + [rot,-1]`) | code | `active_perception:430` | untouched — §5-C, next separable candidate |
-| stuck detector reading only the current burst | code | `orchestrator.py:280` | untouched — §5-F, free but low ceiling |
+| stuck detector reading only the current burst | code | `agent.py:280` | untouched — §5-F, free but low ceiling |
 | contradictory seg legend in the perceive prompt | prose-in-code | `prompt_assembler:64` | untouched — §5-E, bundle later |
 | ORIENTATION cardinal burst | code | `active_perception` (a) | **do not touch** — 50/50 |
 
@@ -47,7 +47,7 @@ to the anchor** — §6.1/§6.7 of the gradient close those, and this iter does 
 
 **The harness asks the arrival question once per *decision*; the agent moves once per *env
 step*; and those are not the same clock.** `ActivePerception`'s cap-2 momentum cadence means
-one perceive+plan per **3.28 env steps**, and `orchestrator.py`'s burst executor walked that whole
+one perceive+plan per **3.28 env steps**, and `agent.py`'s burst executor walked that whole
 burst without ever re-consulting `CompletionChecker`. Measured on the parent's own 50-episode
 run: a ROAD pass window is **6.61 forward frames deep** and receives **1.10 arrival calls** (6
 episodes get **zero**); the in-window per-frame accept rate is **0.205**, so
@@ -159,7 +159,7 @@ already sampled.
 
 - `modules/burst_monitor.py` — **NEW**: `BurstMonitor.check()`, `is_intersection_leg()`,
   `INBURST_SAMPLE_EVERY` / `MAX_INBURST_FIRES_PER_SUBTASK` / `FINISH_APPROACH_FORWARDS`
-- `orchestrator.py` — `BurstMonitor` import + per-episode instance; burst executor rewritten as a
+- `agent.py` — `BurstMonitor` import + per-episode instance; burst executor rewritten as a
   truncatable queue (`burst_queue` / `qi` / `inburst_commit`); monitor consulted after every
   translation; `INBURST_REACH_COMMIT` note; decision-level `proactive_commit_check` deduped
   against `monitor.last_sampled_serial`; module docstring 7 → 8 modules

@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| orchestrator.py | `PipelineHarness.act`: ledger perceive -> stages' `pre` (outer->inner, may short-circuit with NO model call) -> model -> stages' `post` (inner->outer); the trail goes to `response.reasoning` | code |
+| agent.py | `PipelineHarness.act`: ledger perceive -> stages' `pre` (outer->inner, may short-circuit with NO model call) -> model -> stages' `post` (inner->outer); the trail goes to `response.reasoning` | code |
 | tools/stages.py | NEW. `ModalStage` (`[yn]`->y, `--More--`->more), `MeleeStage` (letter glyph adjacent -> model owns the step), `RouteStage` (BFS hop), `ArbitrateStage` (legal projection, veto, orbit break) | code |
 | tools/route.py | NEW. BFS on the `map:` block: first hop to a charted `>`, else to the nearest never-stood frontier (walkable square with an unknown neighbour). Failed edges, prose-blocked/deadly squares and diagonal moves through `+` are removed, and ties use a total order | code |
 | tools/ledger.py | r047's combat-aware ledger (a swing is never a failed move; prose noun outranks glyph) + `banned` squares per level | code |
@@ -43,5 +43,5 @@ left to the model. Tokens per episode should fall sharply because route steps ma
 Predicted: MazeWalk 6/10 → 9–10/10, R3 0/5 → 2–4/5, others roughly flat.
 
 ## files:
-orchestrator.py (rewritten), tools/stages.py (new), tools/route.py (new), tools/ledger.py (from r047 + banned),
+agent.py (rewritten), tools/stages.py (new), tools/route.py (new), tools/ledger.py (from r047 + banned),
 tools/action_io.py (from r047), tools/prompting.py (from r047), AGENT.md, memory.md, NOTES.md

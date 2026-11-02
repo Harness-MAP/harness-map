@@ -2,7 +2,7 @@
 
 | file | components | role in the loop |
 |---|---|---|
-| `orchestrator.py` | `_read`, `compose_system_prompt`, `build_agent` | entrypoint + prompt composition; returns the per-step `agent(frame_data)` the evaluator installs |
+| `agent.py` | `_read`, `compose_system_prompt`, `build_agent` | entrypoint + prompt composition; returns the per-step `agent(frame_data)` the evaluator installs |
 | `AGENT.md` | — | role framing + the verified HUD/perception facts |
 | `rules.md` | — | legal action set + granularity contract |
 | `skills/navigation.md` | — | corridor strategy, anti-spin rule |

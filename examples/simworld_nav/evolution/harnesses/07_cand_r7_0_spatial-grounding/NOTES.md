@@ -6,7 +6,7 @@
 
 Token-level, same component graph. Seven modules, same wiring, no file added, no module
 introduced, no stage added to or removed from `run_episode`'s loop. Every behavioural edit
-is inside `modules/completion_checker.py`; `orchestrator.py` changes only comments that the edit
+is inside `modules/completion_checker.py`; `agent.py` changes only comments that the edit
 made false. What moves is the one thing the gradient leaves open — not *what* the arrival
 call is asked or *what it looks at* (both axes are now measured closed), but **when it is
 asked, how often, where, and when its answer expires.**
@@ -25,7 +25,7 @@ reverted, and the leg where the call has never once been right no longer spends 
 
 | module | role | this iter |
 |---|---|---|
-| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | comments only — four blocks that described the deleted caps/evidence now describe the rate |
+| `agent.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | comments only — four blocks that described the deleted caps/evidence now describe the rate |
 | `modules/spatial_memory.py` | scratchpad: per-step action + odometry ring | untouched |
 | `modules/prompt_assembler.py` | composes the perceive prompt (4 channels + legend) | untouched |
 | `modules/perceiver.py` | 1 VLM call: 4 images → free-text description | untouched |
@@ -43,12 +43,12 @@ reverted, and the leg where the call has never once been right no longer spends 
 | arrival-call **evidence set** (mask + depth + description) | code | `_binary_reach_vlm_call` | **REVERTED — CLOSED, measured negative** (0.143 vs 0.209 at +126 % tok) |
 | arrival-call **criterion wording** | prose-in-code | `_binary_reach_vlm_call` sys_prompt | **CLOSED, do not touch** (two operating points, flat ROC) |
 | cross-check **standing answer** (expires on displacement) | code | `_xcheck_standing`, `XCHECK_REARM_FORWARDS` | **NEW this iter** — replaces cap + refusal allowance + accept memo |
-| blocked-commit HOLD response | code | `orchestrator.py` `HOLD_PROBE` / `MAX_HOLDS_PER_SUBTASK` | kept verbatim — it does what it says (0 cm vs 1 500 cm); it simply may no longer buy a commit |
-| terminal-pose composer / bare REACH `-1` | code | `commit_burst`, `orchestrator.py` REACH path | kept verbatim — correct, and now that FINISH forward looks are gone it is exercised only on ROAD |
+| blocked-commit HOLD response | code | `agent.py` `HOLD_PROBE` / `MAX_HOLDS_PER_SUBTASK` | kept verbatim — it does what it says (0 cm vs 1 500 cm); it simply may no longer buy a commit |
+| terminal-pose composer / bare REACH `-1` | code | `commit_burst`, `agent.py` REACH path | kept verbatim — correct, and now that FINISH forward looks are gone it is exercised only on ROAD |
 | turn-approach latch | code | `active_perception` | kept verbatim |
-| **FINISH pose** (`request_side_scan` → yaw → `scan_reach`) | code | `completion_checker` + `orchestrator.py:~505` | **the open axis, deliberately NOT taken this iter** — see §why |
+| **FINISH pose** (`request_side_scan` → yaw → `scan_reach`) | code | `completion_checker` + `agent.py:~505` | **the open axis, deliberately NOT taken this iter** — see §why |
 | overshoot / "I have passed it" state | code | `spatial_memory` + `completion_checker` | untouched — would confound this measurement |
-| stall recovery / strafe ladder | code | `orchestrator.py` STUCK + `affordance_estimator` | untouched — 24 % of episodes end wedged, next-largest open population |
+| stall recovery / strafe ladder | code | `agent.py` STUCK + `affordance_estimator` | untouched — 24 % of episodes end wedged, next-largest open population |
 | `_named_side_has_structure` as a free veto | code | `completion_checker:~1005` | untouched — inert (0/16), but it is the only uncounted veto left in the file |
 
 ## change
@@ -97,7 +97,7 @@ near-miss (2 000–5 000 cm) false positives **4/61 vs 0/52**, at **2 371 tok/ca
 cited depth hue or the segmentation layout; every one was a pure RGB identity statement. That
 budget is what pays for change 1: at ~1 050 tok/call the same money buys ≈875 firings instead of
 388. `description` is still *accepted* by the three call sites and deliberately ignored, so
-`orchestrator.py` needs no signature edit; the now-dead `_aux_b64` helper is **deleted**, not left
+`agent.py` needs no signature edit; the now-dead `_aux_b64` helper is **deleted**, not left
 inert, because an unread helper is how three iters of dead schedule logic survived in this file.
 
 **4. The cross-check's answer stands until the agent moves** (`cross_check_planner_commit`).
@@ -148,7 +148,7 @@ wording, evidence set, the planner channel as an arrival detector) are all left 
 look cadence instead of the unusable `_side_band_near` depth band, so the agent yaws to the named
 side and asks from the pose the reference photo was taken from — is the diagnosis's only
 realistic path to SR > 0, and it is left for the next iter on purpose. It is a second axis (where
-the body points, not when the question is asked), it needs `orchestrator.py`'s scan branch as well as
+the body points, not when the question is asked), it needs `agent.py`'s scan branch as well as
 this file, and shipping it alongside change 1 would make the coverage measurement
 uninterpretable: leg-3 movement and leg-1 movement would be confounded in a single number.
 Change 2 is the half of it that is measurement-free (removing a call that has never been right
@@ -195,7 +195,7 @@ passes the TURNING leg through the untouched latch, and walks the FINISH leg to 
   `_binary_reach_vlm_call` evidence block reverted to the anchor's 2-image call;
   `proactive_commit_check` gate rewritten (bucket + FINISH suppression);
   `cross_check_planner_commit` arbitration rewritten (standing answer)
-- `orchestrator.py` — **comments only** (four blocks describing the deleted caps / the evidence
+- `agent.py` — **comments only** (four blocks describing the deleted caps / the evidence
   upgrade); no behavioural change, signature and control flow untouched
 - `NOTES.md` — this file
 

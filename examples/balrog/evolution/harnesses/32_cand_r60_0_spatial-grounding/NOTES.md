@@ -7,7 +7,7 @@ New `tools/chart.py` holds three things: `new_chart`, `merge`, and `route`.
 - A square the hero has stood on is always passable, so an opened door drawn as `-` or `|` stays usable.
 - `route` returns the first hop of a BFS to a charted `>`. When there is none, it goes to the nearest frontier: a passable, never-stood square with an uncharted neighbour. The BFS respects refused (square, direction) edges and never steps onto lava.
 
-`orchestrator.py:GroundedAgent.own` answers before any model call:
+`agent.py:GroundedAgent.own` answers before any model call:
 1. `--More--` gets `more`; an attack `[yn` prompt gets `y`.
 2. Standing on a charted `>` gets `down`.
 3. A letter drawn in the ring gets a code-owned swing.
@@ -31,4 +31,4 @@ The diagnosis puts the binding constraint on the missing chart and route: the mo
 Across the chain, chart+BFS lineages score 0.325–0.375 against this candidate's 0.175. Expected effect: MW15 and R3 recover, and tokens per episode fall sharply, because most steps become model-free.
 
 ## files:
-tools/chart.py (new), tools/grid.py, orchestrator.py, NOTES.md
+tools/chart.py (new), tools/grid.py, agent.py, NOTES.md

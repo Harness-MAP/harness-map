@@ -21,7 +21,7 @@ read from it.
 
 | module | role | this iter |
 |---|---|---|
-| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ new sensor stage + new commit stage + 3 call-site args |
+| `agent.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ new sensor stage + new commit stage + 3 call-site args |
 | `modules/road_geometry.py` | **★ NEW** — non-VLM arrival channel; per-leg intersection-crossing state machine over `obs['depth']` + `obs['object_mask']` | ★ added |
 | `modules/completion_checker.py` | owns every `-1` | ★ `geometric_arrival`, the FINISH crossing floor, the geo-keyed look schedule, `_depth_gray` perf |
 | `modules/spatial_memory.py` | odometry + step / boundary bookkeeping | untouched |
@@ -39,7 +39,7 @@ read from it.
 | frame-median depth as an "open scene" statistic | code | `road_geometry._FRAME_OPEN_MIN` | **NEW** — the one distance-discriminative readout found (in-window 0.59 vs 0.15 out, lift 4.0×) |
 | lateral building-class fraction | code | `road_geometry._SIDE_BUILDING_MAX` | **NEW** — the second conjunct; both sides must have stopped being a wall |
 | arm → rising-edge → first-crossing state machine | code | `RoadGeometry.update` | **NEW** — what turns a detector into a commit channel |
-| zero-VLM ROAD commit | code | `CompletionChecker.geometric_arrival` + `orchestrator.py` | **NEW** — the harness's only model-free commit path |
+| zero-VLM ROAD commit | code | `CompletionChecker.geometric_arrival` + `agent.py` | **NEW** — the harness's only model-free commit path |
 | geo-keyed REACH look schedule | code | `proactive_commit_check(geo_event=…)` | **NEW** — reallocates the 12-call budget, never grows it |
 | FINISH intersection-crossing floor | code | `K_MIN_CROSSINGS_BEFORE_FINISH_COMMIT` | **NEW** — diagnosis §5-C, re-expressed in crossings instead of action counts |
 | photometric normalisation before `_binary_reach_vlm_call` | code | `completion_checker:~700` | **untouched — the next obvious lever** (diagnosis §5-B: a measured 2.68× luminance shift the judge names in 58 % of its refusals) |
@@ -69,7 +69,7 @@ leg's first frame. Hence: the leg must first be seen **closed** (armed), only a 
 arming counts as a crossing, and only the leg's **first** crossing may commit — at most once. The
 total crossing count per leg is kept and exported.
 
-**2. `orchestrator.py` — a new loop stage** (`road.update(obs, cur_idx)`), placed inside the perceive
+**2. `agent.py` — a new loop stage** (`road.update(obs, cur_idx)`), placed inside the perceive
 branch rather than at the top of the loop *on purpose*: those are exactly the frames the operating
 point was measured on, and sampling the ActivePerception short-circuits too would make the edge
 detector denser than anything that has been measured. It returns `{ok, event, crossings, arrival}`.
@@ -195,7 +195,7 @@ clear of the lint's 2 000 flag. `validate_harness.py` passes with no new warning
   `_finish_crossing_ok`; `CompletionChecker.geometric_arrival`; `verify(leg_crossings=…)`;
   `proactive_commit_check(geo_event=…, leg_crossings=…)` (floor + stride waiver, crossing
   accept-validator); `_depth_gray` unique-colour inner loop (perf only, output byte-identical)
-- `orchestrator.py` — import + instantiate `RoadGeometry`; the new sensor stage before the Perceiver; the
+- `agent.py` — import + instantiate `RoadGeometry`; the new sensor stage before the Perceiver; the
   new geometric ROAD commit stage before the proactive REACH; `leg_crossings` / `geo_event` threaded
   into `verify` and `proactive_commit_check`; `GEO_COMMIT` note + a per-episode sensor-coverage token;
   module-map docstring

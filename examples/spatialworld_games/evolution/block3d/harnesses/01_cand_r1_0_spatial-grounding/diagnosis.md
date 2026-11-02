@@ -39,14 +39,14 @@ own emitted actions (spawn `(2,2,0)`, clamp to `[0,5]³`, `left/right = ∓X`, `
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py` is a **pass-through**. Nothing in it decides anything.
+`agent.py` is a **pass-through**. Nothing in it decides anything.
 
-- `compose_system_prompt()` (orchestrator.py:21) concatenates `AGENT.md` + `skills/*.md` + `rules.md` and
+- `compose_system_prompt()` (agent.py:21) concatenates `AGENT.md` + `skills/*.md` + `rules.md` and
   installs the result on `evaluator.current_prompt`; `eval_runner.py:293` captures that as
   `initial_prompt`. The composition reproduces `system_prompt.txt` in order: role + grid facts →
   "study the three views / you can remove misplaced blocks" → the 7-action control map + colour
   legend. It supplies **no coordinates, no clamp model, no toggle-parity model, no plan**.
-- `build_agent(evaluator)` (orchestrator.py:34) puts `HERE` on `sys.path`, purges `sys.modules["tools*"]`
+- `build_agent(evaluator)` (agent.py:34) puts `HERE` on `sys.path`, purges `sys.modules["tools*"]`
   so a sibling candidate's `tools/` is never inherited (**keep this line**), and returns
   `agent(frame_data) -> await tools.vlm.decide(evaluator, frame_data)`.
 - `tools/vlm.py:decide()` is **two lines**: `return await evaluator.baseline_step(frame_data)`. That

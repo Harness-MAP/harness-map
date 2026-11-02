@@ -197,7 +197,7 @@ def last_line(planner) -> str:
 
 
 class ActionPlanner:
-    """Episode-local state + the governor. One instance per episode, built in orchestrator.py."""
+    """Episode-local state + the governor. One instance per episode, built in agent.py."""
 
     def __init__(self, max_steps: int = 100, stall_limit: int = 4,
                  climb_lock_span: int = 8, template: str = ""):

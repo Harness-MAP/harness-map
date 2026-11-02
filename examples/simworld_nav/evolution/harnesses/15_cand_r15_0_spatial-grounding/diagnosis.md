@@ -24,12 +24,12 @@ required position conjunct on a FINISH leg — answered `Here: 0` on **29/29** l
 
 ## 1. What this harness does (mechanism)
 
-`run_episode` (orchestrator.py:174-735) is a single loop over 10 modules. Per iteration:
+`run_episode` (agent.py:174-735) is a single loop over 10 modules. Per iteration:
 
 1. **stuck check** on Δ`info['moving_distance']` → `ActivePerception.should_emit` (cardinal burst on
    ORIENT, red-idle, anti-spin) → `ViewpointController.gate_burst` (holds the TURN `[rotate,-1]` burst
    until the lateral segmentation band opens). A non-empty burst **short-circuits perceive+plan**.
-2. otherwise: **`RoadGeometry.update(obs, instruction, cur_idx)`** (orchestrator.py:363, new this iter) →
+2. otherwise: **`RoadGeometry.update(obs, instruction, cur_idx)`** (agent.py:363, new this iter) →
    `Perceiver` (1 VLM call, 4 images: rgb / hint / object_mask / depth) → `Planner` (1 VLM call) →
    `CompletionChecker.verify` → if the planner proposed `-1`, `ArrivalGate.allow_planner_commit`; else
    `ArrivalGate.proactive_commit`.
@@ -310,7 +310,7 @@ has **no faced frames**, so this one is only priceable live; that is an argument
 
 ### F3 — Uncap and re-pace the FINISH ask schedule
 *(`modules/completion_checker.py:MAX_REACH_FIRES_PER_SUBTASK`; `arrival_gate.proactive_commit`;
-`orchestrator.py` burst materialisation ≈ `:600-640`)*
+`agent.py` burst materialisation ≈ `:600-640`)*
 
 The recall ceiling in F1 is 2 because only 8 in-window asks exist. Two sub-levers, both cheap:
 
@@ -362,7 +362,7 @@ rate → `[2]` 0.578 → ≈ 0.62; SubtaskSR 0.550 → ≈ 0.59.
   measured saves.
 
 ### F6 — Make the harness notice a wedge, and notice an overshoot
-*(`orchestrator.py:316` `forward_count = sum(1 for a in chosen_actions if a == 0)`)*
+*(`agent.py:316` `forward_count = sum(1 for a in chosen_actions if a == 0)`)*
 
 `chosen_actions` holds only the **current burst** and is reset to `[]` on every commit, so the stuck
 detector fires only when the latest burst happened to contain > 3 forwards. Measured consequence: **9

@@ -32,7 +32,7 @@ eval_runner.py  (ANTICHEAT_GUARD on: _GuardedEvaluator + _DiskGuard + VLM-call c
   evaluator.baseline_step = evaluator.openai_ai_model        # pristine SpatialWorld per-step fn
   evaluator.openai_ai_model = harness.build_agent(_guarded_evaluator)
        │
-orchestrator.py:build_agent
+agent.py:build_agent
   ├─ evaluator.current_prompt = compose_system_prompt()
   │        AGENT.md  +  skills/navigation.md  +  rules.md     (concatenated, in md-sorted order)
   └─ async agent(frame_data) -> tools.vlm.decide(evaluator, frame_data)
@@ -242,7 +242,7 @@ with it, 8/20 without a turn-to-look rule, ~12–13/20 with the did-I-move bit a
 
 ### 5.2 `tools/pose.py` — the ledger, and the ONE side the frame cannot see
 
-Instantiate once in `orchestrator.py:build_agent` (closure state ⇒ episode-lifetime) and thread it through
+Instantiate once in `agent.py:build_agent` (closure state ⇒ episode-lifetime) and thread it through
 `decide`:
 
 ```

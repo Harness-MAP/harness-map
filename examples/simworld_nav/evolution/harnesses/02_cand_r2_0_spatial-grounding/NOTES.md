@@ -25,7 +25,7 @@ data point, and the gradient says keep it verbatim.
 
 | module | role | this iter |
 |---|---|---|
-| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ REACH path raises a bare `-1` (composer called once); `description` threaded into both arrival calls; a vetoed `-1` answered with an in-place HOLD instead of a forward |
+| `agent.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ REACH path raises a bare `-1` (composer called once); `description` threaded into both arrival calls; a vetoed `-1` answered with an in-place HOLD instead of a forward |
 | `modules/spatial_memory.py` | scratchpad: per-step action + odometry ring | untouched |
 | `modules/prompt_assembler.py` | composes the perceive prompt (4 channels + legend) | untouched — but its legend is now the source the arrival call reuses |
 | `modules/perceiver.py` | 1 VLM call: 4 images → free-text description | untouched |
@@ -43,11 +43,11 @@ data point, and the gradient says keep it verbatim.
 | cross-check **refusal allowance** | code | `MAX_XCHECK_REFUSALS_PER_SUBTASK`, `_xcheck_refusals` | **NEW this iter** — bounds the veto by evidence events, not budget |
 | cap-exhaustion semantics | code | `cross_check_planner_commit` | **neither `True` nor `False`** now — falls through to the motion floor |
 | accept memo | code | `_xcheck_verdict_cache` | **narrowed** to `True`-only (a cached refusal is self-fulfilling) |
-| blocked-commit response | code | `orchestrator.py` `HOLD_PROBE` / `MAX_HOLDS_PER_SUBTASK` | **NEW this iter** — net-zero in-place hold |
+| blocked-commit response | code | `agent.py` `HOLD_PROBE` / `MAX_HOLDS_PER_SUBTASK` | **NEW this iter** — net-zero in-place hold |
 | terminal-pose composer | code | `completion_checker.commit_burst` | kept; **double-apply fixed** at the REACH call site |
 | turn-approach latch | code | `active_perception` | kept verbatim |
 | overshoot / "I have passed it" state | code | `spatial_memory` + `completion_checker` | untouched — largest open population (40 eps walked a median 18 357 cm past the window) |
-| stuck detector wired to history | code | `orchestrator.py:~290` | untouched — still counts only the current burst |
+| stuck detector wired to history | code | `agent.py:~290` | untouched — still counts only the current burst |
 | planner `Match` in the Output Format | prose | `planner.reasoning_template` | untouched — ~12 % of replies drop it, and the planner channel is now load-bearing |
 | ORIENTATION cardinal burst | code | `active_perception` (a) | **do not touch** — 50/50 |
 
@@ -104,7 +104,7 @@ a cost bound again — and the verdict memo is narrowed to cache **accepts only*
 memoised refusal at a position the agent has not left is self-fulfilling: the refusal is
 exactly what stops it moving, so it can never expire.
 
-**4. A vetoed `-1` holds its ground instead of walking away** (`orchestrator.py`,
+**4. A vetoed `-1` holds its ground instead of walking away** (`agent.py`,
 `HOLD_PROBE` / `MAX_HOLDS_PER_SUBTASK`). When the cross-check revoked a commit the
 planner's remaining actions were usually nothing at all, the action list came out empty,
 and the `EMPTY_FALLBACK` branch injected a **`Move_Forward`** — so the veto physically
@@ -118,7 +118,7 @@ holds per leg so an insistent planner cannot pirouette away the episode; past th
 the old forward fallback returns. `EMPTY_FALLBACK` for its original cause (a stray planner
 `[-1]` at streak 0) is untouched.
 
-**5. The terminal pose is composed exactly once** (`orchestrator.py`, REACH path). The parent's
+**5. The terminal pose is composed exactly once** (`agent.py`, REACH path). The parent's
 `commit_burst` predicate is correct (199/199 FINISH legs, 0/561 others over every
 `task_config.json` in `hard/`), but the REACH path pre-composed the burst *and* the trim
 loop composed it again, so the surviving rotation plus the appended one made **180°** — the
@@ -178,7 +178,7 @@ cycle.
 ## files
 
 - `modules/completion_checker.py` — `_aux_b64` helper; `_binary_reach_vlm_call` (+`description` kwarg, criterion reverted, evidence legend, mask/depth/description attachment); `MAX_XCHECK_FIRES_PER_SUBTASK` 3→2; new `MAX_XCHECK_REFUSALS_PER_SUBTASK`; `_xcheck_refusals` field; `_xcheck_verdict_cache` narrowed to accepts; `cross_check_planner_commit` arbitration rewritten (+`description` kwarg); `proactive_commit_check` / `scan_reach` thread `description`
-- `orchestrator.py` — `HOLD_PROBE` / `MAX_HOLDS_PER_SUBTASK` constants; `_hold_fallbacks` per-leg counter; `commit_blocked` per-decision flag; `description` threaded into the cross-check and proactive arrival calls; REACH path raises a bare `[-1]`; blocked-commit HOLD branch in the empty-action fallback
+- `agent.py` — `HOLD_PROBE` / `MAX_HOLDS_PER_SUBTASK` constants; `_hold_fallbacks` per-leg counter; `commit_blocked` per-decision flag; `description` threaded into the cross-check and proactive arrival calls; REACH path raises a bare `[-1]`; blocked-commit HOLD branch in the empty-action fallback
 - `NOTES.md` — this file
 
 *(unchanged: `AGENT.md`, `rules.md`, `__init__.py`, `modules/{spatial_memory,prompt_assembler,perceiver,planner,affordance_estimator,active_perception}.py`)*

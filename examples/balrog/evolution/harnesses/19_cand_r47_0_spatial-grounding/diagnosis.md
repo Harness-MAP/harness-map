@@ -20,7 +20,7 @@ Four wins are MazeWalk episodes where the `>` is adjacent to spawn and the episo
 Beneath both bugs sits a structural TASK-GAP. A one-hop orbit-break cannot explore: 56–84% of steps revisit a square, and every R3 / MazeWalk-15 loss ends with the `>` never charted.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:GroundedHarness.act` runs these steps each turn:
+`agent.py:GroundedHarness.act` runs these steps each turn:
 1. `Ledger.observe`
    - Parses cursor `(x, y-1)`, the `map:` block, `Dlvl` and "`<noun> adjacent <dirs>`" prose.
    - Counts visits.

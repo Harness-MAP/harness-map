@@ -14,7 +14,7 @@ This is **identical** to the parent r041 (0.375 / same vector). All 23 navigatio
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:LearnerAgent.act` runs the stages `STAGES = (prompt, orient, stairs, fight, quest, fetch, route, learner)` in order. The first stage that answers wins, and its rung name goes into `reasoning`.
+`agent.py:LearnerAgent.act` runs the stages `STAGES = (prompt, orient, stairs, fight, quest, fetch, route, learner)` in order. The first stage that answers wins, and its rung name goes into `reasoning`.
 
 - **`orient`** folds the frame into `tools/chart.py:Chart`, credits the TD learner, calls `Quest.observe`, and computes `route`.
 - **`quest` and `fetch`** are new in this candidate. They are gated by `Quest.armed = "pickup" in legal and a } is charted`.
@@ -102,7 +102,7 @@ It is not VLM-CEILING, because the VLM never touches Quest decisions except the 
 **2. `tools/quest.py:ITEM`: restrict it to `(` and `/`.** *(QE letter arithmetic.)* Potions, darts and daggers never help and eat letters, so drop `!`, `)`, `?`, `=`, `"`, `[`, `*` and `$`.
 - If the first tool lands on an untypeable letter (`f`, `g`, `i`, …), the second pickup gets the next letter. Pick up **both** tools before firing, and let `usable()` choose whichever is typeable. It already reads letters off `x - …` messages and checks them against the `[..]` prompt.
 
-**3. Add a mouth hold for the rat room: `orchestrator.py:st_fight`, or a new `st_hold` between `fight` and `quest`.** *(QM survival 0/5 → up to 3–5/5; required for change 1 to score on QM.)*
+**3. Add a mouth hold for the rat room: `agent.py:st_fight`, or a new `st_hold` between `fight` and `quest`.** *(QM survival 0/5 → up to 3–5/5; required for change 1 to score on QM.)*
 - Arm it when a hostile letter is drawn within about 3 squares, or named `very near`/`near` in the prose, and the hero stands on a square with ≤ 2 passable neighbours: a corridor or door mouth.
 - In that case emit `search` (a free wait, and it is in the Quest vocabulary) instead of letting `route` advance, and keep swinging whatever is adjacent.
 - Release it once no creature is drawn within the radius.

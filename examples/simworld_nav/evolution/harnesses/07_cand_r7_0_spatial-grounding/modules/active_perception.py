@@ -96,7 +96,7 @@ if _pkg:
     sys.modules.setdefault(_pkg, types.ModuleType(_pkg))
 
 
-# High-level action codes (matching orchestrator.py's ACTION_TO_STEP map).
+# High-level action codes (matching agent.py's ACTION_TO_STEP map).
 _FORWARD = 0
 _ROTATE_LEFT = 1
 _ROTATE_RIGHT = 2
@@ -239,7 +239,7 @@ def _rotation_burst(current: str, target: str) -> List[int]:
 
 # --- iter_004 (retuned in iter_009): red-signal-ahead detection -------
 # obs['rgb'] is uint8 (600, 720, 3) per the workspace probe (pinned in
-# orchestrator.py's docstring). A typical traffic-signal lamp head occupies
+# agent.py's docstring). A typical traffic-signal lamp head occupies
 # ~10-15 px across at that resolution; an "ahead" signal projects in the
 # upper-third / center of the frame.
 #

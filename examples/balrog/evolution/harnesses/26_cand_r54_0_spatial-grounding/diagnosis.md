@@ -13,7 +13,7 @@ Neither is present in this candidate.
 Provenance check: the trace rungs (`chart:route-frontier`, `reflex:prompt-more`, `chart:probe`) are this candidate's rung names, so `$TRACE_DIR` IS this code. The judge's "blank Reasoning" note just reflects the model-stage rows (see §5.4).
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:GroundedAgent.act` parses the frame with `tools/frame.py:parse_glyph_map`, then runs `STAGES = (prompt, orient, stairs, fight, route, probe, model)`. The first non-None answer is emitted.
+`agent.py:GroundedAgent.act` parses the frame with `tools/frame.py:parse_glyph_map`, then runs `STAGES = (prompt, orient, stairs, fight, route, probe, model)`. The first non-None answer is emitted.
 - `st_prompt`: any open prompt (`cursor.y==0`) → `more`, cap 3.
 - `st_orient`: folds the frame into `Chart`, books bumps, and marks doors from prose and from `door opens`.
 - `st_stairs`: `down` when standing on `>`.

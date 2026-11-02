@@ -3,7 +3,7 @@
 ## module map / levers
 | file | role | lever |
 |---|---|---|
-| orchestrator.py | `PipelineHarness`: Chart.observe → StepContext → stage `pre` hooks → ONE model call → legal projection → stage `post` hooks (inner→outer). Resets the chart when the system prompt changes (the agent is reused across tasks). Writes `route=… model:… route:/swing:/veto:… picked=…` to `reasoning` | code |
+| agent.py | `PipelineHarness`: Chart.observe → StepContext → stage `pre` hooks → ONE model call → legal projection → stage `post` hooks (inner→outer). Resets the chart when the system prompt changes (the agent is reused across tasks). Writes `route=… model:… route:/swing:/veto:… picked=…` to `reasoning` | code |
 | tools/chart.py | NEW. Per-level map memory: glyphs, visits, prose-named wall/bars SQUARES, terrain-refused (square, dir) edges; BFS `plan()` to a charted `>` or the nearest frontier (never stood on AND borders uncharted) | code |
 | tools/stages.py | NEW. `VetoStage` (lava/water, refused edge, named wall/bars), `SwingStage` (an adjacent creature letter is a fight target, never vetoed or overridden), `RouteStage` (ROUTE note; post-hoc override of a move onto an already-visited square with the BFS hop) | code |
 | tools/action_io.py | legal set from the system prompt; whole-word projection with veto + fallback | code |
@@ -37,4 +37,4 @@ r039 showed the model copies a ROUTE hop but used a broken frontier; r018 showed
 pre/post stage wiring. This candidate combines the two and adds a code-owned route override.
 
 ## files:
-orchestrator.py, tools/chart.py (new), tools/stages.py (new), tools/prompting.py, AGENT.md, NOTES.md
+agent.py, tools/chart.py (new), tools/stages.py (new), tools/prompting.py, AGENT.md, NOTES.md

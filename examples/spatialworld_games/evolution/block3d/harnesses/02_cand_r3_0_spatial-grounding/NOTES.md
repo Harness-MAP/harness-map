@@ -42,7 +42,7 @@ of this reads engine state: the only inputs are `frame_data.image` (with `captur
 fallback channel) and the keys this harness itself returned.
 
 ## files
-`orchestrator.py`, `AGENT.md`, `rules.md`, `memory.md`, `skills/building.md`, `skills/sweeping.md` (new),
+`agent.py`, `AGENT.md`, `rules.md`, `memory.md`, `skills/building.md`, `skills/sweeping.md` (new),
 `tools/__init__.py`, `tools/frame.py`, `tools/panels.py`, `tools/layers.py` (new), `tools/serpent.py`
 (new), `tools/press.py` (new, replaces `tools/action.py`), `tools/ledger.py` (new), `tools/vlm.py`,
 `traces_notes/MEASUREMENTS.md` (new, the full offline log). `tools/action.py` removed — `tools/press.py`
@@ -57,7 +57,7 @@ supersedes it and is on the live path.
 ## module map
 | file | role |
 |------|------|
-| `orchestrator.py` | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn; `compose_system_prompt()` rebuilds the prompt from the `.md` priors. The `sys.modules["tools*"]` purge is load-bearing and stays. |
+| `agent.py` | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn; `compose_system_prompt()` rebuilds the prompt from the `.md` priors. The `sys.modules["tools*"]` purge is load-bearing and stays. |
 | `AGENT.md` | role framing + the perception facts verified off the frame (6x6x6, absorbing faces, spawn, the three panels, the self-occluding view, the ~50-press episode). |
 | `rules.md` | the seven legal actions, the one-action JSON contract, toggle semantics, and that a press into a face is legal and useless. |
 | `skills/building.md` | reading a panel square into a statement about the structure; ALLOWED vs REQUIRED. |
@@ -90,7 +90,7 @@ supersedes it and is on the live path.
 - **The affordability switch is refuted.** Aiming at the minimal shape when the hull tape does not fit the
   wallet wins 15/15/11 against the hull tape's 19/15/11, and "either" is also 19/15/11. It never adds a
   level; recorded so the next round does not spend itself on it.
-- **End to end, driving the real `orchestrator.py`:** 19/20 structured, 15/20 hull-closed, 11/20 hull-over —
+- **End to end, driving the real `agent.py`:** 19/20 structured, 15/20 hull-closed, 11/20 hull-over —
   and 19/20 structured with the model replying at RANDOM, with no highlight ink at all, and with cubes
   occluding the cursor. **Clamped presses 0, cancelled work 0, stand-downs 0** in every bank. The parent,
   on the real levels, won 1/20 with 42.5% of its moves clamped and 21.0% of its toggles cancelling its own

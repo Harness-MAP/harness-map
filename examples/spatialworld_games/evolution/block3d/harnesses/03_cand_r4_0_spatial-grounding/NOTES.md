@@ -110,7 +110,7 @@ and order sweeps and the rig's calibration against the real `make_phi_blocks` pi
 - `AGENT.md`, `rules.md`, `skills/{observe,plan,press}.md`, `memory.md` — the prose priors
 - `traces_notes/MEASURED.md` — the full engine measurement tables (φ-free, so it can be long)
 - `traces_notes/PHI.md` — the centroid inversion, the per-block match, the doc sweeps (φ-free)
-- `orchestrator.py` — entry point, unchanged contract: `build_agent(evaluator) -> agent(frame_data)`
+- `agent.py` — entry point, unchanged contract: `build_agent(evaluator) -> agent(frame_data)`
 ## levers
 
 | lever | file | kind | what it moves |
@@ -207,7 +207,7 @@ applied actions and corrected only from the picture.
 ## module map
 
 ```
-orchestrator.py                 entry point; composes the prompt from the .md priors      [3 components]
+agent.py                 entry point; composes the prompt from the .md priors      [3 components]
 └── tools/
     ├── frame.py           raster(frame_data) -> uint8 HWC array;  capture(evaluator) [2]
     ├── action.py          KEY_MAPPING, LEGAL, AXIS, FACE, SPAWN, clamp algebra       [1]

@@ -29,4 +29,4 @@ The steer points at r027's structure: the field decides and the model breaks tie
 Frontier or stairs descent on a chart is the mechanism behind 0.375 on the chart lineage. It also cuts model calls, and with them the cost, on navigation tasks.
 
 ## files:
-orchestrator.py, tools/field.py (new), tools/ledger.py, tools/action_io.py
+agent.py, tools/field.py (new), tools/ledger.py, tools/action_io.py

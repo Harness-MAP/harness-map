@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| orchestrator.py | `GradientAgent`; `STAGES = (prompt, orient, stairs, swing, door, cross, hold, kit, fetch, descend, consult)`. The first stage that answers is emitted, and its rung goes to `reasoning`. tools/ are loaded under a path-unique module name. | code |
+| agent.py | `GradientAgent`; `STAGES = (prompt, orient, stairs, swing, door, cross, hold, kit, fetch, descend, consult)`. The first stage that answers is emitted, and its rung goes to `reasoning`. tools/ are loaded under a path-unique module name. | code |
 | tools/field.py | frame decoder only: sections, `adjacent` prose clauses, raw `lang`, glyph lookup. It holds no chart state any more. | code |
 | tools/chart.py | `Chart`: terrain, door SQUARES, bump-closed edges, visits, **locked-door ledger**. `edge` has no diagonal through a door. `field(pos)` is seeded only on REACHABLE `>` or reachable frontier. | code |
 | tools/quest.py | Quest regime (ported from r052), armed only when `{pickup,kick,zap} ⊆ legal`. It handles silent-pile detection, one safe kick, horn-first pickup plus a letter filler, apply/zap across lava, prompt answers and the mouth hold. | code |
@@ -31,4 +31,4 @@ The steer exemplars are r041/r046, and r052 is the realisation of that shape on 
 The new `door` stage follows the memory "`This door is locked.` → kick" (+7/−0 on R3). It is a new owner that only this stage-slot structure can host cleanly. Expected result: R3 2→4–5/5, Quest 0→8–9/10, with MazeWalk unchanged at 10/10.
 
 ## files:
-orchestrator.py (rewired as a stage table, plus the `door` stage and kick-aim prompt), tools/field.py (decoder only), tools/chart.py (new: doors, reach-seeded field, `locked` / `lock_to_kick`), tools/quest.py (ported), tools/__init__.py, NOTES.md
+agent.py (rewired as a stage table, plus the `door` stage and kick-aim prompt), tools/field.py (decoder only), tools/chart.py (new: doors, reach-seeded field, `locked` / `lock_to_kick`), tools/quest.py (ported), tools/__init__.py, NOTES.md

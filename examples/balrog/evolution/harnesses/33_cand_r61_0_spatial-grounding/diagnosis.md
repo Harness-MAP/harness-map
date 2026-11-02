@@ -17,11 +17,11 @@ The parent r035 scored 0.150, so the chart + BFS graft recovered **+8 episodes**
 - **TASK-GAP on Boxoban and Quest (20/40 episodes, 0 wins):** the harness has no mechanism for either task. Both have known, observation-only mechanisms: r058's `tools/quest.py` scores 10/10, and an exact push-space Sokoban planner scores about 19/20.
 
 ## 1. What this harness does (mechanism)
-Everything is in the single module `orchestrator.py:LearnerAgent.act`. `AGENT.md` is one line and is used only by `consult`. `rules.md` and `memory.md` are empty.
+Everything is in the single module `agent.py:LearnerAgent.act`. `AGENT.md` is one line and is used only by `consult`. `rules.md` and `memory.md` are empty.
 
 Each step runs in this order:
 1. **Prompt reflexes:** `y` for an attack `[yn]` prompt, `more` for `--More--`, otherwise `esc`.
-2. **`credit()`:** records drawn glyphs and applies a TD(λ) update. It also books a no-move as `(s,a)` in `self.blocked` and pins q to −1 (`orchestrator.py:265-268`).
+2. **`credit()`:** records drawn glyphs and applies a TD(λ) update. It also books a no-move as `(s,a)` in `self.blocked` and pins q to −1 (`agent.py:265-268`).
 3. **`overlay()`:** writes each `<noun> adjacent <dirs>` clause onto its square, as `block` (wall, corner, **dark area**, bars, stone…) or `open` (doorway, open door, floor…).
 4. **`reflex:stairs`:** emits `down` on a remembered `>`. It fired **0 times**, because stepping onto `>` already ends a MiniHack episode.
 5. **`deadly()`:** vetoes lava/water nouns and adjacent `}`. **`foe_bearing()`:** swings at any adjacent letter.
@@ -86,20 +86,20 @@ Token cost is entirely learner consults on Boxoban and Quest-Easy, the tasks whe
 ## 5. Concrete changes (ranked by leverage)
 
 1. **Graft r058's Quest module**
-   - **Where:** `tools/quest.py`, plus a stage in `act()` before `route()`. Source: `candidates/prop_r058/cand_r058_0_spatial-grounding/tools/quest.py` (`Quest.observe/answer/kit/cross/hold/targets/toward`) and its wiring at `orchestrator.py:396-468` there.
+   - **Where:** `tools/quest.py`, plus a stage in `act()` before `route()`. Source: `candidates/prop_r058/cand_r058_0_spatial-grounding/tools/quest.py` (`Quest.observe/answer/kit/cross/hold/targets/toward`) and its wiring at `agent.py:396-468` there.
    - **What it does:** kicks the spawn pile apart, `pickup`s one item at a time (wand first, so its letter is answerable), then answers the `zap`/`apply` letter prompt with the letter-equivalent verb (`h j k l y u b n a c e o q s z`) and fires at the lava toward the goal bearing.
    - **In QM:** hold the 1-wide corridor mouth for the rat fight; **never advance into the room while a rat is adjacent**.
    - **Prompt reflex:** stop `esc`-ing item prompts when Quest is armed.
    - **Predicted:** Quest 0/10 → 7–10/10, so primary +0.18 to +0.25. It also removes about 70k tokens per QE episode and should turn 4 QM deaths into survivals.
 
-2. **Fix the no-move classifier in `credit()`** (`orchestrator.py:252-268`)
+2. **Fix the no-move classifier in `credit()`** (`agent.py:252-268`)
    - Book `(s,a)` in `blocked` **only** when the message does NOT contain `door opens`, `door resists`, `door is locked`, `diagonally`, or an attack verb.
    - On `door opens`, set `self.nouns[target] = "open"` and `discard((s,a))` from `blocked`.
    - On `diagonally`, block only that diagonal edge (current behaviour), and tag the target as a doorway so `route()` never offers a diagonal into or out of it.
    - On `This door is locked.`, if `kick` is legal, emit `kick` + bearing (a two-step verb) instead of routing away.
    - **Predicted:** R3 2/5 → 4–5/5 (+0.05 to +0.075). Each of the 3 losses had the `>` or the only exit one door away.
 
-3. **Take `dark area` out of `BLOCK_NOUNS`** (`orchestrator.py:32`)
+3. **Take `dark area` out of `BLOCK_NOUNS`** (`agent.py:32`)
    - Treat it as *unknown*: don't write it to `self.nouns`, or write `"dark"`, which `passable()` rejects but `frontier()` counts as unexplored.
    - A real wall still gets caught by the bump ledger once the fix in item 2 is in.
    - **Predicted:** gets R3 run_01-style dark-room stalls moving again, and lets frontiers extend through dark doorways. MazeWalk is unaffected because it already routes to a drawn `>`.

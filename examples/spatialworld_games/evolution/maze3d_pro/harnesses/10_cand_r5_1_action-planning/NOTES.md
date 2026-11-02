@@ -80,7 +80,7 @@ into a fresh map epoch settled afterwards by per-pose digest comparison.
 The gradient was a SEARCH-SPACE STEER toward the `cand_r002_1_action-planning` /
 `cand_r003_0_spatial-grounding` region, naming the productive difference as its **token-level
 implementation**. So the component graph is deliberately NOT where the work went: the module set is
-the parent anchor's own five files (`orchestrator.py` + `tools/{__init__,action,frame,vlm}.py`), nothing
+the parent anchor's own five files (`agent.py` + `tools/{__init__,action,frame,vlm}.py`), nothing
 added, split out or renamed, and `build_agent` / `compose_system_prompt` keep their signatures and
 callers. Everything new is content INSIDE those modules. Measured against the parent, in the frozen
 `cvt_v3_k2` standardisation (distance of each phi block to the target region's centroid):
@@ -173,7 +173,7 @@ to the model's own action for that step rather than costing the episode.
 
 | file | role |
 |------|------|
-| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and builds one `Chart` + one `Tape` per episode; `compose_system_prompt()` recomposes the prompt from the .md priors. |
+| agent.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and builds one `Chart` + one `Tape` per episode; `compose_system_prompt()` recomposes the prompt from the .md priors. |
 | AGENT.md | role framing + the perception facts this build actually renders (no HUD, depth-shaded corridor, gold exit, cyan stair, the unseen cell underfoot) + how to read the MEASURED STATE block. |
 | rules.md | the legal action set, the granularity contract, the DECISION ECONOMICS, and the climb precondition stated as "the block says there is a stair underfoot". |
 | skills/navigation.md | the navigation priority order, including `move_backward` as the one-decision reversal. |
@@ -185,7 +185,7 @@ to the model's own action for that step rather than costing the episode.
 ## evolvable levers (axes)
 
 * prose: `AGENT.md` / `rules.md` / `skills/*.md` / `memory.md` — what the agent is told.
-* code: `orchestrator.py` / `tools/*.py` — the mechanism.
+* code: `agent.py` / `tools/*.py` — the mechanism.
 * swept, as `Tape` class attributes (set them AFTER `build_agent`, which purges
   `sys.modules["tools*"]` and throws away anything set before): `STRIDE_MAX`, `REVERSE`,
   `PROBE_FIRST`, `TRANSIT_ONLY`, `RANK`, `COMMIT`, `OBEY`, `FLOOR_GATE`, `STALE_LIMIT`,
@@ -202,6 +202,6 @@ every single step, so the VLM-call counter can never void the run.
 
 ## files
 
-`orchestrator.py`, `tools/__init__.py`, `tools/frame.py`, `tools/action.py`, `tools/vlm.py`, `AGENT.md`,
+`agent.py`, `tools/__init__.py`, `tools/frame.py`, `tools/action.py`, `tools/vlm.py`, `AGENT.md`,
 `rules.md`, `skills/navigation.md`, `memory.md`, `NOTES.md`. `system_prompt.txt` and
 `system_prompt.md` are untouched (declared non-levers; `compose_system_prompt` never reads them).

@@ -9,7 +9,7 @@
 **Binding constraint:** the pipeline has **no goal and no route**. Every stage only *reacts to the model's proposed direction*, so the frozen VLM still picks where to go. Worse, OrbitStage's perpendicular redirect gets copied by the model's in-context history and becomes a longer cycle. This is a HARNESS-BUG: the fix is a chart + BFS route (a frontier or a drawn `>`), which is already proven at 0.35–0.375 in this same chain (r001/r036/r041).
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:PipelineHarness.act` works in five steps:
+`agent.py:PipelineHarness.act` works in five steps:
 1. `context.build(obs)` builds a StepContext from the frame: cursor pos, `map:` cells, message, and adjacent-noun prose. It keeps no memory across steps.
 2. `pre()` runs outer→inner: Legal, Modal, Hazard, Bump, Orbit. Only ModalStage can short-circuit. Hazard and Bump only append `ctx.notes` lines to the prompt.
 3. One model call. The prompt is NaiveAgent's plus a "Checks on this frame:" block. The reply goes through `action_io.snap`: whole-word match against the legal set, falling back to the stock string.
@@ -111,7 +111,7 @@ This is not a VLM ceiling: the frames contain enough to route. MW15 r04 draws th
    - Never pass an unlisted string through. Fall back to the route's first hop, or the least-visited safe move.
    - Predicted: 51 wall-bumping steps in QE r04 recovered, and illegal count → ~0.
 4. **Delete OrbitStage or subordinate it to the route.** The perpendicular redirect demonstrably *seeds* the period-3/4 cycles (MW9 r00, MW15 r04, R3 r00, Boxoban-Hard r02). Once a route owns movement it is dead weight. If it is kept, detect cycles on the position history (period ≤6), not on action reversal.
-5. **Keep HazardStage and ModalStage as they are.** They are the only stages with measured positive effect: lava deaths 4 → 0 and modal frames answered without the model. Note that a `pre()` short-circuit skips every `post()`, so HazardStage cannot veto a route hop. The route's BFS must exclude `}` and lethal-noun squares itself, or `orchestrator.py` must run the post chain on short-circuited actions too.
+5. **Keep HazardStage and ModalStage as they are.** They are the only stages with measured positive effect: lava deaths 4 → 0 and modal frames answered without the model. Note that a `pre()` short-circuit skips every `post()`, so HazardStage cannot veto a route hop. The route's BFS must exclude `}` and lethal-noun squares itself, or `agent.py` must run the post chain on short-circuited actions too.
 
 ## 6. Exhausted — do NOT repeat
 - Veto/rewrite layers around a model-chosen direction with no destination: this candidate, 0.175. The chain's scores separate by *whether a BFS route drives the step*: 0.35–0.375 with a route, ≤0.25 without.

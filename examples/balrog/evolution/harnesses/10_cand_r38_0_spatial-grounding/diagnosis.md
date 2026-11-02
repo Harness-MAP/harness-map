@@ -13,7 +13,7 @@ Boxoban has no push planner, Quest has no item/lava opener and no corridor hold,
 post. On top of that, the VLM copies `rec` on **1412/1415** model steps, so every model call is pure cost.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:GroundedHarness.act` runs a stage ladder:
+`agent.py:GroundedHarness.act` runs a stage ladder:
 - **Stage 0, modal:** runs when a prompt is open, i.e. the message contains `[yn`/`--More--`/`what do you
   want to`, or cursor y==0. It skips `memory.observe`, books `(last_pos, last_move)` as refused on
   `Really attack`, and answers `more`/`esc`.
@@ -144,7 +144,7 @@ the whole cost bill.
      (≤2 passable neighbours), do not advance. Spend the turn with `search`/`wait` and swing only at an
      adjacent foe. Commit the post to the cell you stepped to.
    - Cross-chain: QM 0→3–5/5, QE ~2/5.
-4. **Model fallback, `orchestrator.py` stage 3** (cost only, primary-neutral).
+4. **Model fallback, `agent.py` stage 3** (cost only, primary-neutral).
    - Since reply==rec on 99.8% of steps, stage 3 can emit `g.recommended` directly with no model call.
    - Alternatively, keep the call only when `g.recommended is None`.
    - Predicted: cost goes from 188k to ~0–20k/ep, with identical actions. **Do this only after (1) and

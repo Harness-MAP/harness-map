@@ -1,5 +1,5 @@
 <!-- memory.md — the per-step scratchpad TEMPLATE, and a live prose lever.
-     orchestrator.py reads everything after this comment and hands it to tools/action.py:Tape as the
+     agent.py reads everything after this comment and hands it to tools/action.py:Tape as the
      format string it renders each step; tools/vlm.py appends the result to the agent's system turn
      (conversation_history[0]), which is the only per-turn text channel the engine has. The block is
      APPENDED to a stashed pristine base, never spliced in: truncating that turn at a marker deletes

@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| orchestrator.py | `GroundedAgent`: `act()` builds a per-step context `c` and walks `STAGES = (prompt, orient, stairs, fight, route, model)`; each `st_*` abstains (None) or answers `(word, rung, kind)`; `emit()` books `self.last` and writes the rung to `reasoning`. Chart = `terrain`/`visits`/`blocked`/`doors` + BFS `route`. | code |
+| agent.py | `GroundedAgent`: `act()` builds a per-step context `c` and walks `STAGES = (prompt, orient, stairs, fight, route, model)`; each `st_*` abstains (None) or answers `(word, rung, kind)`; `emit()` books `self.last` and writes the rung to `reasoning`. Chart = `terrain`/`visits`/`blocked`/`doors` + BFS `route`. | code |
 | AGENT.md / rules.md / memory.md / skills/ | empty | prose |
 
 ## axis:
@@ -35,4 +35,4 @@ Checked by a stub smoke test:
 - a `What do you want to drink?` prompt with the cursor on the message line gets `more`.
 
 ## files:
-orchestrator.py, NOTES.md
+agent.py, NOTES.md

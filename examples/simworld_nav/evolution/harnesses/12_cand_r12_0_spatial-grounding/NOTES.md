@@ -55,7 +55,7 @@ moved is the shape of the answer and what the license reads off it.
 
 | module | role | this iter |
 |---|---|---|
-| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ★ 5 wiring points (xcheck gate, proactive gate, side-scan verdict, FINISH commit pose, ledger into `notes`) |
+| `agent.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)` | ★ 5 wiring points (xcheck gate, proactive gate, side-scan verdict, FINISH commit pose, ledger into `notes`) |
 | `modules/arrival_scale.py` | **ordinal arrival ladder; owns the non-orient `-1` license + the FINISH commit pose** | ★ **NEW MODULE** |
 | `modules/completion_checker.py` | the binary recognizer | **untouched** — demoted to `ArrivalScale`'s degradation path |
 | `modules/active_perception.py` | cardinal burst, relative-turn burst, red idle, anti-spin, momentum | **untouched** (the cardinal burst is 50/50 — do not touch) |
@@ -81,7 +81,7 @@ moved is the shape of the answer and what the license reads off it.
 | ORIENTATION cardinal burst | code | `active_perception` (a) | **do not touch** — 50/50, zero VLM calls |
 | `_named_side_has_structure` / `_side_band_near` / `_looming_state` vetoes | code | `completion_checker` | **unwired from the new path** — §6 measures them inert/noise; left in place for the degradation route and a future A/B |
 | **TURN approach** (spend ~2 forwards before the turn burst) | code | `active_perception:432` | **still open** — gradient §5-B, priced 5/12 → 11/12. Deliberately deferred: it is a MOTION axis and would confound this iter's attribution |
-| **stuck detector scoped to the leg, not the burst** | code | `orchestrator.py:~285` | **still open** — gradient §5-F; `forward_count > 3` is unreachable when 750/918 bursts are `[0]` |
+| **stuck detector scoped to the leg, not the burst** | code | `agent.py:~285` | **still open** — gradient §5-F; `forward_count > 3` is unreachable when 750/918 bursts are `[0]` |
 | **geometric roadway-band decider** (`object_mask`) | code | — | **still open** — gradient §5-C. This iter asks the VLM about the junction instead; if the ladder's INTERSECTION rung holds up, the two are substitutes and the cheaper one should win |
 | **a FINISH arrival channel that is not a forward two-image call** | — | — | **the named open problem** — §risk |
 
@@ -99,7 +99,7 @@ elements of the message are present. r009's own token-level move was *subtractiv
 iter's is *structural within the answer*: **one call, five ordered tokens, and a
 license that reads the sequence of tokens rather than any single one.**
 
-Five wiring points in `orchestrator.py`, each a re-point rather than a new edge:
+Five wiring points in `agent.py`, each a re-point rather than a new edge:
 
 1. `cross_check_planner_commit` → `scale.allow_planner_commit`, which **blocks**
    on a spent budget instead of approving (F5).
@@ -259,5 +259,5 @@ prompt): 3/3 in-window ROAD frames → `ALONGSIDE` → licensed; 2/2 frames at
 * `modules/arrival_scale.py` — **new** (the ordinal ladder, the license, the
   leg taxonomy, the FINISH commit pose, the ledger)
 * `modules/__init__.py` — export `ArrivalScale`
-* `orchestrator.py` — 5 wiring points + the module-list docstring
+* `agent.py` — 5 wiring points + the module-list docstring
 * `NOTES.md` — this file

@@ -14,7 +14,7 @@ Note: R3 run_04 shows `progression=0.0` but `end_reason=2` (return 0.99 on its l
 success under the evaluator's `success` flag (BALROG's `progression` requires reward ≥ 1.0). R3 is therefore 2/5, not 1/5.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:LearnerAgent.act` runs these steps in order, one module, with no tools/skills:
+`agent.py:LearnerAgent.act` runs these steps in order, one module, with no tools/skills:
 1. Prompt reflexes: an attack `[yn]` gets `y`, `--More--` gets `more`, any other prompt gets `esc`.
 2. `chart(fr)` copies every non-blank glyph into `self.terrain`. A no-move after a non-swing move adds
    `(square, move)` to `self.blocked`.
@@ -89,7 +89,7 @@ consulted only on ties), so the gain has to come from a planner in the harness.
 
 ## 5. Concrete changes (ranked by leverage and certainty)
 
-1. **Door-aware chart (R3; predicted +1 to +3 wins, i.e. +0.025 to +0.075 primary).** In `orchestrator.py`:
+1. **Door-aware chart (R3; predicted +1 to +3 wins, i.e. +0.025 to +0.075 primary).** In `agent.py`:
    - `chart()`: keep `self.doors`, a set of cells whose terrain was ever `+` or that are named `door` in the adjacent
      prose. When a cell in `self.doors` is now drawn `-`/`|`, store the marker `"'"` for an open door
      instead of the wall glyph. Also add the pending target square to `self.doors` when the message contains

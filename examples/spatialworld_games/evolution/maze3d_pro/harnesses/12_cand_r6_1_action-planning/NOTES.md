@@ -7,7 +7,7 @@ optimised. `build_agent(evaluator)` is the entrypoint the extended evaluator ins
 maze `success` scoring all stay byte-compatible with the prompt-only baseline.
 
 The parent is the **staged anchor** (`anchor_maze3d_pro`, 2/25 = 0.0800), a deliberate pass-through:
-`orchestrator.py` composed the prompt from the `.md` priors and `tools/vlm.py:decide` forwarded every step
+`agent.py` composed the prompt from the `.md` priors and `tools/vlm.py:decide` forwarded every step
 to `evaluator.baseline_step` unchanged. It held **no state at all**, so the one bit that separates a
 move that happened from a move that was refused never reached anything, and **1829 of its 2340
 decisions (78.2%) re-pressed a wall that same episode had already proven at the same cell and the same
@@ -53,7 +53,7 @@ both out, and it is worth **+119 of 125 and +33 of 75**.
 
 | file | role | this iteration |
 |------|------|----------------|
-| `orchestrator.py` | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `plan.Pilot` for the episode; `compose_system_prompt()` recomposes the agent's prompt from `AGENT.md` + `skills/*.md` + `rules.md`. | rewired to open the Pilot and read `max_steps` |
+| `agent.py` | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `plan.Pilot` for the episode; `compose_system_prompt()` recomposes the agent's prompt from `AGENT.md` + `skills/*.md` + `rules.md`. | rewired to open the Pilot and read `max_steps` |
 | `tools/sight.py` | **NEW.** ONE FRAME READ AS GEOMETRY: the corridor's length and kind down the centre column, the FLANK LADDER beside it, and the gate that refuses to decode a frame this renderer did not draw. | new |
 | `tools/chart.py` | **NEW.** What the frames have PROVEN, per floor: three kinds of open kept strictly apart, the dead-reckoned pose, the `(cell, bearing)` refusal ledger, the frontier, the clash-wipe, and the EPOCH that settles a floor change with no floor readout to read. | new |
 | `tools/plan.py` | **NEW — the axis.** `edges`/`search` (the decision-priced route), `candidates`/`elect` (goals priced in decisions), `sweep` (the forced escape), `Pilot` (observe → aim → want → govern → speak). | new |
@@ -284,7 +284,7 @@ line `Pilot.notes()` emits.
 ## traps that have each cost a round somewhere in this tree
 
 * **The pre-eval gate text-scans the agent-facing priors case-insensitively** (`system_prompt.txt`,
-  `AGENT.md`, `rules.md`, `memory.md`, `skills/*.md`) and AST-scans `orchestrator.py` + `tools/*.py`, for a
+  `AGENT.md`, `rules.md`, `memory.md`, `skills/*.md`) and AST-scans `agent.py` + `tools/*.py`, for a
   list of privileged names used as an attribute or a string subscript. Never let those spellings into
   prose or code — not even in a comment discussing them. `NOTES.md` and `diagnosis.md` are
   proposer-facing and are not scanned.
@@ -316,6 +316,6 @@ line `Pilot.notes()` emits.
 
 ## files
 
-`orchestrator.py`, `tools/__init__.py`, `tools/sight.py` (new), `tools/chart.py` (new), `tools/plan.py`
+`agent.py`, `tools/__init__.py`, `tools/sight.py` (new), `tools/chart.py` (new), `tools/plan.py`
 (new), `tools/action.py`, `tools/vlm.py`, `AGENT.md`, `rules.md`, `skills/navigation.md`, `memory.md`,
 `NOTES.md`. Untouched: `tools/frame.py`, `system_prompt.txt`, `system_prompt.md`.

@@ -23,7 +23,7 @@ On every such frame the field is either goal-less (Boxoban) or flat (Quest, wher
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:FieldHarness.act` is a rung ladder, and the first rung that fires wins. Its name is written to the CSV `Reasoning` column.
+`agent.py:FieldHarness.act` is a rung ladder, and the first rung that fires wins. Its name is written to the CSV `Reasoning` column.
 
 1. **modal:** answers `--More--`, `[yn` or `In what direction` with the pending kick bearing, else `more`.
 2. **down:** fires when standing on `>`.
@@ -144,7 +144,7 @@ Memory: 19/20 on the stub rig and 10/10 live; it wins iff the optimal plan is â‰
 ### 4. `tools/field.py:Chart.fold`: classify door no-moves (small; R3 robustness)
 Extend the `pend` branch: `door resists`, `door is stuck` and `WHAMM` must **not** add to `blocked`. Book the target as a door and allow a retry, or a kick if `kick` is legal. Only an unexplained no-move convicts the edge (R3/03 row 77).
 
-### 5. `orchestrator.py` consult rung: never pay for a consult on a flat, creature-free field (cost)
+### 5. `agent.py` consult rung: never pay for a consult on a flat, creature-free field (cost)
 Once #1 and #2 land, `consult` should almost never fire. As a backstop:
 - When the field is flat and no letter glyph is drawn, emit the least-visited open neighbour (`rank_open(...)[0]`) in code, or `search` at a dead end.
 - Keep the model only for frames code cannot parse.

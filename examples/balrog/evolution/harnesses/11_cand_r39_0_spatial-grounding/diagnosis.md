@@ -17,7 +17,7 @@ All 5 wins are episodes where `>` was reached in ≤4 steps. There are 7 deaths 
 - **The chain already fixed this.** r036's `chart.frontier` uses AND ("never stood on" and "borders uncharted"). r039 rebuilt the chart from scratch and brought the orbit back.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:ChartHarness.act` runs once per step:
+`agent.py:ChartHarness.act` runs once per step:
 1. `Chart.observe(long_term_context)` updates the chart. It parses the cursor `(x,y-1)`, `Dlvl`, the `map:` rows (row = y−1, verified on frames) and the lava/water "adjacent" directions. A no-move after the last action books a `(square,dir)` blocked edge.
 2. `Chart.plan(legal)` runs a BFS in `STEP` order (N, NE, E, SE, S, SW, W, NW). The target is a charted `>`, else the first square for which `_frontier()` is true.
 3. `render_chart` adds `ROUTE: nearest <kind> is N step(s) away; first move toward it: <dir>` and an 8-row neighbour table to the naive prompt. `AGENT.md` says "follow it unless something you can see says otherwise".
@@ -111,7 +111,7 @@ The remaining 0/5 tasks are the chain's standing TASK-GAPs (Boxoban planner, Que
 3. **Treat open doors as passable (tools/chart.py:passable).**
    - r038's lesson: an open door is drawn `-`/`|`. Use the prose noun `door`/`doorway` or a successful move through it to override `WALL` for that square.
    - This targets R3 losses.
-4. **An adjacent creature is a fight, not a detour (orchestrator.py:act).**
+4. **An adjacent creature is a fight, not a detour (agent.py:act).**
    - When the prose says `<creature> adjacent <dir>` and the square is not a corpse, emit that direction (attack) instead of the route hop.
    - Don't flee: the chain shows every degree of disengagement kills more.
    - *Predicted:* removes most of the 7 deaths. Price the CB-Dark part at ≥200 episodes; at n=5 CB-Dark is dice.

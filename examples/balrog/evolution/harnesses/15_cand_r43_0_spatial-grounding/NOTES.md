@@ -1,7 +1,7 @@
 # cand_r043_0_spatial-grounding
 
 ## axis:
-Control-flow wiring (code): a model-free rung ladder in `orchestrator.py`, with the rungs placed in
+Control-flow wiring (code): a model-free rung ladder in `agent.py`, with the rungs placed in
 `tools/grounding.py` and `tools/spatial_memory.py`. This follows the steer toward r036's
 structure, where the model is consulted only when every model-free rung is silent. In the parent
 (r001), every step goes through `client.generate`, and the model copied `recommended` on 99.2% of
@@ -34,4 +34,4 @@ harness bug on R3 and Quest. Fix 4: the `[yn]` loop. r036's productive differenc
 wiring, where the planner and reflex rungs answer before the model and the model is the last rung.
 
 ## files:
-orchestrator.py, tools/grounding.py, tools/spatial_memory.py, NOTES.md
+agent.py, tools/grounding.py, tools/spatial_memory.py, NOTES.md

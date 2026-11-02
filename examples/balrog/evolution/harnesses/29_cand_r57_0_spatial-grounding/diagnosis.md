@@ -16,7 +16,7 @@
 This is mostly **HARNESS-BUG** (door glyphs, door-failure booking, dead ModalStage) plus **TASK-GAP** (no Quest item mechanism: r052's `tools/quest.py` scored QM 5/5 and QE 4/5 in this same chain and was dropped).
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:PipelineHarness.act` works in five steps:
+`agent.py:PipelineHarness.act` works in five steps:
 1. `tools/ledger.Ledger.observe(text)` parses the cursor `(x, y-1)`, the `map:` rows and the adjacent prose. It books a `failed{(sq,dir)}` edge whenever the cursor did not move and no COMBAT regex matched (`ledger.py:71-72`).
 2. The stages run in order: `ModalStage` → `MeleeStage` → `RouteStage` → `ArbitrateStage` (`tools/stages.py`).
    - `ModalStage.pre` answers `[yn` with `"y"` **only if `"y" in legal`**, and `--More--` with `more`.

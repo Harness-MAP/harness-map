@@ -276,7 +276,7 @@ profile. This candidate moves the other way, into the anchor's idiom: **zero lam
 code path** (the two occurrences left are the word "lambda" inside docstrings), every table is
 returned by a `def` that builds it with an explicit loop, every rule is an `if` inside a named
 function, and the literals that were packed into module-level comprehensions now live inside
-function bodies. The module graph is deliberately unchanged — same `orchestrator.py`, same four files
+function bodies. The module graph is deliberately unchanged — same `agent.py`, same four files
 under `tools/`, same `AGENT.md`/`rules.md`/`memory.md`/one skill — so the move is a token-level one
 rather than a structural one: `p_If`/`p_For` up, `p_comprehension`/`p_BoolOp`/`p_IfExp` down,
 component count and per-component literal density both up, with `build_agent`'s signature and

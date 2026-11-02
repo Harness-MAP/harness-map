@@ -4,7 +4,7 @@
 
 | file | role |
 |---|---|
-| `orchestrator.py` | Entrypoint/factory; composes the agent priors and routes each frame to the decision tool. |
+| `agent.py` | Entrypoint/factory; composes the agent priors and routes each frame to the decision tool. |
 | `AGENT.md` | Maze role and the scene/HUD perception facts shown to the agent. |
 | `rules.md` | Legal actions, the JSON contract, and movement granularity. |
 | `skills/navigation.md` | Reactive navigation prior, plus the four facts the harness now measures. |

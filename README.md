@@ -66,7 +66,7 @@ anchor harness ─► descriptor φ ─► CVT partition with k0 cells (fit once
 
 Evaluation budget: **N = ⌈m·k0⌉ + G·P·C**, with P = ⌈log2 k0⌉ in the paper.
 
-- **Harness.** A directory with a fixed skeleton: `orchestrator.py` (entry point), `AGENT.md`,
+- **Harness.** A directory with a fixed skeleton: `agent.py` (entry point), `AGENT.md`,
   `rules.md`, `memory.md`, `skills/*.md` and `tools/*.py`. The skeleton is specified to the
   meta-agent in `harness_map/meta_agent/skills/proposer/SKILL.md`; a benchmark supplies the content.
 - **Meta-agent.** Three skill-driven roles. The *proposer* edits a copy of the parent harness. The
@@ -235,16 +235,16 @@ The skeleton is fixed because the proposer skill relies on it; the content is yo
 
 ```
 harnesses/<task>/
-├── orchestrator.py    entry point (your evaluator imports and runs it)
+├── agent.py           entry point (your evaluator imports and runs it)
 ├── AGENT.md           role and task framing, verified facts about the observations
 ├── rules.md           output contract, legal actions, anti-cheat rule
 ├── memory.md          per-step scratchpad template
 ├── skills/*.md        composable text priors, one concern per file
-├── tools/*.py         executable helpers called by orchestrator.py
+├── tools/*.py         executable helpers called by agent.py
 └── NOTES.md           module map and the list of evolvable levers
 ```
 
-Your evaluator decides how `orchestrator.py` is run (the three examples each use a different entry
+Your evaluator decides how `agent.py` is run (the three examples each use a different entry
 point); the search also accepts the older name `harness.py` for the entry point. Make sure the anchor runs and scores above zero on some tasks: the search needs a
 non-degenerate starting point.
 
@@ -306,7 +306,7 @@ class MyAdapter(AgenticAdapter):              # inherits propose / judge / diagn
         return Genome(source_dir=Path("harnesses/my_task"), label="anchor")
 
     def evaluate(self, genome, iter_n=0):
-        ...                                   # run orchestrator.py on the search split, then score it
+        ...                                   # run agent.py on the search split, then score it
         return Fitness(primary=success_rate, rows=per_episode, valid=True)
 
     def evaluate_batch(self, genomes, iter_n=0):   # routes evaluation through the LLM judge

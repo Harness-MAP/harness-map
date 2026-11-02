@@ -20,7 +20,7 @@
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:LearnerAgent.act()` runs `STAGES = (prompt, orient, stairs, swing, cross, hold, kit, fetch, route, learner)`. The first stage that returns an action wins, and its rung name goes to `reasoning`.
+`agent.py:LearnerAgent.act()` runs `STAGES = (prompt, orient, stairs, swing, cross, hold, kit, fetch, route, learner)`. The first stage that returns an action wins, and its rung name goes to `reasoning`.
 
 - **`orient`** does the bookkeeping:
   - `observe()` is the edge ledger: bumps become `blocked`, and doors come from prose or `door opens`.
@@ -115,7 +115,7 @@
 
 ### 5.2 Make `#` impassable when the prose names bars (small; Boxoban fallback hygiene)
 
-- In `passable()` / `frontier()` (orchestrator.py), treat `#` as `WALL` when the current frame's `fr["adjacent"]` contains a `bars` noun, or when the level is Boxoban-armed.
+- In `passable()` / `frontier()` (agent.py), treat `#` as `WALL` when the current frame's `fr["adjacent"]` contains a `bars` noun, or when the level is Boxoban-armed.
 - Chain memory: prose `bars` ⟺ `#` is iron bars, and on R3 and MazeWalk `#` is corridor. Key it on the prose, never globally.
 - This removes 17–44 bumps per Boxoban episode even when the solver bails.
 - `frontier()` must not count a bars cell as a frontier either.

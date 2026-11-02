@@ -1,4 +1,4 @@
-"""Naive H_0 module package — exports the modules wired by orchestrator.py.
+"""Naive H_0 module package — exports the modules wired by agent.py.
 
 8 modules since the in-burst arrival sampler was added: the original 7 plus
 `BurstMonitor`, which the burst executor consults after every translation it

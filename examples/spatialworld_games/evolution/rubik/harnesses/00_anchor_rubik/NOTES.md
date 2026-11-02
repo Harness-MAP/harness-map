@@ -4,12 +4,12 @@ RICH anchor for the SpatialWorld Rubik's Cube game. It reproduces the prompt-onl
 exposing the canonical rich-harness surface, so the agentic proposer has real code + prose levers to
 evolve. The frozen agent (Qwen3-VL-30B-A3B-Instruct) and the SpatialWorld engine are untouched; only
 this harness is optimized. Kept ALONGSIDE `system_prompt.txt` (the prompt-only fallback still runs
-when GAME_HARNESS_DIR has no orchestrator.py).
+when GAME_HARNESS_DIR has no agent.py).
 
 ## module map
 | file | role |
 |------|------|
-| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn; `compose_system_prompt()` recomposes the prompt from the .md priors. Reuses the evaluator's engine handles; returns an engine Action each step. |
+| agent.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn; `compose_system_prompt()` recomposes the prompt from the .md priors. Reuses the evaluator's engine handles; returns an engine Action each step. |
 | AGENT.md | role framing + verified perception facts (FACE IDENTIFICATION — each face's center letter + color: F/B/L/R/U/D). |
 | rules.md | the legal move taxonomy (MOVE TYPES — 90-degree face rotations cw/acw, 45-degree whole-cube view rotations x/y/z) + the brief solving tips that trail it in the source. |
 | tools/frame.py | frame capture — reuses `evaluator.capture_game_screenshot`. |
@@ -27,7 +27,7 @@ lever can carve one out later as long as compose still reproduces the intended p
 
 ## evolvable levers (axes)
 - prose: AGENT.md / rules.md / memory.md — what the agent is told.
-- code:  orchestrator.py / tools/*.py — the mechanism (compose, capture, decide, action algebra, memory).
+- code:  agent.py / tools/*.py — the mechanism (compose, capture, decide, action algebra, memory).
 
 ## anti-cheat
 Decide from the observation only. Never wire oracle/privileged state (the cube's full sticker/facelet

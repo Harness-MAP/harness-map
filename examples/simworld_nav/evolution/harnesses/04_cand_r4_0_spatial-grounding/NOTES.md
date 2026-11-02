@@ -8,7 +8,7 @@ Token-level, in the sense the steer asks for. The component graph is byte-for-by
 — the same seven modules, the same call sites, the same wiring in `run_episode`. **No file added,
 no module introduced, no stage added to or removed from the loop.** What changed is code *inside*
 components: one memory primitive replaces a dead accessor, one `ActivePerception` rule is
-re-grounded and turned into a ladder, one `orchestrator.py` predicate is rewired to the new primitive,
+re-grounded and turned into a ladder, one `agent.py` predicate is rewired to the new primitive,
 and two edits of the parent's four are reverted where the A/B condemned them.
 
 The unifying idea: the parent's harness had **no working notion of "that forward didn't move me."**
@@ -28,7 +28,7 @@ forwards and `static_collision_mean` 1.78 → 5.12.
 
 | module | role | this iter |
 |---|---|---|
-| `orchestrator.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ STUCK backstop rewired to `forward_stall_run`; dead `last_moving_distance` latch removed |
+| `agent.py` | entrypoint `run_episode(env, task_spec, vlm_clients, trace_dir=None)`; perceive→decide→act loop | ★ STUCK backstop rewired to `forward_stall_run`; dead `last_moving_distance` latch removed |
 | `modules/spatial_memory.py` | odometry + step / boundary bookkeeping | ★ forbidden collision channel deleted; `step_progress` + `forward_stall_run` added |
 | `modules/prompt_assembler.py` | composes the perceive prompt | untouched |
 | `modules/perceiver.py` | 1 VLM call: frames → description | untouched |
@@ -44,13 +44,13 @@ forwards and `static_collision_mean` 1.78 → 5.12.
 | blocked-forward **primitive** (`forward_stall_run`, `step_progress`) | code | `spatial_memory` | **NEW this iter** — the honest replacement for the forbidden collision counter |
 | blocked-forward **escape ladder** (strafe → rotate → yield) | code | `active_perception` (b′) | **NEW this iter** |
 | sidestep **direction chooser** from JET depth | code | `active_perception._freer_lateral_side` | **NEW this iter** |
-| STUCK backstop predicate | code | `orchestrator.py` `_STUCK_BLOCKED_FORWARDS` | **NEW this iter** — was dead code in every prior iter |
+| STUCK backstop predicate | code | `agent.py` `_STUCK_BLOCKED_FORWARDS` | **NEW this iter** — was dead code in every prior iter |
 | arrival-call **criterion wording** | prose-in-code | `_binary_reach_vlm_call` sys_prompt | **reverted to anchor, byte-identical — CLOSED** (seven reformulations priced, flat ROC) |
 | xcheck **cap-exhaustion semantics** | code | `cross_check_planner_commit` | **reverted to `True`** — a budget is not evidence |
 | xcheck verdict memo / cap = 3 | code | `_xcheck_verdict_cache`, `MAX_XCHECK_FIRES_PER_SUBTASK` | **kept from the parent** — free and correct |
 | turn-approach latch (`_TURN_APPROACH_FORWARDS = 2`) | code | `active_perception` (a″) | **kept verbatim** — 7/7 anchor TURNING shortfalls closable, 1/1 live conversion; do not raise above 2 |
 | terminal-pose composer (`commit_burst`) | code | `completion_checker` | **kept verbatim** — 181/181 template-verified, still unexercised (FINISH reached 0×) |
-| blocked-commit `EMPTY_FALLBACK` walks the agent forward | code | `orchestrator.py` | untouched — r002's HOLD_PROBE region, left free |
+| blocked-commit `EMPTY_FALLBACK` walks the agent forward | code | `agent.py` | untouched — r002's HOLD_PROBE region, left free |
 | over-walk / "I have passed it" state | code | `spatial_memory` + `completion_checker` | untouched — the largest open population, gradient §5-F, deliberately deferred |
 | REACH look schedule (`K_REACH_*`) | code/const | `completion_checker` | untouched — run to death in iters 006–010 |
 | ORIENTATION cardinal burst | code | `active_perception` (a) | **do not touch** — 50/50 at zero VLM cost |
@@ -119,7 +119,7 @@ it was aimed at is now covered for real by the ladder.
 
 ### 3. The STUCK backstop gets a predicate that can fire — and one that cannot misfire
 
-`orchestrator.py` computed `forward_count = sum(1 for a in chosen_actions if a == 0)` over the
+`agent.py` computed `forward_count = sum(1 for a in chosen_actions if a == 0)` over the
 **previous decision's burst**, not the leg's history. On the `EMPTY_FALLBACK` path that list is
 `[0]`, so `forward_count > 3` was never true and the detector was dead in every iter it shipped in.
 The obvious repair — swapping in a leg-wide forward count — would have made it **worse than dead**:
@@ -190,7 +190,7 @@ frame fractions.
 
 - `run_episode`'s signature (`env, task_spec, vlm_clients, trace_dir=None`) and `EpisodeResult`'s
   seven fields unchanged, loading under the evaluator's `spec_from_file_location` import path;
-  `py_compile` clean on `orchestrator.py` and all seven modules.
+  `py_compile` clean on `agent.py` and all seven modules.
 - The reverted arrival block diffed **byte-identical** to `anchor_nav_r000/source` from
   `sys_prompt = (` through the end of the user turn.
 - `forward_stall_run` correct on: a clear run (0), two refused forwards (2), one refused (1), an
@@ -218,7 +218,7 @@ frame fractions.
   `_freer_lateral_side` helper and its constants (`_STRAFE_LEFT/RIGHT`, `_ESCAPE_STALL_RUN_FIRST/
   NEXT`, `_ESCAPE_STRAFES`, `_MAX_ESCAPES_PER_SUBTASK`, `_ESCAPE_BAND_*`, `_ESCAPE_SIDE_MIN_MARGIN`);
   new `_escapes_this_subtask` field + boundary reset; deleted the unreachable momentum veto.
-- `orchestrator.py` — STUCK backstop rewired to `forward_stall_run` with `_BLOCKED_FORWARD_MD_CM` /
+- `agent.py` — STUCK backstop rewired to `forward_stall_run` with `_BLOCKED_FORWARD_MD_CM` /
   `_STUCK_BLOCKED_FORWARDS`; removed the dead `last_moving_distance` latch; corrected the
   `EMPTY_FALLBACK` comment's account of what bounds it.
 - `modules/completion_checker.py` — reverted `_binary_reach_vlm_call`'s system prompt and user turn

@@ -10,7 +10,7 @@
 **Binding constraint:** the terrain module works. R3 went 2/5→4/5 against r026, and the bars rule removed about 90% of Boxoban bar bumps. But navigation is still saturated, and everything left over goes to the raw model fallback, which scores 0. On Boxoban and Quest-Easy that fallback owns **893 of 1 000 steps**, orbits, and sometimes emits out-of-vocabulary actions. The three task-gaps named by r041 are still unaddressed: no Sokoban planner, no horn/lava rung, and the fight is taken on the room-mouth square. There are also four cheap HARNESS-BUGs in the fallback and prompt code.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py:GroundedAgent.act` tries these rungs in order, and the first one that fires decides the step:
+`agent.py:GroundedAgent.act` tries these rungs in order, and the first one that fires decides the step:
 1. **Prompt reflex.** If `fr["prompt"]`, emit `more`, capped at 3 in a row.
    - On `[yn]` + "attack", the last swung glyph is added to `self.peaceful`.
    - A cursor on the message line sets `pos=None`.
@@ -116,7 +116,7 @@ A CSV row is (action, the observation AFTER that action). Map row = cursor.y −
      - Cap at about 200k nodes.
    - **Execution:** cardinal moves only, from a committed tape. Re-plan only when a step no-moves or the boulder set deviates.
    - **Predicted:** chain memory reports 19/20 stub and 10/10 live, winning iff the optimal plan is ≤99 steps. Boxoban cost drops to 0 tokens, which is **−78% of the whole bill**.
-2. **Make the fallback vocabulary-safe (`orchestrator.py:ask_model`, last lines). Cost and validity; also removes the Box-*/01 degenerate episodes.**
+2. **Make the fallback vocabulary-safe (`agent.py:ask_model`, last lines). Cost and validity; also removes the Box-*/01 degenerate episodes.**
    - Never emit a raw completion. If `pick` is None, use the least-visited legal, non-banned move whenever `pos` is known. When `pos` is None, emit `more` if legal, else `wait`.
    - Also break the visit-count rotation: tie-break by `(visits, turns-since-last-visit, ORDER)` instead of `ORDER`, or better, make Boxoban unreachable for this path via (1).
 3. **Goal-attracted frontier in `route()` (fixes §2D). R3 4/5→5/5; chain memory says +2/−0 of 125.**

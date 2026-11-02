@@ -3,7 +3,7 @@
 ## module map
 | file | role | lever |
 |---|---|---|
-| orchestrator.py | hub `LearnerAgent`. `act()` builds one context `c` and runs `STAGES = (prompt, orient, stairs, swing, cross, hold, kit, fetch, route, learner)`. The first stage that answers is emitted, and its rung goes to `reasoning`. `ChartView` exposes the learner's chart (`drawn`, `blocked`, `doors`) to tools as `terrain` / `passable` / `edge`. `goal_kind()` reports `stairs` / `frontier` / None. | code |
+| agent.py | hub `LearnerAgent`. `act()` builds one context `c` and runs `STAGES = (prompt, orient, stairs, swing, cross, hold, kit, fetch, route, learner)`. The first stage that answers is emitted, and its rung goes to `reasoning`. `ChartView` exposes the learner's chart (`drawn`, `blocked`, `doors`) to tools as `terrain` / `passable` / `edge`. `goal_kind()` reports `stairs` / `frontier` / None. | code |
 | tools/quest.py | **NEW** (ported from r052). The `Quest` regime: silent-pickup pile detection, one safe kick, horn-first pickup plus a letter filler, apply/zap across a cardinal lava run, typed prompt answers (`In what direction?`, `[j or ?*]`, `Improvise?`), a mouth hold, and a charted `toward` walk. Loaded under a path-unique module name. | code |
 | AGENT.md | one-sentence tie-break prose for the learner consult (unchanged) | prose |
 | rules.md, memory.md | empty | prose |
@@ -32,4 +32,4 @@ Checked on a synthetic frame:
 - With only move verbs offered, it takes `chart:route` exactly as the parent does.
 
 ## files:
-orchestrator.py (stage-table rewire, ChartView, goal_kind, Quest stages, `lang`/`modal` in the frame parser), tools/quest.py (new), tools/__init__.py (new, empty), NOTES.md
+agent.py (stage-table rewire, ChartView, goal_kind, Quest stages, `lang`/`modal` in the frame parser), tools/quest.py (new), tools/__init__.py (new, empty), NOTES.md

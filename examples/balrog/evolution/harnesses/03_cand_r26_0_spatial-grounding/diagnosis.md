@@ -12,7 +12,7 @@ Corridor-R3 2/5, CB-Dark 1/5, Boxoban-M/H 0/10, Quest-E/M 0/10.
 5. no item/lava rung exists, so the Quest pair is unwinnable by construction.
 
 ## 1. What this harness does (mechanism)
-`orchestrator.py` is one module. `GroundedAgent.act` runs this order:
+`agent.py` is one module. `GroundedAgent.act` runs this order:
 modal reflex → stairs `down` → hazard veto (`lethal_moves`: prose lava/water + `}` glyph) → melee
 (`adjacent_foe`: any letter glyph adjacent → move into it) → `route()` (BFS over `self.terrain` to a
 charted `>`, else the nearest *unstood charted* square that touches undrawn space, with a per-(square,
@@ -84,7 +84,7 @@ the prose prints at step 0.
 Survival 0.775 = 9 deaths: 5 QM + 4 CB-Dark, all melee. There are no lava deaths, so the hazard veto works.
 
 ## 4. Binding constraint — classification
-- A, B, C: **HARNESS-BUG.** Each is a one-function fix in `orchestrator.py`, and each maps to named episodes.
+- A, B, C: **HARNESS-BUG.** Each is a one-function fix in `agent.py`, and each maps to named episodes.
 - D: **HARNESS-BUG/TASK-GAP.** The fight position is a harness decision, and the model is never asked about it.
   CB-Dark is partly dice (prior campaign evidence), so price any CB change on many seeds. QM is deterministic.
 - E/Quest: **TASK-GAP**, and it is NOT a ceiling. Prior probes in this campaign measured Quest as winnable

@@ -26,7 +26,7 @@ and have nothing to show in between.
 Maze3d_pro is the game with a real search: the anchor solves 2 of 25 levels, and twelve
 proposals follow before `cand_r6_1_action-planning` solves all 25.
 
-**The anchors** are SpatialWorld's shipped per-step agent in the harness layout: `orchestrator.py`
+**The anchors** are SpatialWorld's shipped per-step agent in the harness layout: `agent.py`
 composes the system prompt from `AGENT.md`, `skills/*.md` and `rules.md` (the shipped prompt is
 kept verbatim as `system_prompt.txt`) and forwards every step to the engine's own model call
 through `tools/vlm.py`; `tools/action.py`, `tools/frame.py` and `memory.md` are present but
@@ -36,7 +36,7 @@ unused by the anchor, so that the proposer has a real multi-file surface to edit
 
 | file | written by | content |
 |---|---|---|
-| `orchestrator.py`, `tools/*.py`, `skills/*.md`, `AGENT.md`, `rules.md`, `memory.md`, `system_prompt.txt`, `system_prompt.md` | the proposer | the harness as evaluated |
+| `agent.py`, `tools/*.py`, `skills/*.md`, `AGENT.md`, `rules.md`, `memory.md`, `system_prompt.txt`, `system_prompt.md` | the proposer | the harness as evaluated |
 | `NOTES.md` | the proposer | its own account of the change: module map, axis, what changed and why |
 | `diagnosis.md` | the diagnostician | the report on this harness's evaluation, read by the proposer when the harness is bred from |
 

@@ -8,7 +8,7 @@ with the prompt-only baseline.
 
 ## axis
 **Spatial grounding — proprioception from frame differencing** (code lever: a new `tools/grounding.py`
-threaded through `tools/vlm.py` + `orchestrator.py`, rendered through the `memory.md` scratchpad, with
+threaded through `tools/vlm.py` + `agent.py`, rendered through the `memory.md` scratchpad, with
 `AGENT.md`/`rules.md`/`skills/navigation.md` corrected to the perception facts this build actually
 has). The parent's axis was "compose a prompt and delegate"; this one is "measure what the agent's
 own actions did to the world, and hand that back every turn".
@@ -117,7 +117,7 @@ from the evolvable bundle by the adapter).
 ## module map
 | file | role |
 |------|------|
-| orchestrator.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `Grounding` for the episode; `compose_system_prompt()` recomposes the prompt from the .md priors. Wraps the step in a try/except that falls back to the pristine `baseline_step`, so the mechanism can never cost an episode. |
+| agent.py | ENTRYPOINT. `build_agent(evaluator)` returns the async per-step fn and opens ONE `Grounding` for the episode; `compose_system_prompt()` recomposes the prompt from the .md priors. Wraps the step in a try/except that falls back to the pristine `baseline_step`, so the mechanism can never cost an episode. |
 | tools/grounding.py | NEW. Frame-differencing proprioception: view digest, outcome of the last action, exact heading / floor / local position, the proven wall+open map, the exact-colour exit & stair scanner with the `depth = 600/width` ring law, the proven-null set, the rescue action, and the rendering of memory.md. |
 | tools/vlm.py | The perceive -> ground -> VLM -> verify step. Injects the block into `conversation_history[0]` (append-to-stashed-base), delegates to `evaluator.baseline_step`, re-asks on a proven-null answer, substitutes the rescue as a last resort. |
 | tools/action.py | the maze3d_pro action/key algebra + the engine Action contract (w/s carry granularity 1/2/3; a/d turn; q/e climb). Used by vlm.py to canonicalize the model's action and to build a substituted Action. |
@@ -129,7 +129,7 @@ from the evolvable bundle by the adapter).
 
 ## evolvable levers (axes)
 - prose: AGENT.md / rules.md / skills/*.md / memory.md — what the agent is told.
-- code:  orchestrator.py / tools/*.py — the mechanism (compose, capture, ground, decide, verify).
+- code:  agent.py / tools/*.py — the mechanism (compose, capture, ground, decide, verify).
 - tuning knobs inside the new mechanism, all still unexplored: `RETRY_LIMIT` / `MAX_EXTRA_CALLS`
   (tools/vlm.py), `LANE_TOLERANCE` / `ASPECT_TOLERANCE` (tools/grounding.py), the rescue's
   preference order, and whether the harness should also report the *advisory* cross-episode
@@ -155,5 +155,5 @@ model is already shown plus the agent's own action history. Nothing reads `evalu
 distance. The pre-eval gate AST-scans the code and text-scans the priors for privileged fields.
 
 ## files
-orchestrator.py, tools/grounding.py (new), tools/vlm.py, memory.md, AGENT.md, rules.md,
+agent.py, tools/grounding.py (new), tools/vlm.py, memory.md, AGENT.md, rules.md,
 skills/navigation.md, NOTES.md

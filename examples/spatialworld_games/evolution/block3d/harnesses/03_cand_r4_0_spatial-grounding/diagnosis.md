@@ -53,15 +53,15 @@ the responses JSON and the session log), so pixel claims are flagged as inherite
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py` is a **pass-through**. Nothing in it decides anything.
+`agent.py` is a **pass-through**. Nothing in it decides anything.
 
-- `compose_system_prompt()` (`orchestrator.py:21`) concatenates `AGENT.md` + `skills/building.md` +
+- `compose_system_prompt()` (`agent.py:21`) concatenates `AGENT.md` + `skills/building.md` +
   `rules.md` and installs the result on `evaluator.current_prompt`. The composition equals
   `system_prompt.txt` up to leading/trailing whitespace (1377 vs 1382 chars), so **this candidate *is*
   the prompt-only baseline wearing a module layout**. It supplies role + grid facts, "study the three
   views / you can remove misplaced blocks", the 7-action control map and a colour legend. **No
   coordinates, no clamp model, no toggle-parity model, no plan.**
-- `build_agent(evaluator)` (`orchestrator.py:34`) puts `HERE` on `sys.path` and purges
+- `build_agent(evaluator)` (`agent.py:34`) puts `HERE` on `sys.path` and purges
   `sys.modules["tools*"]` so a sibling candidate's `tools/` can never be inherited — **the only
   load-bearing line in the file; keep it.** It returns `agent(frame_data) -> await tools.vlm.decide(...)`.
 - `tools/vlm.py:decide()` is **two lines**: `return await evaluator.baseline_step(frame_data)`.

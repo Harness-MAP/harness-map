@@ -18,20 +18,20 @@ measured on the same 788 frames **is** distance-monotone (§5-A).
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:run_episode` drives one perceive→plan→gate→execute loop per decision over seven modules,
+`agent.py:run_episode` drives one perceive→plan→gate→execute loop per decision over seven modules,
 graph byte-identical to the parent:
 
 | stage | file:line | role |
 |---|---|---|
-| STUCK backstop | `orchestrator.py:305-313` | `memory.forward_stall_run() >= 8` → end episode (**new this iter**) |
-| ActivePerception short-circuit | `orchestrator.py:330-336` | cardinal burst (a), turn-approach latch (a″), red idle, anti-spin, **blocked-forward escape ladder (b′, new)**, momentum (d) |
-| Perceiver | `orchestrator.py:339-348` | 1 VLM call, 4 images: `rgb`, hint, `object_mask`, `depth` → text description |
-| Planner | `orchestrator.py:360-375` | 1 VLM call, text only → `Actions[]` + `Match` + rolling summary |
+| STUCK backstop | `agent.py:305-313` | `memory.forward_stall_run() >= 8` → end episode (**new this iter**) |
+| ActivePerception short-circuit | `agent.py:330-336` | cardinal burst (a), turn-approach latch (a″), red idle, anti-spin, **blocked-forward escape ladder (b′, new)**, momentum (d) |
+| Perceiver | `agent.py:339-348` | 1 VLM call, 4 images: `rgb`, hint, `object_mask`, `depth` → text description |
+| Planner | `agent.py:360-375` | 1 VLM call, text only → `Actions[]` + `Match` + rolling summary |
 | `verify()` | `completion_checker.py:607` | honours a planner `-1` iff `Match=1` **and** `forward_streak ≥ 1` (`K_MIN_FORWARD_BEFORE_PLANNER_COMMIT=1`, `:168`) |
-| cross-check | `orchestrator.py:447` → `completion_checker.py:815` | re-asks the **same** `_binary_reach_vlm_call` before honouring a planner `-1`; cap 3/leg, verdict memo; cap-exhaustion reverted to `True` (`:905`) |
-| proactive REACH | `orchestrator.py:469` → `completion_checker.py:732` | fires at `forward_streak ≥ 4` then every 5 forwards, cap 12 (`:83,96,114`); Match=1 → inject `commit_burst` |
-| side-scan | `orchestrator.py:504` → `:932,:971` | yaw toward the instruction's named side, re-ask, restore on miss |
-| `EMPTY_FALLBACK` | `orchestrator.py:577` | nothing survived the gates → walk one forward |
+| cross-check | `agent.py:447` → `completion_checker.py:815` | re-asks the **same** `_binary_reach_vlm_call` before honouring a planner `-1`; cap 3/leg, verdict memo; cap-exhaustion reverted to `True` (`:905`) |
+| proactive REACH | `agent.py:469` → `completion_checker.py:732` | fires at `forward_streak ≥ 4` then every 5 forwards, cap 12 (`:83,96,114`); Match=1 → inject `commit_burst` |
+| side-scan | `agent.py:504` → `:932,:971` | yaw toward the instruction's named side, re-ask, restore on miss |
+| `EMPTY_FALLBACK` | `agent.py:577` | nothing survived the gates → walk one forward |
 
 **Every** commit path in the harness funnels through a single function,
 `completion_checker._binary_reach_vlm_call` (`:646`), whose criterion (`sys_prompt`, `:686`) this
@@ -234,7 +234,7 @@ Anti-cheat is clean: `read_audit.json` shows 0 forbidden / 0 undeclared reads.
 
 ## 5. Concrete changes to try (the gradient — ranked by leverage)
 
-### A — Build a **non-VLM geometric arrival channel** from `object_mask` + `depth`, and let it drive the commit. `modules/completion_checker.py` (new helper beside `_depth_gray:346` / `_named_side_has_structure:514`), consumed at `orchestrator.py:469`
+### A — Build a **non-VLM geometric arrival channel** from `object_mask` + `depth`, and let it drive the commit. `modules/completion_checker.py` (new helper beside `_depth_gray:346` / `_named_side_has_structure:514`), consumed at `agent.py:469`
 
 This is the one measurement in this diagnosis that found distance signal where the VLM has none.
 Over the same 788 ROAD-leg frames, in the horizon band (rows 0.45–0.70 H, outer 25 % of columns each
@@ -307,7 +307,7 @@ FINISH progress at all, and for the 4 two-subtask episodes (`ep_20_10_21`, `ep_2
 `ep_20_21_11`, `ep_20_5_11`, which died at steps 11/20/24/13) it restores a real shot at position 1.
 Zero downside: the gate it tightens is **0 for 8** on this subset.
 
-### D — An over-walk backstop grounded in §5-A, not in a streak heuristic. `modules/spatial_memory.py` + `modules/active_perception.py` + `orchestrator.py`
+### D — An over-walk backstop grounded in §5-A, not in a streak heuristic. `modules/spatial_memory.py` + `modules/active_perception.py` + `agent.py`
 
 The parent sketched this (§5-F) as "stop forwards once `forward_streak` exceeds the largest streak
 at which an arrival call was near-positive" — too weak to act on, because no call is ever
@@ -315,7 +315,7 @@ near-positive. With §5-A there is a real event to count: **the lateral opening 
 through**. Track intersection crossings per leg in `SpatialMemory` (rising edge of the §5-A
 predicate). A ROAD instruction says *"stop at **the** intersection"* — so once the leg has crossed
 **more than one** opening without committing, the agent is past the waypoint. Then:
-stop emitting `Move_Forward`, route to the side-scan path (`orchestrator.py:504`), and if that also
+stop emitting `Move_Forward`, route to the side-scan path (`agent.py:504`), and if that also
 declines, commit anyway rather than continue — on a ROAD leg a commit from inside the last opening
 is a coin flip whereas another 47 forwards is a certain zero.
 
@@ -378,8 +378,8 @@ passing play was an immediate `-1`, which `K_MIN_FORWARD_BEFORE_PLANNER_COMMIT =
 
 ## 7. Provenance
 
-- Candidate: `$OUT_DIR` = `…/prop_r004_fe2b86/cand_r004_0_spatial-grounding` — `orchestrator.py` (673 ln)
-  + 7 modules; this iter's diff vs parent = 4 files (`orchestrator.py`, `modules/spatial_memory.py`,
+- Candidate: `$OUT_DIR` = `…/prop_r004_fe2b86/cand_r004_0_spatial-grounding` — `agent.py` (673 ln)
+  + 7 modules; this iter's diff vs parent = 4 files (`agent.py`, `modules/spatial_memory.py`,
   `modules/active_perception.py`, `modules/completion_checker.py`).
 - Eval: `cand_r4_0_spatial-grounding_r004/score.json`, subset `search_hard_50`, **50/50 episodes
   complete**, 0 missing, 0 skipped; `read_audit.json` verdict **PASS** (0 forbidden, 0 undeclared,

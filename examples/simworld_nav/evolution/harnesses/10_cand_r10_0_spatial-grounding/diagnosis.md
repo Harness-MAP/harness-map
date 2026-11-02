@@ -24,7 +24,7 @@ reads in code.
 
 ## 1. What this harness does (mechanism)
 
-`run_episode` (orchestrator.py:172-700) is a single while-loop over `len(actions_log) < max_steps`, with
+`run_episode` (agent.py:172-700) is a single while-loop over `len(actions_log) < max_steps`, with
 seven modules wired in a fixed order:
 
 1. **ActivePerception.should_emit** (`modules/active_perception.py:420`) can short-circuit the whole
@@ -168,7 +168,7 @@ into unreliability at this cadence.
 
 ### 2.6 The stuck detector is structurally dead
 
-`orchestrator.py:293` computes `forward_count = sum(1 for a in chosen_actions if a == 0)` over the **last
+`agent.py:293` computes `forward_count = sum(1 for a in chosen_actions if a == 0)` over the **last
 burst only**, and requires `forward_count > 3`. With the planner's modal burst being 3 forwards, the
 condition can never be true no matter how many consecutive bursts are blocked. Consequence: the env had
 to kill 5 episodes on its 20-identical-positions rule, and **none of the five** has `STUCK` in `notes`.
@@ -283,7 +283,7 @@ correlate with position for the first time. Zero risk, three lines, and a prereq
 *Why it should work:* §2.7/§2.8 — the cue is present in every frame, discriminative, and currently
 described to the model as a class that does not matter.
 
-### B — Make leg 1's commit a geometric detector, not a photo match. New `road_surface_arrival()` in `modules/completion_checker.py` (beside `_named_side_has_building`, :543-570); called from `orchestrator.py:~430`, **before** `proactive_commit_check`
+### B — Make leg 1's commit a geometric detector, not a photo match. New `road_surface_arrival()` in `modules/completion_checker.py` (beside `_named_side_has_building`, :543-570); called from `agent.py:~430`, **before** `proactive_commit_check`
 Compute the roadway-class fraction in a forward band of `obs['object_mask']` (rows ≈0.55–0.75, full
 width). On a non-orientation, non-FINISH leg, latch `commit_done = True` the **first** time that
 fraction crosses a small threshold. Latch **once per leg** (`self._road_fired[cur_idx]`) so a later
@@ -297,7 +297,7 @@ Keep the existing VLM path as the fallback when the mask channel is missing.
 4-colour palette from the candidate's own probe before shipping rather than trusting this note; and
 degrade to the current behaviour when `obs['object_mask']` is absent.
 
-### C — Stop emitting 3-step bursts once the leg is near its stop condition. `orchestrator.py:561`
+### C — Stop emitting 3-step bursts once the leg is near its stop condition. `agent.py:561`
 `chosen_actions = [a for a in planner_actions if a in allowed]` executes the planner's whole list
 blind. Truncate it to **one translation** once the leg's perceive has reported *any* roadway class in
 the forward band (B's precursor, below the commit threshold), or once the leg's translation count
@@ -317,7 +317,7 @@ intersection instead of being dead. Small, cheap, and strictly additive to B.
 *Note:* this is `K_MIN_FORWARD_BEFORE_PLANNER_COMMIT` (the planner path's floor), **not**
 `K_REACH_FORWARD_STREAK` — the latter is on the exhausted list and stays there.
 
-### E — Repair the stuck detector, then use it. `orchestrator.py:290-300`
+### E — Repair the stuck detector, then use it. `agent.py:290-300`
 `forward_count` must count **consecutive translations across decisions**, not within the last burst;
 with a modal burst of 3 the current `> 3` test is unreachable (§2.6). Track a running counter reset by
 any non-translation action or any `Δ moving_distance ≥` one step-length, and trip on ~3 consecutive
@@ -389,7 +389,7 @@ the arrival call directly instead of inferring it from notes.
 
 ## 7. Provenance
 
-- Candidate source: `$OUT_DIR` — `orchestrator.py` (700 L) + 7 modules (2 474 L).
+- Candidate source: `$OUT_DIR` — `agent.py` (700 L) + 7 modules (2 474 L).
 - Score: `…/cand_r2_0_spatial-grounding_r002/score.json` (50/50 episodes, `complete: true`).
 - Read audit: `…/cand_r2_0_spatial-grounding_r002/read_audit.json` — **PASS**, 25 071 reads over 15
   declared paths, 0 forbidden / 0 escalated / 0 undeclared.

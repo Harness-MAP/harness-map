@@ -1,4 +1,4 @@
-"""Naive H_0 module package — exports the modules wired by orchestrator.py.
+"""Naive H_0 module package — exports the modules wired by agent.py.
 
 iter 11 adds an 8th node to the component graph: `RoadGeometry`, the harness's
 first non-VLM arrival channel (see road_geometry.py).

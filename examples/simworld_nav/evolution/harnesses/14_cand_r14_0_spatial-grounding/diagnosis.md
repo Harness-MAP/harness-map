@@ -22,15 +22,15 @@ supply the exact graded yaw, and one 0/29 veto discarded all three.
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:run_episode` is a 10-node per-step loop. Each loop iteration: stuck check → read the structural
+`agent.py:run_episode` is a 10-node per-step loop. Each loop iteration: stuck check → read the structural
 subtask index → `ActivePerception.gate_burst` → `RoadGeometry.update(obs, instruction, cur_idx)` (new this
 iter, inside the perceive branch) → `Perceiver` (1 VLM call, 4 images) → `Planner` (1 VLM call → an action
 list) → `ArrivalGate` → affordance filter → **execute the whole action list as a burst** with no
-re-perception between steps (`orchestrator.py:631`, median burst = **3** forwards, 1261/1601 runs exactly 3).
+re-perception between steps (`agent.py:631`, median burst = **3** forwards, 1261/1601 runs exactly 3).
 
 The decision that matters is the **`-1` LICENSE**, owned entirely by `modules/arrival_gate.py`:
 
-* `proactive_commit` (harness-injected `-1`, `orchestrator.py:529`) — a **conjunction**:
+* `proactive_commit` (harness-injected `-1`, `agent.py:529`) — a **conjunction**:
   `_place_verdict` (POSITION) ∧ `_identity_call` (IDENTITY, two images, no leg text) ∧
   `_named_side_has_structure` (free segmentation veto).
 * `allow_planner_commit` (cross-check on a planner-proposed `-1`) — same conjuncts, now **fail-closed** at
@@ -46,7 +46,7 @@ The decision that matters is the **`-1` LICENSE**, owned entirely by `modules/ar
   **`MAX_REACH_FIRES_PER_SUBTASK = 12`**, `MAX_XCHECK_FIRES_PER_SUBTASK = 2`. On a leg with a live geometric
   edge the floor drops to `GEO_MIN_TRANSLATIONS = 1` and the interval is waived.
 * `viewpoint_controller.commit_pose_prefix` prepends one quarter-turn toward the named side at the **one**
-  place a `-1` is materialised (`orchestrator.py:594`) — so a FINISH commit is yaw-legal *if it ever happens*.
+  place a `-1` is materialised (`agent.py:594`) — so a FINISH commit is yaw-legal *if it ever happens*.
 
 Prose (`AGENT.md`, `rules.md`) is byte-identical to the parent by design; every change this iter is in the
 decision graph.
@@ -263,7 +263,7 @@ on the destination). The 29 % → 56 % win this iter came from moving the asks, 
 Secondary, genuinely **VLM-CEILING**: the identity call's 38.5 % far-field rate on long ROAD legs. Re-wording
 is closed (iters 1–5, plus junction A/B). The fix must **narrow the comparison**, not re-phrase it.
 
-Residual **TASK-GAP**: there is still no arrival *controller* — no path in `orchestrator.py` can slow down, stop,
+Residual **TASK-GAP**: there is still no arrival *controller* — no path in `agent.py` can slow down, stop,
 or back up. Every in-ball frame is a `Move_Forward`. This remains the deepest structural gap, but it is now
 *downstream* of the two bugs above: fix the license and the controller question becomes measurable.
 

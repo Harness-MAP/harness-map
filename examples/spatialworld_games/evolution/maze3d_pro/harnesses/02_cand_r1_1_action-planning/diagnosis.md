@@ -18,7 +18,7 @@ exact signal the harness does not read.
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:build_agent(evaluator)` returns the per-step `agent(frame_data)` the extended
+`agent.py:build_agent(evaluator)` returns the per-step `agent(frame_data)` the extended
 evaluator installs as `ai_model_func`. It builds ONE `tools.plan.ActionPlanner` per episode and
 threads it through `tools.vlm.decide`, whose loop is
 

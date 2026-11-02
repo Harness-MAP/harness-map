@@ -211,7 +211,7 @@ mechanism they exercised is byte-identical to what is shipped.
 ## module map
 | file | role | what it owns |
 |---|---|---|
-| `orchestrator.py` | ENTRYPOINT | `build_agent(evaluator)` → `async agent(frame_data) -> Action`; `compose_system_prompt()` rebuilds the prior from `AGENT.md` + `skills/*.md` + `rules.md`; builds ONE `ActionPlanner` per episode with `memory.md` as its template. |
+| `agent.py` | ENTRYPOINT | `build_agent(evaluator)` → `async agent(frame_data) -> Action`; `compose_system_prompt()` rebuilds the prior from `AGENT.md` + `skills/*.md` + `rules.md`; builds ONE `ActionPlanner` per episode with `memory.md` as its template. |
 | `tools/sight.py` | perception | `Sight` — the whole frame read three ways (colour census, centre-column corridor, side bands) + the derived `reach` / `stride` / `junction` / `blocked` / `open_sides()` / `corridor_line()`; `look()`; `StairSense` (the stair-underfoot latch, its budget, and the floor price). |
 | `tools/plan.py` | policy | `ActionPlanner` — the ledgers, `observe`/`govern`/`_reaim`/`_stride`/`apply`/`_commit`, the memory block; `fingerprint`, `screen_changed` (exact), `refusal_reason`, `last_line`, `_clean_template`. |
 | `tools/action.py` | validity | the key table, `name_for`, `inverse_climb`, `granularity_steps`, `retarget` (strips `granularity`/`repeat`/`json_data` before re-targeting). |
@@ -276,4 +276,4 @@ decision, so `vlm_calls == steps`. Ground truth was read only by the rigs, which
 stride, `mode_line`/`climb_line` folded into `ActionPlanner`), `memory.md` (+`{corridor_line}`,
 new tail), `rules.md` (stride economics), `skills/navigation.md` (blocked-forward, openings, dead-end = turn around),
 `AGENT.md` (the measured-corridor paragraph), `NOTES.md` (this file).
-`orchestrator.py`, `tools/vlm.py`, `tools/action.py`, `tools/frame.py` unchanged.
+`agent.py`, `tools/vlm.py`, `tools/action.py`, `tools/frame.py` unchanged.

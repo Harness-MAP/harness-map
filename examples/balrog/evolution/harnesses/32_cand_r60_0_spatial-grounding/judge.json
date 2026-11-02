@@ -1,5 +1,5 @@
 {"verdict": "OK", "reasons": [
- "Decision path reads only the agent's observation: orchestrator.py:act parses obs['text']['long_term_context'] (message, language prose, cursor (x=,y=), map: block, Dlvl) via tools/grid.py:parse_glyph_map and tools/chart.py:merge; no env/unwrapped/full_state/goal_pos/seed/des_file access anywhere (validator read_audit PASS, grep confirms).",
+ "Decision path reads only the agent's observation: agent.py:act parses obs['text']['long_term_context'] (message, language prose, cursor (x=,y=), map: block, Dlvl) via tools/grid.py:parse_glyph_map and tools/chart.py:merge; no env/unwrapped/full_state/goal_pos/seed/des_file access anywhere (validator read_audit PASS, grep confirms).",
  "The legal action set comes from prompt_builder.system_prompt (the same action list the model sees), not from env internals.",
  "tools/chart.py:route is a BFS over a map remembered from past observed frames toward a DRAWN `>` or an observed frontier; stairs are only targeted once charted from the frame. This is legitimate perception/planning, not an oracle.",
  "No hardcoding: no branching on task name, seed, episode id, or instance; rules/skills/memory.md are generic priors.",

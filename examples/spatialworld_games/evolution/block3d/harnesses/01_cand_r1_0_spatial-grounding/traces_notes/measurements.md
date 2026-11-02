@@ -90,4 +90,4 @@ The decoder pass was also re-run against the final tree: lattice fit 20/20, deco
 not a constant table, so the same code returns a refusal rather than a wrong mask if the renderer
 moves. The adapter's `pre_eval_gate` logic was run over this directory against the live privileged
 vocabulary: PASS (no privileged mention in any agent-facing prior, no privileged attribute or
-subscript access in `orchestrator.py` or `tools/*.py`, no syntax error).
+subscript access in `agent.py` or `tools/*.py`, no syntax error).

@@ -18,7 +18,7 @@
 
 ## 1. What this harness does (mechanism)
 
-`orchestrator.py:PipelineHarness.act` builds a `StepContext` (`tools/context.py:build`: cursor with row = y−1, Dlvl, map rows, message-line combat flag, `<noun> adjacent <dirs>` prose). It then runs `pre` hooks outer→inner over `[Legal, Modal, Hazard, Route, Bump]`:
+`agent.py:PipelineHarness.act` builds a `StepContext` (`tools/context.py:build`: cursor with row = y−1, Dlvl, map rows, message-line combat flag, `<noun> adjacent <dirs>` prose). It then runs `pre` hooks outer→inner over `[Legal, Modal, Hazard, Route, Bump]`:
 
 - **ModalStage.pre** answers `[yn` with `y` **only if `y` is in the legal set**, and `--More--` with `more`.
 - **RouteStage.pre** folds the observation into `Chart` (drawn glyphs, visits, bump-closed edges, prose-noun doors/walls/lava). If a letter glyph is adjacent, it returns None (the model fights). Otherwise it returns `Chart.route()`'s BFS first hop toward a drawn `>`, else toward the nearest unvisited drawn square bordering undrawn space. If there is no route, it returns None.

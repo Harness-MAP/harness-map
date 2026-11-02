@@ -119,7 +119,7 @@ Reply with ONLY the JSON object in the format specified above."""
 
 
 class ActionPlanner:
-    """Episode-local state + the governor. One instance per episode, built in orchestrator.py.
+    """Episode-local state + the governor. One instance per episode, built in agent.py.
 
     Everything that used to be a module-level helper here is a method: the ledgers, the frame
     comparison, the veto chain and the four lines of the working-memory block all read nothing but
