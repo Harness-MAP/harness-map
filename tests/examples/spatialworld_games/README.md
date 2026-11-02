@@ -24,7 +24,7 @@ renders that text.
    ```
    The patch also adds a client-side image budget (`SPATIALWORLD_MAX_IMAGES`) and an output-token
    setting (`GAME_MAX_TOKENS`) to the game runner's model client.
-2. **Policy model**: a vLLM server with `Qwen3-VL-30B-A3B-Instruct`. The agent sends up to 30
+2. **Base model**: a vLLM server with `Qwen3-VL-30B-A3B-Instruct`. The agent sends up to 30
    frames per request, so allow enough image slots and context:
    ```bash
    vllm serve Qwen/Qwen3-VL-30B-A3B-Instruct --served-model-name Qwen3-VL-30B-A3B-Instruct \

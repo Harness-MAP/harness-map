@@ -12,7 +12,7 @@ with five episodes each (40 episodes per evaluation); the evaluation budget is N
    conda create -n balrog python=3.10 -y && conda activate balrog
    pip install -e . && balrog-post-install
    ```
-2. **Policy model**: a vLLM server with `Qwen3-VL-30B-A3B-Instruct` (text-only requests are
+2. **Base model**: a vLLM server with `Qwen3-VL-30B-A3B-Instruct` (text-only requests are
    enough here):
    ```bash
    vllm serve Qwen/Qwen3-VL-30B-A3B-Instruct --served-model-name Qwen3-VL-30B-A3B-Instruct \

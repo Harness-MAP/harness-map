@@ -3,7 +3,7 @@
 One directory per game holds every harness the chosen run evaluated, from the anchor to the first
 harness that solved every level of the game, in evaluation order, plus videos of one level played
 by four of those harnesses. All runs are `mapelites_adaptive` on the pure-visual variant of the
-games, with the Claude Code CLI as meta-agent and `Qwen3-VL-30B-A3B-Instruct` as the policy model.
+games, with the Claude Code CLI as meta-agent and `Qwen3-VL-30B-A3B-Instruct` as the base model.
 
 **Which run is shown.** Each game was run at five archive sizes (k0 = 2, 4, 8, 16 and 32).
 Every run of maze, block3d, rubik and snake reached a score of 1.0 (every level solved), and

@@ -31,7 +31,7 @@ evaluation budget is N = 16.
    ./SimWorld.sh /Game/Maps/empty -RenderOffScreen -unattended   # UnrealCV listens on :9000 after ~30 s
    ```
    The simulator serves one client at a time; never probe its port while an evaluation runs.
-3. **Policy model**: a vLLM server with `Qwen3-VL-30B-A3B-Instruct` (no reasoning parser), e.g.
+3. **Base model**: a vLLM server with `Qwen3-VL-30B-A3B-Instruct` (no reasoning parser), e.g.
    `vllm serve Qwen/Qwen3-VL-30B-A3B-Instruct --served-model-name Qwen3-VL-30B-A3B-Instruct --port 8000 --max-model-len 65536 --limit-mm-per-prompt '{"image":32}'`.
    The anchor's spatial tools use the simulator's depth observation; the paper's runs optionally
    replaced it with a metric-depth estimate from a Depth Anything 3 service.

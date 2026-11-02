@@ -7,7 +7,7 @@ videos of the episodes they played.
 **The run.** `mapelites_adaptive` with k0 = 16, C = 1, P = 4 and G = 10 (M = 8 founders from
 coverage-gated initialization, 48 evaluations in total), on the eight official MiniHack tasks with
 five fixed-seed episodes each. The meta-agent was the Claude Code CLI (the proposer transcripts
-record `claude-opus-5-5`), the policy model `Qwen3-VL-30B-A3B-Instruct`. The best harness,
+record `claude-opus-5-5`), the base model `Qwen3-VL-30B-A3B-Instruct`. The best harness,
 `cand_r68_0_spatial-grounding`, solves 36 of the 40 search episodes (success 0.900) and was the
 41st evaluation; the seven harnesses evaluated after it did not improve on it and are not
 included. Its ancestry is the anchor → `cand_r35_0` (0.150) → `cand_r41_0` (0.375) →

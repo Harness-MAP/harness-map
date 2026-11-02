@@ -1,13 +1,42 @@
-# Task examples
+# Evaluators and task examples
 
-One task example per video of the evolution packs: for each, the task record in the format the
-benchmark's evaluator takes (`--tasks` accepts any of these JSON files as is), a preview frame
-(the first frame of the anchor's video), and the outcome of every harness shown in the videos.
-The harnesses and the videos are under [`../examples/<benchmark>/evolution/`](../README.md).
-Evaluation numbers count from the anchor as evaluation 1.
+For each benchmark of the paper, this directory holds the evaluator the paper's runs used, one task
+example per video of the evolution packs (the task record in the format the evaluator takes, a
+preview frame, and the outcome of every harness shown in the videos), and `expected.json`, the
+outcomes in machine-readable form. The harnesses and the videos are under
+[`../examples/<benchmark>/evolution/`](../README.md). Evaluation numbers count the anchor as 1.
 
 The task definitions themselves (level files, map files) belong to the benchmarks and are not
 redistributed; each section says where they live.
+
+## Evaluators
+
+The three `evaluate.py` scripts share one interface and drive the benchmark's own runner with the
+frozen base model; `run_benchmark.py` calls them during a search (through each benchmark's `run.sh`)
+and they run a single task example just as well:
+
+```bash
+python tests/tasks/<benchmark>/evaluate.py --harness DIR --tasks TASKS.json --out OUT
+```
+
+`--harness` is a harness directory (`agent.py`, or the older `harness.py`), `--tasks` a JSON list of
+task records (a split of the benchmark's `config.json`, or one of the task-example files here), and
+`OUT/score.json` receives the score the search reads (the fields `config.json` names under `fitness`
+and `episode`) plus per-episode rows. Each evaluator runs under its benchmark's interpreter and is
+configured through environment variables:
+
+| | SpatialWorld 3D games | BALROG-MiniHack | SimWorld-MMNav |
+|---|---|---|---|
+| script | [`spatialworld_games/evaluate.py`](spatialworld_games/evaluate.py), one [`episode.py`](spatialworld_games/episode.py) subprocess per episode | [`balrog/evaluate.py`](balrog/evaluate.py) | [`simworld_nav/evaluate.py`](simworld_nav/evaluate.py) (+ `unrealcv_patch.py`) |
+| what it reuses | SpatialWorld's per-game `*OpenAIEvaluator` classes; the harness's `build_agent(evaluator)` replaces the per-step decision | BALROG's `EvaluatorManager` with the harness's `build_agent(client_factory, prompt_builder)` as the agent factory; one runtime patch fixes the seed per (task, episode) | the SimWorld-Robotics gym over UnrealCV; the harness's `run_episode(env, task_spec, vlm_clients, trace_dir)` |
+| benchmark checkout | `SPATIALWORLD_REPO` (8e10e24 with `spatialworld.patch`) | `BALROG_REPO` (b7afe79) | `SIMWORLD_ROBOTICS_REPO`; `SIMWORLD_SETTINGS_DIR` (the extracted test settings), `SIMWORLD_BASELINE_DIR` |
+| base model | `GAME_MODEL`, `GAME_API_BASE` (comma-separated servers spread the episodes), `GAME_API_KEY` | `BALROG_MODEL`, `BALROG_API_BASE` | `NAV_MODEL`, `NAV_API_BASE`, or `EVAL_ALLOWED_MODELS` (a JSON pool file) |
+| parallelism and limits | `GAME_EVAL_WORKERS`, `GAME_EPISODE_TIMEOUT_S` (1800), `GAME_MAX_STEPS`, `GAME_MAX_TOKENS`, `SPATIALWORLD_MAX_IMAGES` (32), `HISTORY_WINDOW` | `BALROG_WORKERS` (8), `--episodes`, `--step-cap` (100) | `UE_PORT` (9000), `--setting hard|easy` (`NAV_SETTING`), `EVAL_RESET_TIMEOUT_S`, `EVAL_STALL_LIMIT_S`, `VLM_CALL_TIMEOUT_S`, `MAX_VLM_CALLS_PER_STEP`, `SIM_LAUNCHER` + `EVAL_SIM_RESTART_EVERY` |
+| anti-cheat | `ANTICHEAT_GUARD` (default 1): an episode is voided when the harness reads engine state other than the frame, reads the level files, or never calls the base model | fixed seeds (`seed_base`, `BALROG_SEED_BASE`); the LLM judge runs in the search | a read audit of the environment info the harness touched (`read_audit.json`) |
+| writes | `score.json` (`score`, `n_episodes`, `per_episode`, `voided`), `episodes/<task>/` | `score.json` (`success`, `progression`, `survival_rate`, `step_efficiency`, `per_task_vector`, `per_episode`, `seeds`), BALROG's per-episode files | `score.json` (`SubtaskSR`, `SR`, `per_position_SR`, `distance_progress_mean`, `per_episode`), `traces/ep_<map>_<task>/`, `source/` |
+
+All defaults point at `Qwen3-VL-30B-A3B-Instruct` on `http://127.0.0.1:8000/v1` and at checkouts
+under `~/workspace/`. The full variable list is in each script's docstring.
 
 ## SpatialWorld 3D games
 
@@ -15,6 +44,7 @@ Records: `{"task_id": "<game>/level_NN", "game": "<game>", "level": NN}`, or `"s
 The levels are defined in [SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld) at commit
 8e10e24; the paper's runs use the pure-visual variant (see
 [`../examples/spatialworld_games/README.md`](../examples/spatialworld_games/README.md)).
+[`spatialworld_games/expected.json`](spatialworld_games/expected.json) holds the outcomes below.
 
 | task example | record | the task | anchor → shown harnesses (evaluation) |
 |---|---|---|---|
@@ -32,6 +62,7 @@ for one task. The evaluator seeds episode *i* of a task deterministically from `
 engine seeds BALROG logged for these episodes in the paper's run are given below; with them,
 [MiniHack](https://github.com/samvelyan/minihack) reproduces the exact level directly. The task
 descriptions are BALROG's (`balrog/config/config.yaml` at b7afe79).
+[`balrog/expected.json`](balrog/expected.json) holds the outcomes below.
 
 | task example | record | the task | anchor → `cand_r35_0` (8) → `cand_r41_0` (14) → `cand_r68_0` (41) |
 |---|---|---|---|
@@ -45,7 +76,8 @@ descriptions are BALROG's (`balrog/config/config.yaml` at b7afe79).
 Record: `{"map": "20_10", "task": "task_dist_21_0_1"}`. The task's files (`task_config.json`,
 `roads.json`, `progen_world.json`, `map.png`, `traffic.json`) are in the SimWorld-MMNav test
 settings, Hugging Face dataset `jise/simworld-20k`, file `test_settings/single_test.tar.gz`, under
-`single_agent_world/hard/map_road_20_10/task_dist_21_0_1/`.
+`single_agent_world/hard/map_road_20_10/task_dist_21_0_1/`, which is where `SIMWORLD_SETTINGS_DIR`
+points. [`simworld_nav/expected.json`](simworld_nav/expected.json) holds the outcomes below.
 
 <img src="simworld_nav/map_20_10_task_dist_21_0_1.png" width="480" alt="map 20_10, task dist_21_0_1">
 
@@ -64,6 +96,6 @@ five vehicles and five pedestrians.
 | `cand_r13_0_spatial-grounding` (14) | the same trajectory as `cand_r9_0`: 233 steps, 487 m (22 %) | 131 steps, 463 m (26 %) |
 | `cand_r15_0_spatial-grounding` (16) | 135 steps along the route to 36 m from the destination (94 %), then an arrival commit; the destination check did not fire | completed in 135 steps |
 
-The re-runs use the same policy model and evaluator settings as the campaign; the model samples at
+The re-runs use the same base model and evaluator settings as the campaign; the model samples at
 every step, so a re-run is a fresh draw rather than a replay. The video of `cand_r15_0` is the
 closest of four re-runs (46 m, 268 m, 428 m and 36 m from the destination).

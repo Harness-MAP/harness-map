@@ -21,7 +21,7 @@ S["axis"] = """## axis:
 Code lever, token-level: `tools/vlm.py` is rewritten and NOTHING else in the genome changes.
 `agent.py`, `tools/action.py`, `tools/frame.py`, `tools/__init__.py` and every `.md` prior are
 byte-identical to the parent — `compose_system_prompt()` returns the parent's 1624 characters
-exactly — so the module wiring (`harness.build_agent` -> `tools.vlm.decide` ->
+exactly — so the module wiring (`agent.build_agent` -> `tools.vlm.decide` ->
 `evaluator.baseline_step`) is untouched and what moved is the control flow and the constants
 INSIDE one module. The parent's `decide` was a one-line pass-through; this one is a warrant the
 frozen model is given two chances to satisfy.

@@ -6,9 +6,9 @@ cd "$(dirname "$0")/../../.."
 
 export SIMWORLD_ROBOTICS_DIR=/path/to/SimWorld-Robotics    # gym + baselines, with the test data
 export SIMWORLD_PYTHON=/path/to/simworld-env/bin/python
-export NAV_EVALUATOR=/path/to/nav_evaluator.py             # runs a harness on a split, writes score.json
+export NAV_EVALUATOR=tests/tasks/simworld_nav/evaluate.py             # runs a harness on a split, writes score.json
 export UNREALCV_PORT=9000                                  # port of the running SimWorld simulator
-export POLICY_BASE_URL=http://127.0.0.1:8000/v1            # vLLM server with the frozen policy model
+export POLICY_BASE_URL=http://127.0.0.1:8000/v1            # vLLM server with the frozen base model
 export POLICY_MODEL=Qwen3-VL-30B-A3B-Instruct
 ANCHOR=/path/to/nav_anchor_harness
 

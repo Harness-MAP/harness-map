@@ -226,7 +226,7 @@ SIDE_STRUCTURE_MIN_FRAC = 0.02
 class ViewpointController:
     """Per-episode pose arbiter. All state is per-leg and resets on leg change.
 
-    Public API (consumed by `harness.run_episode`):
+    Public API (consumed by `agent.run_episode`):
       - gate_burst(burst, instruction, obs)  -> Optional[List[int]]
       - request_face_scan(obs, instruction, forward_streak) -> Optional[str]
       - restore_code(side) / note_faced(side) / note_restored()

@@ -5,7 +5,7 @@ the best harness, in evaluation order, and the recipe for rendering an episode o
 
 **The run.** `mapelites_adaptive` with k0 = 4, C = 1 and P = 2 on the hard setting (50 search
 tasks, maps 20_0 to 20_24; `SubtaskSR` as the primary metric), with the Claude Code CLI as
-meta-agent and `Qwen3-VL-30B-A3B-Instruct` as the policy model. The run evaluated 16 harnesses
+meta-agent and `Qwen3-VL-30B-A3B-Instruct` as the base model. The run evaluated 16 harnesses
 (the anchor, one coverage-initialization founder, and 14 bred candidates); the best,
 `cand_r15_0_spatial-grounding`, was the 16th. Its ancestry is the anchor (0.360) →
 `cand_r6_0` (0.370) → `cand_r9_0` (0.400) → `cand_r13_0` (0.550) → `cand_r15_0` (0.555). On the
