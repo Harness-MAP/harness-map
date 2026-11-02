@@ -1,13 +1,28 @@
-# Evaluators and task examples
+# Benchmark settings, evaluators and task examples
 
-For each benchmark of the paper, this directory holds the evaluator the paper's runs used, one task
-example per video of the evolution packs (the task record in the format the evaluator takes, a
-preview frame, and the outcome of every harness shown in the videos), and `expected.json`, the
-outcomes in machine-readable form. The harnesses and the videos are under
-[`../examples/<benchmark>/evolution/`](../README.md). Evaluation numbers count the starting harness as 1.
+For each benchmark of the paper, this directory holds the benchmark settings the paper's runs used,
+copied verbatim from the experiment workspace (the task splits, the search configuration and, for
+BALROG, the CVT corpus and the fitted partitions), the evaluator the runs used, one task example per
+video of the evolution packs (the task record cut from the real split, a preview frame, and the
+outcome of every harness shown in the videos), and `expected.json`, the outcomes in machine-readable
+form. The harnesses and the videos are under [`../examples/<benchmark>/evolution/`](../README.md).
+Evaluation numbers count the starting harness as 1.
 
-The task definitions themselves (level files, map files) belong to the benchmarks and are not
-redistributed; each section says where they live.
+## Benchmark settings
+
+| | SpatialWorld 3D games | BALROG-MiniHack | SimWorld-MMNav |
+|---|---|---|---|
+| task splits | [`spatialworld_games/task_spec/`](spatialworld_games/task_spec/): `<game>_evolve.json` (the search set of each game: maze 20, block3d 20, maze3d_pro 25, rubik 20 levels, snake 20 seeds) and `<game>_eval.json` (held out; only `snake_eval.json`, five seeds, is non-empty, because every level of the other games is searched) | [`balrog/task_spec/`](balrog/task_spec/): `evolve.json` (the official 8 tasks × 5 episodes, seed base 0), `eval_levels.json` (the same tasks on unseen levels, seed base 1, seeds listed), `eval_tasks.json` (8 unseen tasks), `headroom.json`, `quest.json`, and [`SPLITS.md`](balrog/task_spec/SPLITS.md) on how the seeds are fixed | [`simworld_nav/task_spec/`](simworld_nav/task_spec/): `search_val_test_split.json` (the paper's hard run used `search_hard_50`, maps 20_0–20_24, and `val_hard_10`, maps 20_25–20_29; `search_easy_50` and `val_easy_10` for the easy setting), `allowed_models.json` (the base-model pool), `cost_budget.json`, and `api_docs.md` (the harness-facing API of the environment) |
+| search configuration | [`spatialworld_games/meta_config.json`](spatialworld_games/meta_config.json) | [`balrog/meta_config.json`](balrog/meta_config.json) | [`simworld_nav/meta_config.json`](simworld_nav/meta_config.json) |
+| CVT corpus and partitions | fit at run time on the starting harness plus meta-agent variants of it | [`balrog/corpus/`](balrog/corpus/): the 47 structural variants of the naive starting harness (`var_001` … `var_047`; with the starting harness, the 48-harness corpus the partition was fit on); [`balrog/cvt/`](balrog/cvt/): the fitted partitions `cvt_v3_k2` … `cvt_v3_k32` (`cvt_blocks.npz` + `blocks_meta.json`, as `harness_map.main.make_phi_blocks` loads them) | fit at run time |
+| task definitions | the level files stay in SpatialWorld (`data/game/...`, see below) | the tasks are MiniHack's; the seeds pin the levels | [`simworld_nav/settings/hard/map_road_20_10/task_dist_21_0_1/`](simworld_nav/settings/hard/map_road_20_10/task_dist_21_0_1/): the task example's real directory from the SimWorld-MMNav test settings (`task_config.json`, `roads.json`, `progen_world.json`, `map.png`, the two robot views, `traffic.json`); point `SIMWORLD_SETTINGS_DIR` at `tests/tasks/simworld_nav/settings` to run it without the full dataset |
+
+The `meta_config.json` files are the configurations the paper's adapters read (fitness mapping,
+selection key, anti-cheat vocabulary, meta-agent backbone, benchmark defaults); the `config.json` of
+each benchmark under `../examples/` carries the same settings in the form `run_benchmark.py` takes.
+The corpus variants were never evaluated; their `NOTES.md` states which tool modules are inlined and
+which text priors are filled. The descriptor labels graph nodes by role, never by file name, so the
+fitted partitions apply unchanged to harnesses whose entry file is `agent.py`.
 
 ## Evaluators
 
@@ -17,13 +32,17 @@ and they run a single task example just as well:
 
 ```bash
 python tests/tasks/<benchmark>/evaluate.py --harness DIR --tasks TASKS.json --out OUT
+python tests/tasks/balrog/evaluate.py            --harness DIR --split evolve          --out OUT
+python tests/tasks/spatialworld_games/evaluate.py --harness DIR --split maze3d_pro_evolve --out OUT
+python tests/tasks/simworld_nav/evaluate.py       --harness DIR --subset search_hard_50 --out OUT
 ```
 
-`--harness` is a harness directory (`agent.py`, or the older `harness.py`), `--tasks` a JSON list of
-task records (a split of the benchmark's `config.json`, or one of the task-example files here), and
-`OUT/score.json` receives the score the search reads (the fields `config.json` names under `fitness`
-and `episode`) plus per-episode rows. Each evaluator runs under its benchmark's interpreter and is
-configured through environment variables:
+`--harness` is a harness directory (`agent.py`, or the older `harness.py`); `--tasks` a JSON list of
+task records (one of the task-example files here, or a split of the benchmark's `config.json`), or
+`--split` / `--subset` the name of a split in the benchmark's `task_spec/`; `OUT/score.json` receives
+the score the search reads (the fields `config.json` names under `fitness` and `episode`) plus
+per-episode rows. Each evaluator runs under its benchmark's interpreter and is configured through
+environment variables:
 
 | | SpatialWorld 3D games | BALROG-MiniHack | SimWorld-MMNav |
 |---|---|---|---|
@@ -40,9 +59,11 @@ under `~/workspace/`. The full variable list is in each script's docstring.
 
 ## SpatialWorld 3D games
 
-Records: `{"task_id": "<game>/level_NN", "game": "<game>", "level": NN}`, or `"seed"` for snake.
-The levels are defined in [SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld) at commit
-8e10e24; the paper's runs use the pure-visual variant (see
+Records: `{"task_id": "<game>/level_NN", "game": "<game>", "mode": "level", "level": NN}`, or
+`"mode": "run"` with a `"seed"` for snake; each example file holds the record of its level exactly as
+it appears in `task_spec/<game>_evolve.json`. The levels are defined in
+[SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld) at commit 8e10e24 and are not
+redistributed; the paper's runs use the pure-visual variant (see
 [`../examples/spatialworld_games/README.md`](../examples/spatialworld_games/README.md)).
 [`spatialworld_games/expected.json`](spatialworld_games/expected.json) holds the outcomes below.
 
@@ -56,11 +77,13 @@ The levels are defined in [SpatialWorld](https://github.com/Hongcheng-Gao/Spatia
 
 ## BALROG-MiniHack
 
-Records: `{"task_id": "<MiniHack task>", "episodes": n, "seed_base": 0}`, the search split's record
-for one task. The evaluator seeds episode *i* of a task deterministically from `seed_base`, so
+Records: the task's record from `task_spec/evolve.json` (`task_id`, `task`, `episodes`, `family`,
+`official_balrog`) with `episodes` cut to the shown run. The evaluator seeds episode *i* of a task
+deterministically from the seed base (0 for the search split, `BALROG_SEED_BASE` to change it), so
 `episodes: 1` plays run 00 and Corridor-R3's run 04 needs `episodes: 5` (its fifth episode). The
-engine seeds BALROG logged for these episodes in the paper's run are given below; with them,
-[MiniHack](https://github.com/samvelyan/minihack) reproduces the exact level directly. The task
+engine seeds BALROG logged for these episodes in the paper's run are given below; they follow from
+the same formula, which also reproduces the 40 seeds listed in `task_spec/eval_levels.json`, and with
+them [MiniHack](https://github.com/samvelyan/minihack) reproduces the exact level directly. The task
 descriptions are BALROG's (`balrog/config/config.yaml` at b7afe79).
 [`balrog/expected.json`](balrog/expected.json) holds the outcomes below.
 
@@ -73,11 +96,14 @@ descriptions are BALROG's (`balrog/config/config.yaml` at b7afe79).
 
 ## SimWorld-MMNav, hard setting
 
-Record: `{"map": "20_10", "task": "task_dist_21_0_1"}`. The task's files (`task_config.json`,
-`roads.json`, `progen_world.json`, `map.png`, `traffic.json`) are in the SimWorld-MMNav test
-settings, Hugging Face dataset `jise/simworld-20k`, file `test_settings/single_test.tar.gz`, under
-`single_agent_world/hard/map_road_20_10/task_dist_21_0_1/`, which is where `SIMWORLD_SETTINGS_DIR`
-points. [`simworld_nav/expected.json`](simworld_nav/expected.json) holds the outcomes below.
+Record: `{"map": "20_10", "task": "task_dist_21_0_1"}`, the item of `search_hard_50` in
+`task_spec/search_val_test_split.json`. The task's real directory is shipped under
+[`simworld_nav/settings/hard/map_road_20_10/task_dist_21_0_1/`](simworld_nav/settings/hard/map_road_20_10/task_dist_21_0_1/)
+(`task_config.json`, `roads.json`, `progen_world.json`, `map.png`, the two robot views and
+`traffic.json`), so `SIMWORLD_SETTINGS_DIR=tests/tasks/simworld_nav/settings` runs this example
+without the dataset; the other tasks are in the SimWorld-MMNav test settings (Hugging Face dataset
+`jise/simworld-20k`, file `test_settings/single_test.tar.gz`, extracted to the same layout).
+[`simworld_nav/expected.json`](simworld_nav/expected.json) holds the outcomes below.
 
 <img src="simworld_nav/map_20_10_task_dist_21_0_1.png" width="480" alt="map 20_10, task dist_21_0_1">
 

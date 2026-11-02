@@ -1,0 +1,10 @@
+{
+  "num_vehicles": 5,
+  "num_pedestrians": 5,
+  "center_point": {
+    "x": 100.0,
+    "y": 100.0
+  },
+  "roads": "single_agent_world/hard/map_road_20_10/task_dist_21_0_1/roads.json",
+  "_generated_by": "generate_hard_traffic_json.py"
+}

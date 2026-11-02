@@ -1,7 +1,9 @@
 [
   {
     "task_id": "MiniHack-MazeWalk-15x15-v0",
+    "task": "MiniHack-MazeWalk-15x15-v0",
     "episodes": 1,
-    "seed_base": 0
+    "family": "mazewalk",
+    "official_balrog": true
   }
 ]

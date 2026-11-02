@@ -8,9 +8,12 @@ stamps a deterministic seed per (task, episode) so that every candidate plays th
 re-run reproduces them (common random numbers); BALROG's own seeding path still does the seeding.
 
     python evaluate.py --harness DIR --tasks TASKS.json --out OUT
+    python evaluate.py --harness DIR --split evolve --out OUT          # a split of task_spec/
 
-TASKS.json is a list of {"task_id": "<MiniHack task>", "episodes": n, "seed_base": 0} records (the
-split format of tests/examples/balrog/config.json; tests/tasks/balrog/*.json are single-task examples).
+TASKS.json is a list of {"task_id": "<MiniHack task>", "episodes": n} records, optionally with
+"seed_base"; `--split NAME` reads task_spec/NAME.json, the paper's own split files (evolve = the
+search set; eval_levels = the same tasks on unseen levels, seed_base 1; eval_tasks = eight unseen
+tasks; see task_spec/SPLITS.md). tests/tasks/balrog/*.json are single-task examples cut from evolve.json.
 
 Environment: BALROG_REPO (the BALROG checkout at b7afe79; default ~/workspace/BALROG), BALROG_MODEL
 (default Qwen3-VL-30B-A3B-Instruct), BALROG_API_BASE (the vLLM server; default http://127.0.0.1:8000/v1),
@@ -35,6 +38,7 @@ import uuid
 from pathlib import Path
 
 BALROG_REPO = Path(os.environ.get("BALROG_REPO", Path.home() / "workspace" / "BALROG")).expanduser()
+TASK_SPEC = Path(__file__).resolve().parent / "task_spec"   # the paper's split files
 ENTRY_FILES = ("agent.py", "harness.py")          # the harness entry point; the second is its older name
 
 TASK_SUCCESSFUL = 2          # minihack.MiniHack.StepStatus: ABORTED -1, RUNNING 0, DEATH 1, SUCCESS 2
@@ -207,7 +211,9 @@ def main():
     global SEED_BASE
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--harness", required=True, help="harness directory (agent.py, or the older harness.py)")
-    ap.add_argument("--tasks", required=True, help="JSON list of {task_id, episodes, seed_base} records")
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--tasks", help="JSON list of {task_id, episodes[, seed_base]} records")
+    src.add_argument("--split", help=f"a split of {TASK_SPEC}: evolve | eval_levels | eval_tasks | headroom | quest")
     ap.add_argument("--out", required=True, help="output directory: score.json and BALROG's per-episode files")
     ap.add_argument("--episodes", type=int, default=0, help="override the records' episodes per task")
     ap.add_argument("--seed-base", type=int, default=None, help="override the records' seed_base")
@@ -219,7 +225,12 @@ def main():
 
     out = Path(a.out).resolve()
     out.mkdir(parents=True, exist_ok=True)
-    records = json.loads(Path(a.tasks).read_text())
+    tasks_file = Path(a.tasks) if a.tasks else TASK_SPEC / f"{a.split}.json"
+    if not tasks_file.exists():
+        raise SystemExit(f"no such task file: {tasks_file}")
+    records = json.loads(tasks_file.read_text())
+    if not records:
+        raise SystemExit(f"{tasks_file} holds no task records")
     tasks = [r.get("task_id") or r["task"] for r in records]
     eps = a.episodes or max((int(r.get("episodes") or 0) for r in records), default=0) or 5
     bases = {int(r["seed_base"]) for r in records if r.get("seed_base") is not None}
@@ -243,7 +254,7 @@ def main():
     mgr.run(factory)
 
     score = collect(out, a.step_cap, tasks, eps)
-    score.update({"tasks_file": str(Path(a.tasks).resolve()), "harness": str(Path(a.harness).resolve()),
+    score.update({"tasks_file": str(tasks_file.resolve()), "split": a.split, "harness": str(Path(a.harness).resolve()),
                   "model": a.model, "episodes_per_task": eps, "seed_base": SEED_BASE,
                   "seeds": {t: [episode_seed(t, i) for i in range(eps)] for t in tasks}})
     (out / "score.json").write_text(json.dumps(score, indent=1))

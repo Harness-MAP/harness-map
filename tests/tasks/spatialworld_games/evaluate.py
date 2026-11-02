@@ -7,11 +7,14 @@ per-game evaluator classes with the harness's per-step decision function injecte
 SpatialWorld game environment's interpreter (pygame, PyOpenGL and the game engine).
 
     python evaluate.py --harness DIR --tasks TASKS.json --out OUT
+    python evaluate.py --harness DIR --split maze3d_pro_evolve --out OUT     # a split of task_spec/
 
-TASKS.json is a list of {"task_id": "maze/level_06", "game": "maze", "level": 6} records, or
-{"task_id": "snake/run_020", "game": "snake", "seed": 20} for snake (the split format of
-tests/examples/spatialworld_games/config.json; tests/tasks/spatialworld_games/*.json are
-single-level examples).
+TASKS.json is a list of {"task_id": "maze/level_06", "game": "maze", "mode": "level", "level": 6}
+records, or {"task_id": "snake/run_020", "game": "snake", "mode": "run", "seed": 20} for snake;
+`--split NAME` reads task_spec/NAME.json, the paper's own split files (<game>_evolve = the search set
+of a game; snake_eval = snake's five held-out seeds; the other <game>_eval files are empty because
+every level of those games is searched). tests/tasks/spatialworld_games/*.json are single-level
+examples cut from the evolve files.
 
 Environment: SPATIALWORLD_REPO (the SpatialWorld checkout at 8e10e24 with spatialworld.patch applied;
 default ~/workspace/SpatialWorld), GAME_MODEL (default Qwen3-VL-30B-A3B-Instruct), GAME_API_BASE (the
@@ -38,6 +41,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 EPISODE = HERE / "episode.py"
+TASK_SPEC = HERE / "task_spec"                     # the paper's split files
 SPATIALWORLD_REPO = Path(os.environ.get(
     "SPATIALWORLD_REPO", str(Path.home() / "workspace" / "SpatialWorld"))).expanduser().resolve()
 STEP_KEYS = ("steps_taken", "steps", "total_steps", "num_steps")
@@ -96,7 +100,9 @@ def run_episode(rec: dict, harness: Path, out_dir: Path, *, model: str, api_base
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--harness", required=True, help="harness directory (agent.py, or the older harness.py)")
-    ap.add_argument("--tasks", required=True, help="JSON list of task records")
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--tasks", help="JSON list of task records")
+    src.add_argument("--split", help=f"a split of {TASK_SPEC}: <game>_evolve | snake_eval")
     ap.add_argument("--out", required=True, help="output directory: score.json and episodes/")
     ap.add_argument("--workers", type=int, default=None, help="parallel episodes (env GAME_EVAL_WORKERS)")
     ap.add_argument("--timeout", type=float, default=float(os.environ.get("GAME_EPISODE_TIMEOUT_S", "1800")),
@@ -106,7 +112,12 @@ def main() -> None:
     harness = Path(a.harness).resolve()
     out_dir = Path(a.out).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
-    records = json.loads(Path(a.tasks).read_text())
+    tasks_file = Path(a.tasks) if a.tasks else TASK_SPEC / f"{a.split}.json"
+    if not tasks_file.exists():
+        raise SystemExit(f"no such task file: {tasks_file}")
+    records = json.loads(tasks_file.read_text())
+    if not records:
+        raise SystemExit(f"{tasks_file} holds no task records")
     model = os.environ.get("GAME_MODEL", "Qwen3-VL-30B-A3B-Instruct")
     api_key = os.environ.get("GAME_API_KEY", "EMPTY")
     bases = [b.strip() for b in os.environ.get("GAME_API_BASE", "http://127.0.0.1:8000/v1").split(",") if b.strip()]
@@ -136,7 +147,8 @@ def main() -> None:
         "voided": [r["task_id"] for r in rows if not r["valid"]],
         "harness": str(harness),
         "model": model,
-        "tasks_file": str(Path(a.tasks).resolve()),
+        "tasks_file": str(tasks_file.resolve()),
+        "split": a.split,
         "per_episode": rows,
     }
     (out_dir / "score.json").write_text(json.dumps(score, indent=1))

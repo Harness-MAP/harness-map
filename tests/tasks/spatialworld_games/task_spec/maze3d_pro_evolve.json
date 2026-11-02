@@ -1,0 +1,152 @@
+[
+ {
+  "task_id": "maze3d_pro/level_01",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 1
+ },
+ {
+  "task_id": "maze3d_pro/level_02",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 2
+ },
+ {
+  "task_id": "maze3d_pro/level_03",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 3
+ },
+ {
+  "task_id": "maze3d_pro/level_04",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 4
+ },
+ {
+  "task_id": "maze3d_pro/level_05",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 5
+ },
+ {
+  "task_id": "maze3d_pro/level_06",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 6
+ },
+ {
+  "task_id": "maze3d_pro/level_07",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 7
+ },
+ {
+  "task_id": "maze3d_pro/level_08",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 8
+ },
+ {
+  "task_id": "maze3d_pro/level_09",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 9
+ },
+ {
+  "task_id": "maze3d_pro/level_10",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 10
+ },
+ {
+  "task_id": "maze3d_pro/level_11",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 11
+ },
+ {
+  "task_id": "maze3d_pro/level_12",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 12
+ },
+ {
+  "task_id": "maze3d_pro/level_13",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 13
+ },
+ {
+  "task_id": "maze3d_pro/level_14",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 14
+ },
+ {
+  "task_id": "maze3d_pro/level_15",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 15
+ },
+ {
+  "task_id": "maze3d_pro/level_16",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 16
+ },
+ {
+  "task_id": "maze3d_pro/level_17",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 17
+ },
+ {
+  "task_id": "maze3d_pro/level_18",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 18
+ },
+ {
+  "task_id": "maze3d_pro/level_19",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 19
+ },
+ {
+  "task_id": "maze3d_pro/level_20",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 20
+ },
+ {
+  "task_id": "maze3d_pro/level_21",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 21
+ },
+ {
+  "task_id": "maze3d_pro/level_22",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 22
+ },
+ {
+  "task_id": "maze3d_pro/level_23",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 23
+ },
+ {
+  "task_id": "maze3d_pro/level_24",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 24
+ },
+ {
+  "task_id": "maze3d_pro/level_25",
+  "game": "maze3d_pro",
+  "mode": "level",
+  "level": 25
+ }
+]

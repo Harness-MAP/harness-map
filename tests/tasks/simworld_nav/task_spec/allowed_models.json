@@ -1,0 +1,13 @@
+{
+  "comment": "Active agent-model pool for the hard runs (Azure 2x H100 NVL). The 30B-A3B-INSTRUCT is served on :8000 (GPU 0, shared with the DA3 reconstruction service on :8005); GPU 1 runs the UE sim. SWITCHED from the Thinking variant to Instruct for the v3 chains (naive_v3 / skills_v3): the agentic tool-using loop fires many VLM calls per episode, and Instruct answers directly (no <think> block) -> ~5-10x faster, full evals instead of 6h-salvage. NO --reasoning-parser: the whole answer is message.content (the harness already reads message.content). Model weights live at /mnt/scratch/models/Qwen3-VL-30B-A3B-Instruct (OS disk full; ephemeral). Serve via demo/start_vllm_instruct.sh. To revert to Thinking, restart demo/start_vllm.sh and set id back. The harness selects the model via next(iter(vlm_clients)).",
+  "models": [
+    {
+      "id": "Qwen3-VL-30B-A3B-Instruct",
+      "base_url": "http://127.0.0.1:8000/v1",
+      "size_class": "mid",
+      "active_params_b": 3,
+      "total_params_b": 30,
+      "notes": "MoE, fast per-token (3B active). Instruct (non-reasoning) variant - answers directly, structured JSON; no <think> budget needed. GPU 0, shared with DA3 :8005. Weights on /mnt/scratch (ephemeral)."
+    }
+  ]
+}

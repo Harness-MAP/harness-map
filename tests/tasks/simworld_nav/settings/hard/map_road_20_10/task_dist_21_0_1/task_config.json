@@ -1,0 +1,140 @@
+{
+  "type": "spot",
+  "camera_id": 1,
+  "instance_name": "BP_SpotRobot_C",
+  "agent_name": "SportRobot_1",
+  "env_json_path": "/SimWorld/task_generator/input_map/single_world/total/test_map/middle_mode/map_road_20_10/progen_world.json",
+  "radius": 70,
+  "benchmark_type": 0,
+  "destination": {
+    "x": 52545.6808,
+    "y": -1700.0,
+    "z": 73.957685
+  },
+  "criteria": {
+    "max_steps": 1336.0,
+    "dist_threshold": 2000
+  },
+  "spawning_point": {
+    "location": {
+      "x": -10243.8101,
+      "y": -1700.0,
+      "z": 73.957685
+    },
+    "orientation": {
+      "roll": 0,
+      "pitch": 0,
+      "yaw": 90
+    }
+  },
+  "instruction": [
+    "Turn to face west. You will see a gray and white residential building with multiple glass doors on your left.",
+    "Proceed forward until reaching the high gray concrete building with small striped awnings over the ground-level entrances on your left, stop and face that building."
+  ],
+  "visual_path": "map.png",
+  "landmark_images": [],
+  "robot_view_images": [
+    "robot_view_0.png",
+    "robot_view_1.png"
+  ],
+  "ideal_path": [
+    [
+      -10243.8101,
+      -1700.0
+    ],
+    [
+      -8500.0,
+      -1700.0
+    ],
+    [
+      -5100.0,
+      -1700.0
+    ],
+    [
+      -1700.0,
+      -1700.0
+    ],
+    [
+      1700.0,
+      -1700.0
+    ],
+    [
+      4700.0,
+      -1700.0
+    ],
+    [
+      8100.0,
+      -1700.0
+    ],
+    [
+      11500.0,
+      -1700.0
+    ],
+    [
+      14900.0,
+      -1700.0
+    ],
+    [
+      18300.0,
+      -1700.0
+    ],
+    [
+      21700.0,
+      -1700.0
+    ],
+    [
+      24700.0,
+      -1700.0
+    ],
+    [
+      28100.0,
+      -1700.0
+    ],
+    [
+      31500.0,
+      -1700.0
+    ],
+    [
+      34900.0,
+      -1700.0
+    ],
+    [
+      38300.0,
+      -1700.0
+    ],
+    [
+      41700.0,
+      -1700.0
+    ],
+    [
+      44700.0,
+      -1700.0
+    ],
+    [
+      48100.0,
+      -1700.0
+    ],
+    [
+      51500.0,
+      -1700.0
+    ],
+    [
+      52545.6808,
+      -1700.0
+    ]
+  ],
+  "evaluation_of_subtask": [
+    {
+      "type": "ORIENTATION",
+      "correct_robot_orientation": 0
+    },
+    {
+      "type": "FINISH",
+      "correct_robot_orientation": -90,
+      "correct_robot_location": [
+        52545.6808,
+        -1700.0
+      ]
+    }
+  ]
+}

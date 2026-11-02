@@ -1,0 +1,122 @@
+[
+  {
+    "task_id": "snake/run_001",
+    "game": "snake",
+    "mode": "run",
+    "seed": 1
+  },
+  {
+    "task_id": "snake/run_002",
+    "game": "snake",
+    "mode": "run",
+    "seed": 2
+  },
+  {
+    "task_id": "snake/run_003",
+    "game": "snake",
+    "mode": "run",
+    "seed": 3
+  },
+  {
+    "task_id": "snake/run_004",
+    "game": "snake",
+    "mode": "run",
+    "seed": 4
+  },
+  {
+    "task_id": "snake/run_005",
+    "game": "snake",
+    "mode": "run",
+    "seed": 5
+  },
+  {
+    "task_id": "snake/run_006",
+    "game": "snake",
+    "mode": "run",
+    "seed": 6
+  },
+  {
+    "task_id": "snake/run_007",
+    "game": "snake",
+    "mode": "run",
+    "seed": 7
+  },
+  {
+    "task_id": "snake/run_008",
+    "game": "snake",
+    "mode": "run",
+    "seed": 8
+  },
+  {
+    "task_id": "snake/run_009",
+    "game": "snake",
+    "mode": "run",
+    "seed": 9
+  },
+  {
+    "task_id": "snake/run_010",
+    "game": "snake",
+    "mode": "run",
+    "seed": 10
+  },
+  {
+    "task_id": "snake/run_011",
+    "game": "snake",
+    "mode": "run",
+    "seed": 11
+  },
+  {
+    "task_id": "snake/run_012",
+    "game": "snake",
+    "mode": "run",
+    "seed": 12
+  },
+  {
+    "task_id": "snake/run_013",
+    "game": "snake",
+    "mode": "run",
+    "seed": 13
+  },
+  {
+    "task_id": "snake/run_014",
+    "game": "snake",
+    "mode": "run",
+    "seed": 14
+  },
+  {
+    "task_id": "snake/run_015",
+    "game": "snake",
+    "mode": "run",
+    "seed": 15
+  },
+  {
+    "task_id": "snake/run_016",
+    "game": "snake",
+    "mode": "run",
+    "seed": 16
+  },
+  {
+    "task_id": "snake/run_017",
+    "game": "snake",
+    "mode": "run",
+    "seed": 17
+  },
+  {
+    "task_id": "snake/run_018",
+    "game": "snake",
+    "mode": "run",
+    "seed": 18
+  },
+  {
+    "task_id": "snake/run_019",
+    "game": "snake",
+    "mode": "run",
+    "seed": 19
+  },
+  {
+    "task_id": "snake/run_020",
+    "game": "snake",
+    "mode": "run",
+    "seed": 20
+  }
+]

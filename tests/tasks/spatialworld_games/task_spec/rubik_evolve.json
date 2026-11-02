@@ -1,0 +1,122 @@
+[
+ {
+  "task_id": "rubik/level_01",
+  "game": "rubik",
+  "mode": "level",
+  "level": 1
+ },
+ {
+  "task_id": "rubik/level_02",
+  "game": "rubik",
+  "mode": "level",
+  "level": 2
+ },
+ {
+  "task_id": "rubik/level_03",
+  "game": "rubik",
+  "mode": "level",
+  "level": 3
+ },
+ {
+  "task_id": "rubik/level_04",
+  "game": "rubik",
+  "mode": "level",
+  "level": 4
+ },
+ {
+  "task_id": "rubik/level_05",
+  "game": "rubik",
+  "mode": "level",
+  "level": 5
+ },
+ {
+  "task_id": "rubik/level_06",
+  "game": "rubik",
+  "mode": "level",
+  "level": 6
+ },
+ {
+  "task_id": "rubik/level_07",
+  "game": "rubik",
+  "mode": "level",
+  "level": 7
+ },
+ {
+  "task_id": "rubik/level_08",
+  "game": "rubik",
+  "mode": "level",
+  "level": 8
+ },
+ {
+  "task_id": "rubik/level_09",
+  "game": "rubik",
+  "mode": "level",
+  "level": 9
+ },
+ {
+  "task_id": "rubik/level_10",
+  "game": "rubik",
+  "mode": "level",
+  "level": 10
+ },
+ {
+  "task_id": "rubik/level_11",
+  "game": "rubik",
+  "mode": "level",
+  "level": 11
+ },
+ {
+  "task_id": "rubik/level_12",
+  "game": "rubik",
+  "mode": "level",
+  "level": 12
+ },
+ {
+  "task_id": "rubik/level_13",
+  "game": "rubik",
+  "mode": "level",
+  "level": 13
+ },
+ {
+  "task_id": "rubik/level_14",
+  "game": "rubik",
+  "mode": "level",
+  "level": 14
+ },
+ {
+  "task_id": "rubik/level_15",
+  "game": "rubik",
+  "mode": "level",
+  "level": 15
+ },
+ {
+  "task_id": "rubik/level_16",
+  "game": "rubik",
+  "mode": "level",
+  "level": 16
+ },
+ {
+  "task_id": "rubik/level_17",
+  "game": "rubik",
+  "mode": "level",
+  "level": 17
+ },
+ {
+  "task_id": "rubik/level_18",
+  "game": "rubik",
+  "mode": "level",
+  "level": 18
+ },
+ {
+  "task_id": "rubik/level_19",
+  "game": "rubik",
+  "mode": "level",
+  "level": 19
+ },
+ {
+  "task_id": "rubik/level_20",
+  "game": "rubik",
+  "mode": "level",
+  "level": 20
+ }
+]

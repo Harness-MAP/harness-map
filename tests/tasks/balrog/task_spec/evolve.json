@@ -1,0 +1,58 @@
+[
+ {
+  "task_id": "MiniHack-Boxoban-Hard-v0",
+  "task": "MiniHack-Boxoban-Hard-v0",
+  "episodes": 5,
+  "family": "boxoban",
+  "official_balrog": true
+ },
+ {
+  "task_id": "MiniHack-Boxoban-Medium-v0",
+  "task": "MiniHack-Boxoban-Medium-v0",
+  "episodes": 5,
+  "family": "boxoban",
+  "official_balrog": true
+ },
+ {
+  "task_id": "MiniHack-MazeWalk-9x9-v0",
+  "task": "MiniHack-MazeWalk-9x9-v0",
+  "episodes": 5,
+  "family": "mazewalk",
+  "official_balrog": true
+ },
+ {
+  "task_id": "MiniHack-MazeWalk-15x15-v0",
+  "task": "MiniHack-MazeWalk-15x15-v0",
+  "episodes": 5,
+  "family": "mazewalk",
+  "official_balrog": true
+ },
+ {
+  "task_id": "MiniHack-Corridor-R3-v0",
+  "task": "MiniHack-Corridor-R3-v0",
+  "episodes": 5,
+  "family": "corridor",
+  "official_balrog": true
+ },
+ {
+  "task_id": "MiniHack-CorridorBattle-Dark-v0",
+  "task": "MiniHack-CorridorBattle-Dark-v0",
+  "episodes": 5,
+  "family": "combat",
+  "official_balrog": true
+ },
+ {
+  "task_id": "MiniHack-Quest-Easy-v0",
+  "task": "MiniHack-Quest-Easy-v0",
+  "episodes": 5,
+  "family": "quest",
+  "official_balrog": true
+ },
+ {
+  "task_id": "MiniHack-Quest-Medium-v0",
+  "task": "MiniHack-Quest-Medium-v0",
+  "episodes": 5,
+  "family": "quest",
+  "official_balrog": true
+ }
+]

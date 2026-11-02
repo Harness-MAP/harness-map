@@ -1,7 +1,9 @@
 [
   {
     "task_id": "MiniHack-Boxoban-Medium-v0",
+    "task": "MiniHack-Boxoban-Medium-v0",
     "episodes": 1,
-    "seed_base": 0
+    "family": "boxoban",
+    "official_balrog": true
   }
 ]

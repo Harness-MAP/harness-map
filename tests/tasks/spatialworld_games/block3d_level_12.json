@@ -2,6 +2,7 @@
   {
     "task_id": "block3d/level_12",
     "game": "block3d",
+    "mode": "level",
     "level": 12
   }
 ]

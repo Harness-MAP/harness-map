@@ -2,6 +2,7 @@
   {
     "task_id": "rubik/level_06",
     "game": "rubik",
+    "mode": "level",
     "level": 6
   }
 ]

@@ -1,0 +1,92 @@
+{
+  "testbed": "simworld-mmnav",
+  "_doc": "NAV testbed config for the shared meta-harness (AutoSpatial/harness_map). Declares the task-specific Fitness mapping; the snake testbed has its own meta_config.json.",
+
+  "rubric_labels": ["ORIENTATION", "MOVE_ALONG_ROAD", "TURN_AT_INTERSECTION", "REACH_DESTINATION"],
+
+  "score_file": "score.json",
+  "diag_file": "diagnostics_summary.json",
+  "taint_file": "read_audit.json",
+  "judge_file": "judge_verdict.json",
+  "candidate_root": "../runs/candidates_v3/search_hard",
+
+  "fitness": {
+    "primary": "SubtaskSR",
+    "_primary_note": "was SR; SR is floored at 0 on the hard split so the variance-split (archive.cell_range reads fit.primary) could never fire. SubtaskSR is the non-degenerate primary. SR remains in dense/val_guard. leap.sr_field/val_guard reference 'primary' — review if those opt-in modes are activated.",
+    "vector": "per_position_SR",
+    "dense": {
+      "sr": "SR",
+      "subtask_sr": "SubtaskSR",
+      "distance_progress": "distance_progress_mean"
+    },
+    "dense_from_diag": {
+      "progress_score": "progress_score"
+    },
+    "cost": "cost_per_episode",
+    "n": "n_episodes"
+  },
+
+  "episode": {
+    "list_key": "per_episode",
+    "task_id": "episode",
+    "primary": "success",
+    "checkpoints": "subtask_success",
+    "dense": {
+      "subtask_sr": "subtask_sr",
+      "distance_progress": "distance_progress",
+      "final_dist": "final_dist_to_target"
+    },
+    "cost": "total_tokens"
+  },
+
+  "noise_fields": ["primary", "subtask_sr", "distance_progress"],
+
+  "reach": {"source": "per_subtask", "field": "oracle_arrival_rate"},
+
+  "extra_counts": {"constants_findings": "constants_findings", "static_findings": "static_findings"},
+
+  "binding": {"sequential": true, "reach_min": 0.4, "pass_max": 0.5, "funnel_frac": 0.3},
+
+  "stall": {"stall_k": 2, "flat_band": 0.12},
+
+  "selection": {
+    "greedy_key": [
+      ["primary", "desc"],
+      ["dense.subtask_sr", "desc"],
+      ["dense.progress_score", "desc"],
+      ["taint", "asc"],
+      ["judge", "asc"],
+      ["extra.constants_findings", "asc"],
+      ["dense.distance_progress", "desc"],
+      ["cost", "asc"]
+    ],
+    "leap": {
+      "sr_field": "primary",
+      "protect_field": "dense.subtask_sr",
+      "regress_cap": 0.05,
+      "_climb_doc": "climb_field was dense.distance_progress, the most over-traversal-gameable signal (rewards covering forward distance without committing -> pinned the elite to the over-traversing anchor in skills_v5). Switched to dense.progress_score (empirically de-ranks the anchor: 0.689 < iter5 0.767). commit_gate makes the BINDING-leg pass rate (per_position_SR[binding] = the true, un-gameable commit signal) the TOP climb key: on skills_v5 the actionable MOVE_ALONG_ROAD leg runs 0.30-0.55, so commit_gate actively prefers the most-committing candidate within the SubtaskSR cap, with progress_score as the tiebreaker; it degrades to a no-op (progress_score decides) only when the binding leg is fully starved (e.g. a terminal leg pinned at 0).",
+      "commit_gate": true,
+      "climb_field": "dense.progress_score",
+      "tiebreak": [
+        ["dense.subtask_sr", "desc"],
+        ["dense.distance_progress", "desc"],
+        ["taint", "asc"],
+        ["judge", "asc"],
+        ["extra.constants_findings", "asc"],
+        ["cost", "asc"]
+      ]
+    }
+  },
+
+  "val_guard": {
+    "_doc": "Generalization guard (VAL_GUARD=1): an SR>0 crossing on search triggers a held-out probe; flatten only at sufficient power (false_flatten_p=(1-search_SR)^val_n <= alpha), else 'underpowered' escalates to a 2nd probe. probe_subset SHOULD be disjoint from the final/reported val subset so paper numbers stay unprobed (<=1 bit leaks per probed candidate); null falls back to the chain val subset until a split is chosen.",
+    "alpha": 0.25,
+    "min_val_n": 3,
+    "proxy_field": "subtask_sr",
+    "proxy_drop_max": 0.15,
+    "escalate": true,
+    "probe_subset": null
+  },
+
+  "privileged_keys": ["agent_location", "target_location", "gt.json", "ideal_path", "current_instruction"]
+}

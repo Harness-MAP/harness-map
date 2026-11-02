@@ -7,9 +7,12 @@ distance threshold, starting compass) and the ground truth the checker keeps (de
 ideal path, per-subtask checks), and the harness's `run_episode` is called once per task.
 
     python evaluate.py --harness DIR --tasks TASKS.json --out OUT [--setting hard|easy]
+    python evaluate.py --harness DIR --subset search_hard_50 --out OUT    # a subset of task_spec/
 
-TASKS.json is a list of {"map": "20_10", "task": "task_dist_21_0_1"} records (the split format of
-tests/examples/simworld_nav/config.json; tests/tasks/simworld_nav/*.json are single-task examples).
+TASKS.json is a list of {"map": "20_10", "task": "task_dist_21_0_1"} records; `--subset NAME` reads
+that subset of task_spec/search_val_test_split.json, the paper's own split file (search_hard_50 and
+val_hard_10 are the hard setting's 50 search and 10 held-out tasks, search_easy_50 and val_easy_10
+the easy setting's). tests/tasks/simworld_nav/*.json are single-task examples cut from it.
 Outputs: OUT/score.json (SubtaskSR, SR, per_position_SR, distance_progress_mean, cost_per_episode,
 n_episodes, per_episode rows), OUT/traces/ep_<map>_<task>/ (actions, model calls with the frames
 the agent saw, verdict, ground truth), OUT/source/ (the harness as evaluated), OUT/read_audit.json.
@@ -233,7 +236,7 @@ def run(args):
     iter_idx        = args.iter
     out_dir         = Path(args.out).resolve()
     harness_dir     = Path(args.harness).resolve()
-    tasks_file      = Path(args.tasks).resolve()
+    tasks_file      = Path(args.tasks).resolve() if args.tasks else WORKSPACE / "task_spec" / "search_val_test_split.json"
 
     out_dir.mkdir(parents=True, exist_ok=True)
     # Trace dir: use --trace-dir if given, else default to traces/iter_<NNN>
@@ -248,6 +251,8 @@ def run(args):
     # Task records: a JSON list of {"map": ..., "task": ...} (the split format of config.json), or a
     # split dict with "items" or "maps" x "tasks_per_map".
     items = _load_json(tasks_file)
+    if args.subset:
+        items = items[args.subset]
     if isinstance(items, dict):
         items = items.get("items") or [{"map": m, "task": t}
                                         for m in items["maps"] for t in items["tasks_per_map"]]
@@ -1199,6 +1204,7 @@ def run(args):
     score = {
         "iter":             iter_idx,
         "tasks":            str(tasks_file),
+        "subset":           args.subset,
         "setting":          setting,
         "n_episodes":       n,
         "SR":               round(SR, 4),
@@ -1237,8 +1243,9 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--harness", type=str, required=True,
                    help="harness directory (agent.py, or the older harness.py)")
-    p.add_argument("--tasks", type=str, required=True,
-                   help="JSON list of {map, task} records (a split of config.json, or tests/tasks/simworld_nav/*.json)")
+    src = p.add_mutually_exclusive_group(required=True)
+    src.add_argument("--tasks", type=str, help="JSON list of {map, task} records (tests/tasks/simworld_nav/*.json, or a split of config.json)")
+    src.add_argument("--subset", type=str, help="a subset of task_spec/search_val_test_split.json, e.g. search_hard_50 or val_hard_10")
     p.add_argument("--out", type=str, required=True,
                    help="output directory: score.json, traces/, source/, read_audit.json")
     p.add_argument("--setting", type=str, default=os.environ.get("NAV_SETTING") or os.environ.get("SETTING") or "hard",

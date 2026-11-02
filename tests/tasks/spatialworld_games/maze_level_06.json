@@ -2,6 +2,7 @@
   {
     "task_id": "maze/level_06",
     "game": "maze",
+    "mode": "level",
     "level": 6
   }
 ]

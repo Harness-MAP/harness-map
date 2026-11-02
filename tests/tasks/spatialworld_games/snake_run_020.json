@@ -2,6 +2,7 @@
   {
     "task_id": "snake/run_020",
     "game": "snake",
+    "mode": "run",
     "seed": 20
   }
 ]

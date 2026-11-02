@@ -2,6 +2,7 @@
   {
     "task_id": "maze3d_pro/level_05",
     "game": "maze3d_pro",
+    "mode": "level",
     "level": 5
   }
 ]

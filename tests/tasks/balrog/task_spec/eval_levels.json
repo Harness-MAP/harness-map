@@ -1,0 +1,130 @@
+[
+ {
+  "task_id": "MiniHack-Boxoban-Hard-v0",
+  "task": "MiniHack-Boxoban-Hard-v0",
+  "episodes": 5,
+  "family": "boxoban",
+  "official_balrog": true,
+  "holdout": "levels",
+  "seed_base": 1,
+  "seeds": [
+   4093729745,
+   1209330841,
+   4038337238,
+   1742486264,
+   3710414434
+  ]
+ },
+ {
+  "task_id": "MiniHack-Boxoban-Medium-v0",
+  "task": "MiniHack-Boxoban-Medium-v0",
+  "episodes": 5,
+  "family": "boxoban",
+  "official_balrog": true,
+  "holdout": "levels",
+  "seed_base": 1,
+  "seeds": [
+   1894763758,
+   4269023115,
+   3669114138,
+   2773421696,
+   3844889985
+  ]
+ },
+ {
+  "task_id": "MiniHack-MazeWalk-9x9-v0",
+  "task": "MiniHack-MazeWalk-9x9-v0",
+  "episodes": 5,
+  "family": "mazewalk",
+  "official_balrog": true,
+  "holdout": "levels",
+  "seed_base": 1,
+  "seeds": [
+   2683182340,
+   3577982866,
+   3461060630,
+   3988987875,
+   245455274
+  ]
+ },
+ {
+  "task_id": "MiniHack-MazeWalk-15x15-v0",
+  "task": "MiniHack-MazeWalk-15x15-v0",
+  "episodes": 5,
+  "family": "mazewalk",
+  "official_balrog": true,
+  "holdout": "levels",
+  "seed_base": 1,
+  "seeds": [
+   1433250330,
+   780059350,
+   1399382345,
+   588604776,
+   2755135105
+  ]
+ },
+ {
+  "task_id": "MiniHack-Corridor-R3-v0",
+  "task": "MiniHack-Corridor-R3-v0",
+  "episodes": 5,
+  "family": "corridor",
+  "official_balrog": true,
+  "holdout": "levels",
+  "seed_base": 1,
+  "seeds": [
+   675412678,
+   2920134463,
+   1259116597,
+   3659405346,
+   2460027763
+  ]
+ },
+ {
+  "task_id": "MiniHack-CorridorBattle-Dark-v0",
+  "task": "MiniHack-CorridorBattle-Dark-v0",
+  "episodes": 5,
+  "family": "battle",
+  "official_balrog": true,
+  "holdout": "levels",
+  "seed_base": 1,
+  "seeds": [
+   3899628570,
+   508985045,
+   4192294515,
+   1698942489,
+   3500262230
+  ]
+ },
+ {
+  "task_id": "MiniHack-Quest-Easy-v0",
+  "task": "MiniHack-Quest-Easy-v0",
+  "episodes": 5,
+  "family": "quest",
+  "official_balrog": true,
+  "holdout": "levels",
+  "seed_base": 1,
+  "seeds": [
+   484926206,
+   1755365212,
+   1303781230,
+   2306174591,
+   2115181401
+  ]
+ },
+ {
+  "task_id": "MiniHack-Quest-Medium-v0",
+  "task": "MiniHack-Quest-Medium-v0",
+  "episodes": 5,
+  "family": "quest",
+  "official_balrog": true,
+  "holdout": "levels",
+  "seed_base": 1,
+  "seeds": [
+   1569131690,
+   3673856436,
+   2696378240,
+   1763135863,
+   968494200
+  ]
+ }
+]

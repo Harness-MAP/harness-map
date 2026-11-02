@@ -1,0 +1,138 @@
+[
+ {
+  "task_id": "MiniHack-Boxoban-Unfiltered-v0",
+  "task": "MiniHack-Boxoban-Unfiltered-v0",
+  "episodes": 5,
+  "family": "boxoban",
+  "official_balrog": false,
+  "holdout": "tasks",
+  "rationale": "same family, unfiltered level pool",
+  "seed_base": 0,
+  "seeds": [
+   3038911430,
+   3447590680,
+   865877593,
+   3534200212,
+   3581990986
+  ]
+ },
+ {
+  "task_id": "MiniHack-Corridor-R5-v0",
+  "task": "MiniHack-Corridor-R5-v0",
+  "episodes": 5,
+  "family": "corridor",
+  "official_balrog": false,
+  "holdout": "tasks",
+  "rationale": "same family, 5 rooms instead of 3",
+  "seed_base": 0,
+  "seeds": [
+   536976894,
+   3197806947,
+   2638674110,
+   3177676003,
+   448930033
+  ]
+ },
+ {
+  "task_id": "MiniHack-CorridorBattle-v0",
+  "task": "MiniHack-CorridorBattle-v0",
+  "episodes": 5,
+  "family": "battle",
+  "official_balrog": false,
+  "holdout": "tasks",
+  "rationale": "same family, LIT (search set is the Dark variant)",
+  "seed_base": 0,
+  "seeds": [
+   2308126091,
+   482068525,
+   3571495963,
+   2952759174,
+   939553954
+  ]
+ },
+ {
+  "task_id": "MiniHack-Quest-Hard-v0",
+  "task": "MiniHack-Quest-Hard-v0",
+  "episodes": 5,
+  "family": "quest",
+  "official_balrog": false,
+  "holdout": "tasks",
+  "rationale": "same family, hardest variant",
+  "seed_base": 0,
+  "seeds": [
+   3068789856,
+   3521113251,
+   3677069142,
+   2678948577,
+   821738338
+  ]
+ },
+ {
+  "task_id": "MiniHack-Labyrinth-Small-v0",
+  "task": "MiniHack-Labyrinth-Small-v0",
+  "episodes": 5,
+  "family": "maze",
+  "official_balrog": false,
+  "holdout": "tasks",
+  "rationale": "new family: labyrinth navigation",
+  "seed_base": 0,
+  "seeds": [
+   1401428232,
+   870753289,
+   1540313428,
+   2257724286,
+   4171796513
+  ]
+ },
+ {
+  "task_id": "MiniHack-MultiRoom-N4-v0",
+  "task": "MiniHack-MultiRoom-N4-v0",
+  "episodes": 5,
+  "family": "explore",
+  "official_balrog": false,
+  "holdout": "tasks",
+  "rationale": "new family: multi-room exploration",
+  "seed_base": 0,
+  "seeds": [
+   3200083839,
+   3116724519,
+   744159853,
+   835321167,
+   1402148449
+  ]
+ },
+ {
+  "task_id": "MiniHack-River-Narrow-v0",
+  "task": "MiniHack-River-Narrow-v0",
+  "episodes": 5,
+  "family": "river",
+  "official_balrog": false,
+  "holdout": "tasks",
+  "rationale": "new family: cross water via a narrow ford",
+  "seed_base": 0,
+  "seeds": [
+   1108317779,
+   2839281095,
+   3789909814,
+   2944945970,
+   805749998
+  ]
+ },
+ {
+  "task_id": "MiniHack-LavaCrossingS9N1-v0",
+  "task": "MiniHack-LavaCrossingS9N1-v0",
+  "episodes": 5,
+  "family": "lava",
+  "official_balrog": false,
+  "holdout": "tasks",
+  "rationale": "new family: lava crossing",
+  "seed_base": 0,
+  "seeds": [
+   2570720330,
+   4078693052,
+   1146665396,
+   31704780,
+   701751409
+  ]
+ }
+]

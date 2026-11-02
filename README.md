@@ -65,9 +65,12 @@ harness_map/                   the method
     ├── agent.py               MetaAgent, propose_candidates, run_judge, run_diagnosis, AgenticAdapter
     └── skills/{proposer,diagnostician,judge}/SKILL.md
 tests/                         the paper's benchmarks, hands on (README)
-├── tasks/<benchmark>/         evaluate.py, the evaluator of the paper's runs (--harness DIR --tasks TASKS.json --out OUT),
-│                              one task record per example, a preview frame, expected.json (what every shipped
-│                              harness scored on it), README
+├── tasks/<benchmark>/         the paper's benchmark settings, verbatim: task_spec/ (the task splits), meta_config.json
+│                              (the search configuration), for BALROG corpus/ (the 47 CVT corpus variants) and cvt/ (the
+│                              fitted partitions), for navigation settings/ (the task example's real directory);
+│                              evaluate.py, the evaluator of the paper's runs (--harness DIR --tasks TASKS.json --out OUT,
+│                              or --split / --subset for a split of task_spec/); one task record per example cut from
+│                              the splits, a preview frame, expected.json (what every shipped harness scored), README
 └── examples/
     ├── run_benchmark.py       generic driver: config + starting harness + evaluator command → one search
     ├── adapter_example.py     a custom adapter skeleton, with the adapter protocol documented

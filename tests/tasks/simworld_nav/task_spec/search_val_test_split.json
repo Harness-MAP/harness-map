@@ -1,0 +1,1321 @@
+{
+  "comment": "Carved out of single_agent_world/simple/ (the official test set; the proposal's intended search/val/ aren't released yet, so we partition the 100 maps deterministically). Each map has 2 tasks (task_dist_11_0_1 and task_dist_21_0_1). The harness must NOT read test/.",
+  "search": {
+    "maps": [
+      "20_0",
+      "20_1",
+      "20_2",
+      "20_3",
+      "20_4",
+      "20_5",
+      "20_6",
+      "20_7",
+      "20_8",
+      "20_9"
+    ],
+    "tasks_per_map": [
+      "task_dist_11_0_1",
+      "task_dist_21_0_1"
+    ]
+  },
+  "val": {
+    "maps": [
+      "20_10",
+      "20_11",
+      "20_12",
+      "20_13",
+      "20_14"
+    ],
+    "tasks_per_map": [
+      "task_dist_11_0_1",
+      "task_dist_21_0_1"
+    ]
+  },
+  "test_OFF_LIMITS": {
+    "maps": "map_road_20_15 .. map_road_20_99",
+    "tasks_per_map": [
+      "task_dist_11_0_1",
+      "task_dist_21_0_1"
+    ]
+  },
+  "initial_search_subset": {
+    "comment": "Each task ~5 min of sim time -> 5 tasks ~= 25 min per iteration. Iter_000/001 run on this subset.",
+    "items": [
+      {
+        "map": "20_0",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "val_easy_initial": {
+    "comment": "5-map val subset for Phase1b generalization check. Same task_dist_11_0_1 across maps 20_10..20_14.",
+    "items": [
+      {
+        "map": "20_10",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_12",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_13",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "search_hard": {
+    "comment": "Phase2 hard partition. Mirrors search_easy layout on the TrafficWorld 100-map set under single_agent_world/hard/.",
+    "maps": [
+      "20_0",
+      "20_1",
+      "20_2",
+      "20_3",
+      "20_4",
+      "20_5",
+      "20_6",
+      "20_7",
+      "20_8",
+      "20_9"
+    ],
+    "tasks_per_map": [
+      "task_dist_11_0_1",
+      "task_dist_21_0_1"
+    ]
+  },
+  "val_hard": {
+    "maps": [
+      "20_10",
+      "20_11",
+      "20_12",
+      "20_13",
+      "20_14"
+    ],
+    "tasks_per_map": [
+      "task_dist_11_0_1",
+      "task_dist_21_0_1"
+    ]
+  },
+  "test_hard_OFF_LIMITS": {
+    "maps": "map_road_20_15 .. map_road_20_99",
+    "tasks_per_map": [
+      "task_dist_11_0_1",
+      "task_dist_21_0_1"
+    ]
+  },
+  "initial_search_subset_hard": {
+    "comment": "5-map search subset for hard/TrafficWorld Phase2 iters.",
+    "items": [
+      {
+        "map": "20_0",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "val_hard_initial": {
+    "comment": "5-map val subset for hard Phase2b generalization check.",
+    "items": [
+      {
+        "map": "20_10",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_12",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_13",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "anticheat_val_subset": {
+    "comment": "Single-map validation of 5-layer anti-cheat (runtime taint + LLM judge). Mirrors initial_search_subset[0].",
+    "items": [
+      {
+        "map": "20_0",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "search_hard_subset_10": {
+    "comment": "10-map TrafficWorld subset for v2 chains. Doubles the episode coverage of initial_search_subset_hard.",
+    "items": [
+      {
+        "map": "20_0",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_5",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_6",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "search_hard_50": {
+    "comment": "2026-08-28: 50/10 search/val split (per difficulty). search=maps 20_0..20_24, val=maps 20_25..20_29, test_OFF_LIMITS=20_30..20_99. hard: broken 20_6/task_dist_21_0_1 -> 20_30/task_dist_21_0_1.",
+    "items": [
+      {
+        "map": "20_0",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_0",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_5",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_5",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_6",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_10",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_10",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_12",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_12",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_13",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_13",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_15",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_15",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_16",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_16",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_17",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_17",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_18",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_18",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_19",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_19",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_20",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_20",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_21",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_21",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_22",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_22",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_23",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_23",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_24",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_24",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_30",
+        "task": "task_dist_21_0_1"
+      }
+    ]
+  },
+  "val_hard_10": {
+    "comment": "2026-08-28: 50/10 search/val split (per difficulty). search=maps 20_0..20_24, val=maps 20_25..20_29, test_OFF_LIMITS=20_30..20_99. hard: broken 20_6/task_dist_21_0_1 -> 20_30/task_dist_21_0_1.",
+    "items": [
+      {
+        "map": "20_25",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_25",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_26",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_26",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_27",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_27",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_28",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_28",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_29",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_29",
+        "task": "task_dist_21_0_1"
+      }
+    ]
+  },
+  "search_hard_20": {
+    "comment": "20/5 protocol (2026-08-28): search=full clean search partition, holdout=first 5 of val. Disjoint; clear of test_OFF_LIMITS. REBUILT from clean search_hard partition (old key leaked into val_hard). | 2026-08-28: substituted broken 20_6/task_dist_21_0_1 (empty dataset dir) -> 20_13/task_dist_21_0_1",
+    "items": [
+      {
+        "map": "20_0",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_0",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_5",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_5",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_6",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_13",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_21_0_1"
+      }
+    ]
+  },
+  "search_hard_test2": {
+    "comment": "2-episode multi-episode-stability test (20_0,20_1).",
+    "items": [
+      {
+        "map": "20_0",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "short2_probe_4": {
+    "comment": "Stratified short-instance probe set: the four 2-subtask hard maps outside search_hard_20 (20_0..19), val_hard_10 (20_50..59), and the off-limits test (20_60..99). Built 2026-07-05 to adjudicate the naive_v5l_004 facade_conjunct_uturn SR crossing, which lives on the 2-checkpoint instance class (1/2 on search; val_hard_10 contains only one such map). Held-out; do not add to any search subset.",
+    "items": [
+      {
+        "map": "20_21",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_30",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_39",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_47",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "search_easy_20": {
+    "comment": "20/5 protocol (2026-08-28): search=full clean search partition, holdout=first 5 of val. Disjoint; clear of test_OFF_LIMITS.",
+    "items": [
+      {
+        "map": "20_0",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_0",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_5",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_5",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_6",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_6",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_21_0_1"
+      }
+    ]
+  },
+  "val_easy_5": {
+    "comment": "20/5 protocol (2026-08-28): search=full clean search partition, holdout=first 5 of val. Disjoint; clear of test_OFF_LIMITS.",
+    "items": [
+      {
+        "map": "20_10",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_10",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_12",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "val_hard_5": {
+    "comment": "20/5 protocol (2026-08-28): search=full clean search partition, holdout=first 5 of val. Disjoint; clear of test_OFF_LIMITS.",
+    "items": [
+      {
+        "map": "20_10",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_10",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_12",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "search_hard_20_fix": {
+    "comment": "2026-08-28: unfinished search_hard_20 tasks to re-run after the broken-task crash (13 already have verdicts). Merge into hard_search20.",
+    "items": [
+      {
+        "map": "20_13",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_21_0_1"
+      }
+    ]
+  },
+  "search_easy_50": {
+    "comment": "2026-08-28: 50/10 search/val split (per difficulty). search=maps 20_0..20_24, val=maps 20_25..20_29, test_OFF_LIMITS=20_30..20_99. hard: broken 20_6/task_dist_21_0_1 -> 20_30/task_dist_21_0_1.",
+    "items": [
+      {
+        "map": "20_0",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_0",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_1",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_2",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_3",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_4",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_5",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_5",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_6",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_6",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_7",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_8",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_9",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_10",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_10",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_11",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_12",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_12",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_13",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_13",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_15",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_15",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_16",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_16",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_17",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_17",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_18",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_18",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_19",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_19",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_20",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_20",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_21",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_21",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_22",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_22",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_23",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_23",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_24",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_24",
+        "task": "task_dist_21_0_1"
+      }
+    ]
+  },
+  "val_easy_10": {
+    "comment": "2026-08-28: 50/10 search/val split (per difficulty). search=maps 20_0..20_24, val=maps 20_25..20_29, test_OFF_LIMITS=20_30..20_99. hard: broken 20_6/task_dist_21_0_1 -> 20_30/task_dist_21_0_1.",
+    "items": [
+      {
+        "map": "20_25",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_25",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_26",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_26",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_27",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_27",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_28",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_28",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_29",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_29",
+        "task": "task_dist_21_0_1"
+      }
+    ]
+  },
+  "run_easy_A": {
+    "comment": "5010 new-tasks GPU0 stream",
+    "items": [
+      {
+        "map": "20_12",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_13",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_15",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_16",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_17",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_18",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_19",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_20",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_21",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_22",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_23",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_24",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_25",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_26",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_27",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_28",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_29",
+        "task": "task_dist_21_0_1"
+      }
+    ]
+  },
+  "run_easy_B": {
+    "comment": "5010 new-tasks GPU1 stream",
+    "items": [
+      {
+        "map": "20_13",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_15",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_16",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_17",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_18",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_19",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_20",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_21",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_22",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_23",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_24",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_25",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_26",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_27",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_28",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_29",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  },
+  "run_hard_A": {
+    "comment": "5010 new-tasks GPU0 stream",
+    "items": [
+      {
+        "map": "20_12",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_15",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_16",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_17",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_18",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_19",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_20",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_21",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_22",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_23",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_24",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_30",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_25",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_26",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_27",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_28",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_29",
+        "task": "task_dist_21_0_1"
+      }
+    ]
+  },
+  "run_hard_B": {
+    "comment": "5010 new-tasks GPU1 stream",
+    "items": [
+      {
+        "map": "20_13",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_14",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_15",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_16",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_17",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_18",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_19",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_20",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_21",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_22",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_23",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_24",
+        "task": "task_dist_21_0_1"
+      },
+      {
+        "map": "20_25",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_26",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_27",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_28",
+        "task": "task_dist_11_0_1"
+      },
+      {
+        "map": "20_29",
+        "task": "task_dist_11_0_1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "task_id": "snake/run_021",
+    "game": "snake",
+    "mode": "run",
+    "seed": 21
+  },
+  {
+    "task_id": "snake/run_022",
+    "game": "snake",
+    "mode": "run",
+    "seed": 22
+  },
+  {
+    "task_id": "snake/run_023",
+    "game": "snake",
+    "mode": "run",
+    "seed": 23
+  },
+  {
+    "task_id": "snake/run_024",
+    "game": "snake",
+    "mode": "run",
+    "seed": 24
+  },
+  {
+    "task_id": "snake/run_025",
+    "game": "snake",
+    "mode": "run",
+    "seed": 25
+  }
+]

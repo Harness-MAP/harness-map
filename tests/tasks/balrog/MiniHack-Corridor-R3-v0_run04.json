@@ -1,7 +1,9 @@
 [
   {
     "task_id": "MiniHack-Corridor-R3-v0",
+    "task": "MiniHack-Corridor-R3-v0",
     "episodes": 5,
-    "seed_base": 0
+    "family": "corridor",
+    "official_balrog": true
   }
 ]

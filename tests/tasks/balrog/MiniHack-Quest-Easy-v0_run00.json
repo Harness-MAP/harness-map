@@ -1,7 +1,9 @@
 [
   {
     "task_id": "MiniHack-Quest-Easy-v0",
+    "task": "MiniHack-Quest-Easy-v0",
     "episodes": 1,
-    "seed_base": 0
+    "family": "quest",
+    "official_balrog": true
   }
 ]
