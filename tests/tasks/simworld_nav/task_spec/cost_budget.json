@@ -1,6 +1,0 @@
-{
-  "comment": "Cost is measured in total input+output tokens per episode (vLLM is local, no $-cost; tokens are the resource). The ceiling is set against H_0 cost-per-episode after iter_000 runs; until then, treat any iteration that exceeds 2x H_0 tokens-per-episode as over_budget.",
-  "per_episode_token_ceiling": null,
-  "per_episode_token_warn_multiplier": 2.0,
-  "per_iteration_episode_count": 5
-}

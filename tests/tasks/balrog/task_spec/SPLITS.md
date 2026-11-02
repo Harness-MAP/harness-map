@@ -2,7 +2,7 @@
 
 Every episode's level is fixed by
 `seed = int(sha256(f"{seed_base}|{task}|{episode_idx}").hexdigest()[:8], 16)`
-(`balrog_config/evaluator.py::episode_seed`, installed over BALROG's own
+(`evaluate.py::episode_seed`, installed over BALROG's own
 `envs.env_kwargs.seed` by `install_crn_seeding()`; the BALROG repo is never modified).
 Same seeds for every arm = common random numbers, so an arm-to-arm difference is the harness,
 not the draw. Each split's seeds are written into its score.json (`seed_base`, `seeds`).
@@ -22,9 +22,9 @@ BALROG's own `make_minihack_env` + `config.yaml` (reset + step) before selection
 Run either split with the evaluator's `--split` flag; holdout A additionally needs
 `BALROG_SEED_BASE=1`:
 
-    BALROG_SEED_BASE=1 python balrog_config/evaluator.py --harness <dir> --split eval_levels --out <dir>
-    BALROG_SEED_BASE=0 python balrog_config/evaluator.py --harness <dir> --split eval_tasks  --out <dir>
+    BALROG_SEED_BASE=1 python tests/tasks/balrog/evaluate.py --harness <dir> --split eval_levels --out <dir>
+    BALROG_SEED_BASE=0 python tests/tasks/balrog/evaluate.py --harness <dir> --split eval_tasks  --out <dir>
 
-NOTE `eval.json` stays `[]` on purpose: `evaluate_holdout` is the in-loop hook, and no holdout may
-be visible to the search. The two files above are scored ONCE, after each arm finishes, on the
+NOTE the search has no in-loop holdout split on purpose: `evaluate_holdout` is the in-loop hook,
+and no holdout may be visible to the search. The two files above are scored ONCE, after each arm finishes, on the
 harness the search selected.

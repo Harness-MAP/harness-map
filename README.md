@@ -65,15 +65,14 @@ harness_map/                   the method
     ├── agent.py               MetaAgent, propose_candidates, run_judge, run_diagnosis, AgenticAdapter
     └── skills/{proposer,diagnostician,judge}/SKILL.md
 tests/                         the paper's benchmarks, hands on (README)
-├── tasks/<benchmark>/         the paper's benchmark settings, verbatim: task_spec/ (the task splits), meta_config.json
-│                              (the search configuration), for BALROG corpus/ (the 47 CVT corpus variants) and cvt/ (the
-│                              fitted partitions), for navigation settings/ (the task example's real directory);
-│                              evaluate.py, the evaluator of the paper's runs (--harness DIR --tasks TASKS.json --out OUT,
-│                              or --split / --subset for a split of task_spec/); one task record per video, cut from
-│                              the splits; README
+├── tasks/                     benchmark setup and code (README)
+│   ├── <benchmark>/           the paper's settings, verbatim: task_spec/ (the task splits), meta_config.json (the
+│   │                          search configuration), for navigation settings/ (the task example's real directory);
+│   │                          evaluate.py, the evaluator of the paper's runs (--harness DIR --tasks TASKS.json --out OUT,
+│   │                          or --split / --subset for a split of task_spec/); one task record per video, cut from the splits
+│   └── adapter_example.py     a custom adapter skeleton, with the adapter protocol documented
 └── examples/
     ├── run_benchmark.py       generic driver: config + starting harness + evaluator command → one search
-    ├── adapter_example.py     a custom adapter skeleton, with the adapter protocol documented
     ├── balrog/                BALROG-MiniHack: config.json, run.sh, README (setup),
     │                          evolution/ (every harness of the paper's best run, with videos)
     ├── spatialworld_games/    SpatialWorld 3D games: config.json, run.sh, spatialworld.patch,
@@ -232,7 +231,7 @@ A benchmark plugs in through four pieces; the search itself (`main.py`, `qd/`, `
 
    The command line overrides any of them (`--mode`, `--k0`, `--budget`, `--children`, `--m`, `--sigma`, `--lenient-coverage`). `fitness` and `episode` map your score file onto `Fitness`; `audit.privileged_keys` is the anti-cheat vocabulary the static gate scans for; `roles.extra` adds `[role, [keyword, ...]]` pairs so φ's structure block follows your benchmark's naming; the evaluator command is a template in which `{harness}`, `{tasks}`, `{out}` and `{split}` are filled in.
 
-4. **Adapter.** `run_benchmark.py`'s `CommandAdapter` covers an evaluator command. For in-process evaluation, your own batching or a different judge policy, subclass `AgenticAdapter` as in [`tests/examples/adapter_example.py`](tests/examples/adapter_example.py), which documents the protocol: `starting_harness()` and `evaluate()` are required, `evaluate_batch()` routes candidates through the LLM judge, `privileged_keys()` names what a harness must never read, `evaluate_holdout()` scores the final harness.
+4. **Adapter.** `run_benchmark.py`'s `CommandAdapter` covers an evaluator command. For in-process evaluation, your own batching or a different judge policy, subclass `AgenticAdapter` as in [`tests/tasks/adapter_example.py`](tests/tasks/adapter_example.py), which documents the protocol: `starting_harness()` and `evaluate()` are required, `evaluate_batch()` routes candidates through the LLM judge, `privileged_keys()` names what a harness must never read, `evaluate_holdout()` scores the final harness.
 
 ## Citation
 

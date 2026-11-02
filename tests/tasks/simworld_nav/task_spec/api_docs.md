@@ -113,8 +113,8 @@ intentionally withheld — they are ground truth.
 ```python
 vlm_clients = {
     "Qwen3-VL-30B-A3B-Instruct": openai.OpenAI(base_url=..., api_key="EMPTY"),
-    # more models will be added later; always check
-    # task_spec_dir/allowed_models.json before hard-coding a key
+    # the evaluator fills this dict from NAV_MODEL (or the EVAL_ALLOWED_MODELS pool);
+    # iterate its keys instead of hard-coding one
 }
 ```
 

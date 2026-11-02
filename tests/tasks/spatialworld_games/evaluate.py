@@ -12,8 +12,8 @@ SpatialWorld game environment's interpreter (pygame, PyOpenGL and the game engin
 TASKS.json is a list of {"task_id": "maze/level_06", "game": "maze", "mode": "level", "level": 6}
 records, or {"task_id": "snake/run_020", "game": "snake", "mode": "run", "seed": 20} for snake;
 `--split NAME` reads task_spec/NAME.json, the paper's own split files (<game>_evolve = the search set
-of a game; snake_eval = snake's five held-out seeds; the other <game>_eval files are empty because
-every level of those games is searched). tests/tasks/spatialworld_games/*.json are single-level
+of a game; snake_eval = snake's five held-out seeds; the other games search every level and have
+no held-out split). tests/tasks/spatialworld_games/*.json are single-level
 examples cut from the evolve files.
 
 Environment: SPATIALWORLD_REPO (the SpatialWorld checkout at 8e10e24 with spatialworld.patch applied;

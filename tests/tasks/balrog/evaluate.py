@@ -213,7 +213,7 @@ def main():
     ap.add_argument("--harness", required=True, help="harness directory (agent.py, or the older harness.py)")
     src = ap.add_mutually_exclusive_group(required=True)
     src.add_argument("--tasks", help="JSON list of {task_id, episodes[, seed_base]} records")
-    src.add_argument("--split", help=f"a split of {TASK_SPEC}: evolve | eval_levels | eval_tasks | headroom | quest")
+    src.add_argument("--split", help=f"a split of {TASK_SPEC}: evolve | eval_levels | eval_tasks")
     ap.add_argument("--out", required=True, help="output directory: score.json and BALROG's per-episode files")
     ap.add_argument("--episodes", type=int, default=0, help="override the records' episodes per task")
     ap.add_argument("--seed-base", type=int, default=None, help="override the records' seed_base")

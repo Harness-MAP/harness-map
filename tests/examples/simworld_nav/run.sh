@@ -4,15 +4,16 @@
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
 
-export SIMWORLD_ROBOTICS_DIR=/path/to/SimWorld-Robotics    # gym + baselines, with the test data
+export SIMWORLD_ROBOTICS_REPO=/path/to/SimWorld-Robotics   # the gym and the baselines
+export SIMWORLD_SETTINGS_DIR=/path/to/single_test          # the extracted test settings (tests/tasks/simworld_nav/settings holds one task)
 export SIMWORLD_PYTHON=/path/to/simworld-env/bin/python
 export NAV_EVALUATOR=tests/tasks/simworld_nav/evaluate.py             # runs a harness on a split, writes score.json
-export UNREALCV_PORT=9000                                  # port of the running SimWorld simulator
-export POLICY_BASE_URL=http://127.0.0.1:8000/v1            # vLLM server with the frozen base model
-export POLICY_MODEL=Qwen3-VL-30B-A3B-Instruct
+export UE_PORT=9000                                        # port of the running SimWorld simulator
+export NAV_API_BASE=http://127.0.0.1:8000/v1               # vLLM server with the frozen base model
+export NAV_MODEL=Qwen3-VL-30B-A3B-Instruct
 STARTING_HARNESS=/path/to/nav_starting_harness
 
-SETTING=${SETTING:-hard}                                   # hard | easy
+export SETTING=${SETTING:-hard}                            # hard | easy
 MODE=${MODE:-adaptive}                                     # adaptive | fixed | hier
 K0=${K0:-4}                                                # the paper uses 2 4 8
 

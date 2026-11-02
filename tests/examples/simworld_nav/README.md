@@ -43,7 +43,7 @@ evaluation budget is N = 16.
 6. **Evaluator** (`NAV_EVALUATOR` in `run.sh`): a script run under the `simworld` environment as
    `evaluator.py --harness DIR --tasks TASKS.json --out OUT`. For each task record (`map`,
    `task`) it should reset the gym environment on that map and task over UnrealCV
-   (`UNREALCV_PORT`), run the harness's episode entry point with the frozen model, and record
+   (`UE_PORT`), run the harness's episode entry point with the frozen model, and record
    per-subtask success from the environment's own checker. Write `OUT/score.json` with
    `SubtaskSR`, `SR`, `distance_progress_mean`, `cost_per_episode`, `n_episodes`,
    `per_position_SR` (success rate per subtask position, in the order of `rubric_labels`) and

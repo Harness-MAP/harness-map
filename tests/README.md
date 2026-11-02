@@ -15,16 +15,16 @@ configuration and scripts to run the search yourself.
 
 ```
 tests/
-├── tasks/<benchmark>/            the paper's benchmark settings, verbatim: task_spec/ (the task splits),
-│                                 meta_config.json (the search configuration), BALROG's corpus/ and cvt/ (the
-│                                 CVT corpus and the fitted partitions), navigation's settings/ (the task
-│                                 example's real directory); evaluate.py: the evaluator of the paper's runs,
-│                                 which drives the benchmark's own runner (--harness DIR --tasks TASKS.json
-│                                 --out OUT, or --split / --subset for a split of task_spec/); one task
-│                                 record per video, cut from the splits; README
+├── tasks/                        benchmark setup and code (README)
+│   ├── <benchmark>/              the paper's benchmark settings, verbatim: task_spec/ (the task splits),
+│   │                             meta_config.json (the search configuration), navigation's settings/ (the
+│   │                             task example's real directory); evaluate.py: the evaluator of the paper's
+│   │                             runs, which drives the benchmark's own runner (--harness DIR --tasks
+│   │                             TASKS.json --out OUT, or --split / --subset for a split of task_spec/);
+│   │                             one task record per video, cut from the splits
+│   └── adapter_example.py        a custom adapter skeleton, with the adapter protocol documented
 └── examples/
     ├── run_benchmark.py          the search driver the run scripts call
-    ├── adapter_example.py        a custom adapter skeleton, with the adapter protocol documented
     ├── render/                   the scripts that turned the episode logs into the videos
     └── <benchmark>/              config.json, run.sh, README (installing the benchmark and the base model)
         └── evolution/            the paper's best run: README, lineage.json,
