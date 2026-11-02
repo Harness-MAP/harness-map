@@ -52,41 +52,39 @@ The settings and results of the paper's runs are tabulated under [Set up a bench
 
 ```
 harness_map/                   the method
-├── main.py                    Genome/Fitness types, config defaults, run(), the adapter protocol,
-│                              Node/Ctx, evaluation gates, fitness_from_dir; re-exports qd/'s names
+├── main.py                    types, config, the search loop, the adapter protocol
 ├── qd/
-│   ├── descriptors.py         φ: roles, component graph, WL, AST / numeric / doc-text blocks
-│   ├── partition.py           k-means, CVT fit (fit_cvt_blocks), frozen φ (make_phi_blocks), ladder
+│   ├── descriptors.py         the structural descriptor φ
+│   ├── partition.py           CVT fitting
 │   ├── coverage.py            coverage-gated initialization
-│   ├── archive.py             cells, placement, elites, refine / retreat / advance, steering; breeding one generation
-│   └── modes.py               the three CVT drivers, the N = ⌈m·k0⌉ + G·P·C accounting, run_frontier,
-│                              the per-evaluation ledger and resume from a snapshot
+│   ├── archive.py             the archive: cells, elites, resolution control, breeding
+│   └── modes.py               the three CVT drivers, budget, ledger, resume
 └── meta_agent/
-    ├── agent.py               MetaAgent, propose_candidates, run_judge, run_diagnosis, AgenticAdapter
-    └── skills/{proposer,diagnostician,judge}/SKILL.md
-tests/                         the paper's benchmarks, hands on (README)
-├── tasks/                     benchmark setup and code (README)
-│   ├── <benchmark>/           the paper's settings, verbatim: task_spec/ (the task splits, which the examples' config.json
-│   │                          name), for navigation settings/ (the task example's real directory); evaluate.py, the
-│   │                          evaluator of the paper's runs (--harness DIR --tasks TASKS.json --out OUT, or --split /
-│   │                          --subset for a split of task_spec/); one task record per video, cut from the splits
-│   └── adapter_example.py     a custom adapter skeleton, with the adapter protocol documented
-└── examples/
-    ├── run_benchmark.py       generic driver: config + starting harness + evaluator command → one search
-    ├── balrog/                BALROG-MiniHack: config.json, run.sh, README (setup),
-    │                          evolution/ (every harness of the paper's best run, with videos)
-    ├── spatialworld_games/    SpatialWorld 3D games: config.json, run.sh, spatialworld.patch,
-    │                          README, evolution/<game>/ (the best run of each game, with videos)
-    ├── simworld_nav/          SimWorld-Robotics navigation: config.json, run.sh, README,
-    │                          evolution/ (the best hard-setting run, with videos)
-    └── render/                episode logs → videos: replay_balrog_episode.py and
-                               replay_rubik_episode.py (engine replays), render_balrog_episode.py
-                               (text frames), render_nav_trace.py, grid_videos.py (2×2 grids)
-assets/                        the method figure and the clips above
-pyproject.toml                 the harness_map package (pip install -e .)
+    ├── agent.py               the meta-agent: proposer, judge, diagnostician
+    └── skills/                their SKILL.md files
+tests/                         the paper's benchmarks
+├── run_benchmark.py           the search driver
+├── adapter_example.py         a custom adapter skeleton
+└── <benchmark>/               balrog, spatialworld_games, simworld_nav
+    ├── tasks/                 what runs the benchmark
+    │   ├── README.md          installing the benchmark and the base model
+    │   ├── config.json        the search configuration
+    │   ├── run.sh             the paper's run
+    │   ├── evaluate.py        the evaluator
+    │   ├── task_spec/         the task splits and the task examples
+    │   ├── episode.py         games only: one episode
+    │   ├── spatialworld.patch games only: the pure-visual variant
+    │   └── settings/          navigation only: the task example's directory
+    └── examples/              the paper's best run
+        ├── README.md          the lineage and the videos
+        ├── lineage.json       every harness, its score and its parent
+        ├── harnesses/         every harness as evaluated
+        └── videos/            the task examples played by the lineage
+assets/                        the figure and the clips
+pyproject.toml                 the harness_map package
 ```
 
-Each `evolution/` directory is laid out as `README.md`, `lineage.json`, `harnesses/<NN>_<label>/` (the harness as evaluated, its `NOTES.md` and `diagnosis.md`) and `videos/`. A search writes `runs/<testbed>/<split>/<mode>_k<k0>/`: `result.json` (every evaluated harness with its `Fitness`, the best, and the mode's report with the final cell table, split/retreat and steering logs, the budget and coverage reports), `candidates/` (one directory per proposed harness), `evals/` (the evaluator's score files and traces) and `checkpoints/` (the per-evaluation ledger and the resume snapshot).
+A search writes `runs/<testbed>/<split>/<mode>_k<k0>/`: `result.json` (every evaluated harness with its `Fitness`, the best, and the mode's report with the final cell table, split/retreat and steering logs, the budget and coverage reports), `candidates/` (one directory per proposed harness), `evals/` (the evaluator's score files and traces) and `checkpoints/` (the per-evaluation ledger and the resume snapshot).
 
 ## Quickstart
 
@@ -117,13 +115,13 @@ All three read the same SKILL.md files and produce the same result: an edited ca
 
 ### Set up a benchmark
 
-The benchmarks are not redistributed. Install each one in its own environment as its README under `tests/examples/` describes, and serve the base model with vLLM. The evaluators the paper's runs used are in `tests/tasks/<benchmark>/evaluate.py`; they drive the benchmark's own runner and are configured through the environment variables listed in [`tests/tasks/README.md`](tests/tasks/README.md).
+The benchmarks are not redistributed. Install each one in its own environment as `tests/<benchmark>/tasks/README.md` describes, and serve the base model with vLLM. The evaluators the paper's runs used are in `tests/<benchmark>/tasks/evaluate.py`; they drive the benchmark's own runner and are configured through the environment variables listed in [`tests/README.md`](tests/README.md#evaluators).
 
-| Benchmark | `tests/examples/` | Repository | Base model |
+| Benchmark | `tests/` | Repository | Base model |
 |---|---|---|---|
-| SpatialWorld 3D games | [`spatialworld_games/`](tests/examples/spatialworld_games/README.md) | [Hongcheng-Gao/SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld) at 8e10e24, with `spatialworld.patch` | `Qwen3-VL-30B-A3B-Instruct` on vLLM |
-| BALROG-MiniHack | [`balrog/`](tests/examples/balrog/README.md) | [balrog-ai/BALROG](https://github.com/balrog-ai/BALROG) at b7afe79 | `Qwen3-VL-30B-A3B-Instruct` on vLLM |
-| SimWorld-MMNav | [`simworld_nav/`](tests/examples/simworld_nav/README.md) | [SCAI-JHU/SimWorld-Robotics](https://github.com/SCAI-JHU/SimWorld-Robotics) and the [SimWorld](https://github.com/SimWorld-AI/SimWorld) UE simulator | `Qwen3-VL-30B-A3B-Instruct` on vLLM |
+| SpatialWorld 3D games | [`spatialworld_games/`](tests/spatialworld_games/tasks/README.md) | [Hongcheng-Gao/SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld) at 8e10e24, with `spatialworld.patch` | `Qwen3-VL-30B-A3B-Instruct` on vLLM |
+| BALROG-MiniHack | [`balrog/`](tests/balrog/tasks/README.md) | [balrog-ai/BALROG](https://github.com/balrog-ai/BALROG) at b7afe79 | `Qwen3-VL-30B-A3B-Instruct` on vLLM |
+| SimWorld-MMNav | [`simworld_nav/`](tests/simworld_nav/tasks/README.md) | [SCAI-JHU/SimWorld-Robotics](https://github.com/SCAI-JHU/SimWorld-Robotics) and the [SimWorld](https://github.com/SimWorld-AI/SimWorld) UE simulator | `Qwen3-VL-30B-A3B-Instruct` on vLLM |
 
 <details>
 <summary><b>The paper's runs</b>: settings and results per benchmark</summary>
@@ -132,7 +130,7 @@ The benchmarks are not redistributed. Install each one in its own environment as
 |---|---|---|---|
 | **starting harness → best harness** | 10.0% → 90.0% task success | 10.7% → 100.0% task success (five games) | hard 29.0% → 55.5%, easy 32.0% → 46.5% subtask success |
 | **harness evaluations to the best** | 41 (N = 50) | 39 (N = 50) | 16 (N = 16) |
-| directory | `tests/examples/balrog/` | `tests/examples/spatialworld_games/` | `tests/examples/simworld_nav/` |
+| directory | `tests/balrog/` | `tests/spatialworld_games/` | `tests/simworld_nav/` |
 | upstream | [BALROG](https://github.com/balrog-ai/BALROG) at b7afe79 | [SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld) at 8e10e24 + `spatialworld.patch` | [SimWorld-Robotics](https://github.com/SCAI-JHU/SimWorld-Robotics) + the SimWorld UE simulator |
 | search set | the 8 official MiniHack tasks × 5 episodes (40 episodes per evaluation) | one game per run: maze 20, block3d 20, maze3d_pro 25, rubik 20, snake 20 levels | 50 tasks (maps 20_0–20_24), hard or easy setting |
 | held-out set | the same 8 tasks on unseen level seeds (`holdout_levels`); 8 unseen tasks (`holdout_tasks`) | snake only: 5 unseen seeds | 10 tasks (maps 20_25–20_29) |
@@ -160,22 +158,22 @@ Deviations from the official benchmarks: the 3D games run a **pure-visual varian
 Set the interpreter, server and starting-harness variables at the top of the benchmark's `run.sh`, then:
 
 ```bash
-MODE=adaptive K0=4 bash tests/examples/balrog/run.sh
-GAME=maze3d_pro MODE=adaptive K0=8 bash tests/examples/spatialworld_games/run.sh
-SETTING=hard MODE=adaptive K0=4 bash tests/examples/simworld_nav/run.sh
+MODE=adaptive K0=4 bash tests/balrog/tasks/run.sh
+GAME=maze3d_pro MODE=adaptive K0=8 bash tests/spatialworld_games/tasks/run.sh
+SETTING=hard MODE=adaptive K0=4 bash tests/simworld_nav/tasks/run.sh
 ```
 
 `MODE` is `adaptive` (the method), `fixed` or `hier` (the resolution ablations) and `K0` the initial cell count; the budget N and the other search settings come from the benchmark's `config.json` (see [the `search` block](#run-on-your-own-benchmark)). An interrupted run continues with `--resume` on the same `--run-dir`.
 
 ### Replay a task example
 
-Any shipped harness runs on a task example of [`tests/tasks/`](tests/tasks/README.md) through the same evaluator; the video table of its evolution pack gives the outcome every shown harness obtained on it:
+Any shipped harness runs on a task example ([`tests/README.md`](tests/README.md#task-examples)) through the same evaluator; the video table of its results README gives the outcome every shown harness obtained on it:
 
 ```bash
 export SPATIALWORLD_REPO=/path/to/SpatialWorld GAME_API_BASE=http://127.0.0.1:8000/v1
-"$GAME_PYTHON" tests/tasks/spatialworld_games/evaluate.py \
-    --harness tests/examples/spatialworld_games/evolution/maze3d_pro/harnesses/12_cand_r6_1_action-planning \
-    --tasks   tests/tasks/spatialworld_games/maze3d_pro_level_05.json \
+"$GAME_PYTHON" tests/spatialworld_games/tasks/evaluate.py \
+    --harness tests/spatialworld_games/examples/maze3d_pro/harnesses/12_cand_r6_1_action-planning \
+    --tasks   tests/spatialworld_games/tasks/task_spec/maze3d_pro_level_05.json \
     --out     /tmp/maze3d_pro_level_05
 ```
 
@@ -196,7 +194,7 @@ A benchmark plugs in through four pieces; the search itself (`main.py`, `qd/`, `
    └── NOTES.md           module map and the list of evolvable levers
    ```
 
-2. **Evaluator**: a command `evaluator.py --harness DIR --tasks TASKS.json --out OUT` that runs the frozen base model with the harness on the task records and writes `OUT/score.json`; the three under `tests/tasks/` are templates. Keep a search split and a held-out split, and wrap any environment object that exposes ground truth so that only sanctioned methods are reachable.
+2. **Evaluator**: a command `evaluator.py --harness DIR --tasks TASKS.json --out OUT` that runs the frozen base model with the harness on the task records and writes `OUT/score.json`; the three `tests/<benchmark>/tasks/evaluate.py` are templates. Keep a search split and a held-out split, and wrap any environment object that exposes ground truth so that only sanctioned methods are reachable.
 
 3. **Config**, a JSON file merged over `harness_map.main.DEFAULTS`; `run_benchmark.py` reads the `search`, `benchmark` and `splits` blocks too:
 
@@ -217,21 +215,9 @@ A benchmark plugs in through four pieces; the search itself (`main.py`, `qd/`, `
    }
    ```
 
-   The `search` block sets the search:
+   The command line overrides the `search` keys (`--mode`, `--k0`, `--budget`, `--children`, `--m`, `--sigma`, `--lenient-coverage`). `fitness` and `episode` map your score file onto `Fitness`; `audit.privileged_keys` is the anti-cheat vocabulary the static gate scans for; `roles.extra` adds `[role, [keyword, ...]]` pairs so φ's structure block follows your benchmark's naming; the evaluator command is a template in which `{harness}`, `{tasks}`, `{out}` and `{split}` are filled in.
 
-   | key | meaning |
-   |---|---|
-   | `mode` | `adaptive` (the method), `fixed` or `hier` |
-   | `k0` | number of cells of the initial CVT partition |
-   | `budget` | N, the number of harness evaluations; the generations follow as G = ⌊(N − ⌈m·k0⌉) / (P·C)⌋ with P = ⌈log2 k0⌉ |
-   | `children` | C, children proposed per parent (the paper: 2 for k0 ≤ 4, 1 for k0 ≥ 8) |
-   | `m` | fraction of the k0 cells coverage-gated initialization must fill (0.5) |
-   | `sigma` | adaptive only: noise floor σ (0); splits and retreats use a 2σ threshold |
-   | `strict_coverage` | stop when initialization cannot cover ⌈m·k0⌉ cells; `false` continues on a shortfall |
-
-   The command line overrides any of them (`--mode`, `--k0`, `--budget`, `--children`, `--m`, `--sigma`, `--lenient-coverage`). `fitness` and `episode` map your score file onto `Fitness`; `audit.privileged_keys` is the anti-cheat vocabulary the static gate scans for; `roles.extra` adds `[role, [keyword, ...]]` pairs so φ's structure block follows your benchmark's naming; the evaluator command is a template in which `{harness}`, `{tasks}`, `{out}` and `{split}` are filled in.
-
-4. **Adapter.** `run_benchmark.py`'s `CommandAdapter` covers an evaluator command. For in-process evaluation, your own batching or a different judge policy, subclass `AgenticAdapter` as in [`tests/tasks/adapter_example.py`](tests/tasks/adapter_example.py), which documents the protocol: `starting_harness()` and `evaluate()` are required, `evaluate_batch()` routes candidates through the LLM judge, `privileged_keys()` names what a harness must never read, `evaluate_holdout()` scores the final harness.
+4. **Adapter.** `run_benchmark.py`'s `CommandAdapter` covers an evaluator command. For in-process evaluation, your own batching or a different judge policy, subclass `AgenticAdapter` as in [`tests/adapter_example.py`](tests/adapter_example.py), which documents the protocol: `starting_harness()` and `evaluate()` are required, `evaluate_batch()` routes candidates through the LLM judge, `privileged_keys()` names what a harness must never read, `evaluate_holdout()` scores the final harness.
 
 ## Citation
 
