@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Run Harness-MAP on a benchmark described by a config file.
 
-    python tests/examples/run_benchmark.py --config tests/examples/balrog/config.json --anchor <ANCHOR_DIR>
+    python tests/examples/run_benchmark.py --config tests/examples/balrog/config.json --starting-harness <HARNESS_DIR>
 
 `benchmark.evaluate` in the config is a shell command that runs one harness on one split and
 writes a score file; see the benchmark READMEs under tests/examples/.
@@ -58,7 +58,7 @@ class CommandAdapter(AgenticAdapter):
 
     AUDIT_PROVIDED = True
 
-    def __init__(self, cfg: dict, anchor_dir, run_dir, *, search_split: str, holdout_split=None):
+    def __init__(self, cfg: dict, start_dir, run_dir, *, search_split: str, holdout_split=None):
         self.cfg = cfg
         self.bench = cfg["benchmark"]
         self.meta_agent = cfg.get("meta_agent")
@@ -67,18 +67,20 @@ class CommandAdapter(AgenticAdapter):
         self.run_dir = Path(run_dir).resolve()
         self.work_root = self.run_dir / "candidates"
         self.work_root.mkdir(parents=True, exist_ok=True)
-        self.anchor_dir = Path(anchor_dir)
+        self.start_dir = Path(start_dir)                # the starting harness
         self.search_split, self.holdout_split = search_split, holdout_split
         splits = cfg.get("splits") or {}
         self.evolve = list(splits.get(search_split) or [])            # task records of the two
         self.evalset = list(splits.get(holdout_split) or []) if holdout_split else []   # splits
         self._last_out = {}
 
-    def anchor(self, cfg=None) -> Genome:
+    def starting_harness(self, cfg=None) -> Genome:
         dst = self.run_dir / "anchor"
         if not dst.exists():
-            shutil.copytree(self.anchor_dir, dst, ignore=STAGE_IGNORE)
+            shutil.copytree(self.start_dir, dst, ignore=STAGE_IGNORE)
         return Genome(source_dir=dst, label="anchor")
+
+    anchor = starting_harness                       # the older name of the hook
 
     def evaluate(self, genome: Genome, iter_n: int = 0) -> Fitness:
         return self._run(genome, self.search_split, f"r{iter_n:03d}")
@@ -152,7 +154,7 @@ def content_hash(d: Path) -> str:
 
 
 def proposer_corpus(adapter, anchor_dir, out_dir, k: int, *, max_rounds: int = 6) -> list:
-    """The anchor and `k` distinct, never-evaluated meta-agent variants of it, to fit the CVT on."""
+    """The starting harness and `k` distinct, never-evaluated meta-agent variants of it, to fit the CVT on."""
     anchor_dir, out_dir = Path(anchor_dir), Path(out_dir)
     anchor = Genome(source_dir=anchor_dir, label="anchor")
 
@@ -172,7 +174,7 @@ def proposer_corpus(adapter, anchor_dir, out_dir, k: int, *, max_rounds: int = 6
             break
         used = [int(d.name.split("_")[1][1:]) for d in out_dir.glob("cand_r*")]
         need = k - len(have)
-        log(f"[corpus] proposing {need + need // 2 + 1} variants of the anchor ({len(have)}/{k} so far)")
+        log(f"[corpus] proposing {need + need // 2 + 1} variants of the starting harness ({len(have)}/{k} so far)")
         propose_candidates(anchor, work_root=out_dir, rid=max(used, default=-1) + 1,
                            n_children=need + need // 2 + 1, meta_agent=adapter._ma(),
                            env=adapter.proposer_env(anchor))
@@ -260,12 +262,13 @@ def _save(path: Path, out: dict, **meta) -> None:
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     ap.add_argument("--config", type=Path, required=True, help="benchmark config (JSON)")
-    ap.add_argument("--anchor", type=Path, required=True, help="anchor harness directory")
+    ap.add_argument("--starting-harness", "--anchor", dest="start", type=Path, required=True,
+                    help="the starting harness directory (--anchor is the older name of this flag)")
     ap.add_argument("--run-dir", type=Path, default=None,
                     help="output directory (default: runs/<testbed>/<mode>_k<k0>)")
     ap.add_argument("--corpus", type=Path, default=None,
                     help="directory of harness variants to fit the CVT on (default: meta-agent "
-                         "variants of the anchor, cached in runs/<testbed>/corpus)")
+                         "variants of the starting harness, cached in runs/<testbed>/corpus)")
     ap.add_argument("--search-split", default=None, help="override benchmark.search_split")
     ap.add_argument("--holdout-split", default=None, help="override benchmark.holdout_split")
     ap.add_argument("--mode", choices=MODES, default=None,
@@ -307,13 +310,13 @@ def main(argv=None) -> None:
     root = Path("runs") / (cfg.get("testbed") or a.config.parent.name)
     run_dir = a.run_dir or root / search_split / f"{mode}_k{k0}"
     cls = JudgedCommandAdapter if bench.get("judge") else CommandAdapter
-    adapter = cls(cfg, a.anchor, run_dir, search_split=search_split, holdout_split=holdout_split)
+    adapter = cls(cfg, a.start, run_dir, search_split=search_split, holdout_split=holdout_split)
 
     if a.corpus:
-        corpus = [adapter.anchor().source_dir] + sorted(
+        corpus = [adapter.starting_harness().source_dir] + sorted(
             d for d in a.corpus.iterdir() if MH.entry_file(d))
     else:
-        corpus = proposer_corpus(adapter, adapter.anchor().source_dir, root / "corpus",
+        corpus = proposer_corpus(adapter, adapter.starting_harness().source_dir, root / "corpus",
                                  k=max(5, k0 + 3))
     run_search(adapter, cfg, corpus=corpus, run_dir=run_dir, mode=mode, k0=k0, rounds=rounds,
                children=C, m=m, sigma=sigma, max_evals=n_budget, strict_coverage=strict,

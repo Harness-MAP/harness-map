@@ -1,6 +1,6 @@
 # BALROG-MiniHack: the evolution behind the paper's best harness
 
-This directory holds every harness the paper's best BALROG run evaluated, from the anchor to the
+This directory holds every harness the paper's best BALROG run evaluated, from the starting harness to the
 first harness that reached the run's best score, in the order they were evaluated, together with
 videos of the episodes they played.
 
@@ -10,7 +10,7 @@ five fixed-seed episodes each. The meta-agent was the Claude Code CLI (the propo
 record `claude-opus-5-5`), the base model `Qwen3-VL-30B-A3B-Instruct`. The best harness,
 `cand_r68_0_spatial-grounding`, solves 36 of the 40 search episodes (success 0.900) and was the
 41st evaluation; the seven harnesses evaluated after it did not improve on it and are not
-included. Its ancestry is the anchor → `cand_r35_0` (0.150) → `cand_r41_0` (0.375) →
+included. Its ancestry is the starting harness → `cand_r35_0` (0.150) → `cand_r41_0` (0.375) →
 `cand_r68_0` (0.900): the first step moved the decision from a per-turn model call to an
 in-episode value learner that asks the model only to break ties, the second put a per-level
 chart with a BFS router in front of the learner, and the third rewired that learner onto an
@@ -18,7 +18,7 @@ ordered stage table with `tools/` owners for the Quest and Sokoban tasks and a f
 in the router (edits the proposer was steered toward from two sibling cells, `cand_r64_0` and
 `cand_r58_0`).
 
-**The anchor** (`harnesses/00_anchor_naive`) is BALROG's published naive agent, reproduced in the
+**The starting harness** (`harnesses/00_anchor_naive`) is BALROG's published naive agent, reproduced in the
 harness layout: `agent.py` appends the same instruction and extracts the action with the same
 filter as `balrog/agents/naive.py`; the structural split into `tools/` modules adds no behaviour
 (see the docstring in its `agent.py`). The text priors `AGENT.md`, `rules.md`, `memory.md` and
@@ -28,7 +28,7 @@ filter as `balrog/agents/naive.py`; the structural split into `tools/` modules a
 
 | file | written by | content |
 |---|---|---|
-| `agent.py`, `tools/*.py`, `skills/*.md`, `AGENT.md`, `rules.md`, `memory.md`, `system_prompt.txt` | the proposer | the harness as evaluated (the anchor's are the starting point) |
+| `agent.py`, `tools/*.py`, `skills/*.md`, `AGENT.md`, `rules.md`, `memory.md`, `system_prompt.txt` | the proposer | the harness as evaluated (the starting harness's are the starting point) |
 | `NOTES.md` | the proposer | its own account of the change: module map, the axis it worked on, what changed and why |
 | `DESIGN.txt` | the proposer | a design note, present when the proposer chose to write one |
 | `diagnosis.md` | the diagnostician | the report on this harness's evaluation, which the proposer reads when the harness is bred from |
@@ -91,11 +91,11 @@ each task.
 
 ## Videos
 
-`videos/` shows the four harnesses on the path to the best (the anchor, `cand_r35_0`,
+`videos/` shows the four harnesses on the path to the best (the starting harness, `cand_r35_0`,
 `cand_r41_0` and `cand_r68_0`) on four episodes, one per task family the path unlocked in turn:
 MazeWalk-15x15 run 00, Corridor-R3 run 04 (first solved by `cand_r35_0`), Boxoban-Medium run 00
 and Quest-Easy run 00 (first solved by `cand_r68_0`). Each episode has one video per harness and
-a `_progression_grid` video that tiles the four (anchor top left, best bottom right).
+a `_progression_grid` video that tiles the four (starting harness top left, best bottom right).
 
 The videos show the game as MiniHack renders it: each episode was replayed in the engine from
 the seed and the action sequence BALROG logged (the agent is text-only, so the tiles are a
@@ -118,19 +118,19 @@ rendered the same way from the run's logs.
 | [`MiniHack-MazeWalk-15x15-v0_run00__07_cand_r35_0_spatial-grounding.mp4`](videos/MiniHack-MazeWalk-15x15-v0_run00__07_cand_r35_0_spatial-grounding.mp4) | `cand_r35_0_spatial-grounding` (eval 8) | failed in 100 steps |
 | [`MiniHack-MazeWalk-15x15-v0_run00__13_cand_r41_0_spatial-grounding.mp4`](videos/MiniHack-MazeWalk-15x15-v0_run00__13_cand_r41_0_spatial-grounding.mp4) | `cand_r41_0_spatial-grounding` (eval 14) | solved in 70 steps |
 | [`MiniHack-MazeWalk-15x15-v0_run00__40_cand_r68_0_spatial-grounding.mp4`](videos/MiniHack-MazeWalk-15x15-v0_run00__40_cand_r68_0_spatial-grounding.mp4) | `cand_r68_0_spatial-grounding` (eval 41) | solved in 70 steps |
-| [`MiniHack-MazeWalk-15x15-v0_run00__progression_grid.mp4`](videos/MiniHack-MazeWalk-15x15-v0_run00__progression_grid.mp4) | the four above, 2×2 (anchor top left, best bottom right) | — |
+| [`MiniHack-MazeWalk-15x15-v0_run00__progression_grid.mp4`](videos/MiniHack-MazeWalk-15x15-v0_run00__progression_grid.mp4) | the four above, 2×2 (starting harness top left, best bottom right) | — |
 | [`MiniHack-Corridor-R3-v0_run04__00_anchor_naive.mp4`](videos/MiniHack-Corridor-R3-v0_run04__00_anchor_naive.mp4) | `anchor_naive` (eval 1) | failed in 100 steps |
 | [`MiniHack-Corridor-R3-v0_run04__07_cand_r35_0_spatial-grounding.mp4`](videos/MiniHack-Corridor-R3-v0_run04__07_cand_r35_0_spatial-grounding.mp4) | `cand_r35_0_spatial-grounding` (eval 8) | solved in 67 steps |
 | [`MiniHack-Corridor-R3-v0_run04__13_cand_r41_0_spatial-grounding.mp4`](videos/MiniHack-Corridor-R3-v0_run04__13_cand_r41_0_spatial-grounding.mp4) | `cand_r41_0_spatial-grounding` (eval 14) | solved in 41 steps |
 | [`MiniHack-Corridor-R3-v0_run04__40_cand_r68_0_spatial-grounding.mp4`](videos/MiniHack-Corridor-R3-v0_run04__40_cand_r68_0_spatial-grounding.mp4) | `cand_r68_0_spatial-grounding` (eval 41) | solved in 41 steps |
-| [`MiniHack-Corridor-R3-v0_run04__progression_grid.mp4`](videos/MiniHack-Corridor-R3-v0_run04__progression_grid.mp4) | the four above, 2×2 (anchor top left, best bottom right) | — |
+| [`MiniHack-Corridor-R3-v0_run04__progression_grid.mp4`](videos/MiniHack-Corridor-R3-v0_run04__progression_grid.mp4) | the four above, 2×2 (starting harness top left, best bottom right) | — |
 | [`MiniHack-Boxoban-Medium-v0_run00__00_anchor_naive.mp4`](videos/MiniHack-Boxoban-Medium-v0_run00__00_anchor_naive.mp4) | `anchor_naive` (eval 1) | failed in 100 steps |
 | [`MiniHack-Boxoban-Medium-v0_run00__07_cand_r35_0_spatial-grounding.mp4`](videos/MiniHack-Boxoban-Medium-v0_run00__07_cand_r35_0_spatial-grounding.mp4) | `cand_r35_0_spatial-grounding` (eval 8) | failed in 100 steps |
 | [`MiniHack-Boxoban-Medium-v0_run00__13_cand_r41_0_spatial-grounding.mp4`](videos/MiniHack-Boxoban-Medium-v0_run00__13_cand_r41_0_spatial-grounding.mp4) | `cand_r41_0_spatial-grounding` (eval 14) | failed in 100 steps |
 | [`MiniHack-Boxoban-Medium-v0_run00__40_cand_r68_0_spatial-grounding.mp4`](videos/MiniHack-Boxoban-Medium-v0_run00__40_cand_r68_0_spatial-grounding.mp4) | `cand_r68_0_spatial-grounding` (eval 41) | solved in 38 steps |
-| [`MiniHack-Boxoban-Medium-v0_run00__progression_grid.mp4`](videos/MiniHack-Boxoban-Medium-v0_run00__progression_grid.mp4) | the four above, 2×2 (anchor top left, best bottom right) | — |
+| [`MiniHack-Boxoban-Medium-v0_run00__progression_grid.mp4`](videos/MiniHack-Boxoban-Medium-v0_run00__progression_grid.mp4) | the four above, 2×2 (starting harness top left, best bottom right) | — |
 | [`MiniHack-Quest-Easy-v0_run00__00_anchor_naive.mp4`](videos/MiniHack-Quest-Easy-v0_run00__00_anchor_naive.mp4) | `anchor_naive` (eval 1) | failed in 100 steps |
 | [`MiniHack-Quest-Easy-v0_run00__07_cand_r35_0_spatial-grounding.mp4`](videos/MiniHack-Quest-Easy-v0_run00__07_cand_r35_0_spatial-grounding.mp4) | `cand_r35_0_spatial-grounding` (eval 8) | failed in 100 steps |
 | [`MiniHack-Quest-Easy-v0_run00__13_cand_r41_0_spatial-grounding.mp4`](videos/MiniHack-Quest-Easy-v0_run00__13_cand_r41_0_spatial-grounding.mp4) | `cand_r41_0_spatial-grounding` (eval 14) | failed in 100 steps |
 | [`MiniHack-Quest-Easy-v0_run00__40_cand_r68_0_spatial-grounding.mp4`](videos/MiniHack-Quest-Easy-v0_run00__40_cand_r68_0_spatial-grounding.mp4) | `cand_r68_0_spatial-grounding` (eval 41) | solved in 48 steps |
-| [`MiniHack-Quest-Easy-v0_run00__progression_grid.mp4`](videos/MiniHack-Quest-Easy-v0_run00__progression_grid.mp4) | the four above, 2×2 (anchor top left, best bottom right) | — |
+| [`MiniHack-Quest-Easy-v0_run00__progression_grid.mp4`](videos/MiniHack-Quest-Easy-v0_run00__progression_grid.mp4) | the four above, 2×2 (starting harness top left, best bottom right) | — |

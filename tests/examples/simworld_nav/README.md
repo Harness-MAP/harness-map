@@ -21,7 +21,7 @@ evaluation budget is N = 16.
    The single-agent baseline (`baseline/single`) targets the OpenAI Responses API; the paper's
    runs added a `vllm` backend that converts the agent's `input_text` / `input_image` parts into
    chat-completion requests, a `base_url` argument, and an output-token budget of 8192. The nav
-   anchor imports `prompt_template` and `utils` from that directory, found through
+   starting harness imports `prompt_template` and `utils` from that directory, found through
    `SIMWORLD_BASELINE_DIR`.
 2. **Simulator**: the SimWorld UE binary (Hugging Face dataset `SimWorld-AI/SimWorld`, file
    `Base20260201/Linux.zip`), the `simworld` Python package
@@ -33,12 +33,12 @@ evaluation budget is N = 16.
    The simulator serves one client at a time; never probe its port while an evaluation runs.
 3. **Base model**: a vLLM server with `Qwen3-VL-30B-A3B-Instruct` (no reasoning parser), e.g.
    `vllm serve Qwen/Qwen3-VL-30B-A3B-Instruct --served-model-name Qwen3-VL-30B-A3B-Instruct --port 8000 --max-model-len 65536 --limit-mm-per-prompt '{"image":32}'`.
-   The anchor's spatial tools use the simulator's depth observation; the paper's runs optionally
+   The starting harness's spatial tools use the simulator's depth observation; the paper's runs optionally
    replaced it with a metric-depth estimate from a Depth Anything 3 service.
 4. **Meta-agent**: the Claude Code CLI (`claude`) on `PATH`, or another backbone (top-level README).
-5. **Anchor harness**: the multi-module navigation harness (`agent.py` plus `modules/`:
+5. **Starting harness**: the multi-module navigation harness (`agent.py` plus `modules/`:
    perceiver, spatial memory, planner, prompt assembler, active perception, completion checker)
-   in the layout of `harness_map/meta_agent/skills/proposer/SKILL.md`; the paper's anchor runs
+   in the layout of `harness_map/meta_agent/skills/proposer/SKILL.md`; the paper's starting harness runs
    the ReAct baseline agent through these modules unchanged.
 6. **Evaluator** (`NAV_EVALUATOR` in `run.sh`): a script run under the `simworld` environment as
    `evaluator.py --harness DIR --tasks TASKS.json --out OUT`. For each task record (`map`,
@@ -77,7 +77,7 @@ Outputs land in `runs/simworld-mmnav/search_<setting>/<mode>_k<k0>/` (`result.js
 ## The paper's best run
 
 [`evolution/`](evolution/README.md) holds the 16 harnesses of the paper's best hard-setting run
-(adaptive, k0 = 4), from the anchor to the harness that reached SubtaskSR 0.555 on the search
+(adaptive, k0 = 4), from the starting harness to the harness that reached SubtaskSR 0.555 on the search
 tasks and 0.567 held out, with each harness's score file, the proposer's notes and the
 diagnostician's reports, videos of one hard task re-run with four harnesses of the lineage, and
 the recipe for rendering an episode with `../render/render_nav_trace.py`.

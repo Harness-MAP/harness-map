@@ -33,11 +33,11 @@ renders that text.
 3. **Meta-agent**: the Claude Code CLI (`claude`) on `PATH`, or another backbone (top-level README).
    The paper's runs additionally prevented the meta-agent from reading the game engine's source,
    so that it could only learn from the rendered frames and the harness contract; the simplest way
-   is to run the search in a container that mounts only the run directory and the anchor.
-4. **Anchor harnesses**, one per game, in the layout of
+   is to run the search in a container that mounts only the run directory and the starting harness.
+4. **Starting harnesses**, one per game, in the layout of
    `harness_map/meta_agent/skills/proposer/SKILL.md`. `agent.py` exports
    `build_agent(evaluator)` returning an async per-step function `agent(frame_data) -> Action`;
-   the paper's anchors compose the system prompt from `AGENT.md`, `skills/*.md` and `rules.md`
+   the paper's starting harnesses compose the system prompt from `AGENT.md`, `skills/*.md` and `rules.md`
    and delegate each step to the frozen model through `evaluator.baseline_step`, reproducing
    SpatialWorld's shipped agent.
 5. **Evaluator** (`GAME_EVALUATOR` in `run.sh`): a script run under the game environment as
@@ -73,6 +73,6 @@ Outputs land in `runs/spatialworld-3dgames/<game>/<mode>_k<k0>/` (`result.json`,
 ## The paper's best runs
 
 [`evolution/`](evolution/README.md) holds, for each game, every harness of the paper's best run
-from the anchor to the first harness that solved every level, with the proposer's notes and the
-diagnostician's reports, and videos of one level played by four of them (the anchor, two in
+from the starting harness to the first harness that solved every level, with the proposer's notes and the
+diagnostician's reports, and videos of one level played by four of them (the starting harness, two in
 between and the best; the engine's own recordings, or engine replays for rubik).

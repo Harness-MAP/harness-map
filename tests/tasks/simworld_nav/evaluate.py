@@ -321,7 +321,7 @@ def run(args):
 
     # ---- VLM trajectory logger ----------------------------------------------
     # The chat.completions.create wrapper below also records EVERY VLM call from
-    # ANY harness (baseline, anchor, future proposer candidates) with its full
+    # ANY harness (the baseline, the starting harness, proposer candidates) with its full
     # reasoning trajectory: prompt, the model's <think> chain (reasoning_content,
     # surfaced by the deepseek_r1 parser), the response, tokens, latency, and the
     # frames the agent saw. This is the harness-diagnosis reference, written to

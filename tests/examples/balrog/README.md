@@ -20,9 +20,9 @@ with five episodes each (40 episodes per evaluation); the evaluation budget is N
    ```
 3. **Meta-agent**: the Claude Code CLI (`claude`) on `PATH`, or set `meta_agent.backbone` in
    `config.json` to `cli:codex` or `chat-loop` (see the top-level README).
-4. **Anchor harness**: BALROG's `balrog/agents/naive.py` placed in the harness layout described
+4. **Starting harness**: BALROG's `balrog/agents/naive.py` placed in the harness layout described
    in `harness_map/meta_agent/skills/proposer/SKILL.md`, with `agent.py` exporting
-   `build_agent(client_factory, prompt_builder)` that returns a BALROG agent. The paper's anchor
+   `build_agent(client_factory, prompt_builder)` that returns a BALROG agent. The paper's starting harness
    reproduces the naive agent unchanged.
 5. **Evaluator** (`BALROG_EVALUATOR` in `run.sh`): a script run under the BALROG interpreter as
    `evaluator.py --harness DIR --tasks TASKS.json --out OUT`. It should inject the harness's
@@ -51,7 +51,7 @@ P = ⌈log2 k0⌉ and C = 2 (k0 ≤ 4) or 1 (k0 ≥ 8): k0 = 2, 4, 8, 16, 32 giv
 Evaluations go through `evaluate_batch`, so the LLM judge reviews every candidate.
 
 The CVT in the paper's BALROG runs was fit on a fixed corpus of 48 structural variants of the
-naive anchor (the anchor plus copies with the `tools/` modules inlined into `agent.py` or kept
+naive starting harness (the starting harness plus copies with the `tools/` modules inlined into `agent.py` or kept
 separate, and the text priors filled with placeholder text or left empty), never evaluated. By
 default `run_benchmark.py` fits it on meta-agent variants instead; to reproduce the paper's
 partition, build that corpus as a directory of harness directories and pass `--corpus DIR`.
@@ -62,11 +62,11 @@ full history and the archive report), `candidates/` (every proposed harness with
 `checkpoints/evals.jsonl` (one line per evaluation). The two held-out splits in `config.json`,
 `holdout_levels` (the same tasks with unseen level seeds) and `holdout_tasks` (eight tasks outside
 the official set), are for scoring the final harness after the search; `holdout_levels` is run
-automatically at the end when the best harness is an evolved one (never on the anchor).
+automatically at the end when the best harness is an evolved one (never on the starting harness).
 
 ## The paper's best run
 
 [`evolution/`](evolution/README.md) holds the 41 harnesses of the paper's best BALROG run
-(adaptive, k0 = 16), from the naive anchor to the harness that reached success 0.900, with the
+(adaptive, k0 = 16), from the naive starting harness to the harness that reached success 0.900, with the
 proposer's notes, the diagnostician's reports, the judge's verdicts, and videos of four episodes
 played by the four harnesses on the path to the best (engine replays and the text frames).

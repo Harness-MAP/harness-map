@@ -10,12 +10,12 @@ export NAV_EVALUATOR=tests/tasks/simworld_nav/evaluate.py             # runs a h
 export UNREALCV_PORT=9000                                  # port of the running SimWorld simulator
 export POLICY_BASE_URL=http://127.0.0.1:8000/v1            # vLLM server with the frozen base model
 export POLICY_MODEL=Qwen3-VL-30B-A3B-Instruct
-ANCHOR=/path/to/nav_anchor_harness
+STARTING_HARNESS=/path/to/nav_starting_harness
 
 SETTING=${SETTING:-hard}                                   # hard | easy
 MODE=${MODE:-adaptive}                                     # adaptive | fixed | hier
 K0=${K0:-4}                                                # the paper uses 2 4 8
 
 python tests/examples/run_benchmark.py --config tests/examples/simworld_nav/config.json \
-    --anchor "$ANCHOR" --search-split "search_$SETTING" --holdout-split "val_$SETTING" \
+    --starting-harness "$STARTING_HARNESS" --search-split "search_$SETTING" --holdout-split "val_$SETTING" \
     --mode "$MODE" --k0 "$K0"

@@ -4,7 +4,7 @@ For each benchmark of the paper, this directory holds the evaluator the paper's 
 example per video of the evolution packs (the task record in the format the evaluator takes, a
 preview frame, and the outcome of every harness shown in the videos), and `expected.json`, the
 outcomes in machine-readable form. The harnesses and the videos are under
-[`../examples/<benchmark>/evolution/`](../README.md). Evaluation numbers count the anchor as 1.
+[`../examples/<benchmark>/evolution/`](../README.md). Evaluation numbers count the starting harness as 1.
 
 The task definitions themselves (level files, map files) belong to the benchmarks and are not
 redistributed; each section says where they live.
@@ -46,13 +46,13 @@ The levels are defined in [SpatialWorld](https://github.com/Hongcheng-Gao/Spatia
 [`../examples/spatialworld_games/README.md`](../examples/spatialworld_games/README.md)).
 [`spatialworld_games/expected.json`](spatialworld_games/expected.json) holds the outcomes below.
 
-| task example | record | the task | anchor → shown harnesses (evaluation) |
+| task example | record | the task | starting harness → shown harnesses (evaluation) |
 |---|---|---|---|
-| <img src="spatialworld_games/maze_level_06.png" width="240" alt="maze level 6"><br>maze, level 6 | [`maze_level_06.json`](spatialworld_games/maze_level_06.json) | a 7×7 first-person maze (`data/game/maze3d/Level_06.txt`): reach the exit within 100 steps | anchor: failed in 100 steps → `cand_r1_0` (2): solved in 48 → `cand_r2_0` (3): 20 → `cand_r4_0` (4): 10 |
-| <img src="spatialworld_games/block3d_level_12.png" width="240" alt="block3d level 12"><br>block3d, level 12 | [`block3d_level_12.json`](spatialworld_games/block3d_level_12.json) | a five-block target configuration (`LEVEL_DESIGNS["12"]` in `data/Block3D/level_data.py`); 50-step cap | anchor: score 0 in 50 steps → `cand_r1_0` (2): 0 → `cand_r3_0` (3): solved in 15 → `cand_r4_0` (4): 15 |
-| <img src="spatialworld_games/maze3d_pro_level_05.png" width="240" alt="maze3d_pro level 5"><br>maze3d_pro, level 5 | [`maze3d_pro_level_05.json`](spatialworld_games/maze3d_pro_level_05.json) | two 7×7 floors with the exit on the other floor (`data/game/maze3d_pro/Level_05.txt`); 100-step cap | anchor: failed in 100 steps → `cand_r2_1` (5): failed → `cand_r4_0` (8): solved in 56 → `cand_r6_1` (13): 18 |
-| <img src="spatialworld_games/rubik_level_06.png" width="240" alt="rubik level 6"><br>rubik, level 6 | [`rubik_level_06.json`](spatialworld_games/rubik_level_06.json) | a cube scrambled by two quarter turns, U' then R (`INITIAL_CONFIGS["6"]` in `data/rubik_cube/scramble_data.py`); solve within 100 steps | anchor: failed in 100 steps → `cand_r1_0` (2): failed → `cand_r2_0` (3): solved in 28 → `cand_r2_1` (4): 4 |
-| <img src="spatialworld_games/snake_run_020.png" width="240" alt="snake run 20"><br>snake, run 20 | [`snake_run_020.json`](spatialworld_games/snake_run_020.json) | snake with seed 20 (the seed fixes the food placement); score = min(food eaten / 4, 1), 100-step cap | anchor: 0 (game over at step 3) → `cand_r1_0` (2): 0.25 → `cand_r2_0` (3): 0.25 → `cand_r3_0` (4): 1.0 in 16 steps |
+| <img src="spatialworld_games/maze_level_06.png" width="240" alt="maze level 6"><br>maze, level 6 | [`maze_level_06.json`](spatialworld_games/maze_level_06.json) | a 7×7 first-person maze (`data/game/maze3d/Level_06.txt`): reach the exit within 100 steps | starting harness: failed in 100 steps → `cand_r1_0` (2): solved in 48 → `cand_r2_0` (3): 20 → `cand_r4_0` (4): 10 |
+| <img src="spatialworld_games/block3d_level_12.png" width="240" alt="block3d level 12"><br>block3d, level 12 | [`block3d_level_12.json`](spatialworld_games/block3d_level_12.json) | a five-block target configuration (`LEVEL_DESIGNS["12"]` in `data/Block3D/level_data.py`); 50-step cap | starting harness: score 0 in 50 steps → `cand_r1_0` (2): 0 → `cand_r3_0` (3): solved in 15 → `cand_r4_0` (4): 15 |
+| <img src="spatialworld_games/maze3d_pro_level_05.png" width="240" alt="maze3d_pro level 5"><br>maze3d_pro, level 5 | [`maze3d_pro_level_05.json`](spatialworld_games/maze3d_pro_level_05.json) | two 7×7 floors with the exit on the other floor (`data/game/maze3d_pro/Level_05.txt`); 100-step cap | starting harness: failed in 100 steps → `cand_r2_1` (5): failed → `cand_r4_0` (8): solved in 56 → `cand_r6_1` (13): 18 |
+| <img src="spatialworld_games/rubik_level_06.png" width="240" alt="rubik level 6"><br>rubik, level 6 | [`rubik_level_06.json`](spatialworld_games/rubik_level_06.json) | a cube scrambled by two quarter turns, U' then R (`INITIAL_CONFIGS["6"]` in `data/rubik_cube/scramble_data.py`); solve within 100 steps | starting harness: failed in 100 steps → `cand_r1_0` (2): failed → `cand_r2_0` (3): solved in 28 → `cand_r2_1` (4): 4 |
+| <img src="spatialworld_games/snake_run_020.png" width="240" alt="snake run 20"><br>snake, run 20 | [`snake_run_020.json`](spatialworld_games/snake_run_020.json) | snake with seed 20 (the seed fixes the food placement); score = min(food eaten / 4, 1), 100-step cap | starting harness: 0 (game over at step 3) → `cand_r1_0` (2): 0.25 → `cand_r2_0` (3): 0.25 → `cand_r3_0` (4): 1.0 in 16 steps |
 
 ## BALROG-MiniHack
 
@@ -64,7 +64,7 @@ engine seeds BALROG logged for these episodes in the paper's run are given below
 descriptions are BALROG's (`balrog/config/config.yaml` at b7afe79).
 [`balrog/expected.json`](balrog/expected.json) holds the outcomes below.
 
-| task example | record | the task | anchor → `cand_r35_0` (8) → `cand_r41_0` (14) → `cand_r68_0` (41) |
+| task example | record | the task | starting harness → `cand_r35_0` (8) → `cand_r41_0` (14) → `cand_r68_0` (41) |
 |---|---|---|---|
 | <img src="balrog/MiniHack-MazeWalk-15x15-v0_run00.png" width="240" alt="MazeWalk-15x15 run 00"><br>MazeWalk-15x15, run 00 | [`MiniHack-MazeWalk-15x15-v0_run00.json`](balrog/MiniHack-MazeWalk-15x15-v0_run00.json) | reach the staircase through a 15×15 maze; engine seed 360437341 | failed in 100 steps → failed → solved in 70 → solved in 70 |
 | <img src="balrog/MiniHack-Corridor-R3-v0_run04.png" width="240" alt="Corridor-R3 run 04"><br>Corridor-R3, run 04 | [`MiniHack-Corridor-R3-v0_run04.json`](balrog/MiniHack-Corridor-R3-v0_run04.json) | reach the staircase through three rooms linked by unlit corridors; engine seed 3971796377 | failed in 100 steps → solved in 67 → solved in 41 → solved in 41 |

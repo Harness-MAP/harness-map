@@ -1,26 +1,26 @@
 # SimWorld-MMNav (hard): the evolution behind the paper's best harness
 
-This directory holds every harness the paper's best navigation run evaluated, from the anchor to
+This directory holds every harness the paper's best navigation run evaluated, from the starting harness to
 the best harness, in evaluation order, and the recipe for rendering an episode of any of them.
 
 **The run.** `mapelites_adaptive` with k0 = 4, C = 1 and P = 2 on the hard setting (50 search
 tasks, maps 20_0 to 20_24; `SubtaskSR` as the primary metric), with the Claude Code CLI as
 meta-agent and `Qwen3-VL-30B-A3B-Instruct` as the base model. The run evaluated 16 harnesses
-(the anchor, one coverage-initialization founder, and 14 bred candidates); the best,
-`cand_r15_0_spatial-grounding`, was the 16th. Its ancestry is the anchor (0.360) →
+(the starting harness, one coverage-initialization founder, and 14 bred candidates); the best,
+`cand_r15_0_spatial-grounding`, was the 16th. Its ancestry is the starting harness (0.360) →
 `cand_r6_0` (0.370) → `cand_r9_0` (0.400) → `cand_r13_0` (0.550) → `cand_r15_0` (0.555). On the
 ten held-out tasks (maps 20_25 to 20_29) three replicate evaluations of the best harness scored
-0.600, 0.575 and 0.525 (mean 0.567), against 0.430 ± 0.033 for five replicates of the anchor.
+0.600, 0.575 and 0.525 (mean 0.567), against 0.430 ± 0.033 for five replicates of the starting harness.
 
 **Full-task successes.** Hard tasks are rarely completed end to end: across the campaign's 117
 fifty-episode evaluations of all methods, only three evaluations contain a full success, two of
 them in this run. `cand_r15_0` completed map 20_10, task `dist_21_0_1` (SR 0.02 over the 50
 search tasks), and its sibling `cand_r14_0` completed map 20_2 and map 20_18, task `dist_11_0_1`
 (SR 0.04); the third is a Meta-Harness candidate with one success. Every other evaluation in
-this run, including the anchor's, has SR = 0. Per-episode outcomes are in each harness's
+this run, including the starting harness's, has SR = 0. Per-episode outcomes are in each harness's
 `score.json` under `per_episode`.
 
-**The anchor** (`harnesses/00_anchor_nav`) runs SimWorld-Robotics' ReAct baseline agent through
+**The starting harness** (`harnesses/00_anchor_nav`) runs SimWorld-Robotics' ReAct baseline agent through
 the multi-module harness (perceiver, spatial memory, planner, prompt assembler, active
 perception, completion checker) without changing its behaviour; the evolved harnesses add
 modules such as `road_geometry.py`, `arrival_gate.py` and `viewpoint_controller.py`.
@@ -84,10 +84,10 @@ python tests/examples/render/render_nav_trace.py <eval>/traces/ep_20_10_task_dis
 ## Videos
 
 `videos/` holds a re-run of the task the best harness completed during the search, map 20_10
-task `dist_21_0_1`, played by four harnesses of the lineage, the anchor and the best's ancestors
+task `dist_21_0_1`, played by four harnesses of the lineage, the starting harness and the best's ancestors
 `cand_r9_0`, `cand_r13_0` and the best itself, `cand_r15_0`, in the simulator with the same policy
 model and evaluator settings as the campaign, plus a `_progression_grid` video that tiles the four
-(anchor top left, best bottom right). The campaign's own frames were not archived, and the policy
+(starting harness top left, best bottom right). The campaign's own frames were not archived, and the policy
 model samples at every step, so a re-run is a fresh draw of the same harness on the same task
 rather than a replay of the campaign episode. The videos were rendered from the re-runs' traces
 with [`../../render/render_nav_trace.py`](../../render/render_nav_trace.py): each frame shows the
@@ -95,7 +95,7 @@ camera image the model was last shown, the expected view at the end of the curre
 step's action and distance, the per-subtask verdict, and a top-down map with the ideal path, the
 destination and the robot's track.
 
-**Outcomes.** The anchor's re-run reproduced its campaign episode exactly. `cand_r9_0` and
+**Outcomes.** The starting harness's re-run reproduced its campaign episode exactly. `cand_r9_0` and
 `cand_r13_0` produced the same 233-step trajectory: both drove along the street past the
 destination (closest approach about 73 m, at step 120) until the step cap and ended 487 m from
 it; the two share the road-following controller, and the model's answers, which differ between

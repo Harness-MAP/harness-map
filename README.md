@@ -18,16 +18,16 @@
 
 <table>
 <tr>
-<td width="66%"><img src="assets/games_maze3d_pro_level_05.gif" width="100%" alt="SpatialWorld maze3d_pro level 5: the anchor (left) roams the maze for 100 steps; the evolved harness (right) exits in 18 steps"></td>
-<td width="34%"><b>SpatialWorld maze3d_pro, level 5.</b> The anchor, SpatialWorld's shipped agent, roams the two-floor maze for 100 steps without finding the exit and solves 2 of the game's 25 levels. The 13th harness of the run, bred along the <em>action-planning</em> axis, exits in 18 steps and solves all 25. <em>Qwen3-VL-30B-A3B-Instruct, pure-visual variant.</em></td>
+<td width="66%"><img src="assets/games_maze3d_pro_level_05.gif" width="100%" alt="SpatialWorld maze3d_pro level 5: the starting harness (left) roams the maze for 100 steps; the evolved harness (right) exits in 18 steps"></td>
+<td width="34%"><b>SpatialWorld maze3d_pro, level 5.</b> The starting harness, SpatialWorld's shipped agent, roams the two-floor maze for 100 steps without finding the exit and solves 2 of the game's 25 levels. The 13th harness of the run, bred along the <em>action-planning</em> axis, exits in 18 steps and solves all 25. <em>Qwen3-VL-30B-A3B-Instruct, pure-visual variant.</em></td>
 </tr>
 <tr>
 <td><img src="assets/balrog_boxoban_medium_run00.gif" width="100%" alt="MiniHack-Boxoban-Medium episode 00: BALROG's naive agent (left) fails in 100 steps; the best harness (right) solves the level in 38 steps"></td>
-<td><b>BALROG MiniHack-Boxoban-Medium, episode 00.</b> BALROG's naive agent pushes boulders for 100 steps without solving the level (success 0.100 over the 40 search episodes). The run's best harness, <code>cand_r68_0</code> (evaluation 41), plans the pushes over the parsed map and solves it in 38 steps (success 0.900).</td>
+<td><b>BALROG MiniHack-Boxoban-Medium, episode 00.</b> The starting harness, BALROG's naive agent, pushes boulders for 100 steps without solving the level (success 0.100 over the 40 search episodes). The run's best harness, <code>cand_r68_0</code> (evaluation 41), plans the pushes over the parsed map and solves it in 38 steps (success 0.900).</td>
 </tr>
 <tr>
-<td><img src="assets/nav_map_20_10_dist_21_0_1.gif" width="100%" alt="SimWorld-MMNav hard, map 20_10, task dist_21_0_1: the anchor (left) stops after 11 steps, 588 m short; the best harness (right) reaches 36 m from the destination"></td>
-<td><b>SimWorld-MMNav hard, map 20_10, task dist_21_0_1.</b> The anchor declares arrival after 11 steps, 588 m short of the destination. The best harness, <code>cand_r15_0</code> (evaluation 16), follows the street for 135 steps to within 36 m of it (a re-run of the task with the same base model). Subtask success 0.360 → 0.555 on the 50 search tasks.</td>
+<td><img src="assets/nav_map_20_10_dist_21_0_1.gif" width="100%" alt="SimWorld-MMNav hard, map 20_10, task dist_21_0_1: the starting harness (left) stops after 11 steps, 588 m short; the best harness (right) reaches 36 m from the destination"></td>
+<td><b>SimWorld-MMNav hard, map 20_10, task dist_21_0_1.</b> The starting harness declares arrival after 11 steps, 588 m short of the destination. The best harness, <code>cand_r15_0</code> (evaluation 16), follows the street for 135 steps to within 36 m of it (a re-run of the task with the same base model). Subtask success 0.360 → 0.555 on the 50 search tasks.</td>
 </tr>
 </table>
 
@@ -37,41 +37,16 @@ The three clips are task examples of [`tests/`](tests/README.md), which holds ev
 
 A search runs as follows, with an evaluation budget of **N = ⌈m·k0⌉ + G·P·C** (P = ⌈log2 k0⌉ in the paper):
 
-1. **Partition.** The descriptor φ is computed for the anchor harness and a small corpus of variants of it, and one k-means over the descriptors gives a CVT partition with k0 cells. The partition is then frozen.
+1. **Partition.** The descriptor φ is computed for the starting harness and a small corpus of variants of it, and one k-means over the descriptors gives a CVT partition with k0 cells. The partition is then frozen.
 2. **Coverage-gated initialization.** The proposer is aimed at empty cells until ⌈m·k0⌉ cells are covered. Placing a candidate only reads its source, so it is free; only covering candidates are evaluated.
 3. **Generations.** For each of G generations, P parent cells are selected, the meta-agent proposes C children per parent, and every child passes a static pre-evaluation gate, is evaluated on the task set, reviewed by the LLM judge for reward hacking, diagnosed, and placed in its nearest cell.
 4. **Resolution control.** `mapelites_adaptive` splits a cell whose fitness range exceeds 2σ and retreats when no descendant beats the pre-split elite by 2σ; `mapelites_hier` re-partitions coarse to fine on a schedule (Mouret & Clune, 2015); `mapelites_fixed` keeps the partition (Vassiliades, Chatzilygeroudis & Mouret, 2018). The three modes differ *only* here, so a difference between them is attributable to resolution.
 
-- **Harness.** A directory with a fixed skeleton: `agent.py` (entry point), `AGENT.md`, `rules.md`, `memory.md`, `skills/*.md` and `tools/*.py`. The skeleton is specified to the meta-agent in `harness_map/meta_agent/skills/proposer/SKILL.md`; a benchmark supplies the content.
+- **Harness.** A directory with a fixed skeleton: `agent.py` (entry point), `AGENT.md`, `rules.md`, `memory.md`, `skills/*.md` and `tools/*.py`. The skeleton is specified to the meta-agent in `harness_map/meta_agent/skills/proposer/SKILL.md`; a benchmark supplies the content, starting from a **starting harness** it provides (labelled `anchor` in the run artifacts and the evolution packs).
 - **Meta-agent.** Three skill-driven roles. The *proposer* edits a copy of the parent harness. The *judge* reviews an evaluated candidate's code and traces for reward hacking. The *diagnostician* writes `diagnosis.md`, which the next proposer reads as its gradient.
 - **Descriptor φ.** Weisfeiler–Lehman features of the harness's component graph (structure), plus AST statistics, numeric-constant statistics and a sentence embedding of the harness's documentation text. Each block is standardized and scaled by 1/√dim.
 
-### The paper's runs
-
-| | BALROG-MiniHack | SpatialWorld 3D games | SimWorld-MMNav |
-|---|---|---|---|
-| **anchor → best harness** | 10.0% → 90.0% task success | 10.7% → 100.0% task success (five games) | hard 29.0% → 55.5%, easy 32.0% → 46.5% subtask success |
-| **harness evaluations to the best** | 41 (N = 50) | 39 (N = 50) | 16 (N = 16) |
-| directory | `tests/examples/balrog/` | `tests/examples/spatialworld_games/` | `tests/examples/simworld_nav/` |
-| upstream | [BALROG](https://github.com/balrog-ai/BALROG) at b7afe79 | [SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld) at 8e10e24 + `spatialworld.patch` | [SimWorld-Robotics](https://github.com/SCAI-JHU/SimWorld-Robotics) + the SimWorld UE simulator |
-| search set | the 8 official MiniHack tasks × 5 episodes (40 episodes per evaluation) | one game per run: maze 20, block3d 20, maze3d_pro 25, rubik 20, snake 20 levels | 50 tasks (maps 20_0–20_24), hard or easy setting |
-| held-out set | the same 8 tasks on unseen level seeds (`holdout_levels`); 8 unseen tasks (`holdout_tasks`) | snake only: 5 unseen seeds | 10 tasks (maps 20_25–20_29) |
-| primary metric | `success`: fraction of episodes ending in TASK_SUCCESSFUL | per-level success for maze / block3d / maze3d_pro / rubik; `min(food eaten / 4, 1)` for snake | `SubtaskSR`: mean fraction of completed subtasks (`SR` kept as a dense field) |
-| selection key | primary, survival, step efficiency, taint, judge, cost | primary, taint, judge, cost | primary, subtask SR, progress score, taint, judge, distance progress, cost |
-| anchor | BALROG's published naive agent, unchanged, in the harness layout | SpatialWorld's shipped per-step agent, with its prompt split into `AGENT.md` / `skills/*.md` / `rules.md` | the ReAct baseline agent run through a multi-module harness (perceiver, spatial memory, planner, prompt assembler, active perception, completion checker) |
-| budget N | 50 | 50 | 16 |
-| k0 swept | 2, 4, 8, 16, 32 | 2, 4, 8, 16, 32 | 2, 4, 8 |
-| C (children per parent) | 2 for k0 ≤ 4, 1 for k0 ≥ 8 | 2 for k0 ≤ 4, 1 for k0 ≥ 8 | 1 |
-| G (generations), by k0 | 24 / 12 / 15 / 10 / 6 | 24 / 12 / 15 / 10 / 6 | 15 / 7 / 4 |
-| coverage-gated init | strict | strict | lenient (continues on a shortfall) |
-| LLM judge | on (evaluates through `evaluate_batch`) | off: static gate + runtime guard | off: static gate |
-| extra anti-cheat | static scan for env internals, level files, goal positions and the success flag | episode voided if the harness reads engine state (other than the frame), reads level files, or never calls the model | static scan for agent/target location, ideal path, instruction; an evaluation with fewer episodes than the split is invalid |
-| role keywords for φ | perception, memory, navigate, explore, hazard, controller | default rules | default rules |
-| per-evaluation timeout | 4 h | 10 h | 18 h |
-
-Shared by all three: the base model is `Qwen3-VL-30B-A3B-Instruct` served by vLLM (frozen; only the harness evolves); the meta-agent is the Claude Code CLI (`cli:claude`, 3 h per call); P = ⌈log2 k0⌉ parents per generation; m = 0.5, so ⌈k0/2⌉ cells are covered before generation 1; σ = 0; the proposer is steered; the CVT is fit once per benchmark and then frozen for every mode and k0. `run_benchmark.py` fits it on the anchor plus meta-agent variants of it; the paper's BALROG runs instead fit it on a fixed corpus of 48 structural variants of the naive anchor (tool modules inlined or split out, text priors filled or empty), which `--corpus DIR` accepts.
-
-Deviations from the official benchmarks: the 3D games run a **pure-visual variant** (`spatialworld.patch` strips on-screen position, cursor, axis and move-hint text from block3d, maze3d_pro and snake; maze keeps its engine's position-and-heading bar), so their scores are not comparable with the SpatialWorld leaderboard; navigation uses a 50/10 search/held-out split of the SimWorld-MMNav tasks rather than the full set; BALROG's search scores every candidate on fixed per-(task, episode) seeds so all candidates play the same levels. The paper compares against Meta-Harness, GEPA, the Darwin Gödel Machine, OpenEvolve and ShinkaEvolve, each run from the authors' pinned implementation with the same anchor, meta-agent, evaluator, task splits, anti-cheat gate and budget; the [project page](https://harness-map.github.io/) has the full tables and the evolved harnesses.
+The settings and results of the paper's runs are tabulated under [Set up a benchmark](#set-up-a-benchmark).
 
 ## Structure
 
@@ -94,7 +69,7 @@ tests/                         the paper's benchmarks, hands on (README)
 │                              one task record per example, a preview frame, expected.json (what every shipped
 │                              harness scored on it), README
 └── examples/
-    ├── run_benchmark.py       generic driver: config + anchor + evaluator command → one search
+    ├── run_benchmark.py       generic driver: config + starting harness + evaluator command → one search
     ├── adapter_example.py     a custom adapter skeleton, with the adapter protocol documented
     ├── balrog/                BALROG-MiniHack: config.json, run.sh, README (setup),
     │                          evolution/ (every harness of the paper's best run, with videos)
@@ -124,6 +99,20 @@ pip install -e ".[openai]"    # optional: the chat-loop meta-agent backbone
 
 Python 3.10 or newer. The descriptor downloads `nomic-ai/CodeRankEmbed` through sentence-transformers (with `trust_remote_code=True`) on first use and runs it on CPU; set `META_EMB_MODEL` to use a different model.
 
+### Meta-agent backbones
+
+The meta-agent is the Claude Code CLI by default (`claude` on `PATH`); `meta_agent.backbone` in a config selects another:
+
+| backbone | how it runs |
+|---|---|
+| `cli:claude` | Claude Code CLI: `claude -p --permission-mode bypassPermissions` (`CLAUDE_BIN` overrides the binary) |
+| `cli:codex` | Codex CLI: `codex exec ... --dangerously-bypass-approvals-and-sandbox` (`CODEX_BIN` overrides the binary) |
+| `chat-loop` | any OpenAI-compatible chat API with four tools (read_file, write_file, list_dir, run_bash); reads `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_META_MODEL` |
+
+All three read the same SKILL.md files and produce the same result: an edited candidate directory plus a sentinel file (`NOTES.md`). The command line of each CLI backbone is configurable through `meta_agent.cli_cmd`.
+
+> **Security.** The meta-agent edits files and runs shell commands without approval prompts. Run searches inside a container or VM where only the run directory is writable, and keep credentials out of the harness and task directories.
+
 ### Set up a benchmark
 
 The benchmarks are not redistributed. Install each one in its own environment as its README under `tests/examples/` describes, and serve the base model with vLLM. The evaluators the paper's runs used are in `tests/tasks/<benchmark>/evaluate.py`; they drive the benchmark's own runner and are configured through the environment variables listed in [`tests/tasks/README.md`](tests/tasks/README.md).
@@ -134,11 +123,39 @@ The benchmarks are not redistributed. Install each one in its own environment as
 | BALROG-MiniHack | [`balrog/`](tests/examples/balrog/README.md) | [balrog-ai/BALROG](https://github.com/balrog-ai/BALROG) at b7afe79 | `Qwen3-VL-30B-A3B-Instruct` on vLLM |
 | SimWorld-MMNav | [`simworld_nav/`](tests/examples/simworld_nav/README.md) | [SCAI-JHU/SimWorld-Robotics](https://github.com/SCAI-JHU/SimWorld-Robotics) and the [SimWorld](https://github.com/SimWorld-AI/SimWorld) UE simulator | `Qwen3-VL-30B-A3B-Instruct` on vLLM |
 
-The meta-agent is the Claude Code CLI (`claude` on `PATH`) by default; `cli:codex` and `chat-loop` are the alternatives (see [Meta-agent backbones](#meta-agent-backbones)).
+<details>
+<summary><b>The paper's runs</b>: settings and results per benchmark</summary>
+
+| | BALROG-MiniHack | SpatialWorld 3D games | SimWorld-MMNav |
+|---|---|---|---|
+| **starting harness → best harness** | 10.0% → 90.0% task success | 10.7% → 100.0% task success (five games) | hard 29.0% → 55.5%, easy 32.0% → 46.5% subtask success |
+| **harness evaluations to the best** | 41 (N = 50) | 39 (N = 50) | 16 (N = 16) |
+| directory | `tests/examples/balrog/` | `tests/examples/spatialworld_games/` | `tests/examples/simworld_nav/` |
+| upstream | [BALROG](https://github.com/balrog-ai/BALROG) at b7afe79 | [SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld) at 8e10e24 + `spatialworld.patch` | [SimWorld-Robotics](https://github.com/SCAI-JHU/SimWorld-Robotics) + the SimWorld UE simulator |
+| search set | the 8 official MiniHack tasks × 5 episodes (40 episodes per evaluation) | one game per run: maze 20, block3d 20, maze3d_pro 25, rubik 20, snake 20 levels | 50 tasks (maps 20_0–20_24), hard or easy setting |
+| held-out set | the same 8 tasks on unseen level seeds (`holdout_levels`); 8 unseen tasks (`holdout_tasks`) | snake only: 5 unseen seeds | 10 tasks (maps 20_25–20_29) |
+| primary metric | `success`: fraction of episodes ending in TASK_SUCCESSFUL | per-level success for maze / block3d / maze3d_pro / rubik; `min(food eaten / 4, 1)` for snake | `SubtaskSR`: mean fraction of completed subtasks (`SR` kept as a dense field) |
+| selection key | primary, survival, step efficiency, taint, judge, cost | primary, taint, judge, cost | primary, subtask SR, progress score, taint, judge, distance progress, cost |
+| starting harness | BALROG's published naive agent, unchanged, in the harness layout | SpatialWorld's shipped per-step agent, with its prompt split into `AGENT.md` / `skills/*.md` / `rules.md` | the ReAct baseline agent run through a multi-module harness (perceiver, spatial memory, planner, prompt assembler, active perception, completion checker) |
+| budget N | 50 | 50 | 16 |
+| k0 swept | 2, 4, 8, 16, 32 | 2, 4, 8, 16, 32 | 2, 4, 8 |
+| C (children per parent) | 2 for k0 ≤ 4, 1 for k0 ≥ 8 | 2 for k0 ≤ 4, 1 for k0 ≥ 8 | 1 |
+| G (generations), by k0 | 24 / 12 / 15 / 10 / 6 | 24 / 12 / 15 / 10 / 6 | 15 / 7 / 4 |
+| coverage-gated init | strict | strict | lenient (continues on a shortfall) |
+| LLM judge | on (evaluates through `evaluate_batch`) | off: static gate + runtime guard | off: static gate |
+| extra anti-cheat | static scan for env internals, level files, goal positions and the success flag | episode voided if the harness reads engine state (other than the frame), reads level files, or never calls the model | static scan for agent/target location, ideal path, instruction; an evaluation with fewer episodes than the split is invalid |
+| role keywords for φ | perception, memory, navigate, explore, hazard, controller | default rules | default rules |
+| per-evaluation timeout | 4 h | 10 h | 18 h |
+
+Shared by all three: the base model is `Qwen3-VL-30B-A3B-Instruct` served by vLLM (frozen; only the harness evolves); the meta-agent is the Claude Code CLI (`cli:claude`, 3 h per call); P = ⌈log2 k0⌉ parents per generation; m = 0.5, so ⌈k0/2⌉ cells are covered before generation 1; σ = 0; the proposer is steered; the CVT is fit once per benchmark and then frozen for every mode and k0. `run_benchmark.py` fits it on the starting harness plus meta-agent variants of it; the paper's BALROG runs instead fit it on a fixed corpus of 48 structural variants of the naive starting harness (tool modules inlined or split out, text priors filled or empty), which `--corpus DIR` accepts.
+
+Deviations from the official benchmarks: the 3D games run a **pure-visual variant** (`spatialworld.patch` strips on-screen position, cursor, axis and move-hint text from block3d, maze3d_pro and snake; maze keeps its engine's position-and-heading bar), so their scores are not comparable with the SpatialWorld leaderboard; navigation uses a 50/10 search/held-out split of the SimWorld-MMNav tasks rather than the full set; BALROG's search scores every candidate on fixed per-(task, episode) seeds so all candidates play the same levels. The paper compares against Meta-Harness, GEPA, the Darwin Gödel Machine, OpenEvolve and ShinkaEvolve, each run from the authors' pinned implementation with the same starting harness, meta-agent, evaluator, task splits, anti-cheat gate and budget; the [project page](https://harness-map.github.io/) has the full tables and the evolved harnesses.
+
+</details>
 
 ### Run a benchmark of the paper
 
-Set the interpreter and server variables at the top of the benchmark's `run.sh`, then:
+Set the interpreter, server and starting-harness variables at the top of the benchmark's `run.sh`, then:
 
 ```bash
 MODE=adaptive K0=4 bash tests/examples/balrog/run.sh
@@ -146,7 +163,7 @@ GAME=maze3d_pro MODE=adaptive K0=8 bash tests/examples/spatialworld_games/run.sh
 SETTING=hard MODE=adaptive K0=4 bash tests/examples/simworld_nav/run.sh
 ```
 
-`MODE` is `adaptive` (the method), `fixed` or `hier` (the resolution ablations) and `K0` the initial cell count. An interrupted run continues with `--resume` on the same `--run-dir`.
+`MODE` is `adaptive` (the method), `fixed` or `hier` (the resolution ablations) and `K0` the initial cell count; the budget N and the other search settings come from the benchmark's `config.json` (see [the `search` block](#run-on-your-own-benchmark)). An interrupted run continues with `--resume` on the same `--run-dir`.
 
 ### Replay a task example
 
@@ -164,7 +181,7 @@ export SPATIALWORLD_REPO=/path/to/SpatialWorld GAME_API_BASE=http://127.0.0.1:80
 
 A benchmark plugs in through four pieces; the search itself (`main.py`, `qd/`, `meta_agent/`) is never edited.
 
-1. **Anchor harness**, in the fixed skeleton the proposer skill relies on. Your evaluator decides how `agent.py` is run; the search also accepts the older name `harness.py`.
+1. **Starting harness**, in the fixed skeleton the proposer skill relies on. Your evaluator decides how `agent.py` is run; the search also accepts the older name `harness.py`.
 
    ```
    harnesses/<task>/
@@ -179,10 +196,14 @@ A benchmark plugs in through four pieces; the search itself (`main.py`, `qd/`, `
 
 2. **Evaluator**: a command `evaluator.py --harness DIR --tasks TASKS.json --out OUT` that runs the frozen base model with the harness on the task records and writes `OUT/score.json`; the three under `tests/tasks/` are templates. Keep a search split and a held-out split, and wrap any environment object that exposes ground truth so that only sanctioned methods are reachable.
 
-3. **Config**, a JSON file merged over `harness_map.main.DEFAULTS`:
+3. **Config**, a JSON file merged over `harness_map.main.DEFAULTS`; `run_benchmark.py` reads the `search`, `benchmark` and `splits` blocks too:
 
    ```jsonc
    {
+     "search":     { "mode": "adaptive", "k0": 4, "budget": 50, "children": 2, "m": 0.5, "sigma": 0.0, "strict_coverage": true },
+     "benchmark":  { "evaluate": "\"$MY_PYTHON\" evaluator.py --harness {harness} --tasks {tasks} --out {out}",
+                     "search_split": "search", "holdout_split": "holdout", "timeout_s": 14400, "judge": true },
+     "splits":     { "search": [ { "task_id": "..." } ], "holdout": [ { "task_id": "..." } ] },   // the task records
      "meta_agent": { "backbone": "cli:claude", "timeout_s": 10800 },   // or cli:codex / chat-loop
      "score_file": "score.json",
      "fitness":    { "primary": "success", "n": "n_episodes" },        // score-file fields -> Fitness
@@ -194,35 +215,21 @@ A benchmark plugs in through four pieces; the search itself (`main.py`, `qd/`, `
    }
    ```
 
-   `fitness` and `episode` map your score file onto `Fitness`; `audit.privileged_keys` is the anti-cheat vocabulary the static gate scans for; `roles.extra` adds `[role, [keyword, ...]]` pairs so φ's structure block follows your benchmark's naming. `run_benchmark.py` additionally reads `search` (mode, k0, budget or rounds, children, m, strict_coverage), `benchmark` (the evaluator command template with `{harness}`, `{tasks}`, `{out}` and `{split}`, the split names, timeout, whether to judge) and `splits`.
+   The `search` block sets the search:
 
-4. **Adapter.** `run_benchmark.py`'s `CommandAdapter` covers an evaluator command. For in-process evaluation, your own batching or a different judge policy, subclass `AgenticAdapter` as in [`tests/examples/adapter_example.py`](tests/examples/adapter_example.py), which documents the protocol: `anchor()` and `evaluate()` are required, `evaluate_batch()` routes candidates through the LLM judge, `privileged_keys()` names what a harness must never read, `evaluate_holdout()` scores the final harness.
+   | key | meaning |
+   |---|---|
+   | `mode` | `adaptive` (the method), `fixed` or `hier` |
+   | `k0` | number of cells of the initial CVT partition |
+   | `budget` | N, the number of harness evaluations; the generations follow as G = ⌊(N − ⌈m·k0⌉) / (P·C)⌋ with P = ⌈log2 k0⌉ |
+   | `children` | C, children proposed per parent (the paper: 2 for k0 ≤ 4, 1 for k0 ≥ 8) |
+   | `m` | fraction of the k0 cells coverage-gated initialization must fill (0.5) |
+   | `sigma` | adaptive only: noise floor σ (0); splits and retreats use a 2σ threshold |
+   | `strict_coverage` | stop when initialization cannot cover ⌈m·k0⌉ cells; `false` continues on a shortfall |
 
-### Search knobs
+   The command line overrides any of them (`--mode`, `--k0`, `--budget`, `--children`, `--m`, `--sigma`, `--lenient-coverage`). `fitness` and `episode` map your score file onto `Fitness`; `audit.privileged_keys` is the anti-cheat vocabulary the static gate scans for; `roles.extra` adds `[role, [keyword, ...]]` pairs so φ's structure block follows your benchmark's naming; the evaluator command is a template in which `{harness}`, `{tasks}`, `{out}` and `{split}` are filled in.
 
-| knob | meaning |
-|---|---|
-| `k0` | number of CVT cells (set when fitting the partition) |
-| `random_init` | m: fraction of the k0 cells that coverage-gated initialization must fill |
-| `rounds` | G: number of generations |
-| `batch_size` | P: parents bred per generation |
-| `children_per_parent` | C: children proposed per parent |
-| `max_evals` | N: stop once this many evaluations have been charged |
-| `sigma` | adaptive only: noise floor σ (default 0); splits and retreats use a 2σ threshold |
-| `k_split`, `depth_cap`, `patience` | adaptive only: children per split, maximum split depth, breeding turns before a split is judged |
-| `steer` | add a search-space direction to each proposer brief |
-
-### Meta-agent backbones
-
-| backbone | how it runs |
-|---|---|
-| `cli:claude` | Claude Code CLI: `claude -p --permission-mode bypassPermissions` (`CLAUDE_BIN` overrides the binary) |
-| `cli:codex` | Codex CLI: `codex exec ... --dangerously-bypass-approvals-and-sandbox` (`CODEX_BIN` overrides the binary) |
-| `chat-loop` | any OpenAI-compatible chat API with four tools (read_file, write_file, list_dir, run_bash); reads `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_META_MODEL` |
-
-All three read the same SKILL.md files and produce the same result: an edited candidate directory plus a sentinel file (`NOTES.md`). The command line of each CLI backbone is configurable through `meta_agent.cli_cmd`.
-
-> **Security.** The meta-agent edits files and runs shell commands without approval prompts. Run searches inside a container or VM where only the run directory is writable, and keep credentials out of the harness and task directories.
+4. **Adapter.** `run_benchmark.py`'s `CommandAdapter` covers an evaluator command. For in-process evaluation, your own batching or a different judge policy, subclass `AgenticAdapter` as in [`tests/examples/adapter_example.py`](tests/examples/adapter_example.py), which documents the protocol: `starting_harness()` and `evaluate()` are required, `evaluate_batch()` routes candidates through the LLM judge, `privileged_keys()` names what a harness must never read, `evaluate_holdout()` scores the final harness.
 
 ## Citation
 

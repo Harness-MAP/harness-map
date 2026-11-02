@@ -2,7 +2,7 @@
 
 `tests/` holds, for each benchmark of the paper, the evaluator the paper's runs used, task examples
 with the outcomes to expect on them, every harness the paper's best run evolved, videos of the task
-examples played by the anchor and by harnesses of the lineage, and the configuration and scripts to
+examples played by the starting harness and by harnesses of the lineage, and the configuration and scripts to
 run the search yourself.
 
 | benchmark | evaluator and task examples ([`tasks/`](tasks/README.md)) | evolved harnesses | videos | run the search |

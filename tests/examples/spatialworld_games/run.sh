@@ -11,11 +11,11 @@ export POLICY_BASE_URL=http://127.0.0.1:8000/v1            # vLLM server with th
 export POLICY_MODEL=Qwen3-VL-30B-A3B-Instruct
 
 GAME=${GAME:-maze}                                         # maze | block3d | maze3d_pro | rubik | snake
-ANCHOR=/path/to/anchors/$GAME                              # the game's anchor harness
+STARTING_HARNESS=/path/to/starting_harnesses/$GAME          # the game's starting harness
 MODE=${MODE:-adaptive}                                     # adaptive | fixed | hier
 K0=${K0:-4}                                                # the paper sweeps 2 4 8 16 32
 
 HOLDOUT=()
 if [ "$GAME" = snake ]; then HOLDOUT=(--holdout-split snake_holdout); fi   # only snake has one
 python tests/examples/run_benchmark.py --config tests/examples/spatialworld_games/config.json \
-    --anchor "$ANCHOR" --search-split "$GAME" ${HOLDOUT[@]+"${HOLDOUT[@]}"} --mode "$MODE" --k0 "$K0"
+    --starting-harness "$STARTING_HARNESS" --search-split "$GAME" ${HOLDOUT[@]+"${HOLDOUT[@]}"} --mode "$MODE" --k0 "$K0"

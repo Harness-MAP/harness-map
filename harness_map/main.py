@@ -370,8 +370,8 @@ def fitness_from_dir(out_dir, cfg: dict) -> Fitness:
 
 
 class TaskAdapter(Protocol):
-    def anchor(self) -> Genome:
-        """The seed harness, or a list of seed harnesses, evaluated at round 0."""
+    def starting_harness(self) -> Genome:
+        """The starting harness, or a list of them, evaluated at round 0 (`anchor` is the older name of this hook)."""
 
     def propose(self, parent: Genome, iter_n: int) -> list[Genome]:
         """Candidate genomes derived from `parent`; may take `directive=` and `n_children=`."""
@@ -383,7 +383,7 @@ class TaskAdapter(Protocol):
 # ── run state and adapter calls ─────────────────────────────────────────────────────────────────
 @dataclass
 class Node:
-    """An evaluated genome in the archive; `depth` is 0 for anchors and seeds, > 0 when bred."""
+    """An evaluated genome in the archive; `depth` is 0 for the starting harness and the coverage founders, > 0 when bred."""
     idx: int
     genome: Genome
     fit: Fitness
@@ -443,7 +443,9 @@ def conformance(adapter, cfg=None) -> dict:
     """Report how an adapter meets the `TaskAdapter` contract: {ok, problems, notes, surface}."""
     probs, notes = [], []
     surface = {}
-    for req in ("anchor", "propose", "evaluate"):
+    if not (callable(getattr(adapter, "starting_harness", None)) or callable(getattr(adapter, "anchor", None))):
+        probs.append("missing REQUIRED hook starting_harness()")
+    for req in ("propose", "evaluate"):
         if not callable(getattr(adapter, req, None)):
             probs.append(f"missing REQUIRED hook {req}()")
     surface["directive"] = directive_supported(adapter)
@@ -562,11 +564,12 @@ def _out(nodes, cfg, ctx):
 
 
 def _anchor_nodes(ctx: Ctx) -> list:
-    got = ctx.adapter.anchor()
+    hook = getattr(ctx.adapter, "starting_harness", None) or ctx.adapter.anchor   # `anchor`: the older name
+    got = hook()
     genomes = list(got) if isinstance(got, (list, tuple)) else [got]
     if not genomes:
-        raise ValueError(f"{type(ctx.adapter).__name__}.anchor() returned an EMPTY list — a "
-                         f"MAP-Elites run needs at least one anchor individual to seed the archive")
+        raise ValueError(f"{type(ctx.adapter).__name__}.starting_harness() returned an EMPTY list — a "
+                         f"MAP-Elites run needs at least one starting harness to seed the archive")
     fits = _evaluate_all(ctx.adapter, genomes, 0)      # gated, judged, diagnosed and ledgered too
     nodes = []
     for i, (g, f) in enumerate(zip(genomes, fits)):

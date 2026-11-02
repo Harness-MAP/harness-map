@@ -1,6 +1,6 @@
 # SpatialWorld 3D games: the evolution behind the paper's best harnesses
 
-One directory per game holds every harness the chosen run evaluated, from the anchor to the first
+One directory per game holds every harness the chosen run evaluated, from the starting harness to the first
 harness that solved every level of the game, in evaluation order, plus videos of one level played
 by four of those harnesses. All runs are `mapelites_adaptive` on the pure-visual variant of the
 games, with the Claude Code CLI as meta-agent and `Qwen3-VL-30B-A3B-Instruct` as the base model.
@@ -9,7 +9,7 @@ games, with the Claude Code CLI as meta-agent and `Qwen3-VL-30B-A3B-Instruct` as
 Every run of maze, block3d, rubik and snake reached a score of 1.0 (every level solved), and
 three of the five maze3d_pro runs did; the table gives the evaluation at which 1.0 was first
 reached. The run shown per game (in bold) is one that reached 1.0 after evaluating at least
-four harnesses, so that the videos can show the progression from the anchor to the best, and
+four harnesses, so that the videos can show the progression from the starting harness to the best, and
 whose episodes can still be shown (the engine records every episode but recordings older than a
 cut-off were deleted; rubik's episodes are replayed instead, see below). The quickest runs of
 maze, snake and block3d solved every level with their first proposal, at the second evaluation,
@@ -23,14 +23,14 @@ and have nothing to show in between.
 | snake | 2 | 3 | 11 | 3 | **4** |
 | maze3d_pro | **13** | — (0.96) | — (0.92) | 35 | 17 |
 
-Maze3d_pro is the game with a real search: the anchor solves 2 of 25 levels, and twelve
+Maze3d_pro is the game with a real search: the starting harness solves 2 of 25 levels, and twelve
 proposals follow before `cand_r6_1_action-planning` solves all 25.
 
-**The anchors** are SpatialWorld's shipped per-step agent in the harness layout: `agent.py`
+**The starting harnesses** are SpatialWorld's shipped per-step agent in the harness layout: `agent.py`
 composes the system prompt from `AGENT.md`, `skills/*.md` and `rules.md` (the shipped prompt is
 kept verbatim as `system_prompt.txt`) and forwards every step to the engine's own model call
 through `tools/vlm.py`; `tools/action.py`, `tools/frame.py` and `memory.md` are present but
-unused by the anchor, so that the proposer has a real multi-file surface to edit.
+unused by the starting harness, so that the proposer has a real multi-file surface to edit.
 
 ## What is in a harness directory
 
@@ -46,13 +46,13 @@ depth and the size of the diff against the parent.
 ## Videos
 
 Each game directory's `videos/` holds one level played by four harnesses of the lineage, the
-anchor, two in between and the best, and a `_progression_grid` video that tiles the four
-(anchor top left, best bottom right). The two harnesses in between are the best's ancestors
+starting harness, two in between and the best, and a `_progression_grid` video that tiles the four
+(starting harness top left, best bottom right). The two harnesses in between are the best's ancestors
 when it has at least two; otherwise the harnesses that set a new best score before it, and
 among more than two candidates the two whose scores lie nearest to one third and two thirds of
-the way from the anchor's score to the best's (so maze3d_pro shows evaluations 1, 5, 8 and 13).
+the way from the starting harness's score to the best's (so maze3d_pro shows evaluations 1, 5, 8 and 13).
 Maze, block3d, rubik and snake evaluated exactly four harnesses before reaching 1.0, so all four
-are shown. The level is one on which the anchor fails and the best harness succeeds, chosen
+are shown. The level is one on which the starting harness fails and the best harness succeeds, chosen
 among the levels for which every shown harness's recording could be matched unambiguously to
 its evaluation.
 
@@ -87,7 +87,7 @@ pure-visual patch leaves in place (see [`../README.md`](../README.md)); the mode
 | [`level_6__01_cand_r1_0_spatial-grounding.mp4`](maze/videos/level_6__01_cand_r1_0_spatial-grounding.mp4) | `cand_r1_0_spatial-grounding` (eval 2) | solved in 48 steps |
 | [`level_6__02_cand_r2_0_spatial-grounding.mp4`](maze/videos/level_6__02_cand_r2_0_spatial-grounding.mp4) | `cand_r2_0_spatial-grounding` (eval 3) | solved in 20 steps |
 | [`level_6__03_cand_r4_0_spatial-grounding.mp4`](maze/videos/level_6__03_cand_r4_0_spatial-grounding.mp4) | `cand_r4_0_spatial-grounding` (eval 4) | solved in 10 steps |
-| [`level_6__progression_grid.mp4`](maze/videos/level_6__progression_grid.mp4) | the four above, 2×2 (anchor top left, best bottom right) | — |
+| [`level_6__progression_grid.mp4`](maze/videos/level_6__progression_grid.mp4) | the four above, 2×2 (starting harness top left, best bottom right) | — |
 
 ### block3d (k0 = 32): 4 harnesses, 1.0 first reached at evaluation 4
 
@@ -104,7 +104,7 @@ pure-visual patch leaves in place (see [`../README.md`](../README.md)); the mode
 | [`level_12__01_cand_r1_0_spatial-grounding.mp4`](block3d/videos/level_12__01_cand_r1_0_spatial-grounding.mp4) | `cand_r1_0_spatial-grounding` (eval 2) | score 0.00 in 50 steps |
 | [`level_12__02_cand_r3_0_spatial-grounding.mp4`](block3d/videos/level_12__02_cand_r3_0_spatial-grounding.mp4) | `cand_r3_0_spatial-grounding` (eval 3) | solved in 15 steps |
 | [`level_12__03_cand_r4_0_spatial-grounding.mp4`](block3d/videos/level_12__03_cand_r4_0_spatial-grounding.mp4) | `cand_r4_0_spatial-grounding` (eval 4) | solved in 15 steps |
-| [`level_12__progression_grid.mp4`](block3d/videos/level_12__progression_grid.mp4) | the four above, 2×2 (anchor top left, best bottom right) | — |
+| [`level_12__progression_grid.mp4`](block3d/videos/level_12__progression_grid.mp4) | the four above, 2×2 (starting harness top left, best bottom right) | — |
 
 ### rubik (k0 = 4): 4 harnesses, 1.0 first reached at evaluation 4
 
@@ -121,7 +121,7 @@ pure-visual patch leaves in place (see [`../README.md`](../README.md)); the mode
 | [`level_6__01_cand_r1_0_spatial-grounding.mp4`](rubik/videos/level_6__01_cand_r1_0_spatial-grounding.mp4) | `cand_r1_0_spatial-grounding` (eval 2) | score 0.00 in 100 steps |
 | [`level_6__02_cand_r2_0_spatial-grounding.mp4`](rubik/videos/level_6__02_cand_r2_0_spatial-grounding.mp4) | `cand_r2_0_spatial-grounding` (eval 3) | solved in 28 steps |
 | [`level_6__03_cand_r2_1_action-planning.mp4`](rubik/videos/level_6__03_cand_r2_1_action-planning.mp4) | `cand_r2_1_action-planning` (eval 4) | solved in 4 steps |
-| [`level_6__progression_grid.mp4`](rubik/videos/level_6__progression_grid.mp4) | the four above, 2×2 (anchor top left, best bottom right) | — |
+| [`level_6__progression_grid.mp4`](rubik/videos/level_6__progression_grid.mp4) | the four above, 2×2 (starting harness top left, best bottom right) | — |
 
 ### snake (k0 = 32): 4 harnesses, 1.0 first reached at evaluation 4
 
@@ -138,7 +138,7 @@ pure-visual patch leaves in place (see [`../README.md`](../README.md)); the mode
 | [`run_20__01_cand_r1_0_spatial-grounding.mp4`](snake/videos/run_20__01_cand_r1_0_spatial-grounding.mp4) | `cand_r1_0_spatial-grounding` (eval 2) | score 0.25 in 100 steps |
 | [`run_20__02_cand_r2_0_spatial-grounding.mp4`](snake/videos/run_20__02_cand_r2_0_spatial-grounding.mp4) | `cand_r2_0_spatial-grounding` (eval 3) | score 0.25 in 100 steps |
 | [`run_20__03_cand_r3_0_spatial-grounding.mp4`](snake/videos/run_20__03_cand_r3_0_spatial-grounding.mp4) | `cand_r3_0_spatial-grounding` (eval 4) | solved in 16 steps |
-| [`run_20__progression_grid.mp4`](snake/videos/run_20__progression_grid.mp4) | the four above, 2×2 (anchor top left, best bottom right) | — |
+| [`run_20__progression_grid.mp4`](snake/videos/run_20__progression_grid.mp4) | the four above, 2×2 (starting harness top left, best bottom right) | — |
 
 ### maze3d_pro (k0 = 2): 13 harnesses, 1.0 first reached at evaluation 13
 
@@ -164,5 +164,5 @@ pure-visual patch leaves in place (see [`../README.md`](../README.md)); the mode
 | [`level_5__04_cand_r2_1_action-planning.mp4`](maze3d_pro/videos/level_5__04_cand_r2_1_action-planning.mp4) | `cand_r2_1_action-planning` (eval 5) | score 0.00 in 100 steps |
 | [`level_5__07_cand_r4_0_spatial-grounding.mp4`](maze3d_pro/videos/level_5__07_cand_r4_0_spatial-grounding.mp4) | `cand_r4_0_spatial-grounding` (eval 8) | solved in 56 steps |
 | [`level_5__12_cand_r6_1_action-planning.mp4`](maze3d_pro/videos/level_5__12_cand_r6_1_action-planning.mp4) | `cand_r6_1_action-planning` (eval 13) | solved in 18 steps |
-| [`level_5__progression_grid.mp4`](maze3d_pro/videos/level_5__progression_grid.mp4) | the four above, 2×2 (anchor top left, best bottom right) | — |
+| [`level_5__progression_grid.mp4`](maze3d_pro/videos/level_5__progression_grid.mp4) | the four above, 2×2 (starting harness top left, best bottom right) | — |
 
