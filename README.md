@@ -69,8 +69,8 @@ tests/                         the paper's benchmarks, hands on (README)
 │                              (the search configuration), for BALROG corpus/ (the 47 CVT corpus variants) and cvt/ (the
 │                              fitted partitions), for navigation settings/ (the task example's real directory);
 │                              evaluate.py, the evaluator of the paper's runs (--harness DIR --tasks TASKS.json --out OUT,
-│                              or --split / --subset for a split of task_spec/); one task record per example cut from
-│                              the splits, a preview frame, expected.json (what every shipped harness scored), README
+│                              or --split / --subset for a split of task_spec/); one task record per video, cut from
+│                              the splits; README
 └── examples/
     ├── run_benchmark.py       generic driver: config + starting harness + evaluator command → one search
     ├── adapter_example.py     a custom adapter skeleton, with the adapter protocol documented
@@ -170,7 +170,7 @@ SETTING=hard MODE=adaptive K0=4 bash tests/examples/simworld_nav/run.sh
 
 ### Replay a task example
 
-Any shipped harness runs on a task example of [`tests/tasks/`](tests/tasks/README.md) through the same evaluator; `expected.json` next to the record gives the outcome every shipped harness obtained on it:
+Any shipped harness runs on a task example of [`tests/tasks/`](tests/tasks/README.md) through the same evaluator; the video table of its evolution pack gives the outcome every shown harness obtained on it:
 
 ```bash
 export SPATIALWORLD_REPO=/path/to/SpatialWorld GAME_API_BASE=http://127.0.0.1:8000/v1

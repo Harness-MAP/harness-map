@@ -1,9 +1,9 @@
 # The paper's benchmarks, hands on
 
-`tests/` holds, for each benchmark of the paper, the evaluator the paper's runs used, task examples
-with the outcomes to expect on them, every harness the paper's best run evolved, videos of the task
-examples played by the starting harness and by harnesses of the lineage, and the configuration and scripts to
-run the search yourself.
+`tests/` holds, for each benchmark of the paper, the benchmark settings and the evaluator the
+paper's runs used, one task record per video, every harness the paper's best run evolved, videos of
+the task examples played by the starting harness and by harnesses of the lineage, and the
+configuration and scripts to run the search yourself.
 
 | benchmark | evaluator and task examples ([`tasks/`](tasks/README.md)) | evolved harnesses | videos | run the search |
 |---|---|---|---|---|
@@ -20,9 +20,8 @@ tests/
 │                                 CVT corpus and the fitted partitions), navigation's settings/ (the task
 │                                 example's real directory); evaluate.py: the evaluator of the paper's runs,
 │                                 which drives the benchmark's own runner (--harness DIR --tasks TASKS.json
-│                                 --out OUT, or --split / --subset for a split of task_spec/); one record per
-│                                 task example, cut from the splits; a preview frame per example;
-│                                 expected.json: what every shipped harness scored on each example; README
+│                                 --out OUT, or --split / --subset for a split of task_spec/); one task
+│                                 record per video, cut from the splits; README
 └── examples/
     ├── run_benchmark.py          the search driver the run scripts call
     ├── adapter_example.py        a custom adapter skeleton, with the adapter protocol documented
@@ -51,8 +50,8 @@ export SPATIALWORLD_REPO=/path/to/SpatialWorld GAME_API_BASE=http://127.0.0.1:80
     --out     /tmp/maze3d_pro_level_05
 ```
 
-`OUT/score.json` holds the score and the per-episode rows; `tasks/<benchmark>/expected.json` gives
-the outcome every shipped harness obtained on the same task. The base model samples at every step,
+`OUT/score.json` holds the score and the per-episode rows; the video table of the evolution pack's
+README gives the outcome every shown harness obtained on the same task. The base model samples at every step,
 so a replay is a fresh draw of the same harness on the same task rather than a frame-for-frame copy
 of the video; the BALROG episodes are fixed-seed, so the level itself is identical. The same
 evaluators run the searches: each benchmark's `run.sh` passes them to `run_benchmark.py`.

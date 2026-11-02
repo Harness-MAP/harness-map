@@ -2,11 +2,9 @@
 
 For each benchmark of the paper, this directory holds the benchmark settings the paper's runs used,
 copied verbatim from the experiment workspace (the task splits, the search configuration and, for
-BALROG, the CVT corpus and the fitted partitions), the evaluator the runs used, one task example per
-video of the evolution packs (the task record cut from the real split, a preview frame, and the
-outcome of every harness shown in the videos), and `expected.json`, the outcomes in machine-readable
-form. The harnesses and the videos are under [`../examples/<benchmark>/evolution/`](../README.md).
-Evaluation numbers count the starting harness as 1.
+BALROG, the CVT corpus and the fitted partitions), the evaluator the runs used, and one task record
+per video of the evolution packs, cut from the real split. The harnesses, the videos and the outcomes
+on these tasks are under [`../examples/<benchmark>/evolution/`](../README.md).
 
 ## Benchmark settings
 
@@ -57,71 +55,48 @@ environment variables:
 All defaults point at `Qwen3-VL-30B-A3B-Instruct` on `http://127.0.0.1:8000/v1` and at checkouts
 under `~/workspace/`. The full variable list is in each script's docstring.
 
-## SpatialWorld 3D games
+## Task examples
 
-Records: `{"task_id": "<game>/level_NN", "game": "<game>", "mode": "level", "level": NN}`, or
-`"mode": "run"` with a `"seed"` for snake; each example file holds the record of its level exactly as
-it appears in `task_spec/<game>_evolve.json`. The levels are defined in
+One record per shipped video, cut from the real split, so that any harness of the evolution packs
+runs on the task its video shows ([how to run one](../README.md#run-a-task-example)). What every
+shown harness did on these tasks is in the video table of each pack's README
+([games](../examples/spatialworld_games/evolution/README.md#videos),
+[BALROG](../examples/balrog/evolution/README.md#videos),
+[navigation](../examples/simworld_nav/evolution/README.md#videos)).
+
+| benchmark | record | the task |
+|---|---|---|
+| SpatialWorld, maze | [`spatialworld_games/maze_level_06.json`](spatialworld_games/maze_level_06.json) | level 6: a 7×7 first-person maze (`data/game/maze3d/Level_06.txt`); reach the exit within 100 steps |
+| SpatialWorld, block3d | [`spatialworld_games/block3d_level_12.json`](spatialworld_games/block3d_level_12.json) | level 12: a five-block target configuration (`LEVEL_DESIGNS["12"]` in `data/Block3D/level_data.py`); 50-step cap |
+| SpatialWorld, maze3d_pro | [`spatialworld_games/maze3d_pro_level_05.json`](spatialworld_games/maze3d_pro_level_05.json) | level 5: two 7×7 floors with the exit on the other floor (`data/game/maze3d_pro/Level_05.txt`); 100-step cap |
+| SpatialWorld, rubik | [`spatialworld_games/rubik_level_06.json`](spatialworld_games/rubik_level_06.json) | level 6: a cube scrambled by two quarter turns, U' then R (`INITIAL_CONFIGS["6"]` in `data/rubik_cube/scramble_data.py`); solve within 100 steps |
+| SpatialWorld, snake | [`spatialworld_games/snake_run_020.json`](spatialworld_games/snake_run_020.json) | run 20: snake with seed 20 (the seed fixes the food placement); score = min(food eaten / 4, 1), 100-step cap |
+| BALROG-MiniHack | [`balrog/MiniHack-MazeWalk-15x15-v0_run00.json`](balrog/MiniHack-MazeWalk-15x15-v0_run00.json) | MazeWalk-15x15, run 00: reach the staircase through a 15×15 maze; engine seed 360437341 |
+| BALROG-MiniHack | [`balrog/MiniHack-Corridor-R3-v0_run04.json`](balrog/MiniHack-Corridor-R3-v0_run04.json) | Corridor-R3, run 04: reach the staircase through three rooms linked by unlit corridors; engine seed 3971796377 |
+| BALROG-MiniHack | [`balrog/MiniHack-Boxoban-Medium-v0_run00.json`](balrog/MiniHack-Boxoban-Medium-v0_run00.json) | Boxoban-Medium, run 00: a Sokoban level, push every boulder onto a fountain; engine seed 291150209 |
+| BALROG-MiniHack | [`balrog/MiniHack-Quest-Easy-v0_run00.json`](balrog/MiniHack-Quest-Easy-v0_run00.json) | Quest-Easy, run 00: cross a river of lava with the items in the inventory and reach the staircase; engine seed 255275049 |
+| SimWorld-MMNav, hard | [`simworld_nav/map_20_10_task_dist_21_0_1.json`](simworld_nav/map_20_10_task_dist_21_0_1.json) | map 20_10, task dist_21_0_1: a Spot quadruped spawns at x = −102 m, y = −17 m facing yaw 90° and must stop within 20 m of the destination at x = 525 m, y = −17 m, 628 m away, within 1336 steps; two subtasks are scored, ORIENTATION ("Turn to face west…") and FINISH ("Proceed forward until reaching the high gray concrete building…"); five vehicles and five pedestrians |
+
+**SpatialWorld 3D games.** `{"task_id": "<game>/level_NN", "game": "<game>", "mode": "level",
+"level": NN}`, or `"mode": "run"` with a `"seed"` for snake, the record of the level exactly as it
+appears in `task_spec/<game>_evolve.json`. The levels are defined in
 [SpatialWorld](https://github.com/Hongcheng-Gao/SpatialWorld) at commit 8e10e24 and are not
 redistributed; the paper's runs use the pure-visual variant (see
 [`../examples/spatialworld_games/README.md`](../examples/spatialworld_games/README.md)).
-[`spatialworld_games/expected.json`](spatialworld_games/expected.json) holds the outcomes below.
 
-| task example | record | the task | starting harness → shown harnesses (evaluation) |
-|---|---|---|---|
-| <img src="spatialworld_games/maze_level_06.png" width="240" alt="maze level 6"><br>maze, level 6 | [`maze_level_06.json`](spatialworld_games/maze_level_06.json) | a 7×7 first-person maze (`data/game/maze3d/Level_06.txt`): reach the exit within 100 steps | starting harness: failed in 100 steps → `cand_r1_0` (2): solved in 48 → `cand_r2_0` (3): 20 → `cand_r4_0` (4): 10 |
-| <img src="spatialworld_games/block3d_level_12.png" width="240" alt="block3d level 12"><br>block3d, level 12 | [`block3d_level_12.json`](spatialworld_games/block3d_level_12.json) | a five-block target configuration (`LEVEL_DESIGNS["12"]` in `data/Block3D/level_data.py`); 50-step cap | starting harness: score 0 in 50 steps → `cand_r1_0` (2): 0 → `cand_r3_0` (3): solved in 15 → `cand_r4_0` (4): 15 |
-| <img src="spatialworld_games/maze3d_pro_level_05.png" width="240" alt="maze3d_pro level 5"><br>maze3d_pro, level 5 | [`maze3d_pro_level_05.json`](spatialworld_games/maze3d_pro_level_05.json) | two 7×7 floors with the exit on the other floor (`data/game/maze3d_pro/Level_05.txt`); 100-step cap | starting harness: failed in 100 steps → `cand_r2_1` (5): failed → `cand_r4_0` (8): solved in 56 → `cand_r6_1` (13): 18 |
-| <img src="spatialworld_games/rubik_level_06.png" width="240" alt="rubik level 6"><br>rubik, level 6 | [`rubik_level_06.json`](spatialworld_games/rubik_level_06.json) | a cube scrambled by two quarter turns, U' then R (`INITIAL_CONFIGS["6"]` in `data/rubik_cube/scramble_data.py`); solve within 100 steps | starting harness: failed in 100 steps → `cand_r1_0` (2): failed → `cand_r2_0` (3): solved in 28 → `cand_r2_1` (4): 4 |
-| <img src="spatialworld_games/snake_run_020.png" width="240" alt="snake run 20"><br>snake, run 20 | [`snake_run_020.json`](spatialworld_games/snake_run_020.json) | snake with seed 20 (the seed fixes the food placement); score = min(food eaten / 4, 1), 100-step cap | starting harness: 0 (game over at step 3) → `cand_r1_0` (2): 0.25 → `cand_r2_0` (3): 0.25 → `cand_r3_0` (4): 1.0 in 16 steps |
+**BALROG-MiniHack.** The task's record from `task_spec/evolve.json` (`task_id`, `task`, `episodes`,
+`family`, `official_balrog`) with `episodes` cut to the shown run. The evaluator seeds episode *i*
+of a task deterministically from the seed base (0 for the search split, `BALROG_SEED_BASE` to change
+it), so `episodes: 1` plays run 00 and Corridor-R3's run 04 needs `episodes: 5` (its fifth episode).
+The engine seeds above are the ones BALROG logged for these episodes in the paper's run; they follow
+from the same formula, which also reproduces the 40 seeds listed in `task_spec/eval_levels.json`,
+and with them [MiniHack](https://github.com/samvelyan/minihack) reproduces the exact level directly.
+The task descriptions are BALROG's (`balrog/config/config.yaml` at b7afe79).
 
-## BALROG-MiniHack
-
-Records: the task's record from `task_spec/evolve.json` (`task_id`, `task`, `episodes`, `family`,
-`official_balrog`) with `episodes` cut to the shown run. The evaluator seeds episode *i* of a task
-deterministically from the seed base (0 for the search split, `BALROG_SEED_BASE` to change it), so
-`episodes: 1` plays run 00 and Corridor-R3's run 04 needs `episodes: 5` (its fifth episode). The
-engine seeds BALROG logged for these episodes in the paper's run are given below; they follow from
-the same formula, which also reproduces the 40 seeds listed in `task_spec/eval_levels.json`, and with
-them [MiniHack](https://github.com/samvelyan/minihack) reproduces the exact level directly. The task
-descriptions are BALROG's (`balrog/config/config.yaml` at b7afe79).
-[`balrog/expected.json`](balrog/expected.json) holds the outcomes below.
-
-| task example | record | the task | starting harness → `cand_r35_0` (8) → `cand_r41_0` (14) → `cand_r68_0` (41) |
-|---|---|---|---|
-| <img src="balrog/MiniHack-MazeWalk-15x15-v0_run00.png" width="240" alt="MazeWalk-15x15 run 00"><br>MazeWalk-15x15, run 00 | [`MiniHack-MazeWalk-15x15-v0_run00.json`](balrog/MiniHack-MazeWalk-15x15-v0_run00.json) | reach the staircase through a 15×15 maze; engine seed 360437341 | failed in 100 steps → failed → solved in 70 → solved in 70 |
-| <img src="balrog/MiniHack-Corridor-R3-v0_run04.png" width="240" alt="Corridor-R3 run 04"><br>Corridor-R3, run 04 | [`MiniHack-Corridor-R3-v0_run04.json`](balrog/MiniHack-Corridor-R3-v0_run04.json) | reach the staircase through three rooms linked by unlit corridors; engine seed 3971796377 | failed in 100 steps → solved in 67 → solved in 41 → solved in 41 |
-| <img src="balrog/MiniHack-Boxoban-Medium-v0_run00.png" width="240" alt="Boxoban-Medium run 00"><br>Boxoban-Medium, run 00 | [`MiniHack-Boxoban-Medium-v0_run00.json`](balrog/MiniHack-Boxoban-Medium-v0_run00.json) | a Sokoban level: push every boulder onto a fountain; engine seed 291150209 | failed in 100 steps → failed → failed → solved in 38 |
-| <img src="balrog/MiniHack-Quest-Easy-v0_run00.png" width="240" alt="Quest-Easy run 00"><br>Quest-Easy, run 00 | [`MiniHack-Quest-Easy-v0_run00.json`](balrog/MiniHack-Quest-Easy-v0_run00.json) | cross a river of lava with the items in the inventory and reach the staircase; engine seed 255275049 | failed in 100 steps → failed → failed → solved in 48 |
-
-## SimWorld-MMNav, hard setting
-
-Record: `{"map": "20_10", "task": "task_dist_21_0_1"}`, the item of `search_hard_50` in
+**SimWorld-MMNav.** `{"map": "20_10", "task": "task_dist_21_0_1"}`, the item of `search_hard_50` in
 `task_spec/search_val_test_split.json`. The task's real directory is shipped under
 [`simworld_nav/settings/hard/map_road_20_10/task_dist_21_0_1/`](simworld_nav/settings/hard/map_road_20_10/task_dist_21_0_1/)
 (`task_config.json`, `roads.json`, `progen_world.json`, `map.png`, the two robot views and
 `traffic.json`), so `SIMWORLD_SETTINGS_DIR=tests/tasks/simworld_nav/settings` runs this example
 without the dataset; the other tasks are in the SimWorld-MMNav test settings (Hugging Face dataset
 `jise/simworld-20k`, file `test_settings/single_test.tar.gz`, extracted to the same layout).
-[`simworld_nav/expected.json`](simworld_nav/expected.json) holds the outcomes below.
-
-<img src="simworld_nav/map_20_10_task_dist_21_0_1.png" width="480" alt="map 20_10, task dist_21_0_1">
-
-**The task.** A Spot quadruped spawns at x = −102 m, y = −17 m on a straight street facing yaw 90°
-and must stop within 20 m of the destination at x = 525 m, y = −17 m, 628 m away, within 1336
-steps. Two subtasks are scored by the environment's checker: ORIENTATION, "Turn to face west. You
-will see a gray and white residential building with multiple glass doors on your left.", and
-FINISH, "Proceed forward until reaching the high gray concrete building with small striped awnings
-over the ground-level entrances on your left, stop and face that building." The hard setting adds
-five vehicles and five pedestrians.
-
-| harness (evaluation) | re-run shown in the video | campaign evaluation of this task |
-|---|---|---|
-| `anchor_nav` (1) | orientation passed, then an arrival commit after 11 steps, 588 m from the destination (6 % of the way) | the same: 11 steps, 588 m |
-| `cand_r9_0_spatial-grounding` (10) | 233 steps along the street to the step cap, 487 m from the destination (22 %) | 40 steps, 448 m (29 %) |
-| `cand_r13_0_spatial-grounding` (14) | the same trajectory as `cand_r9_0`: 233 steps, 487 m (22 %) | 131 steps, 463 m (26 %) |
-| `cand_r15_0_spatial-grounding` (16) | 135 steps along the route to 36 m from the destination (94 %), then an arrival commit; the destination check did not fire | completed in 135 steps |
-
-The re-runs use the same base model and evaluator settings as the campaign; the model samples at
-every step, so a re-run is a fresh draw rather than a replay. The video of `cand_r15_0` is the
-closest of four re-runs (46 m, 268 m, 428 m and 36 m from the destination).
