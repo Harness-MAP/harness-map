@@ -3,5 +3,3 @@ __pycache__/
 build/
 *.egg-info/
 runs/
-baselines/vendor/
-baselines/.venv_shinka/
